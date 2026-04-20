@@ -1,0 +1,24 @@
+[gd_scene format=3 uid="uid://drnundi171cmh"]
+
+[ext_resource type="Texture2D" uid="uid://c3l36itqvmw2l" path="res://assets/sprites/player/player.png" id="1_8afob"]
+[ext_resource type="Texture2D" uid="uid://iryghwbjj8a6" path="res://assets/sprites/player/player_shadow.png" id="1_dovo2"]
+[ext_resource type="Script" uid="uid://cry0ys24kicg1" path="res://scripts/player.gd" id="1_gmlin"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dovo2"]
+size = Vector2(8, 8)
+
+[node name="Player" type="CharacterBody2D" unique_id=1458309070]
+z_index = 1
+script = ExtResource("1_gmlin")
+
+[node name="ShadowSprite" type="Sprite2D" parent="." unique_id=1880866285]
+texture = ExtResource("1_dovo2")
+
+[node name="PlayerSprite" type="Sprite2D" parent="." unique_id=1276956797]
+texture = ExtResource("1_8afob")
+
+[node name="PlayerCollision" type="CollisionShape2D" parent="." unique_id=894170625]
+visible = false
+shape = SubResource("RectangleShape2D_dovo2")
+
+[node name="DashTimer" type="Timer" parent="." unique_id=313604202]
