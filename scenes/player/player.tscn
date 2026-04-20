@@ -2,13 +2,17 @@
 
 [ext_resource type="Texture2D" uid="uid://c3l36itqvmw2l" path="res://assets/sprites/player/player.png" id="1_8afob"]
 [ext_resource type="Texture2D" uid="uid://iryghwbjj8a6" path="res://assets/sprites/player/player_shadow.png" id="1_dovo2"]
-[ext_resource type="Script" uid="uid://cry0ys24kicg1" path="res://scripts/player.gd" id="1_gmlin"]
+[ext_resource type="Script" uid="uid://cry0ys24kicg1" path="res://scripts/player/player.gd" id="1_gmlin"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dovo2"]
 size = Vector2(8, 8)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gmlin"]
+size = Vector2(4, 4)
+
 [node name="Player" type="CharacterBody2D" unique_id=1458309070]
 z_index = 1
+collision_mask = 2
 script = ExtResource("1_gmlin")
 
 [node name="ShadowSprite" type="Sprite2D" parent="." unique_id=1880866285]
@@ -22,3 +26,13 @@ visible = false
 shape = SubResource("RectangleShape2D_dovo2")
 
 [node name="DashTimer" type="Timer" parent="." unique_id=313604202]
+
+[node name="InteractionArea" type="Area2D" parent="." unique_id=419232090]
+collision_mask = 28
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractionArea" unique_id=74698378]
+shape = SubResource("RectangleShape2D_gmlin")
+
+[connection signal="area_entered" from="InteractionArea" to="." method="_on_interaction_area_area_entered"]
+[connection signal="body_entered" from="InteractionArea" to="." method="_on_interaction_area_body_entered"]
+[connection signal="body_exited" from="InteractionArea" to="." method="_on_interaction_area_body_exited"]

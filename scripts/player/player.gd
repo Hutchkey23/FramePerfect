@@ -15,7 +15,7 @@ enum PlayerState {
 var current_state: PlayerState = PlayerState.NORMAL
 
 ########### Movement ###########
-const NORMAL_SPEED: float = 120.0
+const NORMAL_SPEED: float = 140.0
 const ACCELERATION: float = 450.0
 const BRAKING: float = 350.0
 
@@ -23,7 +23,7 @@ var move_input: Vector2 = Vector2.ZERO
 var last_move_input: Vector2 = Vector2.RIGHT
 
 # Dashing
-const DASH_SPEED: float = 180.0
+const DASH_SPEED: float = 220.0
 const DASH_DURATION: float = 0.20
 const DASH_COOLDOWN: float = 0.5
 
@@ -35,9 +35,17 @@ var dash_cooldown_timer: float = 0.0
 const JUMP_HEIGHT: float = 72.0
 const JUMP_DURATION: float = 0.35
 const JUMP_COOLDOWN: float = 0.15
+const DASH_JUMP_SPEED_MULTIPLIER: float = 1.0
+const JUMP_FORWARD_DRAG: float = 120.0
+const JUMP_STEER_SPEED: float = 45.0
+const JUMP_STEER_ACCELERATION: float = 180.0
+
+
+var jumped_from_dash: bool = false
+var jump_locked_direction: Vector2 = Vector2.ZERO
 
 # Air movement during jump
-const JUMP_MOVE_SPEED: float = 80.0
+const JUMP_MOVE_SPEED: float = 140.0
 const JUMP_ACCELERATION: float = 250.0
 const JUMP_BRAKING: float = 200.0
 
@@ -67,9 +75,16 @@ var sprite_normal_scale: Vector2 = Vector2.ONE
 var player_sprite_landing_tween: Tween
 var shadow_sprite_landing_tween: Tween
 
+# Camera
+var camera_reference: GameCamera
+
+# Hazards
+var overlapping_hazard_count: int = 0
+
 func _ready() -> void:
 	sprite_ground_y = player_sprite.position.y
 	sprite_normal_scale = player_sprite.scale
+	camera_reference = get_tree().get_first_node_in_group("game_camera")
 
 func _physics_process(delta: float) -> void:
 	move_input = Input.get_vector("move_left", "move_right", "move_up", "move_down")
@@ -119,6 +134,8 @@ func _process(delta: float) -> void:
 	player_sprite.rotation_degrees += current_rotation_speed * delta
 	shadow_sprite.rotation_degrees += current_rotation_speed * delta
 
+func die() -> void:
+	get_tree().reload_current_scene()
 
 func handle_normal_movement(delta: float) -> void:
 	if move_input != Vector2.ZERO:
@@ -148,6 +165,8 @@ func try_start_dash() -> void:
 
 	dash_direction = last_move_input.normalized()
 	velocity = dash_direction * DASH_SPEED
+	
+	camera_reference.add_shake(3.0)
 	
 	spawn_dash_clouds(dash_direction)
 
@@ -182,13 +201,22 @@ func try_start_jump() -> void:
 	if jump_cooldown_timer > 0.0:
 		return
 
-	# Start jump from NORMAL or DASH
+	jumped_from_dash = current_state == PlayerState.DASH
+
 	current_state = PlayerState.JUMP
 	jump_timer = JUMP_DURATION
 	jump_cooldown_timer = JUMP_COOLDOWN
-	
+
+	if jumped_from_dash:
+		jump_locked_direction = dash_direction
+		velocity = jump_locked_direction * DASH_SPEED
+	else:
+		if velocity.length() > 0.0:
+			jump_locked_direction = velocity.normalized()
+		else:
+			jump_locked_direction = last_move_input.normalized()
+
 	var jump_cloud_instance = JUMP_CLOUD.instantiate()
-	
 	get_parent().add_child(jump_cloud_instance)
 	jump_cloud_instance.global_position = global_position
 
@@ -196,22 +224,26 @@ func try_start_jump() -> void:
 func handle_jump(delta: float) -> void:
 	jump_timer -= delta
 
-	# Slight steering while airborne
+	# Preserve forward momentum, especially for dash-jumps
+	var forward_velocity := jump_locked_direction * velocity.dot(jump_locked_direction)
+	forward_velocity = forward_velocity.move_toward(Vector2.ZERO, JUMP_FORWARD_DRAG * delta)
+
+	# Small steering influence only
+	var steer_velocity := Vector2.ZERO
 	if move_input != Vector2.ZERO:
-		var target_velocity := move_input * JUMP_MOVE_SPEED
-		velocity = velocity.move_toward(target_velocity, JUMP_ACCELERATION * delta)
-	else:
-		velocity = velocity.move_toward(Vector2.ZERO, JUMP_BRAKING * delta)
+		var steer_target := move_input * JUMP_STEER_SPEED
+		steer_velocity = Vector2.ZERO.move_toward(steer_target, JUMP_STEER_ACCELERATION * delta)
+
+	velocity = forward_velocity + steer_velocity
 
 	# Visual jump arc
 	var progress := 1.0 - (jump_timer / JUMP_DURATION)
 	progress = clamp(progress, 0.0, 1.0)
 
-	# Arc: 0 at start, peaks in middle, 0 at end
 	var height := JUMP_HEIGHT * progress * (1.0 - progress)
 	player_sprite.position.y = sprite_ground_y - height
-	
-	var height_ratio = (height * 4.0) / JUMP_HEIGHT
+
+	var height_ratio := height / JUMP_HEIGHT
 	var shadow_scale = lerp(1.0, SHADOW_MIN_SCALE, height_ratio)
 	shadow_sprite.scale = Vector2(shadow_scale, shadow_scale * 0.9)
 	shadow_sprite.modulate.a = lerp(1.0, 0.6, height_ratio)
@@ -221,7 +253,11 @@ func handle_jump(delta: float) -> void:
 		shadow_sprite.scale = Vector2.ONE
 		shadow_sprite.modulate.a = 1.0
 		play_landing_squash()
+		camera_reference.add_shake(2.0)
 		current_state = PlayerState.NORMAL
+		
+		if overlapping_hazard_count > 0:
+			die()
 
 func play_landing_squash() -> void:
 	if player_sprite_landing_tween:
@@ -242,3 +278,20 @@ func play_landing_squash() -> void:
 	player_sprite_landing_tween.chain().tween_property(player_sprite, "scale", sprite_normal_scale, 0.10).set_ease(Tween.EASE_OUT)
 	shadow_sprite_landing_tween.chain().tween_property(shadow_sprite, "scale", sprite_normal_scale, 0.10).set_ease(Tween.EASE_OUT)
 	
+
+
+func _on_interaction_area_body_entered(body: Node2D) -> void:
+	if body.is_in_group("hazards"):
+		overlapping_hazard_count += 1
+		if current_state == PlayerState.JUMP:
+			return
+		get_tree().reload_current_scene()
+
+func _on_interaction_area_body_exited(body: Node2D) -> void:
+	if body.is_in_group("hazards"):
+		overlapping_hazard_count = max(0, overlapping_hazard_count - 1)
+
+
+func _on_interaction_area_area_entered(area: Area2D) -> void:
+	if area.is_in_group("goal"):
+		print("WIN!")

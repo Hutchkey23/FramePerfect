@@ -1,0 +1,18 @@
+[gd_scene format=3 uid="uid://cwv3wpwmybmey"]
+
+[ext_resource type="Texture2D" uid="uid://drakd26v650se" path="res://assets/sprites/goal/goal.png" id="1_bjw50"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ub4hd"]
+size = Vector2(16, 16)
+
+[node name="Goal" type="Node2D" unique_id=652280647 groups=["goal"]]
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=174667340]
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("1_bjw50")
+
+[node name="Area2D" type="Area2D" parent="." unique_id=1225981306 groups=["goal"]]
+collision_layer = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=1187932494]
+shape = SubResource("RectangleShape2D_ub4hd")

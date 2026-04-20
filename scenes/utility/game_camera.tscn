@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://ca2uxdoweqwc1"]
+
+[ext_resource type="Script" uid="uid://ckx86per6sfmc" path="res://scripts/utility/game_camera.gd" id="1_cymba"]
+
+[node name="GameCamera" type="Node2D" unique_id=13152400 groups=["game_camera"]]
+script = ExtResource("1_cymba")
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=82576838]

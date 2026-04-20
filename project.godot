@@ -23,6 +23,15 @@ window/size/window_width_override=1280
 window/size/window_height_override=720
 window/stretch/mode="canvas_items"
 
+[file_customization]
+
+folder_colors={
+"res://assets/": "green",
+"res://scenes/": "blue",
+"res://scripts/": "purple",
+"res://shaders/": "pink"
+}
+
 [input]
 
 move_left={
@@ -61,6 +70,14 @@ dash={
 , Object(InputEventJoypadButton,"resource_local_to_scene":false,"resource_name":"","device":-1,"button_index":2,"pressure":0.0,"pressed":true,"script":null)
 ]
 }
+
+[layer_names]
+
+2d_physics/layer_1="Player"
+2d_physics/layer_2="Walls"
+2d_physics/layer_3="Hazards"
+2d_physics/layer_4="Goal"
+2d_physics/layer_5="Pickup"
 
 [physics]
 
