@@ -1,0 +1,20 @@
+[gd_scene format=3 uid="uid://ecmje7pp4gyy"]
+
+[node name="LevelUI" type="CanvasLayer" unique_id=687480857]
+
+[node name="LevelUIControl" type="Control" parent="." unique_id=2015085019]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TimerLabel" type="Label" parent="LevelUIControl" unique_id=1846635214]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 23.0
+grow_horizontal = 2
+text = "00.00"
+horizontal_alignment = 1

@@ -1,10 +1,13 @@
 [gd_scene format=4 uid="uid://8nnykyojpaha"]
 
+[ext_resource type="PackedScene" uid="uid://cvsktm1iw46q4" path="res://scenes/utility/level_controller.tscn" id="1_e5kto"]
 [ext_resource type="PackedScene" uid="uid://drnundi171cmh" path="res://scenes/player/player.tscn" id="1_wt8jm"]
 [ext_resource type="PackedScene" uid="uid://ca2uxdoweqwc1" path="res://scenes/utility/game_camera.tscn" id="2_dwa3t"]
 [ext_resource type="TileSet" uid="uid://7q8eymh2ksuh" path="res://scenes/tilesets/main_floor_and_walls.tres" id="4_lqd0q"]
 [ext_resource type="Shader" uid="uid://cyftftn8qvqe5" path="res://shaders/hazard_shader.gdshader" id="4_qybow"]
 [ext_resource type="PackedScene" uid="uid://cwv3wpwmybmey" path="res://scenes/props/goal.tscn" id="5_qybow"]
+[ext_resource type="PackedScene" uid="uid://ecmje7pp4gyy" path="res://scenes/utility/level_ui.tscn" id="7_26hog"]
+[ext_resource type="Script" uid="uid://cnkegtjtgdls" path="res://scripts/utility/level_ui.gd" id="8_nrqd8"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_wwkcr"]
 shader = ExtResource("4_qybow")
@@ -14,6 +17,8 @@ shader_parameter/pulse_speed = 5.00000023424012
 shader_parameter/center_glow_strength = 0.0
 
 [node name="DebugLevel" type="Node2D" unique_id=1381461103]
+
+[node name="LevelController" parent="." unique_id=1058685242 instance=ExtResource("1_e5kto")]
 
 [node name="Player" parent="." unique_id=1458309070 instance=ExtResource("1_wt8jm")]
 position = Vector2(145, 63)
@@ -44,3 +49,7 @@ tile_set = ExtResource("4_lqd0q")
 [node name="Goal" parent="." unique_id=652280647 instance=ExtResource("5_qybow")]
 position = Vector2(368, 64)
 rotation = 0.2617994
+
+[node name="LevelUI" parent="." unique_id=687480857 instance=ExtResource("7_26hog")]
+script = ExtResource("8_nrqd8")
+level_controller_path = NodePath("../LevelController")

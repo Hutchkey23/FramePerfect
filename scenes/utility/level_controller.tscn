@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://cvsktm1iw46q4"]
+
+[ext_resource type="Script" uid="uid://ccefj7mv15xsy" path="res://scripts/utility/level_controller.gd" id="1_kkh15"]
+
+[node name="LevelController" type="Node" unique_id=1058685242]
+script = ExtResource("1_kkh15")
+player_path = NodePath("../Player")
+goal_path = NodePath("../Goal")

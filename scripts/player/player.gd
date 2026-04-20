@@ -1,6 +1,9 @@
 extends CharacterBody2D
 class_name Player
 
+signal died
+signal goal_reached
+
 @onready var player_sprite: Sprite2D = $PlayerSprite
 @onready var shadow_sprite: Sprite2D = $ShadowSprite
 @onready var player_collision: CollisionShape2D = $PlayerCollision
@@ -13,6 +16,7 @@ enum PlayerState {
 }
 
 var current_state: PlayerState = PlayerState.NORMAL
+var control_enabled: bool = true
 
 ########### Movement ###########
 const NORMAL_SPEED: float = 140.0
@@ -67,6 +71,10 @@ const DUST_CLOUD = preload("uid://db8k50wa1l8n")
 const MIN_DUST_TRAVEL_DISTANCE : float = 4.0
 const MAX_DUST_TRAVEL_DISTANCE : float = 20.0
 
+# Death Clouds
+const MIN_DEATH_DUST_TRAVEL_DISTANCE : float = 4.0
+const MAX_DEATH_DUST_TRAVEL_DISTANCE : float = 10.0
+
 # Jump Cloud
 const JUMP_CLOUD = preload("uid://3d6xwo56h5a")
 
@@ -78,15 +86,24 @@ var shadow_sprite_landing_tween: Tween
 # Camera
 var camera_reference: GameCamera
 
-# Hazards
+# Jump Interactions
 var overlapping_hazard_count: int = 0
+var goal_overlapping: bool = false
 
 func _ready() -> void:
 	sprite_ground_y = player_sprite.position.y
 	sprite_normal_scale = player_sprite.scale
 	camera_reference = get_tree().get_first_node_in_group("game_camera")
 
+func set_control_enabled(enabled: bool) -> void:
+	control_enabled = enabled
+
 func _physics_process(delta: float) -> void:
+	if not control_enabled:
+		velocity = Vector2.ZERO
+		move_and_slide()
+		return
+	
 	move_input = Input.get_vector("move_left", "move_right", "move_up", "move_down")
 
 	if move_input != Vector2.ZERO:
@@ -135,7 +152,28 @@ func _process(delta: float) -> void:
 	shadow_sprite.rotation_degrees += current_rotation_speed * delta
 
 func die() -> void:
-	get_tree().reload_current_scene()
+	player_sprite.visible = false
+	shadow_sprite.visible = false
+	control_enabled = false
+	spawn_death_clouds(8)
+	
+	died.emit()
+
+func spawn_death_clouds(number_of_clouds: int) -> void:
+	for cloud in number_of_clouds:
+		var dust_cloud_instance = DUST_CLOUD.instantiate()
+		
+		get_parent().add_child(dust_cloud_instance)
+		dust_cloud_instance.global_position = global_position
+		
+		var random_travel_distance: float = randf_range(MIN_DEATH_DUST_TRAVEL_DISTANCE, MAX_DEATH_DUST_TRAVEL_DISTANCE)
+		
+		var spread_angle := deg_to_rad(60.0) # total spread range
+		var random_angle := randf_range(-spread_angle, spread_angle)
+		var random_direction = Vector2.UP.rotated(randf_range(0, TAU))
+		var spread_direction := (random_direction).rotated(random_angle)
+		
+		dust_cloud_instance.move_to(random_travel_distance, spread_direction)
 
 func handle_normal_movement(delta: float) -> void:
 	if move_input != Vector2.ZERO:
@@ -258,6 +296,9 @@ func handle_jump(delta: float) -> void:
 		
 		if overlapping_hazard_count > 0:
 			die()
+		
+		if goal_overlapping:
+			goal_reached.emit()
 
 func play_landing_squash() -> void:
 	if player_sprite_landing_tween:
@@ -285,7 +326,7 @@ func _on_interaction_area_body_entered(body: Node2D) -> void:
 		overlapping_hazard_count += 1
 		if current_state == PlayerState.JUMP:
 			return
-		get_tree().reload_current_scene()
+		die()
 
 func _on_interaction_area_body_exited(body: Node2D) -> void:
 	if body.is_in_group("hazards"):
@@ -294,4 +335,14 @@ func _on_interaction_area_body_exited(body: Node2D) -> void:
 
 func _on_interaction_area_area_entered(area: Area2D) -> void:
 	if area.is_in_group("goal"):
-		print("WIN!")
+		goal_overlapping = true
+		
+		if current_state == PlayerState.JUMP:
+			return
+		
+		goal_reached.emit()
+
+
+func _on_interaction_area_area_exited(area: Area2D) -> void:
+	if area.is_in_group("goal"):
+		goal_overlapping = false
