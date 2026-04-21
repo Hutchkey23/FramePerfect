@@ -3,25 +3,25 @@ class_name LevelUI
 
 @export var level_controller_path: NodePath
 @onready var level_controller: LevelController = get_node(level_controller_path)
-@onready var complete_label: Label = $LevelUIControl/CompleteLabel
+@onready var level_complete_prompts: HBoxContainer = $LevelUIControl/LevelCompletePrompts
 @onready var timer_label: Label = $LevelUIControl/TimerLabel
 
-var complete_label_initial_position: Vector2
+var level_complete_prompts_initial_position: Vector2
 
 func _ready() -> void:
-	complete_label.visible = false
-	complete_label_initial_position = complete_label.position
-	complete_label.position.y += 20
+	level_complete_prompts.visible = false
+	level_complete_prompts_initial_position = level_complete_prompts.position
+	level_complete_prompts.position.y += 20
 
 func _process(_delta: float) -> void:
 	update_timer_display()
 
-func show_complete_label() -> void:
-	complete_label.visible = true
+func show_level_complete_prompts() -> void:
+	level_complete_prompts.visible = true
 	
 	var tween = create_tween()
 	
-	tween.tween_property(complete_label, "position:y", complete_label_initial_position.y, 0.35).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
+	tween.tween_property(level_complete_prompts, "position:y", level_complete_prompts_initial_position.y, 0.35).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
 
 func update_timer_display() -> void:
 	var time := level_controller.level_time

@@ -30,7 +30,7 @@ func _ready() -> void:
 	connect_signals()
 
 func _unhandled_input(event: InputEvent) -> void:
-	if event.is_action_pressed("restart"):
+	if event.is_action_pressed("retry"):
 		get_tree().reload_current_scene()
 
 func _process(delta: float) -> void:
@@ -76,7 +76,7 @@ func complete_level() -> void:
 	if player.has_method("set_control_enabled"):
 		player.set_control_enabled(false)
 	
-	level_ui.show_complete_label()
+	level_ui.show_level_complete_prompts()
 	
 	cinematic_bars.show_bars()
 	camera.zoom_to_target(goal, Vector2.ONE * 2.5, 0.2)

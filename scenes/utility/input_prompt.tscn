@@ -1,0 +1,33 @@
+[gd_scene format=3 uid="uid://xov8xfl4yj0t"]
+
+[ext_resource type="Script" uid="uid://ckgcomuw2bnbu" path="res://scripts/utility/input_prompt.gd" id="1_0p0t7"]
+[ext_resource type="Texture2D" uid="uid://bsdtebc4c8kob" path="res://assets/ui/glyphs/keyboard/x.png" id="1_wtrq5"]
+[ext_resource type="FontFile" uid="uid://vklaqlxxc5o7" path="res://assets/fonts/Whacky_Joe.ttf" id="1_yvhyl"]
+
+[node name="InputPrompt" type="HBoxContainer" unique_id=1802492218]
+offset_right = 87.0
+offset_bottom = 24.0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+script = ExtResource("1_0p0t7")
+
+[node name="Icon" type="TextureRect" parent="." unique_id=399755621]
+custom_minimum_size = Vector2(24, 24)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("1_wtrq5")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Text" type="Label" parent="." unique_id=1062906640]
+layout_mode = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 1
+theme_override_constants/shadow_offset_y = 1
+theme_override_constants/shadow_outline_size = 0
+theme_override_fonts/font = ExtResource("1_yvhyl")
+theme_override_font_sizes/font_size = 12
+text = "PROMPT"
+horizontal_alignment = 1
+vertical_alignment = 1

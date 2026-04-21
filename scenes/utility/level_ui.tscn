@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://cnkegtjtgdls" path="res://scripts/utility/level_ui.gd" id="1_krbps"]
 [ext_resource type="FontFile" uid="uid://vklaqlxxc5o7" path="res://assets/fonts/Whacky_Joe.ttf" id="1_tvlq7"]
+[ext_resource type="PackedScene" uid="uid://xov8xfl4yj0t" path="res://scenes/utility/input_prompt.tscn" id="3_j6qd6"]
 
 [node name="LevelUI" type="CanvasLayer" unique_id=687480857]
 script = ExtResource("1_krbps")
@@ -30,7 +31,7 @@ text = "00.00"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="CompleteLabel" type="Label" parent="LevelUIControl" unique_id=418070364]
+[node name="LevelCompletePrompts" type="HBoxContainer" parent="LevelUIControl" unique_id=1163831830]
 layout_mode = 1
 anchors_preset = 12
 anchor_top = 1.0
@@ -39,12 +40,15 @@ anchor_bottom = 1.0
 offset_top = -25.0
 grow_horizontal = 2
 grow_vertical = 0
-theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
-theme_override_constants/shadow_offset_x = 1
-theme_override_constants/shadow_offset_y = 1
-theme_override_constants/shadow_outline_size = 0
-theme_override_fonts/font = ExtResource("1_tvlq7")
-theme_override_font_sizes/font_size = 12
-text = "R TO RETRY      X TO CONTINUE"
-horizontal_alignment = 1
-vertical_alignment = 1
+theme_override_constants/separation = 48
+alignment = 1
+
+[node name="RetryPrompt" parent="LevelUIControl/LevelCompletePrompts" unique_id=1802492218 instance=ExtResource("3_j6qd6")]
+layout_mode = 2
+action_name = "retry"
+action_label = "RETRY"
+
+[node name="ContinuePrompt" parent="LevelUIControl/LevelCompletePrompts" unique_id=1889156033 instance=ExtResource("3_j6qd6")]
+layout_mode = 2
+action_name = "continue_game"
+action_label = "CONTINUE"
