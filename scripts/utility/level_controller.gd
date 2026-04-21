@@ -93,7 +93,9 @@ func fail_level() -> void:
 	if player.has_method("set_control_enabled"):
 		player.set_control_enabled(false)
 	
-	get_tree().reload_current_scene()
+	level_ui.show_level_fail_prompts()
+	cinematic_bars.show_bars()
+	camera.zoom_to_target(player, Vector2.ONE * 2.5, 0.2)
 
 
 func update_timer(delta: float) -> void:

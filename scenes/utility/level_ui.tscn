@@ -52,3 +52,20 @@ action_label = "RETRY"
 layout_mode = 2
 action_name = "continue_game"
 action_label = "CONTINUE"
+
+[node name="LevelFailPrompts" type="HBoxContainer" parent="LevelUIControl" unique_id=158662721]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -25.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_constants/separation = 48
+alignment = 1
+
+[node name="RetryPrompt" parent="LevelUIControl/LevelFailPrompts" unique_id=1330220285 instance=ExtResource("3_j6qd6")]
+layout_mode = 2
+action_name = "retry"
+action_label = "RETRY"

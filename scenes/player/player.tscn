@@ -3,12 +3,17 @@
 [ext_resource type="Texture2D" uid="uid://c3l36itqvmw2l" path="res://assets/sprites/player/player.png" id="1_8afob"]
 [ext_resource type="Texture2D" uid="uid://iryghwbjj8a6" path="res://assets/sprites/player/player_shadow.png" id="1_dovo2"]
 [ext_resource type="Script" uid="uid://cry0ys24kicg1" path="res://scripts/player/player.gd" id="1_gmlin"]
+[ext_resource type="FontFile" uid="uid://vklaqlxxc5o7" path="res://assets/fonts/Whacky_Joe.ttf" id="4_lvxji"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dovo2"]
 size = Vector2(8, 8)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gmlin"]
 size = Vector2(4, 4)
+
+[sub_resource type="FontVariation" id="FontVariation_p47bc"]
+base_font = ExtResource("4_lvxji")
+spacing_glyph = 1
 
 [node name="Player" type="CharacterBody2D" unique_id=1458309070]
 z_index = 1
@@ -32,6 +37,21 @@ collision_mask = 28
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="InteractionArea" unique_id=74698378]
 shape = SubResource("RectangleShape2D_gmlin")
+
+[node name="FailLabel" type="RichTextLabel" parent="." unique_id=1408916861]
+offset_left = -33.0
+offset_top = -14.0
+offset_right = 33.0
+offset_bottom = -4.0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 2
+theme_override_fonts/normal_font = SubResource("FontVariation_p47bc")
+theme_override_font_sizes/normal_font_size = 6
+bbcode_enabled = true
+text = "[shake]OUCH![/shake]"
+fit_content = true
+horizontal_alignment = 1
+vertical_alignment = 2
 
 [connection signal="area_entered" from="InteractionArea" to="." method="_on_interaction_area_area_entered"]
 [connection signal="area_exited" from="InteractionArea" to="." method="_on_interaction_area_area_exited"]

@@ -7,6 +7,34 @@ signal goal_reached
 @onready var player_sprite: Sprite2D = $PlayerSprite
 @onready var shadow_sprite: Sprite2D = $ShadowSprite
 @onready var player_collision: CollisionShape2D = $PlayerCollision
+@onready var fail_label: RichTextLabel = $FailLabel
+
+var fail_words: Array = [
+	"OUCH!",
+	"YIKES!",
+	"ROUGH!",
+	"U DED!",
+	"OOF!",
+	"OW!",
+	"ACK!",
+	"UGH!",
+	"YOW!",
+	"WHAM!",
+	"BAM!",
+	"OOF!",
+	"CRUNCH!",
+	"SMACK!",
+	"BONK!",
+	"YEEOW!",
+	"OWIE!",
+	"JEEZ!",
+	"GAH!",
+	"EEK!",
+	"NOPE!",
+	"RIP IN PIECE!",
+	"DONEZO!",
+	"LIK DIS IF U CRI EVERTIM!"
+]
 
 # State
 enum PlayerState {
@@ -95,6 +123,7 @@ func _ready() -> void:
 	sprite_ground_y = player_sprite.position.y
 	sprite_normal_scale = player_sprite.scale
 	camera_reference = get_tree().get_first_node_in_group("game_camera")
+	fail_label.visible = false
 
 func set_control_enabled(enabled: bool) -> void:
 	control_enabled = enabled
@@ -165,6 +194,7 @@ func die() -> void:
 	shadow_sprite.visible = false
 	control_enabled = false
 	spawn_death_clouds(8)
+	show_fail_label()
 	
 	died.emit()
 
@@ -357,3 +387,8 @@ func _on_interaction_area_area_entered(area: Area2D) -> void:
 func _on_interaction_area_area_exited(area: Area2D) -> void:
 	if area.is_in_group("goal"):
 		goal_overlapping = false
+
+func show_fail_label() -> void:
+	var random_word = fail_words.pick_random()
+	fail_label.text = "[shake]" + random_word.to_upper() + "[/shake]"
+	fail_label.visible = true
