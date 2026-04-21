@@ -1,6 +1,8 @@
 extends Node
 class_name LevelController
 
+signal load_next_level
+
 enum LevelState {
 	INTRO,
 	PLAYING,
@@ -10,6 +12,7 @@ enum LevelState {
 
 
 @export var player_path: NodePath
+@export var player_spawn_path: NodePath
 @export var goal_path: NodePath
 @export var camera_path: NodePath
 @export var cinematic_bars_path: NodePath
@@ -18,20 +21,23 @@ enum LevelState {
 var current_state: LevelState = LevelState.INTRO
 var level_time: float = 0.0
 var timer_running: bool = false
+var fixed_camera_level : bool = false
+
 
 @onready var camera: GameCamera = get_node(camera_path)
 @onready var cinematic_bars: CinematicBars = get_node(cinematic_bars_path)
 @onready var level_ui: LevelUI = get_node(level_ui_path)
 @onready var player: Player = get_node(player_path)
+@onready var player_spawn: Node2D = get_node(player_spawn_path)
 @onready var goal: Goal = get_node(goal_path)
 
 func _ready() -> void:
 	enter_intro_state()
 	connect_signals()
-
-func _unhandled_input(event: InputEvent) -> void:
-	if event.is_action_pressed("retry"):
-		get_tree().reload_current_scene()
+	player.position = player_spawn.position
+	
+	if camera.mode == camera.CameraMode.FIXED:
+		fixed_camera_level = true
 
 func _process(delta: float) -> void:
 	match current_state:
@@ -39,6 +45,10 @@ func _process(delta: float) -> void:
 			check_for_level_start_input()
 		LevelState.PLAYING:
 			update_timer(delta)
+		LevelState.DEAD:
+			check_for_dead_input()
+		LevelState.COMPLETED:
+			check_for_level_completed_input()
 
 
 func connect_signals() -> void:
@@ -59,6 +69,7 @@ func enter_intro_state() -> void:
 
 func start_level() -> void:
 	cinematic_bars.hide_bars()
+	level_ui.hide_start_label()
 	current_state = LevelState.PLAYING
 	timer_running = true
 	
@@ -112,6 +123,16 @@ func check_for_level_start_input() -> void:
 	or Input.is_action_just_pressed("dash"):
 		start_level()
 
+func check_for_level_completed_input() -> void:
+	if Input.is_action_just_pressed("continue_game"):
+		load_next_level.emit()
+	elif Input.is_action_just_pressed("retry"):
+		retry_level()
+	
+func check_for_dead_input() -> void:
+	if Input.is_action_just_pressed("retry"):
+		retry_level()
+
 
 func _on_player_died() -> void:
 	fail_level()
@@ -119,3 +140,13 @@ func _on_player_died() -> void:
 
 func _on_goal_reached() -> void:
 	complete_level()
+
+func retry_level() -> void:
+	player.retry_level()
+	camera.retry_level()
+	if not fixed_camera_level:
+		camera.set_follow_target(player)
+	goal.hide_completion_label()
+	level_ui.retry_level()
+	player.position = player_spawn.position
+	enter_intro_state()

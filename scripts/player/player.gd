@@ -58,7 +58,7 @@ var last_move_input: Vector2 = Vector2.RIGHT
 # Dashing
 const DASH_SPEED: float = 220.0
 const DASH_DURATION: float = 0.20
-const DASH_COOLDOWN: float = 0.5
+const DASH_COOLDOWN: float = 0.35
 
 var dash_direction: Vector2 = Vector2.ZERO
 var dash_timer: float = 0.0
@@ -197,6 +197,15 @@ func die() -> void:
 	show_fail_label()
 	
 	died.emit()
+
+func retry_level() -> void:
+	current_state = PlayerState.NORMAL
+	current_rotation_speed = 0.0
+	rotation_degrees = 0.0
+	velocity = Vector2.ZERO	
+	player_sprite.visible = true
+	shadow_sprite.visible = true
+	hide_fail_label()
 
 func spawn_death_clouds(number_of_clouds: int) -> void:
 	for cloud in number_of_clouds:
@@ -392,3 +401,6 @@ func show_fail_label() -> void:
 	var random_word = fail_words.pick_random()
 	fail_label.text = "[shake]" + random_word.to_upper() + "[/shake]"
 	fail_label.visible = true
+
+func hide_fail_label() -> void:
+	fail_label.visible = false

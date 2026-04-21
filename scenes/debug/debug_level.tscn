@@ -18,12 +18,16 @@ shader_parameter/center_glow_strength = 0.0
 
 [node name="DebugLevel" type="Node2D" unique_id=1381461103]
 
-[node name="LevelController" parent="." unique_id=1058685242 instance=ExtResource("1_e5kto")]
+[node name="LevelController" parent="." unique_id=1058685242 groups=["level_controller"] instance=ExtResource("1_e5kto")]
+player_spawn_path = NodePath("../PlayerSpawn")
 camera_path = NodePath("../GameCamera")
 cinematic_bars_path = NodePath("../CinematicBars")
 level_ui_path = NodePath("../LevelUI")
 
 [node name="Player" parent="." unique_id=1458309070 instance=ExtResource("1_wt8jm")]
+position = Vector2(145, 63)
+
+[node name="PlayerSpawn" type="Node2D" parent="." unique_id=535208430]
 position = Vector2(145, 63)
 
 [node name="GameCamera" parent="." unique_id=13152400 node_paths=PackedStringArray("target") instance=ExtResource("2_dwa3t")]

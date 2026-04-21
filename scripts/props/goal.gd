@@ -42,3 +42,6 @@ func show_completion_label() -> void:
 	var random_word = completion_words.pick_random()
 	completion_label.text = "[wave]" + random_word.to_upper() + "[/wave]"
 	completion_label.visible = true
+
+func hide_completion_label() -> void:
+	completion_label.visible = false

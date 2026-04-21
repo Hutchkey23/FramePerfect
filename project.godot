@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Frame Perfect"
-run/main_scene="uid://8nnykyojpaha"
+run/main_scene="uid://bohea1k6xl1cw"
 config/features=PackedStringArray("4.6", "GL Compatibility")
 config/icon="res://icon.svg"
 
@@ -37,6 +37,8 @@ enabled=PackedStringArray("res://addons/input_helper/plugin.cfg")
 folder_colors={
 "res://addons/": "yellow",
 "res://assets/": "green",
+"res://materials/": "teal",
+"res://resources/": "orange",
 "res://scenes/": "blue",
 "res://scripts/": "purple",
 "res://shaders/": "pink"

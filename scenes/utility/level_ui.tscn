@@ -4,6 +4,10 @@
 [ext_resource type="FontFile" uid="uid://vklaqlxxc5o7" path="res://assets/fonts/Whacky_Joe.ttf" id="1_tvlq7"]
 [ext_resource type="PackedScene" uid="uid://xov8xfl4yj0t" path="res://scenes/utility/input_prompt.tscn" id="3_j6qd6"]
 
+[sub_resource type="FontVariation" id="FontVariation_j6qd6"]
+base_font = ExtResource("1_tvlq7")
+spacing_glyph = 1
+
 [node name="LevelUI" type="CanvasLayer" unique_id=687480857]
 script = ExtResource("1_krbps")
 
@@ -31,7 +35,25 @@ text = "00.00"
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[node name="LevelStartLabel" type="Label" parent="LevelUIControl" unique_id=1054741852]
+layout_mode = 0
+offset_left = 32.0
+offset_top = 158.0
+offset_right = 288.0
+offset_bottom = 182.0
+grow_horizontal = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 1
+theme_override_constants/shadow_offset_y = 1
+theme_override_constants/shadow_outline_size = 0
+theme_override_fonts/font = SubResource("FontVariation_j6qd6")
+theme_override_font_sizes/font_size = 12
+text = "PRESS ANY BUTTON TO START"
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [node name="LevelCompletePrompts" type="HBoxContainer" parent="LevelUIControl" unique_id=1163831830]
+visible = false
 layout_mode = 1
 anchors_preset = 12
 anchor_top = 1.0
@@ -54,6 +76,7 @@ action_name = "continue_game"
 action_label = "CONTINUE"
 
 [node name="LevelFailPrompts" type="HBoxContainer" parent="LevelUIControl" unique_id=158662721]
+visible = false
 layout_mode = 1
 anchors_preset = 12
 anchor_top = 1.0

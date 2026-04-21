@@ -16,9 +16,13 @@ enum CameraMode {
 
 var shake_strength: float = 0.0
 var zoom_tween: Tween
+var fixed_camera_level: bool = false
 
 func _ready() -> void:
 	global_position = get_base_position()
+	
+	if mode == CameraMode.FIXED:
+		fixed_camera_level = true
 
 
 func _process(delta: float) -> void:
@@ -92,3 +96,12 @@ func zoom_to_target(target_node: Node2D, zoom_amount: Vector2, zoom_duration: fl
 	zoom_tween.tween_property(camera, "zoom", zoom_amount, zoom_duration)\
 		.set_trans(Tween.TRANS_SINE)\
 		.set_ease(Tween.EASE_IN_OUT)
+
+func retry_level() -> void:
+	if zoom_tween:
+		zoom_tween.kill()
+	
+	camera.zoom = Vector2.ONE
+	
+	if fixed_camera_level:
+		set_mode_fixed(fixed_position)
