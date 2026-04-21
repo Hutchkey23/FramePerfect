@@ -4,6 +4,7 @@ class_name LevelController
 signal load_next_level
 
 enum LevelState {
+	LOADING,
 	INTRO,
 	PLAYING,
 	COMPLETED,
@@ -18,7 +19,7 @@ enum LevelState {
 @export var cinematic_bars_path: NodePath
 @export var level_ui_path: NodePath
 
-var current_state: LevelState = LevelState.INTRO
+var current_state: LevelState = LevelState.LOADING
 var level_time: float = 0.0
 var timer_running: bool = false
 var fixed_camera_level : bool = false
@@ -32,10 +33,13 @@ var fixed_camera_level : bool = false
 @onready var goal: Goal = get_node(goal_path)
 
 func _ready() -> void:
+	# DEBUG
 	enter_intro_state()
+	# END DEBUG
+	
 	connect_signals()
 	player.position = player_spawn.position
-	
+	player.set_control_enabled(false)
 	if camera.mode == camera.CameraMode.FIXED:
 		fixed_camera_level = true
 

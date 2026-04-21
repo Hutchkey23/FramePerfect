@@ -5,6 +5,7 @@
 [ext_resource type="Resource" uid="uid://dhrfu1r1ue2do" path="res://resources/level_data/level_01.tres" id="3_c2g8d"]
 [ext_resource type="Resource" uid="uid://rsy15ntu6h7o" path="res://resources/level_data/level_02.tres" id="4_c2g8d"]
 [ext_resource type="Material" uid="uid://cbe3wuululcrv" path="res://materials/transition_material.tres" id="5_c2g8d"]
+[ext_resource type="Resource" uid="uid://n0hfkuq24c0b" path="res://resources/level_data/level_06.tres" id="5_psj4q"]
 [ext_resource type="FontFile" uid="uid://vklaqlxxc5o7" path="res://assets/fonts/Whacky_Joe.ttf" id="6_c2g8d"]
 [ext_resource type="Script" uid="uid://cfjlvij64shw7" path="res://scripts/ui/level_title_label.gd" id="7_fagfu"]
 
@@ -104,7 +105,7 @@ _data = {
 
 [node name="GameManager" type="Node2D" unique_id=99875122]
 script = ExtResource("1_cax2t")
-levels = Array[ExtResource("2_3yu1d")]([ExtResource("3_c2g8d"), ExtResource("4_c2g8d")])
+levels = Array[ExtResource("2_3yu1d")]([ExtResource("3_c2g8d"), ExtResource("4_c2g8d"), ExtResource("5_psj4q")])
 
 [node name="LevelContainer" type="Node2D" parent="." unique_id=517045765]
 
