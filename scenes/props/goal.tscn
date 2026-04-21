@@ -1,11 +1,18 @@
 [gd_scene format=3 uid="uid://cwv3wpwmybmey"]
 
 [ext_resource type="Texture2D" uid="uid://drakd26v650se" path="res://assets/sprites/goal/goal.png" id="1_bjw50"]
+[ext_resource type="Script" uid="uid://b2sw2on3pp2ru" path="res://scripts/props/goal.gd" id="1_ub4hd"]
+[ext_resource type="FontFile" uid="uid://vklaqlxxc5o7" path="res://assets/fonts/Whacky_Joe.ttf" id="3_n6pa6"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ub4hd"]
 size = Vector2(16, 16)
 
+[sub_resource type="FontVariation" id="FontVariation_n6pa6"]
+base_font = ExtResource("3_n6pa6")
+spacing_glyph = 1
+
 [node name="Goal" type="Node2D" unique_id=652280647 groups=["goal"]]
+script = ExtResource("1_ub4hd")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=174667340]
 scale = Vector2(0.5, 0.5)
@@ -16,3 +23,32 @@ collision_layer = 8
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=1187932494]
 shape = SubResource("RectangleShape2D_ub4hd")
+
+[node name="CompletionLabel" type="RichTextLabel" parent="." unique_id=1839295232]
+offset_left = -33.0
+offset_top = -25.0
+offset_right = 33.0
+offset_bottom = -9.0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 2
+theme_override_fonts/normal_font = SubResource("FontVariation_n6pa6")
+theme_override_font_sizes/normal_font_size = 6
+bbcode_enabled = true
+text = "[wave]RAD![/wave]"
+fit_content = true
+horizontal_alignment = 1
+vertical_alignment = 2
+
+[node name="NewBestLabel" type="RichTextLabel" parent="." unique_id=1180496778]
+offset_left = -33.0
+offset_top = 9.0
+offset_right = 33.0
+offset_bottom = 25.0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 2
+theme_override_fonts/normal_font = SubResource("FontVariation_n6pa6")
+theme_override_font_sizes/normal_font_size = 6
+bbcode_enabled = true
+text = "[rainbow][wave]NEW BEST![/wave][/rainbow]"
+fit_content = true
+horizontal_alignment = 1

@@ -1,6 +1,10 @@
 [gd_scene format=3 uid="uid://ecmje7pp4gyy"]
 
+[ext_resource type="Script" uid="uid://cnkegtjtgdls" path="res://scripts/utility/level_ui.gd" id="1_krbps"]
+[ext_resource type="FontFile" uid="uid://vklaqlxxc5o7" path="res://assets/fonts/Whacky_Joe.ttf" id="1_tvlq7"]
+
 [node name="LevelUI" type="CanvasLayer" unique_id=687480857]
+script = ExtResource("1_krbps")
 
 [node name="LevelUIControl" type="Control" parent="." unique_id=2015085019]
 layout_mode = 3
@@ -16,5 +20,31 @@ anchors_preset = 10
 anchor_right = 1.0
 offset_bottom = 23.0
 grow_horizontal = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 1
+theme_override_constants/shadow_offset_y = 1
+theme_override_constants/shadow_outline_size = 0
+theme_override_fonts/font = ExtResource("1_tvlq7")
+theme_override_font_sizes/font_size = 12
 text = "00.00"
 horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CompleteLabel" type="Label" parent="LevelUIControl" unique_id=418070364]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -25.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 1
+theme_override_constants/shadow_offset_y = 1
+theme_override_constants/shadow_outline_size = 0
+theme_override_fonts/font = ExtResource("1_tvlq7")
+theme_override_font_sizes/font_size = 12
+text = "R TO RETRY      X TO CONTINUE"
+horizontal_alignment = 1
+vertical_alignment = 1

@@ -1,0 +1,27 @@
+[gd_scene format=3 uid="uid://bxry211ole85r"]
+
+[ext_resource type="Script" uid="uid://mpwna2yr478j" path="res://scripts/utility/cinematic_bars.gd" id="1_j50mt"]
+
+[node name="CinematicBars" type="CanvasLayer" unique_id=3966864]
+script = ExtResource("1_j50mt")
+
+[node name="CinematicBarsControl" type="Control" parent="." unique_id=1672293614]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TopBar" type="ColorRect" parent="CinematicBarsControl" unique_id=288859848]
+layout_mode = 0
+offset_right = 320.0
+offset_bottom = 36.0
+color = Color(0, 0, 0, 1)
+
+[node name="BottomBar" type="ColorRect" parent="CinematicBarsControl" unique_id=2050973265]
+layout_mode = 0
+offset_top = 144.0
+offset_right = 320.0
+offset_bottom = 180.0
+color = Color(0, 0, 0, 1)

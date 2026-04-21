@@ -7,17 +7,15 @@ enum CameraMode {
 }
 
 @export var mode: CameraMode = CameraMode.FOLLOW
-
 @export var target: Node2D
 @export var follow_smoothing: float = 8.0
 @export var fixed_position: Vector2 = Vector2.ZERO
-
 @export var shake_decay: float = 18.0
 
 @onready var camera: Camera2D = $Camera2D
 
 var shake_strength: float = 0.0
-
+var zoom_tween: Tween
 
 func _ready() -> void:
 	global_position = get_base_position()
@@ -81,3 +79,16 @@ func set_mode_fixed(new_position: Vector2) -> void:
 
 func add_shake(amount: float) -> void:
 	shake_strength = max(shake_strength, amount)
+
+func zoom_to_target(target_node: Node2D, zoom_amount: Vector2, zoom_duration: float) -> void:
+	if zoom_tween:
+		zoom_tween.kill()
+
+	if target_node:
+		target = target_node
+		mode = CameraMode.FOLLOW
+
+	zoom_tween = create_tween()
+	zoom_tween.tween_property(camera, "zoom", zoom_amount, zoom_duration)\
+		.set_trans(Tween.TRANS_SINE)\
+		.set_ease(Tween.EASE_IN_OUT)

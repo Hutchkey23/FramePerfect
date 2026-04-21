@@ -12,7 +12,8 @@ signal goal_reached
 enum PlayerState {
 	NORMAL,
 	DASH,
-	JUMP
+	JUMP,
+	GOAL_REACHED,
 }
 
 var current_state: PlayerState = PlayerState.NORMAL
@@ -147,6 +148,14 @@ func _process(delta: float) -> void:
 			current_rotation_speed = DASH_ROTATION_SPEED
 		PlayerState.JUMP:
 			current_rotation_speed = JUMP_ROTATION_SPEED
+		PlayerState.GOAL_REACHED:
+			target_rotation_speed = 0.0
+			
+			current_rotation_speed = move_toward(
+				current_rotation_speed,
+				target_rotation_speed,
+				ROTATION_SPEED_CHANGE_RATE * delta
+			)
 	
 	player_sprite.rotation_degrees += current_rotation_speed * delta
 	shadow_sprite.rotation_degrees += current_rotation_speed * delta
@@ -299,6 +308,7 @@ func handle_jump(delta: float) -> void:
 		
 		if goal_overlapping:
 			goal_reached.emit()
+			current_state = PlayerState.GOAL_REACHED
 
 func play_landing_squash() -> void:
 	if player_sprite_landing_tween:
@@ -341,6 +351,7 @@ func _on_interaction_area_area_entered(area: Area2D) -> void:
 			return
 		
 		goal_reached.emit()
+		current_state = PlayerState.GOAL_REACHED
 
 
 func _on_interaction_area_area_exited(area: Area2D) -> void:

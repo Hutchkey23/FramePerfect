@@ -8,20 +8,30 @@ enum LevelState {
 	DEAD
 }
 
+
 @export var player_path: NodePath
 @export var goal_path: NodePath
+@export var camera_path: NodePath
+@export var cinematic_bars_path: NodePath
+@export var level_ui_path: NodePath
 
 var current_state: LevelState = LevelState.INTRO
 var level_time: float = 0.0
 var timer_running: bool = false
 
+@onready var camera: GameCamera = get_node(camera_path)
+@onready var cinematic_bars: CinematicBars = get_node(cinematic_bars_path)
+@onready var level_ui: LevelUI = get_node(level_ui_path)
 @onready var player: Player = get_node(player_path)
-@onready var goal = get_node(goal_path)
+@onready var goal: Goal = get_node(goal_path)
 
 func _ready() -> void:
 	enter_intro_state()
 	connect_signals()
 
+func _unhandled_input(event: InputEvent) -> void:
+	if event.is_action_pressed("restart"):
+		get_tree().reload_current_scene()
 
 func _process(delta: float) -> void:
 	match current_state:
@@ -47,8 +57,8 @@ func enter_intro_state() -> void:
 	if player.has_method("set_control_enabled"):
 		player.set_control_enabled(false)
 
-
 func start_level() -> void:
+	cinematic_bars.hide_bars()
 	current_state = LevelState.PLAYING
 	timer_running = true
 	
@@ -66,8 +76,11 @@ func complete_level() -> void:
 	if player.has_method("set_control_enabled"):
 		player.set_control_enabled(false)
 	
-	print("LEVEL COMPLETE")
-	print("Time: ", snapped(level_time, 0.001))
+	level_ui.show_complete_label()
+	
+	cinematic_bars.show_bars()
+	camera.zoom_to_target(goal, Vector2.ONE * 2.5, 0.2)
+	goal.show_completion_label()
 
 
 func fail_level() -> void:
@@ -80,7 +93,6 @@ func fail_level() -> void:
 	if player.has_method("set_control_enabled"):
 		player.set_control_enabled(false)
 	
-	print("PLAYER DIED")
 	get_tree().reload_current_scene()
 
 
