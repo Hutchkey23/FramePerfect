@@ -15,6 +15,10 @@ run/main_scene="uid://8nnykyojpaha"
 config/features=PackedStringArray("4.6", "GL Compatibility")
 config/icon="res://icon.svg"
 
+[autoload]
+
+InputPromptManager="*uid://brjaskbqa687r"
+
 [display]
 
 window/size/viewport_width=320
