@@ -2,6 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://drakd26v650se" path="res://assets/sprites/goal/goal.png" id="1_bjw50"]
 [ext_resource type="Script" uid="uid://b2sw2on3pp2ru" path="res://scripts/props/goal.gd" id="1_ub4hd"]
+[ext_resource type="Texture2D" uid="uid://bqtpoqxknetqq" path="res://assets/sprites/goal/flag.png" id="2_rwyj0"]
 [ext_resource type="FontFile" uid="uid://vklaqlxxc5o7" path="res://assets/fonts/Whacky_Joe.ttf" id="3_n6pa6"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ub4hd"]
@@ -11,20 +12,165 @@ size = Vector2(16, 16)
 base_font = ExtResource("3_n6pa6")
 spacing_glyph = 1
 
+[sub_resource type="Animation" id="Animation_rwyj0"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("GoalSprite:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("GoalSprite:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0.5, 0.5)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("FlagPivot:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(8, -4)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("FlagPivot:rotation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [3.141592653589793]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("FlagPivot:scale")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_2e18n"]
+resource_name = "goal_animation"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("GoalSprite:scale")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.06666667, 0.16666667, 0.33333334),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(0.5, 0.5), Vector2(0.75, 0.25), Vector2(0.35, 1.3), Vector2(0.5, 0.5)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("FlagPivot:rotation")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.06666667, 0.16666667, 0.33333334, 0.40000004, 0.70000005, 0.8666667),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, -1.56, 1),
+"update": 0,
+"values": [3.1415927, 2.7925267, 3.691371367968007, 3.1415927, 2.9321531433504737, -0.3403392, 0.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("GoalSprite:rotation")
+tracks/2/interp = 2
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.06666667, 0.16666667, 0.33333334),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [0.0, -0.34906584, 0.43633232, 0.0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("FlagPivot:scale")
+tracks/3/interp = 2
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.06666667, 0.16666667, 0.33333334),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(0.75, 0.25), Vector2(0.35, 1.3), Vector2(1, 1)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("FlagPivot:position")
+tracks/4/interp = 2
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.06666667, 0.16666667, 0.33333334),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(8, -4), Vector2(10, -6), Vector2(8, -4), Vector2(8, -4)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_hs6oo"]
+_data = {
+&"RESET": SubResource("Animation_rwyj0"),
+&"goal_animation": SubResource("Animation_2e18n")
+}
+
 [node name="Goal" type="Node2D" unique_id=652280647 groups=["goal"]]
 script = ExtResource("1_ub4hd")
 
-[node name="Sprite2D" type="Sprite2D" parent="." unique_id=174667340]
+[node name="FlagPivot" type="Node2D" parent="." unique_id=2035351984]
+position = Vector2(8, -4)
+rotation = 3.1415927
+
+[node name="Flag" type="Sprite2D" parent="FlagPivot" unique_id=1589305200]
+position = Vector2(1, -3)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("2_rwyj0")
+
+[node name="GoalSprite" type="Sprite2D" parent="." unique_id=174667340]
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("1_bjw50")
 
 [node name="Area2D" type="Area2D" parent="." unique_id=1225981306 groups=["goal"]]
+visible = false
+position = Vector2(-2, 1)
 collision_layer = 8
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=1187932494]
+position = Vector2(2, -1)
 shape = SubResource("RectangleShape2D_ub4hd")
 
 [node name="CompletionLabel" type="RichTextLabel" parent="." unique_id=1839295232]
+z_index = 1
 offset_left = -33.0
 offset_top = -25.0
 offset_right = 33.0
@@ -40,6 +186,7 @@ horizontal_alignment = 1
 vertical_alignment = 2
 
 [node name="NewBestLabel" type="RichTextLabel" parent="." unique_id=1180496778]
+z_index = 1
 offset_left = -33.0
 offset_top = 9.0
 offset_right = 33.0
@@ -52,3 +199,6 @@ bbcode_enabled = true
 text = "[rainbow][wave]NEW BEST![/wave][/rainbow]"
 fit_content = true
 horizontal_alignment = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1909242542]
+libraries/ = SubResource("AnimationLibrary_hs6oo")

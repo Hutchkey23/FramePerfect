@@ -1,0 +1,77 @@
+[gd_scene format=3 uid="uid://b3b7a1qdd5k5g"]
+
+[ext_resource type="Script" uid="uid://yic188jeoy2p" path="res://scripts/hazards/saw_blade.gd" id="1_ee17m"]
+[ext_resource type="Shader" uid="uid://cyftftn8qvqe5" path="res://shaders/hazard_shader.gdshader" id="2_3710t"]
+[ext_resource type="Texture2D" uid="uid://b843eu0sitmyt" path="res://assets/sprites/hazards/saw_blade.png" id="2_xmqhs"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_1eg0g"]
+shader = ExtResource("2_3710t")
+shader_parameter/pulse_color = Color(0.40392157, 0, 0, 1)
+shader_parameter/pulse_strength = 1.0
+shader_parameter/pulse_speed = 5.0980002388951196
+shader_parameter/center_glow_strength = 0.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_c8fuq"]
+size = Vector2(8, 8)
+
+[sub_resource type="Animation" id="Animation_ee17m"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PathFollow2D:progress_ratio")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1.0]
+}
+
+[sub_resource type="Animation" id="Animation_xmqhs"]
+resource_name = "move"
+length = 2.0
+loop_mode = 2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PathFollow2D:progress_ratio")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(-1.56, 1),
+"update": 0,
+"values": [0.0, 1.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_3710t"]
+_data = {
+&"RESET": SubResource("Animation_ee17m"),
+&"move": SubResource("Animation_xmqhs")
+}
+
+[node name="SquareHazard" type="Path2D" unique_id=736354374]
+script = ExtResource("1_ee17m")
+
+[node name="PathFollow2D" type="PathFollow2D" parent="." unique_id=1883799443]
+rotation = 3.1415927
+
+[node name="RemoteTransform2D" type="RemoteTransform2D" parent="PathFollow2D" unique_id=677685462]
+remote_path = NodePath("../../Hazard")
+update_rotation = false
+update_scale = false
+
+[node name="Hazard" type="Area2D" parent="." unique_id=199795999 groups=["hazards"]]
+collision_layer = 4
+
+[node name="Sprite2D" type="Sprite2D" parent="Hazard" unique_id=117742183]
+material = SubResource("ShaderMaterial_1eg0g")
+texture = ExtResource("2_xmqhs")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hazard" unique_id=678441189]
+shape = SubResource("RectangleShape2D_c8fuq")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=809497859]
+libraries/ = SubResource("AnimationLibrary_3710t")

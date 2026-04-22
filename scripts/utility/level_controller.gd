@@ -11,6 +11,7 @@ enum LevelState {
 	DEAD
 }
 
+const STAMP = preload("uid://dpvbyd8v5auob")
 
 @export var player_path: NodePath
 @export var player_spawn_path: NodePath
@@ -31,10 +32,11 @@ var fixed_camera_level : bool = false
 @onready var player: Player = get_node(player_path)
 @onready var player_spawn: Node2D = get_node(player_spawn_path)
 @onready var goal: Goal = get_node(goal_path)
+@onready var stamps: Node2D = $"../Stamps"
 
 func _ready() -> void:
 	# DEBUG
-	enter_intro_state()
+	#enter_intro_state()
 	# END DEBUG
 	
 	connect_signals()
@@ -42,6 +44,10 @@ func _ready() -> void:
 	player.set_control_enabled(false)
 	if camera.mode == camera.CameraMode.FIXED:
 		fixed_camera_level = true
+	
+	spawn_stamps()
+	
+	
 
 func _process(delta: float) -> void:
 	match current_state:
@@ -95,7 +101,7 @@ func complete_level() -> void:
 	
 	cinematic_bars.show_bars()
 	camera.zoom_to_target(goal, Vector2.ONE * 2.5, 0.2)
-	goal.show_completion_label()
+	goal.goal_reached_animation()
 
 
 func fail_level() -> void:
@@ -150,7 +156,23 @@ func retry_level() -> void:
 	camera.retry_level()
 	if not fixed_camera_level:
 		camera.set_follow_target(player)
-	goal.hide_completion_label()
+	goal.retry_level()
+	despawn_stamps()
+	spawn_stamps()
 	level_ui.retry_level()
 	player.position = player_spawn.position
 	enter_intro_state()
+
+func spawn_stamps() -> void:
+	for stamp_location in stamps.get_children():
+		var new_stamp = STAMP.instantiate()
+		add_child(new_stamp)
+		new_stamp.global_position = stamp_location.global_position
+	
+	goal.stamps_remaining = stamps.get_child_count()
+	goal.check_if_goal_available()
+	goal.setup_stamps()
+
+func despawn_stamps() -> void:
+	for stamp in get_tree().get_nodes_in_group("stamps"):
+		stamp.queue_free()

@@ -8,6 +8,7 @@ signal goal_reached
 @onready var shadow_sprite: Sprite2D = $ShadowSprite
 @onready var player_collision: CollisionShape2D = $PlayerCollision
 @onready var fail_label: RichTextLabel = $FailLabel
+@onready var interaction_area: Area2D = $InteractionArea
 
 var fail_words: Array = [
 	"OUCH!",
@@ -18,14 +19,14 @@ var fail_words: Array = [
 	"OW!",
 	"ACK!",
 	"UGH!",
-	"YOW!",
+	"SMAAAAASH!",
 	"WHAM!",
 	"BAM!",
 	"OOF!",
 	"CRUNCH!",
 	"SMACK!",
 	"BONK!",
-	"YEEOW!",
+	"YEEOUCH!",
 	"OWIE!",
 	"JEEZ!",
 	"GAH!",
@@ -190,9 +191,16 @@ func _process(delta: float) -> void:
 	shadow_sprite.rotation_degrees += current_rotation_speed * delta
 
 func die() -> void:
+	if not player_sprite.visible:
+		return
+	
 	player_sprite.visible = false
 	shadow_sprite.visible = false
 	control_enabled = false
+	
+	interaction_area.set_deferred("monitorable", false)
+	interaction_area.set_deferred("monitoring", false)
+	
 	spawn_death_clouds(8)
 	show_fail_label()
 	
@@ -202,7 +210,11 @@ func retry_level() -> void:
 	current_state = PlayerState.NORMAL
 	current_rotation_speed = 0.0
 	rotation_degrees = 0.0
-	velocity = Vector2.ZERO	
+	velocity = Vector2.ZERO
+	
+	interaction_area.monitorable = true
+	interaction_area.monitoring = true
+	
 	player_sprite.visible = true
 	shadow_sprite.visible = true
 	hide_fail_label()
@@ -346,8 +358,8 @@ func handle_jump(delta: float) -> void:
 			die()
 		
 		if goal_overlapping:
-			goal_reached.emit()
-			current_state = PlayerState.GOAL_REACHED
+			try_to_activate_goal()
+			
 
 func play_landing_squash() -> void:
 	if player_sprite_landing_tween:
@@ -389,13 +401,24 @@ func _on_interaction_area_area_entered(area: Area2D) -> void:
 		if current_state == PlayerState.JUMP:
 			return
 		
-		goal_reached.emit()
-		current_state = PlayerState.GOAL_REACHED
+		try_to_activate_goal()
+	
+	if area.is_in_group("hazards"):
+		overlapping_hazard_count += 1
+		if current_state == PlayerState.JUMP:
+			return
+		die()
+	
+	if area.is_in_group("stamps"):
+		area.collect()
 
 
 func _on_interaction_area_area_exited(area: Area2D) -> void:
 	if area.is_in_group("goal"):
 		goal_overlapping = false
+	
+	if area.is_in_group("hazards"):
+		overlapping_hazard_count = max(0, overlapping_hazard_count - 1)
 
 func show_fail_label() -> void:
 	var random_word = fail_words.pick_random()
@@ -404,3 +427,13 @@ func show_fail_label() -> void:
 
 func hide_fail_label() -> void:
 	fail_label.visible = false
+
+func try_to_activate_goal() -> void:
+	var stamps_remaining = get_tree().get_node_count_in_group("stamps")
+	if stamps_remaining > 0:
+		return
+	
+	goal_reached.emit()
+	current_state = PlayerState.GOAL_REACHED
+	player_sprite.visible = false
+	shadow_sprite.visible = false
