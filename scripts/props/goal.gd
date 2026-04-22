@@ -6,6 +6,10 @@ class_name Goal
 @onready var flag_pivot: Node2D = $FlagPivot
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 
+@onready var sprite: Sprite2D = $Sprite2D
+
+
+
 const NORMAL_GOAL_SCALE : Vector2 = Vector2(0.5, 0.5)
 const MAX_DEGREE_ROTATION : float = 10
 
@@ -16,6 +20,10 @@ var pop_tween : Tween
 var goal_reached : bool = false
 var time: float = 0.0
 var completion_words := [
+	"Delivered!",
+	"Sent!",
+	"Boomtastic!",
+	"Boomshakalaka!",
 	"Nice!",
 	"Rad!",
 	"Clean!",

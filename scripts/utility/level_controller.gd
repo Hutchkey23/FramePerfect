@@ -35,9 +35,9 @@ var fixed_camera_level : bool = false
 @onready var stamps: Node2D = $"../Stamps"
 
 func _ready() -> void:
-	# DEBUG
-	#enter_intro_state()
-	# END DEBUG
+	 #DEBUG
+	enter_intro_state()
+	 #END DEBUG
 	
 	connect_signals()
 	player.position = player_spawn.position

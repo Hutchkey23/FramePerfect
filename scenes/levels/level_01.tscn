@@ -85,15 +85,6 @@ speed_scale = 2.0
 
 [node name="Stamps" type="Node2D" parent="." unique_id=777576707]
 
-[node name="StampLocation1" type="Node2D" parent="Stamps" unique_id=507522615]
-position = Vector2(104, 52)
-
-[node name="StampLocation2" type="Node2D" parent="Stamps" unique_id=624450313]
-position = Vector2(104, 124)
-
-[node name="StampLocation3" type="Node2D" parent="Stamps" unique_id=1183920837]
-position = Vector2(129, 90)
-
 [node name="Goal" parent="." unique_id=652280647 instance=ExtResource("6_bt4du")]
 position = Vector2(248, 90)
 

@@ -6,6 +6,6 @@
 [resource]
 script = ExtResource("2_tyrfh")
 level_id = "level_02"
-level_title = "time to jump"
+level_title = "hoppin' around"
 level_scene = ExtResource("1_13q8j")
 metadata/_custom_type_script = "uid://do5fdotl7d638"
