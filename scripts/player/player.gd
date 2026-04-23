@@ -118,6 +118,7 @@ var camera_reference: GameCamera
 
 # Jump Interactions
 var overlapping_hazard_count: int = 0
+var overlapping_stamp: Stamp = null
 var goal_overlapping: bool = false
 
 func _ready() -> void:
@@ -357,6 +358,10 @@ func handle_jump(delta: float) -> void:
 		if overlapping_hazard_count > 0:
 			die()
 		
+		if overlapping_stamp:
+			overlapping_stamp.collect()
+			overlapping_stamp = null
+		
 		if goal_overlapping:
 			try_to_activate_goal()
 			
@@ -410,6 +415,9 @@ func _on_interaction_area_area_entered(area: Area2D) -> void:
 		die()
 	
 	if area.is_in_group("stamps"):
+		overlapping_stamp = area
+		if current_state == PlayerState.JUMP:
+			return
 		area.collect()
 
 
@@ -419,6 +427,9 @@ func _on_interaction_area_area_exited(area: Area2D) -> void:
 	
 	if area.is_in_group("hazards"):
 		overlapping_hazard_count = max(0, overlapping_hazard_count - 1)
+	
+	if area.is_in_group("stamps"):
+		overlapping_stamp = null
 
 func show_fail_label() -> void:
 	var random_word = fail_words.pick_random()
