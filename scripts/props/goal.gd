@@ -74,9 +74,21 @@ func retry_level() -> void:
 	animation_player.stop()
 	flag_pivot.rotation_degrees = 180.0
 	completion_label.visible = false
+	new_best_label.visible = false
 	goal_reached = false
 	rotation_degrees = initial_rotation_degrees
 	time = 0.0
+
+func show_level_complete_result(result: Dictionary) -> void:
+	goal_reached_animation()
+	
+	# Check if player earned medal this run
+	if result.earned_medal_this_run:
+		pass
+	
+	# Only show new best label if not first completion
+	if result.new_best and not result.first_completion:
+		new_best_label.visible = true
 
 func goal_reached_animation() -> void:
 	if pop_tween:

@@ -18,6 +18,8 @@ config/icon="res://icon.svg"
 [autoload]
 
 InputHelper="*uid://cholww48njaeh"
+SaveManager="*uid://b5ifq4a5txl6a"
+LevelDatabase="*uid://kjoca7iumvos"
 
 [display]
 

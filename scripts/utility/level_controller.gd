@@ -102,9 +102,11 @@ func complete_level() -> void:
 	
 	level_ui.show_level_complete_prompts()
 	
+	var result : Dictionary = SaveManager.record_level_completion(level_id, level_time)
+	goal.show_level_complete_result(result)
+	
 	cinematic_bars.show_bars()
 	camera.zoom_to_target(goal, Vector2.ONE * 2.5, 0.2)
-	goal.goal_reached_animation()
 
 
 func fail_level() -> void:
@@ -172,14 +174,17 @@ func retry_level() -> void:
 	enter_intro_state()
 
 func spawn_stamps() -> void:
+	var stamps_in_level: bool = false
 	for stamp_location in stamps.get_children():
 		var new_stamp = STAMP.instantiate()
 		add_child(new_stamp)
 		new_stamp.global_position = stamp_location.global_position
+		stamps_in_level = true
 	
-	goal.stamps_remaining = stamps.get_child_count()
-	goal.check_if_goal_available()
-	goal.setup_stamps()
+	if stamps_in_level:
+		goal.stamps_remaining = stamps.get_child_count()
+		goal.check_if_goal_available()
+		goal.setup_stamps()
 
 func despawn_stamps() -> void:
 	for stamp in get_tree().get_nodes_in_group("stamps"):

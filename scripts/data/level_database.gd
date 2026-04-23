@@ -31,8 +31,14 @@ func has_level(level_id: String) -> bool:
 
 func get_medal_time(level_id: String) -> float:
 	if not LEVEL_DATA.has(level_id):
-		return INF
+		return 999999.0
 	return LEVEL_DATA[level_id].medal_time
+
+func get_display_name(level_id: String) -> String:
+	if not LEVEL_DATA.has(level_id):
+		return level_id
+	
+	return LEVEL_DATA[level_id].display_name
 
 func level_has_medal(level_id: String, best_time: float) -> bool:
 	return best_time <= get_medal_time(level_id)

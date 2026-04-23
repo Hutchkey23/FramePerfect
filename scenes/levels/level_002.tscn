@@ -19,7 +19,6 @@ shader_parameter/center_glow_strength = 0.0
 [node name="Level_002" type="Node2D" unique_id=1381461103]
 
 [node name="LevelController" parent="." unique_id=1058685242 groups=["level_controller"] instance=ExtResource("1_rmptc")]
-level_id = "level_002"
 player_spawn_path = NodePath("../PlayerSpawn")
 camera_path = NodePath("../GameCamera")
 cinematic_bars_path = NodePath("../CinematicBars")
