@@ -46,6 +46,8 @@ folder_colors={
 [global_group]
 
 hazards=""
+floors=""
+floor_hazards=""
 
 [input]
 
@@ -105,6 +107,7 @@ continue_game={
 2d_physics/layer_3="Hazards"
 2d_physics/layer_4="Goal"
 2d_physics/layer_5="Pickup"
+2d_physics/layer_6="Floors"
 
 [physics]
 

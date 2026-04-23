@@ -11,6 +11,9 @@ size = Vector2(8, 8)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gmlin"]
 size = Vector2(4, 4)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lvxji"]
+size = Vector2(1, 1)
+
 [sub_resource type="FontVariation" id="FontVariation_p47bc"]
 base_font = ExtResource("4_lvxji")
 spacing_glyph = 1
@@ -38,6 +41,12 @@ collision_mask = 28
 [node name="CollisionShape2D" type="CollisionShape2D" parent="InteractionArea" unique_id=74698378]
 shape = SubResource("RectangleShape2D_gmlin")
 
+[node name="FloorHazardDetectionArea" type="Area2D" parent="." unique_id=602288182]
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="FloorHazardDetectionArea" unique_id=688081931]
+shape = SubResource("RectangleShape2D_lvxji")
+
 [node name="FailLabel" type="RichTextLabel" parent="." unique_id=1408916861]
 offset_left = -33.0
 offset_top = -14.0
@@ -57,3 +66,5 @@ vertical_alignment = 2
 [connection signal="area_exited" from="InteractionArea" to="." method="_on_interaction_area_area_exited"]
 [connection signal="body_entered" from="InteractionArea" to="." method="_on_interaction_area_body_entered"]
 [connection signal="body_exited" from="InteractionArea" to="." method="_on_interaction_area_body_exited"]
+[connection signal="body_entered" from="FloorHazardDetectionArea" to="." method="_on_floor_hazard_detection_area_body_entered"]
+[connection signal="body_exited" from="FloorHazardDetectionArea" to="." method="_on_floor_hazard_detection_area_body_exited"]

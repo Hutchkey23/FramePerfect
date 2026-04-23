@@ -9,6 +9,7 @@ signal goal_reached
 @onready var player_collision: CollisionShape2D = $PlayerCollision
 @onready var fail_label: RichTextLabel = $FailLabel
 @onready var interaction_area: Area2D = $InteractionArea
+@onready var floor_hazard_detection_area: Area2D = $FloorHazardDetectionArea
 
 var fail_words: Array = [
 	"OUCH!",
@@ -137,7 +138,8 @@ func _physics_process(delta: float) -> void:
 		return
 	
 	move_input = Input.get_vector("move_left", "move_right", "move_up", "move_down")
-
+	
+	
 	if move_input != Vector2.ZERO:
 		last_move_input = move_input
 
@@ -146,7 +148,7 @@ func _physics_process(delta: float) -> void:
 
 	if jump_cooldown_timer > 0.0:
 		jump_cooldown_timer -= delta
-
+	
 	match current_state:
 		PlayerState.NORMAL:
 			handle_normal_movement(delta)
@@ -202,6 +204,9 @@ func die() -> void:
 	interaction_area.set_deferred("monitorable", false)
 	interaction_area.set_deferred("monitoring", false)
 	
+	floor_hazard_detection_area.set_deferred("monitorable", false)
+	floor_hazard_detection_area.set_deferred("monitoring", false)
+	
 	spawn_death_clouds(8)
 	show_fail_label()
 	
@@ -213,8 +218,13 @@ func retry_level() -> void:
 	rotation_degrees = 0.0
 	velocity = Vector2.ZERO
 	
+	dash_cooldown_timer = 0.0
+	
 	interaction_area.monitorable = true
 	interaction_area.monitoring = true
+	
+	floor_hazard_detection_area.monitorable = true
+	floor_hazard_detection_area.monitoring = true
 	
 	player_sprite.visible = true
 	shadow_sprite.visible = true
@@ -255,8 +265,8 @@ func try_start_dash() -> void:
 	if dash_cooldown_timer > 0.0:
 		return
 
-	if move_input == Vector2.ZERO:
-		return
+	#if move_input == Vector2.ZERO:
+		#return
 
 	current_state = PlayerState.DASH
 	dash_timer = DASH_DURATION
@@ -430,6 +440,18 @@ func _on_interaction_area_area_exited(area: Area2D) -> void:
 	
 	if area.is_in_group("stamps"):
 		overlapping_stamp = null
+
+func _on_floor_hazard_detection_area_body_entered(body: Node2D) -> void:
+	if body.is_in_group("floor_hazards"):
+		overlapping_hazard_count += 1
+		if current_state == PlayerState.JUMP:
+			return
+		die()
+
+
+func _on_floor_hazard_detection_area_body_exited(body: Node2D) -> void:
+	if body.is_in_group("floor_hazards"):
+		overlapping_hazard_count = max(0, overlapping_hazard_count - 1)
 
 func show_fail_label() -> void:
 	var random_word = fail_words.pick_random()
