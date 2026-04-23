@@ -23,9 +23,10 @@ _data = {
 }
 point_count = 2
 
-[node name="Level_08" type="Node2D" unique_id=1381461103]
+[node name="Level_008" type="Node2D" unique_id=1381461103]
 
 [node name="LevelController" parent="." unique_id=1058685242 groups=["level_controller"] instance=ExtResource("1_y0u2e")]
+level_id = "level_008"
 player_spawn_path = NodePath("../PlayerSpawn")
 camera_path = NodePath("../GameCamera")
 cinematic_bars_path = NodePath("../CinematicBars")

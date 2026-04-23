@@ -20,6 +20,9 @@ const STAMP = preload("uid://dpvbyd8v5auob")
 @export var cinematic_bars_path: NodePath
 @export var level_ui_path: NodePath
 
+
+var level_id : String = ""
+
 var current_state: LevelState = LevelState.LOADING
 var level_time: float = 0.0
 var timer_running: bool = false
@@ -155,13 +158,15 @@ func _on_goal_reached() -> void:
 	complete_level()
 
 func retry_level() -> void:
+	despawn_stamps()
+	await get_tree().process_frame
+	spawn_stamps()
+	
 	player.retry_level()
 	camera.retry_level()
 	if not fixed_camera_level:
 		camera.set_follow_target(player)
 	goal.retry_level()
-	despawn_stamps()
-	spawn_stamps()
 	level_ui.retry_level()
 	player.position = player_spawn.position
 	enter_intro_state()

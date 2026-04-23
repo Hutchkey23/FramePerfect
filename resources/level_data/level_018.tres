@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="LevelData" format=3 uid="uid://gia06jvackle"]
+
+[ext_resource type="PackedScene" uid="uid://djeigjjqp4brc" path="res://scenes/levels/level_018.tscn" id="1_pfq0o"]
+[ext_resource type="Script" uid="uid://do5fdotl7d638" path="res://resources/level_data/level_data.gd" id="2_cg7pm"]
+
+[resource]
+script = ExtResource("2_cg7pm")
+level_id = "level_018"
+level_title = "like magic"
+level_scene = ExtResource("1_pfq0o")
+metadata/_custom_type_script = "uid://do5fdotl7d638"

@@ -48,6 +48,7 @@ folder_colors={
 hazards=""
 floors=""
 floor_hazards=""
+goal=""
 
 [input]
 

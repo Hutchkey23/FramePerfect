@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="LevelData" format=3 uid="uid://brjbmrdbcuc7v"]
+
+[ext_resource type="PackedScene" uid="uid://dad31vtcotqt8" path="res://scenes/levels/level_003.tscn" id="1_3yh15"]
+[ext_resource type="Script" uid="uid://do5fdotl7d638" path="res://resources/level_data/level_data.gd" id="2_7qa0v"]
+
+[resource]
+script = ExtResource("2_7qa0v")
+level_id = "level_003"
+level_title = "collect postage"
+level_scene = ExtResource("1_3yh15")
+metadata/_custom_type_script = "uid://do5fdotl7d638"

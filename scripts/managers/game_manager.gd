@@ -20,6 +20,7 @@ func start_run() -> void:
 	load_level(current_level_index)
 	await get_tree().create_timer(TRANSITION_LENGTH).timeout
 	await transition_in()
+	level_controller_reference.level_id = current_level_id
 	level_controller_reference.enter_intro_state()
 
 func transition_in() -> void:
@@ -83,6 +84,7 @@ func load_next_level() -> void:
 	
 	if level_controller_reference:
 		level_controller_reference.enter_intro_state()
+		level_controller_reference.level_id = current_level_id
 
 func unload_current_level() -> void:
 	if level_container.get_child_count() == 0:

@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="LevelData" format=3 uid="uid://d073qyir51xxk"]
+
+[ext_resource type="PackedScene" uid="uid://gata5klffpko" path="res://scenes/levels/level_004.tscn" id="1_7kste"]
+[ext_resource type="Script" uid="uid://do5fdotl7d638" path="res://resources/level_data/level_data.gd" id="2_j8u8x"]
+
+[resource]
+script = ExtResource("2_j8u8x")
+level_id = "level_004"
+level_title = "the wave"
+level_scene = ExtResource("1_7kste")
+metadata/_custom_type_script = "uid://do5fdotl7d638"
