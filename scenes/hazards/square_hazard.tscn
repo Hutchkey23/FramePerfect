@@ -8,7 +8,7 @@
 shader = ExtResource("2_3710t")
 shader_parameter/pulse_color = Color(0.40392157, 0, 0, 1)
 shader_parameter/pulse_strength = 1.0
-shader_parameter/pulse_speed = 5.0980002388951196
+shader_parameter/pulse_speed = 5.09800023889512
 shader_parameter/center_glow_strength = 0.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_c8fuq"]

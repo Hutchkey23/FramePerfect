@@ -10,6 +10,7 @@
 [ext_resource type="FontFile" uid="uid://vklaqlxxc5o7" path="res://assets/fonts/Whacky_Joe.ttf" id="6_c2g8d"]
 [ext_resource type="Resource" uid="uid://0di38jtexyf1" path="res://resources/level_data/level_08.tres" id="6_ssqxr"]
 [ext_resource type="Script" uid="uid://cfjlvij64shw7" path="res://scripts/ui/level_title_label.gd" id="7_fagfu"]
+[ext_resource type="Resource" uid="uid://b6gs23itcnv2o" path="res://resources/level_data/level_20.tres" id="8_vcwo2"]
 
 [sub_resource type="FontVariation" id="FontVariation_fagfu"]
 base_font = ExtResource("6_c2g8d")
@@ -107,7 +108,7 @@ _data = {
 
 [node name="GameManager" type="Node2D" unique_id=99875122]
 script = ExtResource("1_cax2t")
-levels = Array[ExtResource("2_3yu1d")]([ExtResource("3_c2g8d"), ExtResource("4_c2g8d"), ExtResource("5_s6d7f"), ExtResource("5_psj4q"), ExtResource("6_ssqxr")])
+levels = Array[ExtResource("2_3yu1d")]([ExtResource("3_c2g8d"), ExtResource("4_c2g8d"), ExtResource("5_s6d7f"), ExtResource("5_psj4q"), ExtResource("6_ssqxr"), ExtResource("8_vcwo2")])
 
 [node name="LevelContainer" type="Node2D" parent="." unique_id=517045765]
 

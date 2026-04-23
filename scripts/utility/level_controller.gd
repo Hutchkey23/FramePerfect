@@ -24,7 +24,7 @@ var current_state: LevelState = LevelState.LOADING
 var level_time: float = 0.0
 var timer_running: bool = false
 var fixed_camera_level : bool = false
-
+var loading_next_level : bool = false
 
 @onready var camera: GameCamera = get_node(camera_path)
 @onready var cinematic_bars: CinematicBars = get_node(cinematic_bars_path)
@@ -36,7 +36,7 @@ var fixed_camera_level : bool = false
 
 func _ready() -> void:
 	 #DEBUG
-	enter_intro_state()
+	#enter_intro_state()
 	 #END DEBUG
 	
 	connect_signals()
@@ -135,6 +135,9 @@ func check_for_level_start_input() -> void:
 
 func check_for_level_completed_input() -> void:
 	if Input.is_action_just_pressed("continue_game"):
+		if loading_next_level:
+			return
+		loading_next_level = true
 		load_next_level.emit()
 	elif Input.is_action_just_pressed("retry"):
 		retry_level()
