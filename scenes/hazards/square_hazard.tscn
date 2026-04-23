@@ -1,8 +1,8 @@
 [gd_scene format=3 uid="uid://b3b7a1qdd5k5g"]
 
-[ext_resource type="Script" uid="uid://yic188jeoy2p" path="res://scripts/hazards/saw_blade.gd" id="1_ee17m"]
+[ext_resource type="Script" uid="uid://yic188jeoy2p" path="res://scripts/hazards/square_hazard.gd" id="1_ee17m"]
 [ext_resource type="Shader" uid="uid://cyftftn8qvqe5" path="res://shaders/hazard_shader.gdshader" id="2_3710t"]
-[ext_resource type="Texture2D" uid="uid://b843eu0sitmyt" path="res://assets/sprites/hazards/saw_blade.png" id="2_xmqhs"]
+[ext_resource type="Texture2D" uid="uid://b843eu0sitmyt" path="res://assets/sprites/hazards/square_hazard.png" id="2_xmqhs"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_1eg0g"]
 shader = ExtResource("2_3710t")
@@ -56,7 +56,9 @@ _data = {
 script = ExtResource("1_ee17m")
 
 [node name="PathFollow2D" type="PathFollow2D" parent="." unique_id=1883799443]
-rotation = 3.1415927
+position = Vector2(53, 0)
+progress = 53.0
+loop = false
 
 [node name="RemoteTransform2D" type="RemoteTransform2D" parent="PathFollow2D" unique_id=677685462]
 remote_path = NodePath("../../Hazard")

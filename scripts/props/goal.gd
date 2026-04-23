@@ -6,8 +6,6 @@ class_name Goal
 @onready var flag_pivot: Node2D = $FlagPivot
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 
-@onready var sprite: Sprite2D = $Sprite2D
-
 
 
 const NORMAL_GOAL_SCALE : Vector2 = Vector2(0.5, 0.5)
