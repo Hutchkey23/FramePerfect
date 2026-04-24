@@ -1,7 +1,14 @@
 extends Control
 
+@onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var logo_container: MarginContainer = $VBoxContainer/LogoContainer
 @onready var play_button: CustomMenuButton = $VBoxContainer/PlayButton
+@onready var marathon_button: CustomMenuButton = $VBoxContainer/MarathonButton
+@onready var level_select_button: CustomMenuButton = $VBoxContainer/LevelSelectButton
+@onready var customize_button: CustomMenuButton = $VBoxContainer/CustomizeButton
+@onready var options_button: CustomMenuButton = $VBoxContainer/OptionsButton
+@onready var quit_button: CustomMenuButton = $VBoxContainer/QuitButton
+
 
 const ROTATION_AMOUNT: float = 2.0
 const ROTATION_SPEED: float = 2.0
@@ -10,6 +17,9 @@ var time: float = 0.0
 
 func _ready() -> void:
 	call_deferred("setup_pivots")
+	
+	animation_player.play("transition_in")
+	
 	play_button.grab_focus()
 
 
@@ -25,3 +35,29 @@ func _on_logo_container_resized() -> void:
 	if not logo_container:
 		return
 	logo_container.pivot_offset = logo_container.size / 2.0
+
+
+func _on_play_button_pressed() -> void:
+	animation_player.play("transition_out")
+	await animation_player.animation_finished
+	get_tree().change_scene_to_file("res://scenes/managers/game_manager.tscn")
+
+
+func _on_marathon_button_pressed() -> void:
+	pass # Replace with function body.
+
+
+func _on_level_select_button_pressed() -> void:
+	pass # Replace with function body.
+
+
+func _on_customize_button_pressed() -> void:
+	pass # Replace with function body.
+
+
+func _on_options_button_pressed() -> void:
+	pass # Replace with function body.
+
+
+func _on_quit_button_pressed() -> void:
+	get_tree().quit()

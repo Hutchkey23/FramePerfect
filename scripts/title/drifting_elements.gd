@@ -16,11 +16,29 @@ extends Node2D
 @export var rotation_speed_min: float = -45.0
 @export var rotation_speed_max: float = 45.0
 
+# Area where elements should NOT spawn/pass through.
+# Adjust these based on your title logo/menu placement.
+@export var logo_safe_zone: Rect2 = Rect2(Vector2(70, 5), Vector2(180, 75))
+
+# Side drift while moving upward.
+@export var horizontal_drift_min: float = -6.0
+@export var horizontal_drift_max: float = 6.0
+
 var timer: float = 0.0
 var active_elements: Array[Sprite2D] = []
 
+@export var debug_draw_safe_zone: bool = true
+
+func _draw() -> void:
+	if not debug_draw_safe_zone:
+		return
+	
+	draw_rect(logo_safe_zone, Color(1, 0, 0, 0.2), true)   # filled
+	draw_rect(logo_safe_zone, Color(1, 0, 0, 0.8), false)  # outline
 
 func _process(delta: float) -> void:
+	queue_redraw()
+	
 	timer -= delta
 	
 	if timer <= 0.0:
@@ -46,24 +64,31 @@ func spawn_drifting_element() -> void:
 	
 	var viewport_size := get_viewport_rect().size
 	
-	# Spawn just offscreen.
-	var spawn_from_left := randf() < 0.5
+	# Spawn just below the screen.
+	var spawn_position := Vector2(
+		randf_range(20, viewport_size.x - 20),
+		viewport_size.y + 40
+	)
 	
-	if spawn_from_left:
-		sprite.global_position = Vector2(-20, randf_range(20, viewport_size.y - 20))
-		sprite.set_meta("velocity", Vector2(randf_range(min_speed, max_speed), randf_range(-4, 4)))
-	else:
-		sprite.global_position = Vector2(viewport_size.x + 20, randf_range(20, viewport_size.y - 20))
-		sprite.set_meta("velocity", Vector2(-randf_range(min_speed, max_speed), randf_range(-4, 4)))
+	# Avoid spawning directly under the logo area.
+	var attempts := 0
+	while logo_safe_zone.has_point(spawn_position) and attempts < 20:
+		spawn_position.x = randf_range(20, viewport_size.x - 20)
+		attempts += 1
+	
+	sprite.global_position = spawn_position
+	
+	var upward_speed := randf_range(min_speed, max_speed)
+	var horizontal_drift := randf_range(horizontal_drift_min, horizontal_drift_max)
+	sprite.set_meta("velocity", Vector2(horizontal_drift, -upward_speed))
 	
 	var s := randf_range(min_scale, max_scale)
 	sprite.scale = Vector2(s, s)
 	sprite.rotation_degrees = randf_range(0.0, 360.0)
 	sprite.modulate.a = randf_range(min_alpha, max_alpha)
 	
-	var speed_sign : float = -1.0 if randf() < 0.5 else 1.0
+	var speed_sign: float = -1.0 if randf() < 0.5 else 1.0
 	var rot_speed := randf_range(20.0, rotation_speed_max) * speed_sign
-
 	sprite.set_meta("rotation_speed", rot_speed)
 
 
@@ -85,7 +110,6 @@ func update_elements(delta: float) -> void:
 		
 		if sprite.global_position.x < -60 \
 		or sprite.global_position.x > viewport_size.x + 60 \
-		or sprite.global_position.y < -60 \
-		or sprite.global_position.y > viewport_size.y + 60:
+		or sprite.global_position.y < -60:
 			active_elements.remove_at(i)
 			sprite.queue_free()

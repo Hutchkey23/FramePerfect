@@ -16,6 +16,22 @@ const STAMP_TEXTURES := [
 	preload("res://assets/sprites/stamps/stamp8.png"),
 	preload("res://assets/sprites/stamps/stamp9.png"),
 	preload("res://assets/sprites/stamps/stamp10.png"),
+	preload("res://assets/sprites/stamps/stamp_11.png"),
+	preload("res://assets/sprites/stamps/stamp_12.png"),
+	preload("res://assets/sprites/stamps/stamp_13.png"),
+	preload("res://assets/sprites/stamps/stamp_14.png"),
+	preload("res://assets/sprites/stamps/stamp_15.png"),
+	preload("res://assets/sprites/stamps/stamp_16.png"),
+	preload("res://assets/sprites/stamps/stamp_17.png"),
+	preload("res://assets/sprites/stamps/stamp_18.png"),
+	preload("res://assets/sprites/stamps/stamp_19.png"),
+	preload("res://assets/sprites/stamps/stamp_20.png"),
+	preload("res://assets/sprites/stamps/stamp_21.png"),
+	preload("res://assets/sprites/stamps/stamp_22.png"),
+	preload("res://assets/sprites/stamps/stamp_23.png"),
+	preload("res://assets/sprites/stamps/stamp_24.png"),
+	preload("res://assets/sprites/stamps/stamp_25.png"),
+	preload("res://assets/sprites/stamps/stamp_26.png"),
 ]
 
 func _ready() -> void:

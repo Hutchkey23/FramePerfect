@@ -18,6 +18,8 @@ func _ready() -> void:
 
 func start_run() -> void:
 	load_level(current_level_index)
+	animation_player.play("global_transition_in")
+	await animation_player.animation_finished
 	
 	await get_tree().create_timer(TRANSITION_LENGTH).timeout
 	await transition_in()
