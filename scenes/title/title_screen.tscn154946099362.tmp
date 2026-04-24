@@ -6,12 +6,6 @@
 [ext_resource type="PackedScene" uid="uid://dv8sgqilw7oo1" path="res://scenes/title/menu_button.tscn" id="3_iowo3"]
 [ext_resource type="Texture2D" uid="uid://bdmsjrgq7lyt" path="res://assets/title/LogoWithEnvelope.png" id="4_8xedo"]
 [ext_resource type="Shader" uid="uid://d3nr13qnwjafd" path="res://shaders/vignette.gdshader" id="4_84bpe"]
-[ext_resource type="Script" uid="uid://svlunj5u68xy" path="res://scripts/title/drifting_elements.gd" id="4_iy4b5"]
-[ext_resource type="Texture2D" uid="uid://drakd26v650se" path="res://assets/sprites/goal/goal.png" id="5_cbsym"]
-[ext_resource type="Texture2D" uid="uid://bqtpoqxknetqq" path="res://assets/sprites/goal/flag.png" id="6_noexq"]
-[ext_resource type="Texture2D" uid="uid://badx6a15clq2t" path="res://assets/sprites/goal/medal.png" id="7_1m6id"]
-[ext_resource type="Texture2D" uid="uid://dxe8mimn6o53d" path="res://assets/sprites/hazards/laser_cap.png" id="8_73nhm"]
-[ext_resource type="Texture2D" uid="uid://b843eu0sitmyt" path="res://assets/sprites/hazards/square_hazard.png" id="9_8onup"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_84bpe"]
 shader = ExtResource("2_8xedo")
@@ -46,18 +40,6 @@ grow_vertical = 2
 texture = ExtResource("2_qrms8")
 stretch_mode = 1
 
-[node name="DriftingElements" type="Node2D" parent="." unique_id=1612457156]
-script = ExtResource("4_iy4b5")
-textures = Array[Texture2D]([ExtResource("5_cbsym"), ExtResource("6_noexq"), ExtResource("7_1m6id"), ExtResource("8_73nhm"), ExtResource("9_8onup")])
-spawn_interval = 1.2
-max_elements = 8
-min_speed = 7.0
-max_speed = 12.0
-min_scale = 0.9
-max_scale = 1.5
-min_alpha = 0.06
-max_alpha = 0.12
-
 [node name="Vignette" type="ColorRect" parent="." unique_id=1694956365]
 material = SubResource("ShaderMaterial_iy4b5")
 layout_mode = 1
@@ -79,6 +61,7 @@ alignment = 1
 
 [node name="LogoContainer" type="MarginContainer" parent="VBoxContainer" unique_id=1071115620]
 layout_mode = 2
+theme_override_constants/margin_top = 6
 theme_override_constants/margin_bottom = 6
 
 [node name="Logo" type="TextureRect" parent="VBoxContainer/LogoContainer" unique_id=1989668100]
@@ -92,45 +75,27 @@ stretch_mode = 5
 
 [node name="PlayButton" parent="VBoxContainer" unique_id=1859175640 instance=ExtResource("3_iowo3")]
 layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-button_label_text = "PLAY"
+focus_neighbor_top = NodePath("../QuitButton")
+focus_neighbor_bottom = NodePath("../RushButton")
 
-[node name="MarathonButton" parent="VBoxContainer" unique_id=271914662 instance=ExtResource("3_iowo3")]
+[node name="RushButton" parent="VBoxContainer" unique_id=271914662 instance=ExtResource("3_iowo3")]
 layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-button_label_text = "MARATHON"
+focus_neighbor_top = NodePath("../PlayButton")
+focus_neighbor_bottom = NodePath("../LevelSelectButton")
 
 [node name="LevelSelectButton" parent="VBoxContainer" unique_id=759729335 instance=ExtResource("3_iowo3")]
 layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-button_label_text = "LEVEL SELECT"
-
-[node name="CustomizeButton" parent="VBoxContainer" unique_id=1166705071 instance=ExtResource("3_iowo3")]
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-button_label_text = "CUSTOMIZE"
+focus_neighbor_top = NodePath("../RushButton")
+focus_neighbor_bottom = NodePath("../OptionsButton")
 
 [node name="OptionsButton" parent="VBoxContainer" unique_id=1845220450 instance=ExtResource("3_iowo3")]
 layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-button_label_text = "OPTIONS"
+focus_neighbor_top = NodePath("../LevelSelectButton")
+focus_neighbor_bottom = NodePath("../QuitButton")
 
 [node name="QuitButton" parent="VBoxContainer" unique_id=573003843 instance=ExtResource("3_iowo3")]
 layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-button_label_text = "QUIT"
+focus_neighbor_top = NodePath("../OptionsButton")
+focus_neighbor_bottom = NodePath("../PlayButton")
 
 [connection signal="resized" from="VBoxContainer/LogoContainer" to="." method="_on_logo_container_resized"]
-
-[editable path="VBoxContainer/PlayButton"]
-[editable path="VBoxContainer/MarathonButton"]
-[editable path="VBoxContainer/LevelSelectButton"]
-[editable path="VBoxContainer/CustomizeButton"]
-[editable path="VBoxContainer/OptionsButton"]
-[editable path="VBoxContainer/QuitButton"]

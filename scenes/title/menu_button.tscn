@@ -1,0 +1,72 @@
+[gd_scene format=3 uid="uid://dv8sgqilw7oo1"]
+
+[ext_resource type="FontFile" uid="uid://vklaqlxxc5o7" path="res://assets/fonts/Whacky_Joe.ttf" id="1_jdeey"]
+[ext_resource type="Theme" uid="uid://cswj10l2mq3js" path="res://themes/title_button.tres" id="1_xens0"]
+[ext_resource type="Script" uid="uid://4eii2qt8y6vx" path="res://scripts/title/menu_button.gd" id="2_jdeey"]
+[ext_resource type="Texture2D" uid="uid://b843eu0sitmyt" path="res://assets/sprites/hazards/square_hazard.png" id="3_xens0"]
+[ext_resource type="Texture2D" uid="uid://c3l36itqvmw2l" path="res://assets/sprites/player/player.png" id="3_xjb65"]
+
+[sub_resource type="FontVariation" id="FontVariation_kgtt6"]
+base_font = ExtResource("1_jdeey")
+spacing_glyph = 1
+
+[node name="MenuButton" type="Button" unique_id=1166705071]
+custom_minimum_size = Vector2(0, 12)
+offset_bottom = 10.0
+mouse_filter = 2
+theme = ExtResource("1_xens0")
+script = ExtResource("2_jdeey")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=440858513]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 2
+alignment = 1
+
+[node name="IndicatorControl" type="Control" parent="HBoxContainer" unique_id=864107326]
+custom_minimum_size = Vector2(6, 6)
+layout_mode = 2
+
+[node name="Indicator" type="TextureRect" parent="HBoxContainer/IndicatorControl" unique_id=672736980]
+modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(5, 5)
+layout_mode = 0
+offset_top = 4.0
+offset_right = 5.0
+offset_bottom = 9.000004
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("3_xjb65")
+expand_mode = 1
+stretch_mode = 4
+
+[node name="ButtonText" type="Label" parent="HBoxContainer" unique_id=1487818902]
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 3
+theme_override_fonts/font = SubResource("FontVariation_kgtt6")
+theme_override_font_sizes/font_size = 8
+text = "PLAY"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="IndicatorControl2" type="Control" parent="HBoxContainer" unique_id=661242428]
+custom_minimum_size = Vector2(6, 6)
+layout_mode = 2
+
+[node name="IndicatorForSpacing" type="TextureRect" parent="HBoxContainer/IndicatorControl2" unique_id=70116305]
+modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(5, 5)
+layout_mode = 0
+offset_right = 5.0
+offset_bottom = 12.0
+texture = ExtResource("3_xens0")
+expand_mode = 1
+stretch_mode = 5
+
+[connection signal="focus_entered" from="." to="." method="_on_focus_entered"]
+[connection signal="focus_exited" from="." to="." method="_on_focus_exited"]

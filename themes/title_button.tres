@@ -1,0 +1,28 @@
+[gd_resource type="Theme" format=3 uid="uid://cswj10l2mq3js"]
+
+[ext_resource type="FontFile" uid="uid://vklaqlxxc5o7" path="res://assets/fonts/Whacky_Joe.ttf" id="1_8kipw"]
+
+[sub_resource type="FontVariation" id="FontVariation_jdeey"]
+base_font = ExtResource("1_8kipw")
+spacing_glyph = 1
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_xens0"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_kgtt6"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_xjb65"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_tacmp"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ys16a"]
+
+[resource]
+Button/colors/font_focus_color = Color(1, 0.9254902, 0.15294118, 1)
+Button/constants/outline_size = 3
+Button/font_sizes/font_size = 8
+Button/fonts/font = SubResource("FontVariation_jdeey")
+Button/styles/disabled = SubResource("StyleBoxEmpty_xens0")
+Button/styles/focus = SubResource("StyleBoxEmpty_kgtt6")
+Button/styles/hover = SubResource("StyleBoxEmpty_xjb65")
+Button/styles/normal = SubResource("StyleBoxEmpty_tacmp")
+Button/styles/pressed = SubResource("StyleBoxEmpty_ys16a")
