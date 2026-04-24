@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="LevelData" format=3 uid="uid://dqui6cbpnx0ih"]
+
+[ext_resource type="PackedScene" uid="uid://bmu31n1d5shun" path="res://scenes/levels/level_011.tscn" id="1_0hsks"]
+[ext_resource type="Script" uid="uid://do5fdotl7d638" path="res://resources/level_data/level_data.gd" id="2_vpjnd"]
+
+[resource]
+script = ExtResource("2_vpjnd")
+level_id = "level_011"
+level_title = "it's all timing"
+level_scene = ExtResource("1_0hsks")
+metadata/_custom_type_script = "uid://do5fdotl7d638"

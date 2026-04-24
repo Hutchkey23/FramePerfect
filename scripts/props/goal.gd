@@ -203,6 +203,8 @@ func show_new_best_or_medal_label(result) -> void:
 func goal_reached_animation() -> void:
 	if pop_tween:
 		pop_tween.kill()
+	scale = Vector2.ONE
+	rotation_degrees = 0.0
 	
 	animation_player.play("goal_animation")
 	await animation_player.animation_finished

@@ -49,7 +49,6 @@ enum PlayerState {
 
 var current_state: PlayerState = PlayerState.NORMAL
 var control_enabled: bool = true
-const ANALOG_DEADZONE: float = 0.18
 
 ########### Movement ###########
 const NORMAL_SPEED: float = 140.0
@@ -134,7 +133,6 @@ var camera_reference: GameCamera
 
 # Jump Interactions
 var overlapping_hazard_count: int = 0
-var overlapping_stamp: Stamp = null
 var goal_overlapping: bool = false
 
 func _ready() -> void:
@@ -146,31 +144,17 @@ func _ready() -> void:
 func set_control_enabled(enabled: bool) -> void:
 	control_enabled = enabled
 
-func get_movement_input() -> Vector2:
-	var input_vector := Input.get_vector(
-		"move_left",
-		"move_right",
-		"move_up",
-		"move_down",
-		ANALOG_DEADZONE
-	)
-	
-	if input_vector.length() < ANALOG_DEADZONE:
-		return Vector2.ZERO
-	
-	return input_vector
-
 func _physics_process(delta: float) -> void:
 	if not control_enabled:
 		velocity = Vector2.ZERO
 		move_and_slide()
 		return
 	
-	move_input = get_movement_input()
+	move_input = Input.get_vector("move_left", "move_right", "move_up", "move_down")
 	
 	
-	if move_input.length() > 0.25:
-		last_move_input = move_input.normalized()
+	if move_input != Vector2.ZERO:
+		last_move_input = move_input
 
 	if dash_cooldown_timer > 0.0:
 		dash_cooldown_timer -= delta
@@ -487,10 +471,6 @@ func handle_jump(delta: float) -> void:
 		if overlapping_hazard_count > 0:
 			die()
 		
-		if overlapping_stamp:
-			overlapping_stamp.collect()
-			overlapping_stamp = null
-		
 		if goal_overlapping:
 			try_to_activate_goal()
 			
@@ -544,9 +524,6 @@ func _on_interaction_area_area_entered(area: Area2D) -> void:
 		die()
 	
 	if area.is_in_group("stamps"):
-		overlapping_stamp = area
-		if current_state == PlayerState.JUMP:
-			return
 		area.collect()
 
 
@@ -556,9 +533,6 @@ func _on_interaction_area_area_exited(area: Area2D) -> void:
 	
 	if area.is_in_group("hazards"):
 		overlapping_hazard_count = max(0, overlapping_hazard_count - 1)
-	
-	if area.is_in_group("stamps"):
-		overlapping_stamp = null
 
 func _on_floor_hazard_detection_area_body_entered(body: Node2D) -> void:
 	if body.is_in_group("floor_hazards"):

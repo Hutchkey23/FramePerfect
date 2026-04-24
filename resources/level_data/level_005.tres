@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="LevelData" format=3 uid="uid://brqk3icpji3bv"]
+
+[ext_resource type="PackedScene" uid="uid://dpxfmqor3kdp5" path="res://scenes/levels/level_005.tscn" id="1_1qnj0"]
+[ext_resource type="Script" uid="uid://do5fdotl7d638" path="res://resources/level_data/level_data.gd" id="2_fd8gf"]
+
+[resource]
+script = ExtResource("2_fd8gf")
+level_id = "level_005"
+level_title = "fetch quest"
+level_scene = ExtResource("1_1qnj0")
+metadata/_custom_type_script = "uid://do5fdotl7d638"
