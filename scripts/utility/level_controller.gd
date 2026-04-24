@@ -50,7 +50,7 @@ func _ready() -> void:
 	
 	spawn_stamps()
 	
-	
+	goal.level_id = level_id
 
 func _process(delta: float) -> void:
 	match current_state:

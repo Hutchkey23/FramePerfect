@@ -5,11 +5,13 @@ class_name Goal
 @onready var new_best_label: RichTextLabel = $NewBestLabel
 @onready var flag_pivot: Node2D = $FlagPivot
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
-
+@onready var medal_sprite: Sprite2D = $GoalSprite/MedalSprite
 
 
 const NORMAL_GOAL_SCALE : Vector2 = Vector2(0.5, 0.5)
 const MAX_DEGREE_ROTATION : float = 10
+
+var level_id : String = ""
 
 var initial_rotation_degrees : float
 
@@ -55,6 +57,10 @@ func _ready() -> void:
 	initial_rotation_degrees = rotation_degrees
 	completion_label.visible = false
 	new_best_label.visible = false
+	
+	if SaveManager.player_has_medal(level_id):
+		show_medal()
+	
 
 func _process(delta: float) -> void:
 	if not goal_reached:
@@ -64,6 +70,9 @@ func _process(delta: float) -> void:
 	
 	var rotation_offset = sin(5.0 * time) * MAX_DEGREE_ROTATION
 	rotation_degrees = initial_rotation_degrees + rotation_offset
+
+func show_medal() -> void:
+	medal_sprite.visible = true
 
 func show_completion_label() -> void:
 	var random_word = completion_words.pick_random()
@@ -80,15 +89,18 @@ func retry_level() -> void:
 	time = 0.0
 
 func show_level_complete_result(result: Dictionary) -> void:
-	goal_reached_animation()
-	
-	# Check if player earned medal this run
-	if result.earned_medal_this_run:
-		pass
-	
 	# Only show new best label if not first completion
 	if result.new_best and not result.first_completion:
 		new_best_label.visible = true
+	
+	await goal_reached_animation()
+	
+	# Check if player earned medal this run
+	if result.earned_medal_this_run:
+		await medal_animation()
+		await get_tree().create_timer(0.35).timeout
+	
+	goal_reached = true
 
 func goal_reached_animation() -> void:
 	if pop_tween:
@@ -97,7 +109,17 @@ func goal_reached_animation() -> void:
 	show_completion_label()
 	animation_player.play("goal_animation")
 	await animation_player.animation_finished
-	goal_reached = true
+	
+func medal_animation() -> void:
+	var tween = create_tween()
+	medal_sprite.visible = true
+	tween.set_parallel(true)
+	tween.tween_property(medal_sprite, "rotation_degrees", randf_range(-30, 30), 0.18).set_trans(Tween.TRANS_QUART).set_ease(Tween.EASE_OUT)
+	tween.tween_property(medal_sprite, "scale", Vector2(2.5, 3.0), 0.18).set_trans(Tween.TRANS_QUART).set_ease(Tween.EASE_OUT)
+	tween.chain()
+	tween.tween_property(medal_sprite, "rotation_degrees", 0.0, 0.24).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
+	tween.tween_property(medal_sprite, "scale", Vector2.ONE, 0.24).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
+	await tween.finished
 
 func setup_stamps() -> void:
 	for stamp: Stamp in get_tree().get_nodes_in_group("stamps"):

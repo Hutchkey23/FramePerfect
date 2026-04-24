@@ -18,6 +18,7 @@ func _ready() -> void:
 
 func start_run() -> void:
 	load_level(current_level_index)
+	
 	await get_tree().create_timer(TRANSITION_LENGTH).timeout
 	await transition_in()
 	level_controller_reference.level_id = current_level_id

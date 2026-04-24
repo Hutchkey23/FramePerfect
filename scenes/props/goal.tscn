@@ -4,6 +4,7 @@
 [ext_resource type="Script" uid="uid://b2sw2on3pp2ru" path="res://scripts/props/goal.gd" id="1_ub4hd"]
 [ext_resource type="Texture2D" uid="uid://bqtpoqxknetqq" path="res://assets/sprites/goal/flag.png" id="2_rwyj0"]
 [ext_resource type="FontFile" uid="uid://vklaqlxxc5o7" path="res://assets/fonts/Whacky_Joe.ttf" id="3_n6pa6"]
+[ext_resource type="Texture2D" uid="uid://badx6a15clq2t" path="res://assets/sprites/goal/medal.png" id="4_2e18n"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ub4hd"]
 size = Vector2(16, 16)
@@ -159,6 +160,11 @@ texture = ExtResource("2_rwyj0")
 [node name="GoalSprite" type="Sprite2D" parent="." unique_id=174667340]
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("1_bjw50")
+
+[node name="MedalSprite" type="Sprite2D" parent="GoalSprite" unique_id=1323811293]
+visible = false
+position = Vector2(8, 6)
+texture = ExtResource("4_2e18n")
 
 [node name="Area2D" type="Area2D" parent="." unique_id=1225981306 groups=["goal"]]
 visible = false
