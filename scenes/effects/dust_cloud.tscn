@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://db8k50wa1l8n"]
 
 [ext_resource type="Script" uid="uid://d4dfvbohhk5c6" path="res://scripts/effects/dust_cloud.gd" id="1_afl6q"]
-[ext_resource type="Texture2D" uid="uid://c71x4oxii7akn" path="res://assets/sprites/dust_cloud/dust_cloud.png" id="2_cvg8x"]
+[ext_resource type="Texture2D" uid="uid://c71x4oxii7akn" path="res://assets/sprites/particles/dust_cloud.png" id="2_cvg8x"]
 
 [node name="DustCloud" type="Node2D" unique_id=711861348]
 script = ExtResource("1_afl6q")

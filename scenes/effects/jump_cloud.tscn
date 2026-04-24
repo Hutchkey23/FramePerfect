@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://3d6xwo56h5a"]
 
 [ext_resource type="Script" uid="uid://ckk7q3u31p4mv" path="res://scripts/effects/jump_cloud.gd" id="1_njmyh"]
-[ext_resource type="Texture2D" uid="uid://did7crykigyqp" path="res://assets/sprites/dust_cloud/jump_animation.png" id="2_hu2oi"]
+[ext_resource type="Texture2D" uid="uid://did7crykigyqp" path="res://assets/sprites/particles/jump_animation.png" id="2_hu2oi"]
 
 [node name="JumpCloud" type="Node2D" unique_id=1543346481]
 script = ExtResource("1_njmyh")

@@ -49,6 +49,7 @@ enum PlayerState {
 
 var current_state: PlayerState = PlayerState.NORMAL
 var control_enabled: bool = true
+const ANALOG_DEADZONE: float = 0.18
 
 ########### Movement ###########
 const NORMAL_SPEED: float = 140.0
@@ -90,8 +91,9 @@ var jump_cooldown_timer: float = 0.0
 var sprite_ground_y: float = 0.0
 
 # Bonk
-const BONK_REBOUND_SPEED : float = 90.0
+const BONK_REBOUND_SPEED : float = 140.0
 const BONK_STUN_DURATION : float = 0.08
+const BONK_FALL_SPEED : float = 220.0
 
 var bonk_timer : float = 0.0
 var player_sprite_bonk_tween: Tween
@@ -113,6 +115,11 @@ const MAX_DUST_TRAVEL_DISTANCE : float = 20.0
 # Death Clouds
 const MIN_DEATH_DUST_TRAVEL_DISTANCE : float = 4.0
 const MAX_DEATH_DUST_TRAVEL_DISTANCE : float = 10.0
+
+# Bonk
+const BONK = preload("res://scenes/effects/bonk.tscn")
+const MIN_BONK_TRAVEL_DISTANCE : float = 4.0
+const MAX_BONK_TRAVEL_DISTANCE : float = 12.0
 
 # Jump Cloud
 const JUMP_CLOUD = preload("uid://3d6xwo56h5a")
@@ -139,17 +146,31 @@ func _ready() -> void:
 func set_control_enabled(enabled: bool) -> void:
 	control_enabled = enabled
 
+func get_movement_input() -> Vector2:
+	var input_vector := Input.get_vector(
+		"move_left",
+		"move_right",
+		"move_up",
+		"move_down",
+		ANALOG_DEADZONE
+	)
+	
+	if input_vector.length() < ANALOG_DEADZONE:
+		return Vector2.ZERO
+	
+	return input_vector
+
 func _physics_process(delta: float) -> void:
 	if not control_enabled:
 		velocity = Vector2.ZERO
 		move_and_slide()
 		return
 	
-	move_input = Input.get_vector("move_left", "move_right", "move_up", "move_down")
+	move_input = get_movement_input()
 	
 	
-	if move_input != Vector2.ZERO:
-		last_move_input = move_input
+	if move_input.length() > 0.25:
+		last_move_input = move_input.normalized()
 
 	if dash_cooldown_timer > 0.0:
 		dash_cooldown_timer -= delta
@@ -162,6 +183,7 @@ func _physics_process(delta: float) -> void:
 			handle_normal_movement(delta)
 			try_start_dash()
 			try_start_jump()
+			check_if_should_die()
 
 		PlayerState.DASH:
 			handle_dash(delta)
@@ -169,9 +191,15 @@ func _physics_process(delta: float) -> void:
 
 		PlayerState.JUMP:
 			handle_jump(delta)
+		
+		PlayerState.BONK:
+			handle_bonk(delta)
 
 	move_and_slide()
-
+	
+	if current_state == PlayerState.DASH or (current_state == PlayerState.JUMP and jumped_from_dash):
+		check_for_bonk()
+	
 
 func _process(delta: float) -> void:
 	var target_rotation_speed: float = NORMAL_ROTATION_SPEED
@@ -220,10 +248,15 @@ func die() -> void:
 	
 	died.emit()
 
+func check_if_should_die() -> void:
+	if overlapping_hazard_count > 0:
+		die()
+
 func retry_level() -> void:
 	current_state = PlayerState.NORMAL
 	current_rotation_speed = 0.0
 	rotation_degrees = 0.0
+	player_sprite.position.y = sprite_ground_y
 	velocity = Vector2.ZERO
 	
 	dash_cooldown_timer = 0.0
@@ -303,6 +336,22 @@ func spawn_dash_clouds(direction: Vector2, number_of_clouds: int = 5) -> void:
 		
 		dust_cloud_instance.move_to(random_travel_distance, spread_direction)
 
+func spawn_bonk_effects(direction: Vector2, number_of_bonks: int = 3) -> void:
+	for bonk in number_of_bonks:
+		var bonk_instance = BONK.instantiate()
+		
+		get_parent().add_child(bonk_instance)
+		bonk_instance.global_position = global_position
+		
+		var random_travel_distance: float = randf_range(MIN_BONK_TRAVEL_DISTANCE, MAX_BONK_TRAVEL_DISTANCE)
+		
+		var spread_angle := deg_to_rad(70.0)
+		var random_angle := randf_range(-spread_angle, spread_angle)
+		
+		var spread_direction := (-direction).rotated(random_angle)
+		
+		bonk_instance.move_to(random_travel_distance, spread_direction)
+		
 func handle_dash(delta: float) -> void:
 	dash_timer -= delta
 	velocity = dash_direction * DASH_SPEED
@@ -310,6 +359,68 @@ func handle_dash(delta: float) -> void:
 	if dash_timer <= 0.0:
 		current_state = PlayerState.NORMAL
 
+func check_for_bonk() -> void:
+	for i in get_slide_collision_count():
+		var collision := get_slide_collision(i)
+		var normal := collision.get_normal()
+		
+		var impact_direction := dash_direction
+		if current_state == PlayerState.JUMP:
+			impact_direction = jump_locked_direction
+		
+		if impact_direction.dot(-normal) > 0.65:
+			start_bonk(normal)
+			return
+
+func start_bonk(wall_normal: Vector2) -> void:
+	current_state = PlayerState.BONK
+	bonk_timer = BONK_STUN_DURATION
+	
+	var jump_cloud_instance = JUMP_CLOUD.instantiate()
+	get_parent().add_child(jump_cloud_instance)
+	jump_cloud_instance.scale *= 0.8
+	jump_cloud_instance.global_position = global_position
+	
+	spawn_bonk_effects(wall_normal, 3)
+	
+	shadow_sprite.scale = Vector2.ONE
+	shadow_sprite.modulate.a = 1.0
+	
+	velocity = wall_normal * BONK_REBOUND_SPEED
+	dash_timer = 0.0
+	jump_timer = 0.0
+	jumped_from_dash = false
+	
+	camera_reference.add_shake(3.0)
+	play_bonk_squash(wall_normal)
+
+func handle_bonk(delta: float) -> void:
+	bonk_timer -= delta
+	velocity = velocity.move_toward(Vector2.ZERO, 900.0 * delta)
+	
+	player_sprite.position.y = move_toward(player_sprite.position.y, sprite_ground_y, BONK_FALL_SPEED * delta)
+	
+	if bonk_timer <= 0.0:
+		current_state = PlayerState.NORMAL
+
+func play_bonk_squash(wall_normal: Vector2) -> void:
+	if player_sprite_bonk_tween:
+		player_sprite_bonk_tween.kill()
+	
+	player_sprite.scale = sprite_normal_scale
+	
+	var squash_scale: Vector2
+	
+	if abs(wall_normal.x) > abs(wall_normal.y):
+		# Hit left/right wall, squash horizontally.
+		squash_scale = Vector2(sprite_normal_scale.x * 0.75, sprite_normal_scale.y * 1.25)
+	else:
+		# Hit top/bottom wall, squash vertically.
+		squash_scale = Vector2(sprite_normal_scale.x * 1.25, sprite_normal_scale.y * 0.75)
+	
+	player_sprite_bonk_tween = create_tween()
+	player_sprite_bonk_tween.tween_property(player_sprite, "scale", squash_scale, 0.04)
+	player_sprite_bonk_tween.chain().tween_property(player_sprite, "scale", sprite_normal_scale, 0.12).set_trans(Tween.TRANS_ELASTIC).set_ease(Tween.EASE_OUT)
 
 func try_start_jump() -> void:
 	if not Input.is_action_just_pressed("jump"):

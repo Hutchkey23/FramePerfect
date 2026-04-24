@@ -1,0 +1,11 @@
+[gd_scene format=3 uid="uid://dmimct4ceeacb"]
+
+[ext_resource type="Script" uid="uid://c53jilrrja3gi" path="res://scripts/effects/bonk.gd" id="1_orsyk"]
+[ext_resource type="Texture2D" uid="uid://ccf1sf5hkgnr2" path="res://assets/sprites/particles/bonk_sprite.png" id="1_osq2p"]
+
+[node name="Bonk" type="Node2D" unique_id=1924295770]
+z_index = 1
+script = ExtResource("1_orsyk")
+
+[node name="BonkSprite" type="Sprite2D" parent="." unique_id=1664215673]
+texture = ExtResource("1_osq2p")
