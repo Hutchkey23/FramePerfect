@@ -1,7 +1,7 @@
 extends Node
 
 const LEVEL_DATA : Dictionary = {
-	"level_001": { "display_name": "getting started",  "medal_time": 2.00 },
+	"level_001": { "display_name": "getting started",  "medal_time": 1.50 },
 	"level_002": { "display_name": "hoppin' around",  "medal_time": 2.00 },
 	"level_003": { "display_name": "collect postage",  "medal_time": 3.00 },
 	"level_004": { "display_name": "the wave",  "medal_time": 3.00 },

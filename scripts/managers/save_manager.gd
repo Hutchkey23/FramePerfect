@@ -43,7 +43,7 @@ func record_level_completion(level_id: String, clear_time: float) -> Dictionary:
 
 	var best_time: float = level_data["best_time"]
 	var earned_medal := best_time <= medal_time
-	var earned_medal_this_run :=  not medal_already_achieved
+	var earned_medal_this_run :=  clear_time < medal_time
 	var first_completion := previous_best_time == NO_TIME
 
 	save_game()
@@ -54,8 +54,10 @@ func record_level_completion(level_id: String, clear_time: float) -> Dictionary:
 		"best_time": best_time,
 		"previous_best_time": previous_best_time,
 		"new_best": new_best,
+		"missed_new_best_by": max(clear_time - best_time, 0.0),
 		"first_completion": first_completion,
 		"medal_time": medal_time,
+		"medal_already_achieved": medal_already_achieved,
 		"earned_medal": earned_medal,
 		"earned_medal_this_run": earned_medal_this_run,
 		"missed_medal_by": max(clear_time - medal_time, 0.0)
@@ -102,6 +104,8 @@ func save_game() -> void:
 
 
 func load_game() -> void:
+	return
+	
 	if not FileAccess.file_exists(SAVE_PATH):
 		return
 	

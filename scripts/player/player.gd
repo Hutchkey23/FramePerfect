@@ -43,6 +43,7 @@ enum PlayerState {
 	NORMAL,
 	DASH,
 	JUMP,
+	BONK,
 	GOAL_REACHED,
 }
 
@@ -87,6 +88,13 @@ const JUMP_BRAKING: float = 200.0
 var jump_timer: float = 0.0
 var jump_cooldown_timer: float = 0.0
 var sprite_ground_y: float = 0.0
+
+# Bonk
+const BONK_REBOUND_SPEED : float = 90.0
+const BONK_STUN_DURATION : float = 0.08
+
+var bonk_timer : float = 0.0
+var player_sprite_bonk_tween: Tween
 
 ########## Animation ##########
 const NORMAL_ROTATION_SPEED: float = 200.0
