@@ -7,8 +7,8 @@ const LEVEL_DATA : Dictionary = {
 	"level_004": { "display_name": "the wave",  "medal_time": 2.50 },
 	"level_005": { "display_name": "fetch quest",  "medal_time": 4.00 },
 
-	"level_006": { "display_name": "?",  "medal_time": 4.00 },
-	"level_007": { "display_name": "Level 7",  "medal_time": 15.50 },
+	"level_006": { "display_name": "Level 6",  "medal_time": 14.00 },
+	"level_007": { "display_name": "?",  "medal_time": 4.00 },
 	"level_008": { "display_name": "boomerang",  "medal_time": 6.00 },
 	"level_009": { "display_name": "Level 9",  "medal_time": 17.00 },
 	"level_010": { "display_name": "chain dash", "medal_time": 3.00 },

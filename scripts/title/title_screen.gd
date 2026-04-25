@@ -1,13 +1,13 @@
 extends Control
 
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
-@onready var logo_container: MarginContainer = $VBoxContainer/LogoContainer
-@onready var play_button: CustomMenuButton = $VBoxContainer/PlayButton
-@onready var marathon_button: CustomMenuButton = $VBoxContainer/MarathonButton
-@onready var level_select_button: CustomMenuButton = $VBoxContainer/LevelSelectButton
-@onready var customize_button: CustomMenuButton = $VBoxContainer/CustomizeButton
-@onready var options_button: CustomMenuButton = $VBoxContainer/OptionsButton
-@onready var quit_button: CustomMenuButton = $VBoxContainer/QuitButton
+@onready var logo_container: MarginContainer = $MainTitleVbox/LogoContainer
+@onready var play_button: CustomMenuButton = $MainTitleVbox/PlayButton
+@onready var marathon_button: CustomMenuButton = $MainTitleVbox/MarathonButton
+@onready var level_select_button: CustomMenuButton = $MainTitleVbox/LevelSelectButton
+@onready var customize_button: CustomMenuButton = $MainTitleVbox/CustomizeButton
+@onready var options_button: CustomMenuButton = $MainTitleVbox/OptionsButton
+@onready var quit_button: CustomMenuButton = $MainTitleVbox/QuitButton
 
 @onready var main_menu_buttons := [
 	play_button,

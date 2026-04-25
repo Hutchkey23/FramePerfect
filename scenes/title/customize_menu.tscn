@@ -1,8 +1,12 @@
 [gd_scene format=3 uid="uid://dgc7jyqg5ohww"]
 
 [ext_resource type="FontFile" uid="uid://vklaqlxxc5o7" path="res://assets/fonts/Whacky_Joe.ttf" id="1_2k432"]
+[ext_resource type="Script" uid="uid://cm14rkq5gpuun" path="res://scripts/title/customize_menu.gd" id="1_b2iet"]
 [ext_resource type="Texture2D" uid="uid://c3l36itqvmw2l" path="res://assets/sprites/player/player.png" id="2_shj2w"]
+[ext_resource type="Theme" uid="uid://bsvhjxlwp2c7r" path="res://themes/menu_theme.tres" id="2_ypejp"]
 [ext_resource type="Texture2D" uid="uid://drakd26v650se" path="res://assets/sprites/goal/goal.png" id="3_v72ju"]
+[ext_resource type="PackedScene" uid="uid://dv8sgqilw7oo1" path="res://scenes/title/menu_button.tscn" id="4_gev17"]
+[ext_resource type="PackedScene" uid="uid://cbgwprwpxpi4e" path="res://scenes/title/navigation_arrow.tscn" id="5_60j6s"]
 
 [sub_resource type="FontVariation" id="FontVariation_v72ju"]
 base_font = ExtResource("1_2k432")
@@ -15,6 +19,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_b2iet")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1410892678]
 layout_mode = 1
@@ -37,6 +42,7 @@ text = "CUSTOMIZE"
 horizontal_alignment = 1
 
 [node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer" unique_id=1727805792]
+custom_minimum_size = Vector2(0, 100)
 layout_mode = 2
 theme_override_constants/separation = 24
 alignment = 1
@@ -44,6 +50,9 @@ alignment = 1
 [node name="PlayerPanel" type="PanelContainer" parent="VBoxContainer/HBoxContainer" unique_id=1268970638]
 custom_minimum_size = Vector2(100, 95)
 layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme = ExtResource("2_ypejp")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/HBoxContainer/PlayerPanel" unique_id=1456954654]
 layout_mode = 2
@@ -55,15 +64,16 @@ layout_mode = 2
 layout_mode = 2
 theme_override_constants/outline_size = 4
 theme_override_fonts/font = ExtResource("1_2k432")
+theme_override_font_sizes/font_size = 12
 text = "PLAYER"
 horizontal_alignment = 1
 
 [node name="MarginContainer2" type="MarginContainer" parent="VBoxContainer/HBoxContainer/PlayerPanel/VBoxContainer" unique_id=2043870529]
-custom_minimum_size = Vector2(0, 48)
+custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
 
 [node name="PlayerPreview" type="TextureRect" parent="VBoxContainer/HBoxContainer/PlayerPanel/VBoxContainer/MarginContainer2" unique_id=1864333591]
-custom_minimum_size = Vector2(24, 24)
+custom_minimum_size = Vector2(36, 36)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
@@ -71,31 +81,39 @@ texture = ExtResource("2_shj2w")
 expand_mode = 3
 stretch_mode = 5
 
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/HBoxContainer/PlayerPanel/VBoxContainer" unique_id=1910632376]
+[node name="NavigationContainer" type="HBoxContainer" parent="VBoxContainer/HBoxContainer/PlayerPanel/VBoxContainer" unique_id=1833413863]
 layout_mode = 2
+theme_override_constants/separation = 2
 alignment = 1
 
-[node name="Button" type="Button" parent="VBoxContainer/HBoxContainer/PlayerPanel/VBoxContainer/HBoxContainer" unique_id=1331209820]
+[node name="PlayerLeftNavigationArrow" parent="VBoxContainer/HBoxContainer/PlayerPanel/VBoxContainer/NavigationContainer" unique_id=1749217477 instance=ExtResource("5_60j6s")]
 layout_mode = 2
-theme_override_font_sizes/font_size = 8
-text = "<"
+focus_neighbor_right = NodePath("../PlayerRightNavigationArrow")
+focus_neighbor_bottom = NodePath("../../../../../MarginContainer2/ConfirmButton")
 
-[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer/PlayerPanel/VBoxContainer/HBoxContainer" unique_id=783234801]
+[node name="PlayerSkinLabel" type="Label" parent="VBoxContainer/HBoxContainer/PlayerPanel/VBoxContainer/NavigationContainer" unique_id=1548462036]
 custom_minimum_size = Vector2(60, 0)
 layout_mode = 2
+theme_override_constants/outline_size = 3
 theme_override_fonts/font = SubResource("FontVariation_v72ju")
 theme_override_font_sizes/font_size = 8
 text = "CHECKER"
 horizontal_alignment = 1
 
-[node name="Button2" type="Button" parent="VBoxContainer/HBoxContainer/PlayerPanel/VBoxContainer/HBoxContainer" unique_id=420556331]
+[node name="PlayerRightNavigationArrow" parent="VBoxContainer/HBoxContainer/PlayerPanel/VBoxContainer/NavigationContainer" unique_id=1473257918 instance=ExtResource("5_60j6s")]
 layout_mode = 2
-theme_override_font_sizes/font_size = 8
+focus_neighbor_left = NodePath("../PlayerLeftNavigationArrow")
+focus_neighbor_right = NodePath("../../../../GoalPanel/VBoxContainer/NavigationContainer/GoalLeftNavigationArrow")
+focus_neighbor_bottom = NodePath("../../../../../MarginContainer2/ConfirmButton")
 text = ">"
+arrow_direction = 1
 
 [node name="GoalPanel" type="PanelContainer" parent="VBoxContainer/HBoxContainer" unique_id=1040002128]
 custom_minimum_size = Vector2(100, 95)
 layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme = ExtResource("2_ypejp")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/HBoxContainer/GoalPanel" unique_id=435787205]
 layout_mode = 2
@@ -107,34 +125,82 @@ layout_mode = 2
 layout_mode = 2
 theme_override_constants/outline_size = 4
 theme_override_fonts/font = ExtResource("1_2k432")
+theme_override_font_sizes/font_size = 12
 text = "GOAL"
 horizontal_alignment = 1
 
-[node name="GoalPreview" type="TextureRect" parent="VBoxContainer/HBoxContainer/GoalPanel/VBoxContainer" unique_id=1189103999]
-custom_minimum_size = Vector2(48, 48)
+[node name="MarginContainer2" type="MarginContainer" parent="VBoxContainer/HBoxContainer/GoalPanel/VBoxContainer" unique_id=1310020223]
+custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
+
+[node name="GoalPreview" type="TextureRect" parent="VBoxContainer/HBoxContainer/GoalPanel/VBoxContainer/MarginContainer2" unique_id=1189103999]
+custom_minimum_size = Vector2(36, 36)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
 texture = ExtResource("3_v72ju")
-expand_mode = 3
+expand_mode = 1
 stretch_mode = 5
 
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/HBoxContainer/GoalPanel/VBoxContainer" unique_id=49025792]
+[node name="NavigationContainer" type="HBoxContainer" parent="VBoxContainer/HBoxContainer/GoalPanel/VBoxContainer" unique_id=49025792]
 layout_mode = 2
+theme_override_constants/separation = 2
 alignment = 1
 
-[node name="Button" type="Button" parent="VBoxContainer/HBoxContainer/GoalPanel/VBoxContainer/HBoxContainer" unique_id=509428222]
+[node name="GoalLeftNavigationArrow" parent="VBoxContainer/HBoxContainer/GoalPanel/VBoxContainer/NavigationContainer" unique_id=1805449382 instance=ExtResource("5_60j6s")]
 layout_mode = 2
-theme_override_font_sizes/font_size = 8
-text = "<"
+focus_neighbor_left = NodePath("../../../../PlayerPanel/VBoxContainer/NavigationContainer/PlayerRightNavigationArrow")
+focus_neighbor_right = NodePath("../GoalRightNavigationArrow")
+focus_neighbor_bottom = NodePath("../../../../../MarginContainer2/ConfirmButton")
 
-[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer/GoalPanel/VBoxContainer/HBoxContainer" unique_id=1257955899]
+[node name="GoalSkinLabel" type="Label" parent="VBoxContainer/HBoxContainer/GoalPanel/VBoxContainer/NavigationContainer" unique_id=1257955899]
 custom_minimum_size = Vector2(60, 0)
 layout_mode = 2
+theme_override_constants/outline_size = 3
 theme_override_fonts/font = SubResource("FontVariation_v72ju")
 theme_override_font_sizes/font_size = 8
 text = "CHECKER"
 horizontal_alignment = 1
 
-[node name="Button2" type="Button" parent="VBoxContainer/HBoxContainer/GoalPanel/VBoxContainer/HBoxContainer" unique_id=944981191]
+[node name="GoalRightNavigationArrow" parent="VBoxContainer/HBoxContainer/GoalPanel/VBoxContainer/NavigationContainer" unique_id=180122713 instance=ExtResource("5_60j6s")]
 layout_mode = 2
-theme_override_font_sizes/font_size = 8
+focus_neighbor_left = NodePath("../GoalLeftNavigationArrow")
+focus_neighbor_bottom = NodePath("../../../../../MarginContainer2/ConfirmButton")
 text = ">"
+arrow_direction = 1
+
+[node name="MarginContainer3" type="MarginContainer" parent="VBoxContainer" unique_id=760586880]
+layout_mode = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="VBoxContainer/MarginContainer3" unique_id=685136754]
+custom_minimum_size = Vector2(0, 24)
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="MessageLabel" type="Label" parent="VBoxContainer/MarginContainer3/PanelContainer" unique_id=455789161]
+custom_minimum_size = Vector2(240, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/outline_size = 3
+theme_override_fonts/font = ExtResource("1_2k432")
+theme_override_font_sizes/font_size = 8
+text = "Unlock by completing 10 levels!"
+horizontal_alignment = 1
+
+[node name="MarginContainer2" type="MarginContainer" parent="VBoxContainer" unique_id=1953481099]
+layout_mode = 2
+
+[node name="ConfirmButton" parent="VBoxContainer/MarginContainer2" unique_id=1166705071 instance=ExtResource("4_gev17")]
+layout_mode = 2
+button_label_text = "CONFIRM"
+
+[connection signal="focus_entered" from="VBoxContainer/HBoxContainer/PlayerPanel/VBoxContainer/NavigationContainer/PlayerLeftNavigationArrow" to="." method="_on_player_left_navigation_arrow_focus_entered"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/PlayerPanel/VBoxContainer/NavigationContainer/PlayerLeftNavigationArrow" to="." method="_on_player_left_navigation_arrow_pressed"]
+[connection signal="focus_entered" from="VBoxContainer/HBoxContainer/PlayerPanel/VBoxContainer/NavigationContainer/PlayerRightNavigationArrow" to="." method="_on_player_right_navigation_arrow_focus_entered"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/PlayerPanel/VBoxContainer/NavigationContainer/PlayerRightNavigationArrow" to="." method="_on_player_right_navigation_arrow_pressed"]
+[connection signal="focus_entered" from="VBoxContainer/HBoxContainer/GoalPanel/VBoxContainer/NavigationContainer/GoalLeftNavigationArrow" to="." method="_on_goal_left_navigation_arrow_focus_entered"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/GoalPanel/VBoxContainer/NavigationContainer/GoalLeftNavigationArrow" to="." method="_on_goal_left_navigation_arrow_pressed"]
+[connection signal="focus_entered" from="VBoxContainer/HBoxContainer/GoalPanel/VBoxContainer/NavigationContainer/GoalRightNavigationArrow" to="." method="_on_goal_right_navigation_arrow_focus_entered"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/GoalPanel/VBoxContainer/NavigationContainer/GoalRightNavigationArrow" to="." method="_on_goal_right_navigation_arrow_pressed"]
+[connection signal="focus_entered" from="VBoxContainer/MarginContainer2/ConfirmButton" to="." method="_on_confirm_button_focus_entered"]
+[connection signal="pressed" from="VBoxContainer/MarginContainer2/ConfirmButton" to="." method="_on_confirm_button_pressed"]

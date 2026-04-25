@@ -1,0 +1,36 @@
+[gd_scene format=3 uid="uid://cbgwprwpxpi4e"]
+
+[ext_resource type="Script" uid="uid://0mjg30phdt8y" path="res://scripts/title/navigation_arrow.gd" id="1_0qm6i"]
+[ext_resource type="FontFile" uid="uid://vklaqlxxc5o7" path="res://assets/fonts/Whacky_Joe.ttf" id="1_5rj82"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_oq22c"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ec80n"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_t3ogy"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_4whcx"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_057al"]
+
+[node name="NavigationArrow" type="Button" unique_id=1749217477]
+offset_right = 8.0
+offset_bottom = 8.0
+theme_override_colors/font_color = Color(0.875, 0.875, 0.875, 1)
+theme_override_colors/font_focus_color = Color(1, 0.9254902, 0.15294118, 1)
+theme_override_colors/font_pressed_color = Color(1, 0.9254902, 0.15294118, 1)
+theme_override_colors/font_hover_color = Color(1, 0.9254902, 0.15294118, 1)
+theme_override_constants/outline_size = 3
+theme_override_fonts/font = ExtResource("1_5rj82")
+theme_override_font_sizes/font_size = 8
+theme_override_styles/normal = SubResource("StyleBoxEmpty_oq22c")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_ec80n")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_t3ogy")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_4whcx")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_057al")
+text = "<"
+script = ExtResource("1_0qm6i")
+
+[connection signal="focus_entered" from="." to="." method="_on_focus_entered"]
+[connection signal="focus_exited" from="." to="." method="_on_focus_exited"]
+[connection signal="pressed" from="." to="." method="_on_pressed"]

@@ -1,11 +1,11 @@
 [gd_resource type="Resource" script_class="LevelData" format=3 uid="uid://n0hfkuq24c0b"]
 
-[ext_resource type="PackedScene" uid="uid://bb0rhp41jocqu" path="res://scenes/levels/level_006.tscn" id="1_68jga"]
+[ext_resource type="PackedScene" uid="uid://bb0rhp41jocqu" path="res://scenes/levels/level_007.tscn" id="1_w2iqv"]
 [ext_resource type="Script" uid="uid://do5fdotl7d638" path="res://resources/level_data/level_data.gd" id="2_xsfi7"]
 
 [resource]
 script = ExtResource("2_xsfi7")
-level_id = "level_006"
+level_id = "level_007"
 level_title = "?"
-level_scene = ExtResource("1_68jga")
+level_scene = ExtResource("1_w2iqv")
 metadata/_custom_type_script = "uid://do5fdotl7d638"
