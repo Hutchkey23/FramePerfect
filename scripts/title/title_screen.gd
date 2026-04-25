@@ -9,6 +9,14 @@ extends Control
 @onready var options_button: CustomMenuButton = $VBoxContainer/OptionsButton
 @onready var quit_button: CustomMenuButton = $VBoxContainer/QuitButton
 
+@onready var main_menu_buttons := [
+	play_button,
+	marathon_button,
+	level_select_button,
+	customize_button,
+	options_button,
+	quit_button
+]
 
 const ROTATION_AMOUNT: float = 2.0
 const ROTATION_SPEED: float = 2.0

@@ -124,8 +124,9 @@ stretch_mode = 1
 [node name="DriftingElements" type="Node2D" parent="." unique_id=1612457156]
 script = ExtResource("4_iy4b5")
 textures = Array[Texture2D]([ExtResource("6_7y15r"), ExtResource("7_qkiax"), ExtResource("8_6g7h4"), ExtResource("9_72uj8"), ExtResource("10_yyuc5"), ExtResource("11_3sprk"), ExtResource("12_t4oiy"), ExtResource("13_6jxm4"), ExtResource("14_dkd1m"), ExtResource("15_ln6vd"), ExtResource("15_fi7ej"), ExtResource("16_ej8d2"), ExtResource("17_h8t20"), ExtResource("18_q18ng"), ExtResource("19_6py1p"), ExtResource("20_ic87d"), ExtResource("21_702e2"), ExtResource("22_2egvm"), ExtResource("23_5fwbo"), ExtResource("24_vxnr3"), ExtResource("25_ic87d"), ExtResource("26_702e2"), ExtResource("27_2egvm"), ExtResource("28_5fwbo"), ExtResource("29_vxnr3"), ExtResource("30_pjmvw")])
-spawn_interval = 1.2
-max_elements = 14
+spawn_interval = 0.4
+max_elements = 40
+initial_element_count = 12
 min_speed = 5.0
 max_speed = 12.0
 min_scale = 0.9
@@ -133,7 +134,6 @@ max_scale = 1.5
 min_alpha = 0.08
 max_alpha = 0.15
 logo_safe_zone = Rect2(94, 0, 132.23, 500)
-debug_draw_safe_zone = false
 
 [node name="Vignette" type="ColorRect" parent="." unique_id=1694956365]
 material = SubResource("ShaderMaterial_iy4b5")

@@ -1,0 +1,140 @@
+[gd_scene format=3 uid="uid://dgc7jyqg5ohww"]
+
+[ext_resource type="FontFile" uid="uid://vklaqlxxc5o7" path="res://assets/fonts/Whacky_Joe.ttf" id="1_2k432"]
+[ext_resource type="Texture2D" uid="uid://c3l36itqvmw2l" path="res://assets/sprites/player/player.png" id="2_shj2w"]
+[ext_resource type="Texture2D" uid="uid://drakd26v650se" path="res://assets/sprites/goal/goal.png" id="3_v72ju"]
+
+[sub_resource type="FontVariation" id="FontVariation_v72ju"]
+base_font = ExtResource("1_2k432")
+spacing_glyph = 1
+
+[node name="CustomizeMenu" type="Control" unique_id=1550935903]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1410892678]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer" unique_id=932247384]
+layout_mode = 2
+theme_override_constants/margin_top = 2
+
+[node name="TitleLabel" type="Label" parent="VBoxContainer/MarginContainer" unique_id=2099966370]
+layout_mode = 2
+theme_override_constants/outline_size = 4
+theme_override_fonts/font = ExtResource("1_2k432")
+theme_override_font_sizes/font_size = 16
+text = "CUSTOMIZE"
+horizontal_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer" unique_id=1727805792]
+layout_mode = 2
+theme_override_constants/separation = 24
+alignment = 1
+
+[node name="PlayerPanel" type="PanelContainer" parent="VBoxContainer/HBoxContainer" unique_id=1268970638]
+custom_minimum_size = Vector2(100, 95)
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/HBoxContainer/PlayerPanel" unique_id=1456954654]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/HBoxContainer/PlayerPanel/VBoxContainer" unique_id=1466712059]
+layout_mode = 2
+
+[node name="CategoryLabel" type="Label" parent="VBoxContainer/HBoxContainer/PlayerPanel/VBoxContainer/MarginContainer" unique_id=854154631]
+layout_mode = 2
+theme_override_constants/outline_size = 4
+theme_override_fonts/font = ExtResource("1_2k432")
+text = "PLAYER"
+horizontal_alignment = 1
+
+[node name="MarginContainer2" type="MarginContainer" parent="VBoxContainer/HBoxContainer/PlayerPanel/VBoxContainer" unique_id=2043870529]
+custom_minimum_size = Vector2(0, 48)
+layout_mode = 2
+
+[node name="PlayerPreview" type="TextureRect" parent="VBoxContainer/HBoxContainer/PlayerPanel/VBoxContainer/MarginContainer2" unique_id=1864333591]
+custom_minimum_size = Vector2(24, 24)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("2_shj2w")
+expand_mode = 3
+stretch_mode = 5
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/HBoxContainer/PlayerPanel/VBoxContainer" unique_id=1910632376]
+layout_mode = 2
+alignment = 1
+
+[node name="Button" type="Button" parent="VBoxContainer/HBoxContainer/PlayerPanel/VBoxContainer/HBoxContainer" unique_id=1331209820]
+layout_mode = 2
+theme_override_font_sizes/font_size = 8
+text = "<"
+
+[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer/PlayerPanel/VBoxContainer/HBoxContainer" unique_id=783234801]
+custom_minimum_size = Vector2(60, 0)
+layout_mode = 2
+theme_override_fonts/font = SubResource("FontVariation_v72ju")
+theme_override_font_sizes/font_size = 8
+text = "CHECKER"
+horizontal_alignment = 1
+
+[node name="Button2" type="Button" parent="VBoxContainer/HBoxContainer/PlayerPanel/VBoxContainer/HBoxContainer" unique_id=420556331]
+layout_mode = 2
+theme_override_font_sizes/font_size = 8
+text = ">"
+
+[node name="GoalPanel" type="PanelContainer" parent="VBoxContainer/HBoxContainer" unique_id=1040002128]
+custom_minimum_size = Vector2(100, 95)
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/HBoxContainer/GoalPanel" unique_id=435787205]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/HBoxContainer/GoalPanel/VBoxContainer" unique_id=1241043207]
+layout_mode = 2
+
+[node name="CategoryLabel" type="Label" parent="VBoxContainer/HBoxContainer/GoalPanel/VBoxContainer/MarginContainer" unique_id=98202600]
+layout_mode = 2
+theme_override_constants/outline_size = 4
+theme_override_fonts/font = ExtResource("1_2k432")
+text = "GOAL"
+horizontal_alignment = 1
+
+[node name="GoalPreview" type="TextureRect" parent="VBoxContainer/HBoxContainer/GoalPanel/VBoxContainer" unique_id=1189103999]
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 2
+texture = ExtResource("3_v72ju")
+expand_mode = 3
+stretch_mode = 5
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/HBoxContainer/GoalPanel/VBoxContainer" unique_id=49025792]
+layout_mode = 2
+alignment = 1
+
+[node name="Button" type="Button" parent="VBoxContainer/HBoxContainer/GoalPanel/VBoxContainer/HBoxContainer" unique_id=509428222]
+layout_mode = 2
+theme_override_font_sizes/font_size = 8
+text = "<"
+
+[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer/GoalPanel/VBoxContainer/HBoxContainer" unique_id=1257955899]
+custom_minimum_size = Vector2(60, 0)
+layout_mode = 2
+theme_override_fonts/font = SubResource("FontVariation_v72ju")
+theme_override_font_sizes/font_size = 8
+text = "CHECKER"
+horizontal_alignment = 1
+
+[node name="Button2" type="Button" parent="VBoxContainer/HBoxContainer/GoalPanel/VBoxContainer/HBoxContainer" unique_id=944981191]
+layout_mode = 2
+theme_override_font_sizes/font_size = 8
+text = ">"

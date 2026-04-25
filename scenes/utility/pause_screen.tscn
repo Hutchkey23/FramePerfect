@@ -1,0 +1,65 @@
+[gd_scene format=3 uid="uid://cf6jl534sqofh"]
+
+[ext_resource type="FontFile" uid="uid://vklaqlxxc5o7" path="res://assets/fonts/Whacky_Joe.ttf" id="1_i1yr8"]
+[ext_resource type="Script" uid="uid://ba5uopnt85kf3" path="res://scripts/utility/pause_screen.gd" id="1_x1dc2"]
+[ext_resource type="PackedScene" uid="uid://dv8sgqilw7oo1" path="res://scenes/title/menu_button.tscn" id="2_x1dc2"]
+
+[node name="PauseScreen" type="Control" unique_id=1531861683]
+process_mode = 2
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_x1dc2")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=1996956613]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.6627451)
+metadata/_edit_use_anchors_ = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=228075395]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 16
+alignment = 1
+
+[node name="PausedLabel" type="Label" parent="VBoxContainer" unique_id=716173373]
+layout_mode = 2
+theme_override_constants/outline_size = 3
+theme_override_fonts/font = ExtResource("1_i1yr8")
+text = "PAUSED"
+horizontal_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer" unique_id=1943979853]
+layout_mode = 2
+theme_override_constants/separation = 80
+alignment = 1
+
+[node name="ResumeButton" parent="VBoxContainer/HBoxContainer" unique_id=1166705071 instance=ExtResource("2_x1dc2")]
+layout_mode = 2
+button_label_text = "resume"
+
+[node name="RetryButton" parent="VBoxContainer/HBoxContainer" unique_id=1163554985 instance=ExtResource("2_x1dc2")]
+layout_mode = 2
+button_label_text = "retry"
+
+[node name="MainMenuButton" parent="VBoxContainer/HBoxContainer" unique_id=1680646512 instance=ExtResource("2_x1dc2")]
+layout_mode = 2
+button_label_text = "main menu"
+
+[connection signal="visibility_changed" from="." to="." method="_on_visibility_changed"]
+[connection signal="resized" from="VBoxContainer/PausedLabel" to="." method="_on_paused_label_resized"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/ResumeButton" to="." method="_on_resume_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/RetryButton" to="." method="_on_retry_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/MainMenuButton" to="." method="_on_main_menu_button_pressed"]

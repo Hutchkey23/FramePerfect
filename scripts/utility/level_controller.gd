@@ -1,6 +1,9 @@
 extends Node
 class_name LevelController
 
+signal level_completed
+signal level_failed
+signal level_started
 signal load_next_level
 
 enum LevelState {
@@ -81,6 +84,8 @@ func enter_intro_state() -> void:
 		player.set_control_enabled(false)
 
 func start_level() -> void:
+	level_started.emit()
+	
 	cinematic_bars.hide_bars()
 	level_ui.hide_start_label()
 	current_state = LevelState.PLAYING
@@ -93,6 +98,8 @@ func start_level() -> void:
 func complete_level() -> void:
 	if current_state != LevelState.PLAYING:
 		return
+	
+	level_completed.emit()
 	
 	current_state = LevelState.COMPLETED
 	timer_running = false
@@ -112,6 +119,8 @@ func complete_level() -> void:
 func fail_level() -> void:
 	if current_state != LevelState.PLAYING:
 		return
+	
+	level_failed.emit()
 	
 	current_state = LevelState.DEAD
 	timer_running = false
@@ -163,6 +172,8 @@ func retry_level() -> void:
 	despawn_stamps()
 	await get_tree().process_frame
 	spawn_stamps()
+	
+	cinematic_bars.show_bars()
 	
 	player.retry_level()
 	camera.retry_level()

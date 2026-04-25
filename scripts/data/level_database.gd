@@ -4,10 +4,10 @@ const LEVEL_DATA : Dictionary = {
 	"level_001": { "display_name": "getting started",  "medal_time": 1.50 },
 	"level_002": { "display_name": "hoppin' around",  "medal_time": 2.00 },
 	"level_003": { "display_name": "collect postage",  "medal_time": 3.00 },
-	"level_004": { "display_name": "the wave",  "medal_time": 3.00 },
-	"level_005": { "display_name": "Level 5",  "medal_time": 18.00 },
+	"level_004": { "display_name": "the wave",  "medal_time": 2.50 },
+	"level_005": { "display_name": "fetch quest",  "medal_time": 4.00 },
 
-	"level_006": { "display_name": "?",  "medal_time": 13.50 },
+	"level_006": { "display_name": "?",  "medal_time": 4.00 },
 	"level_007": { "display_name": "Level 7",  "medal_time": 15.50 },
 	"level_008": { "display_name": "boomerang",  "medal_time": 6.00 },
 	"level_009": { "display_name": "Level 9",  "medal_time": 17.00 },
@@ -21,9 +21,9 @@ const LEVEL_DATA : Dictionary = {
 
 	"level_016": { "display_name": "Level 16", "medal_time": 15.00 },
 	"level_017": { "display_name": "Level 17", "medal_time": 17.50 },
-	"level_018": { "display_name": "like magic", "medal_time": 5.00},
+	"level_018": { "display_name": "thread the needle", "medal_time": 5.00},
 	"level_019": { "display_name": "Level 19", "medal_time": 19.50 },
-	"level_020": { "display_name": "steady", "medal_time": 10.00 }
+	"level_020": { "display_name": "steady", "medal_time": 7.00 }
 }
 
 func has_level(level_id: String) -> bool:

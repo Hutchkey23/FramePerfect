@@ -4,6 +4,7 @@ extends Node2D
 @onready var level_container: Node2D = $LevelContainer
 @onready var transition: CanvasLayer = $Transition
 @onready var level_title_label: RichTextLabel = $Transition/LevelTitleLabel
+@onready var pause_screen: PauseMenu = $PauseLayer/PauseScreen
 
 const TRANSITION_LENGTH : float = 1.25
 
@@ -12,9 +13,37 @@ var current_level_index : int = 0
 var current_level_id : String
 var level_controller_reference: LevelController
 
+var game_pausable: bool = false
+var is_paused: bool = false
+
 func _ready() -> void:
 	await start_run()
 	
+
+func _input(event: InputEvent) -> void:
+	if event.is_action_pressed("pause"):
+		if is_paused or not game_pausable:
+			return
+		pause_game()
+
+func pause_game() -> void:
+	get_tree().paused = true
+	pause_screen.visible = true
+
+func _on_pause_screen_go_to_main_menu() -> void:
+	animation_player.play("global_transition_out")
+	await animation_player.animation_finished
+	get_tree().change_scene_to_file("res://scenes/title/title_screen.tscn")
+
+
+func _on_pause_screen_resume_game() -> void:
+	pause_screen.visible = false
+
+
+func _on_pause_screen_retry_level() -> void:
+	pause_screen.visible = false
+	if level_controller_reference:
+		level_controller_reference.retry_level()
 
 func start_run() -> void:
 	load_level(current_level_index)
@@ -25,6 +54,8 @@ func start_run() -> void:
 	await transition_in()
 	level_controller_reference.level_id = current_level_id
 	level_controller_reference.enter_intro_state()
+	
+	game_pausable = true
 
 func transition_in() -> void:
 	transition.visible = true
@@ -46,7 +77,16 @@ func get_level_controller_reference() -> void:
 
 	if level_controller_reference and not level_controller_reference.load_next_level.is_connected(load_next_level):
 		level_controller_reference.load_next_level.connect(load_next_level)
+		level_controller_reference.level_completed.connect(disable_pause)
+		level_controller_reference.level_failed.connect(disable_pause)
+		level_controller_reference.level_started.connect(enable_pause)
 	
+
+func enable_pause() -> void:
+	game_pausable = true
+
+func disable_pause() -> void:
+	game_pausable = false
 
 func get_level_data(level_index: int) -> LevelData:
 	if level_index < 0 or level_index >= levels.size():

@@ -16,6 +16,7 @@
 [ext_resource type="Resource" uid="uid://gia06jvackle" path="res://resources/level_data/level_018.tres" id="9_iccyr"]
 [ext_resource type="Resource" uid="uid://bens3cck2h4q6" path="res://resources/level_data/level_010.tres" id="9_niwpp"]
 [ext_resource type="Resource" uid="uid://dqui6cbpnx0ih" path="res://resources/level_data/level_011.tres" id="10_btq4d"]
+[ext_resource type="PackedScene" uid="uid://cf6jl534sqofh" path="res://scenes/utility/pause_screen.tscn" id="17_gbtpl"]
 
 [sub_resource type="Shader" id="Shader_w4fii"]
 code = "shader_type canvas_item;
@@ -299,7 +300,6 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id="Animation_gbtpl"]
 resource_name = "global_transition_out"
-length = 0.4
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -385,7 +385,7 @@ levels = Array[ExtResource("2_3yu1d")]([ExtResource("3_c2g8d"), ExtResource("4_c
 [node name="LevelContainer" type="Node2D" parent="." unique_id=517045765]
 
 [node name="GlobalTransition" type="CanvasLayer" parent="." unique_id=1308287457]
-layer = 4
+layer = 20
 
 [node name="GlobalTransitionRect" type="ColorRect" parent="GlobalTransition" unique_id=1441949515]
 material = SubResource("ShaderMaterial_gbtpl")
@@ -434,3 +434,13 @@ script = ExtResource("7_fagfu")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=908498819]
 libraries/ = SubResource("AnimationLibrary_c2g8d")
+
+[node name="PauseLayer" type="CanvasLayer" parent="." unique_id=1640838470]
+layer = 10
+
+[node name="PauseScreen" parent="PauseLayer" unique_id=1531861683 instance=ExtResource("17_gbtpl")]
+visible = false
+
+[connection signal="go_to_main_menu" from="PauseLayer/PauseScreen" to="." method="_on_pause_screen_go_to_main_menu"]
+[connection signal="resume_game" from="PauseLayer/PauseScreen" to="." method="_on_pause_screen_resume_game"]
+[connection signal="retry_level" from="PauseLayer/PauseScreen" to="." method="_on_pause_screen_retry_level"]

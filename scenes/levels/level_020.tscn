@@ -20,7 +20,6 @@ shader_parameter/center_glow_strength = 0.0
 [node name="Level_020" type="Node2D" unique_id=1381461103]
 
 [node name="LevelController" parent="." unique_id=1058685242 groups=["level_controller"] instance=ExtResource("1_x0akd")]
-level_id = "level_020"
 player_spawn_path = NodePath("../PlayerSpawn")
 camera_path = NodePath("../GameCamera")
 cinematic_bars_path = NodePath("../CinematicBars")
@@ -62,7 +61,7 @@ tile_set = ExtResource("5_h4p5x")
 [node name="Hazards" type="Node2D" parent="." unique_id=798262580]
 
 [node name="LaserHazard2" parent="Hazards" unique_id=1691267045 instance=ExtResource("7_5eyv6")]
-position = Vector2(116, 87)
+position = Vector2(116, 101)
 warning_time = 0.4
 active_time = 0.8
 off_time = 0.8
@@ -88,8 +87,62 @@ position = Vector2(88, 0)
 position = Vector2(44, 0)
 disabled = true
 
+[node name="LaserHazard4" parent="Hazards" unique_id=2109695187 instance=ExtResource("7_5eyv6")]
+position = Vector2(116, 93)
+warning_time = 0.4
+active_time = 0.8
+off_time = 0.8
+phase_offset = 1.0
+
+[node name="RightCap" parent="Hazards/LaserHazard4/Caps" parent_id_path=PackedInt32Array(2109695187, 1936609040) index="0" unique_id=713689459]
+position = Vector2(62, 0)
+
+[node name="Beam" parent="Hazards/LaserHazard4" index="1" unique_id=1755055180]
+visible = false
+points = PackedVector2Array(0, 0, 88, 0)
+width = 0.0
+
+[node name="WarningBeam" parent="Hazards/LaserHazard4" index="2" unique_id=1833803067]
+visible = true
+modulate = Color(1, 1, 1, 0.65)
+points = PackedVector2Array(0, 0, 88, 0)
+
+[node name="RCapParticles" parent="Hazards/LaserHazard4" index="4" unique_id=1655741551]
+position = Vector2(88, 0)
+
+[node name="BeamCollision" parent="Hazards/LaserHazard4" index="5" unique_id=1900670564]
+position = Vector2(44, 0)
+disabled = true
+
+[node name="LaserHazard5" parent="Hazards" unique_id=1467604101 instance=ExtResource("7_5eyv6")]
+position = Vector2(116, 85)
+warning_time = 0.4
+active_time = 0.8
+off_time = 0.8
+phase_offset = 1.0
+
+[node name="RightCap" parent="Hazards/LaserHazard5/Caps" parent_id_path=PackedInt32Array(1467604101, 1936609040) index="0" unique_id=713689459]
+position = Vector2(62, 0)
+
+[node name="Beam" parent="Hazards/LaserHazard5" index="1" unique_id=1755055180]
+visible = false
+points = PackedVector2Array(0, 0, 88, 0)
+width = 0.0
+
+[node name="WarningBeam" parent="Hazards/LaserHazard5" index="2" unique_id=1833803067]
+visible = true
+modulate = Color(1, 1, 1, 0.65)
+points = PackedVector2Array(0, 0, 88, 0)
+
+[node name="RCapParticles" parent="Hazards/LaserHazard5" index="4" unique_id=1655741551]
+position = Vector2(88, 0)
+
+[node name="BeamCollision" parent="Hazards/LaserHazard5" index="5" unique_id=1900670564]
+position = Vector2(44, 0)
+disabled = true
+
 [node name="LaserHazard3" parent="Hazards" unique_id=538597525 instance=ExtResource("7_5eyv6")]
-position = Vector2(116, 72)
+position = Vector2(116, 77)
 warning_time = 0.4
 active_time = 0.8
 off_time = 0.8
@@ -114,67 +167,13 @@ position = Vector2(88, 0)
 position = Vector2(44, 0)
 disabled = true
 
-[node name="LaserHazard4" parent="Hazards" unique_id=305479736 instance=ExtResource("7_5eyv6")]
-position = Vector2(116, 56)
-warning_time = 0.4
-active_time = 0.8
-off_time = 0.8
-phase_offset = 1.0
-
-[node name="RightCap" parent="Hazards/LaserHazard4/Caps" parent_id_path=PackedInt32Array(305479736, 1936609040) index="0" unique_id=713689459]
-position = Vector2(62, 0)
-
-[node name="Beam" parent="Hazards/LaserHazard4" index="1" unique_id=1755055180]
-visible = false
-points = PackedVector2Array(0, 0, 88, 0)
-width = 0.0
-
-[node name="WarningBeam" parent="Hazards/LaserHazard4" index="2" unique_id=1833803067]
-visible = true
-modulate = Color(1, 1, 1, 0.65)
-points = PackedVector2Array(0, 0, 88, 0)
-
-[node name="RCapParticles" parent="Hazards/LaserHazard4" index="4" unique_id=1655741551]
-position = Vector2(88, 0)
-
-[node name="BeamCollision" parent="Hazards/LaserHazard4" index="5" unique_id=1900670564]
-position = Vector2(44, 0)
-disabled = true
-
-[node name="LaserHazard5" parent="Hazards" unique_id=894341053 instance=ExtResource("7_5eyv6")]
-position = Vector2(116, 40)
+[node name="LaserHazard6" parent="Hazards" unique_id=1455763684 instance=ExtResource("7_5eyv6")]
+position = Vector2(116, 69)
 warning_time = 0.4
 active_time = 0.8
 off_time = 0.8
 
-[node name="RightCap" parent="Hazards/LaserHazard5/Caps" parent_id_path=PackedInt32Array(894341053, 1936609040) index="0" unique_id=713689459]
-position = Vector2(62, 0)
-
-[node name="Beam" parent="Hazards/LaserHazard5" index="1" unique_id=1755055180]
-visible = false
-points = PackedVector2Array(0, 0, 88, 0)
-width = 0.0
-
-[node name="WarningBeam" parent="Hazards/LaserHazard5" index="2" unique_id=1833803067]
-visible = true
-modulate = Color(1, 1, 1, 0.65)
-points = PackedVector2Array(0, 0, 88, 0)
-
-[node name="RCapParticles" parent="Hazards/LaserHazard5" index="4" unique_id=1655741551]
-position = Vector2(88, 0)
-
-[node name="BeamCollision" parent="Hazards/LaserHazard5" index="5" unique_id=1900670564]
-position = Vector2(44, 0)
-disabled = true
-
-[node name="LaserHazard6" parent="Hazards" unique_id=955484037 instance=ExtResource("7_5eyv6")]
-position = Vector2(116, 24)
-warning_time = 0.4
-active_time = 0.8
-off_time = 0.8
-phase_offset = 1.0
-
-[node name="RightCap" parent="Hazards/LaserHazard6/Caps" parent_id_path=PackedInt32Array(955484037, 1936609040) index="0" unique_id=713689459]
+[node name="RightCap" parent="Hazards/LaserHazard6/Caps" parent_id_path=PackedInt32Array(1455763684, 1936609040) index="0" unique_id=713689459]
 position = Vector2(62, 0)
 
 [node name="Beam" parent="Hazards/LaserHazard6" index="1" unique_id=1755055180]
@@ -194,13 +193,13 @@ position = Vector2(88, 0)
 position = Vector2(44, 0)
 disabled = true
 
-[node name="LaserHazard7" parent="Hazards" unique_id=3771831 instance=ExtResource("7_5eyv6")]
-position = Vector2(116, 9)
+[node name="LaserHazard7" parent="Hazards" unique_id=1210890068 instance=ExtResource("7_5eyv6")]
+position = Vector2(116, 61)
 warning_time = 0.4
 active_time = 0.8
 off_time = 0.8
 
-[node name="RightCap" parent="Hazards/LaserHazard7/Caps" parent_id_path=PackedInt32Array(3771831, 1936609040) index="0" unique_id=713689459]
+[node name="RightCap" parent="Hazards/LaserHazard7/Caps" parent_id_path=PackedInt32Array(1210890068, 1936609040) index="0" unique_id=713689459]
 position = Vector2(62, 0)
 
 [node name="Beam" parent="Hazards/LaserHazard7" index="1" unique_id=1755055180]
@@ -220,14 +219,14 @@ position = Vector2(88, 0)
 position = Vector2(44, 0)
 disabled = true
 
-[node name="LaserHazard8" parent="Hazards" unique_id=1808545862 instance=ExtResource("7_5eyv6")]
-position = Vector2(116, -7)
+[node name="LaserHazard8" parent="Hazards" unique_id=2099301068 instance=ExtResource("7_5eyv6")]
+position = Vector2(116, 53)
 warning_time = 0.4
 active_time = 0.8
 off_time = 0.8
 phase_offset = 1.0
 
-[node name="RightCap" parent="Hazards/LaserHazard8/Caps" parent_id_path=PackedInt32Array(1808545862, 1936609040) index="0" unique_id=713689459]
+[node name="RightCap" parent="Hazards/LaserHazard8/Caps" parent_id_path=PackedInt32Array(2099301068, 1936609040) index="0" unique_id=713689459]
 position = Vector2(62, 0)
 
 [node name="Beam" parent="Hazards/LaserHazard8" index="1" unique_id=1755055180]
@@ -247,13 +246,14 @@ position = Vector2(88, 0)
 position = Vector2(44, 0)
 disabled = true
 
-[node name="LaserHazard9" parent="Hazards" unique_id=923288386 instance=ExtResource("7_5eyv6")]
-position = Vector2(116, -23)
+[node name="LaserHazard9" parent="Hazards" unique_id=491956818 instance=ExtResource("7_5eyv6")]
+position = Vector2(116, 45)
 warning_time = 0.4
 active_time = 0.8
 off_time = 0.8
+phase_offset = 1.0
 
-[node name="RightCap" parent="Hazards/LaserHazard9/Caps" parent_id_path=PackedInt32Array(923288386, 1936609040) index="0" unique_id=713689459]
+[node name="RightCap" parent="Hazards/LaserHazard9/Caps" parent_id_path=PackedInt32Array(491956818, 1936609040) index="0" unique_id=713689459]
 position = Vector2(62, 0)
 
 [node name="Beam" parent="Hazards/LaserHazard9" index="1" unique_id=1755055180]
@@ -273,14 +273,14 @@ position = Vector2(88, 0)
 position = Vector2(44, 0)
 disabled = true
 
-[node name="LaserHazard10" parent="Hazards" unique_id=304137133 instance=ExtResource("7_5eyv6")]
-position = Vector2(116, -39)
+[node name="LaserHazard10" parent="Hazards" unique_id=2035603992 instance=ExtResource("7_5eyv6")]
+position = Vector2(116, 37)
 warning_time = 0.4
 active_time = 0.8
 off_time = 0.8
 phase_offset = 1.0
 
-[node name="RightCap" parent="Hazards/LaserHazard10/Caps" parent_id_path=PackedInt32Array(304137133, 1936609040) index="0" unique_id=713689459]
+[node name="RightCap" parent="Hazards/LaserHazard10/Caps" parent_id_path=PackedInt32Array(2035603992, 1936609040) index="0" unique_id=713689459]
 position = Vector2(62, 0)
 
 [node name="Beam" parent="Hazards/LaserHazard10" index="1" unique_id=1755055180]
@@ -300,13 +300,13 @@ position = Vector2(88, 0)
 position = Vector2(44, 0)
 disabled = true
 
-[node name="LaserHazard11" parent="Hazards" unique_id=1284737381 instance=ExtResource("7_5eyv6")]
-position = Vector2(116, -54)
+[node name="LaserHazard11" parent="Hazards" unique_id=1184360923 instance=ExtResource("7_5eyv6")]
+position = Vector2(116, 29)
 warning_time = 0.4
 active_time = 0.8
 off_time = 0.8
 
-[node name="RightCap" parent="Hazards/LaserHazard11/Caps" parent_id_path=PackedInt32Array(1284737381, 1936609040) index="0" unique_id=713689459]
+[node name="RightCap" parent="Hazards/LaserHazard11/Caps" parent_id_path=PackedInt32Array(1184360923, 1936609040) index="0" unique_id=713689459]
 position = Vector2(62, 0)
 
 [node name="Beam" parent="Hazards/LaserHazard11" index="1" unique_id=1755055180]
@@ -326,14 +326,13 @@ position = Vector2(88, 0)
 position = Vector2(44, 0)
 disabled = true
 
-[node name="LaserHazard12" parent="Hazards" unique_id=1980031549 instance=ExtResource("7_5eyv6")]
-position = Vector2(116, -70)
+[node name="LaserHazard12" parent="Hazards" unique_id=446855386 instance=ExtResource("7_5eyv6")]
+position = Vector2(116, 21)
 warning_time = 0.4
 active_time = 0.8
 off_time = 0.8
-phase_offset = 1.0
 
-[node name="RightCap" parent="Hazards/LaserHazard12/Caps" parent_id_path=PackedInt32Array(1980031549, 1936609040) index="0" unique_id=713689459]
+[node name="RightCap" parent="Hazards/LaserHazard12/Caps" parent_id_path=PackedInt32Array(446855386, 1936609040) index="0" unique_id=713689459]
 position = Vector2(62, 0)
 
 [node name="Beam" parent="Hazards/LaserHazard12" index="1" unique_id=1755055180]
@@ -353,13 +352,13 @@ position = Vector2(88, 0)
 position = Vector2(44, 0)
 disabled = true
 
-[node name="LaserHazard13" parent="Hazards" unique_id=1232034335 instance=ExtResource("7_5eyv6")]
-position = Vector2(116, -86)
+[node name="LaserHazard13" parent="Hazards" unique_id=656278547 instance=ExtResource("7_5eyv6")]
+position = Vector2(116, 13)
 warning_time = 0.4
 active_time = 0.8
 off_time = 0.8
 
-[node name="RightCap" parent="Hazards/LaserHazard13/Caps" parent_id_path=PackedInt32Array(1232034335, 1936609040) index="0" unique_id=713689459]
+[node name="RightCap" parent="Hazards/LaserHazard13/Caps" parent_id_path=PackedInt32Array(656278547, 1936609040) index="0" unique_id=713689459]
 position = Vector2(62, 0)
 
 [node name="Beam" parent="Hazards/LaserHazard13" index="1" unique_id=1755055180]
@@ -379,14 +378,14 @@ position = Vector2(88, 0)
 position = Vector2(44, 0)
 disabled = true
 
-[node name="LaserHazard14" parent="Hazards" unique_id=1161418286 instance=ExtResource("7_5eyv6")]
-position = Vector2(116, -102)
+[node name="LaserHazard14" parent="Hazards" unique_id=1779760145 instance=ExtResource("7_5eyv6")]
+position = Vector2(116, 5)
 warning_time = 0.4
 active_time = 0.8
 off_time = 0.8
 phase_offset = 1.0
 
-[node name="RightCap" parent="Hazards/LaserHazard14/Caps" parent_id_path=PackedInt32Array(1161418286, 1936609040) index="0" unique_id=713689459]
+[node name="RightCap" parent="Hazards/LaserHazard14/Caps" parent_id_path=PackedInt32Array(1779760145, 1936609040) index="0" unique_id=713689459]
 position = Vector2(62, 0)
 
 [node name="Beam" parent="Hazards/LaserHazard14" index="1" unique_id=1755055180]
@@ -406,13 +405,14 @@ position = Vector2(88, 0)
 position = Vector2(44, 0)
 disabled = true
 
-[node name="LaserHazard15" parent="Hazards" unique_id=2049453327 instance=ExtResource("7_5eyv6")]
-position = Vector2(116, -117)
+[node name="LaserHazard15" parent="Hazards" unique_id=1857889462 instance=ExtResource("7_5eyv6")]
+position = Vector2(116, -3)
 warning_time = 0.4
 active_time = 0.8
 off_time = 0.8
+phase_offset = 1.0
 
-[node name="RightCap" parent="Hazards/LaserHazard15/Caps" parent_id_path=PackedInt32Array(2049453327, 1936609040) index="0" unique_id=713689459]
+[node name="RightCap" parent="Hazards/LaserHazard15/Caps" parent_id_path=PackedInt32Array(1857889462, 1936609040) index="0" unique_id=713689459]
 position = Vector2(62, 0)
 
 [node name="Beam" parent="Hazards/LaserHazard15" index="1" unique_id=1755055180]
@@ -432,14 +432,66 @@ position = Vector2(88, 0)
 position = Vector2(44, 0)
 disabled = true
 
-[node name="LaserHazard18" parent="Hazards" unique_id=265192058 instance=ExtResource("7_5eyv6")]
-position = Vector2(116, 79)
+[node name="LaserHazard16" parent="Hazards" unique_id=705323639 instance=ExtResource("7_5eyv6")]
+position = Vector2(116, -11)
 warning_time = 0.4
 active_time = 0.8
 off_time = 0.8
 phase_offset = 1.0
 
-[node name="RightCap" parent="Hazards/LaserHazard18/Caps" parent_id_path=PackedInt32Array(265192058, 1936609040) index="0" unique_id=713689459]
+[node name="RightCap" parent="Hazards/LaserHazard16/Caps" parent_id_path=PackedInt32Array(705323639, 1936609040) index="0" unique_id=713689459]
+position = Vector2(62, 0)
+
+[node name="Beam" parent="Hazards/LaserHazard16" index="1" unique_id=1755055180]
+visible = false
+points = PackedVector2Array(0, 0, 88, 0)
+width = 0.0
+
+[node name="WarningBeam" parent="Hazards/LaserHazard16" index="2" unique_id=1833803067]
+visible = true
+modulate = Color(1, 1, 1, 0.65)
+points = PackedVector2Array(0, 0, 88, 0)
+
+[node name="RCapParticles" parent="Hazards/LaserHazard16" index="4" unique_id=1655741551]
+position = Vector2(88, 0)
+
+[node name="BeamCollision" parent="Hazards/LaserHazard16" index="5" unique_id=1900670564]
+position = Vector2(44, 0)
+disabled = true
+
+[node name="LaserHazard17" parent="Hazards" unique_id=375417430 instance=ExtResource("7_5eyv6")]
+position = Vector2(116, -19)
+warning_time = 0.4
+active_time = 0.8
+off_time = 0.8
+
+[node name="RightCap" parent="Hazards/LaserHazard17/Caps" parent_id_path=PackedInt32Array(375417430, 1936609040) index="0" unique_id=713689459]
+position = Vector2(62, 0)
+
+[node name="Beam" parent="Hazards/LaserHazard17" index="1" unique_id=1755055180]
+visible = false
+points = PackedVector2Array(0, 0, 88, 0)
+width = 0.0
+
+[node name="WarningBeam" parent="Hazards/LaserHazard17" index="2" unique_id=1833803067]
+visible = true
+modulate = Color(1, 1, 1, 0.65)
+points = PackedVector2Array(0, 0, 88, 0)
+
+[node name="RCapParticles" parent="Hazards/LaserHazard17" index="4" unique_id=1655741551]
+position = Vector2(88, 0)
+
+[node name="BeamCollision" parent="Hazards/LaserHazard17" index="5" unique_id=1900670564]
+position = Vector2(44, 0)
+disabled = true
+
+[node name="LaserHazard18" parent="Hazards" unique_id=2123713500 instance=ExtResource("7_5eyv6")]
+position = Vector2(116, -27)
+warning_time = 0.4
+active_time = 0.8
+off_time = 0.8
+
+[node name="RightCap" parent="Hazards/LaserHazard18/Caps" parent_id_path=PackedInt32Array(2123713500, 1936609040) index="0" unique_id=713689459]
 position = Vector2(62, 0)
 
 [node name="Beam" parent="Hazards/LaserHazard18" index="1" unique_id=1755055180]
@@ -459,13 +511,13 @@ position = Vector2(88, 0)
 position = Vector2(44, 0)
 disabled = true
 
-[node name="LaserHazard19" parent="Hazards" unique_id=1403572315 instance=ExtResource("7_5eyv6")]
-position = Vector2(116, 64)
+[node name="LaserHazard19" parent="Hazards" unique_id=1713802339 instance=ExtResource("7_5eyv6")]
+position = Vector2(116, -35)
 warning_time = 0.4
 active_time = 0.8
 off_time = 0.8
 
-[node name="RightCap" parent="Hazards/LaserHazard19/Caps" parent_id_path=PackedInt32Array(1403572315, 1936609040) index="0" unique_id=713689459]
+[node name="RightCap" parent="Hazards/LaserHazard19/Caps" parent_id_path=PackedInt32Array(1713802339, 1936609040) index="0" unique_id=713689459]
 position = Vector2(62, 0)
 
 [node name="Beam" parent="Hazards/LaserHazard19" index="1" unique_id=1755055180]
@@ -485,14 +537,14 @@ position = Vector2(88, 0)
 position = Vector2(44, 0)
 disabled = true
 
-[node name="LaserHazard20" parent="Hazards" unique_id=1924137037 instance=ExtResource("7_5eyv6")]
-position = Vector2(116, 48)
+[node name="LaserHazard20" parent="Hazards" unique_id=348171946 instance=ExtResource("7_5eyv6")]
+position = Vector2(116, -43)
 warning_time = 0.4
 active_time = 0.8
 off_time = 0.8
 phase_offset = 1.0
 
-[node name="RightCap" parent="Hazards/LaserHazard20/Caps" parent_id_path=PackedInt32Array(1924137037, 1936609040) index="0" unique_id=713689459]
+[node name="RightCap" parent="Hazards/LaserHazard20/Caps" parent_id_path=PackedInt32Array(348171946, 1936609040) index="0" unique_id=713689459]
 position = Vector2(62, 0)
 
 [node name="Beam" parent="Hazards/LaserHazard20" index="1" unique_id=1755055180]
@@ -512,13 +564,14 @@ position = Vector2(88, 0)
 position = Vector2(44, 0)
 disabled = true
 
-[node name="LaserHazard21" parent="Hazards" unique_id=1122786156 instance=ExtResource("7_5eyv6")]
-position = Vector2(116, 32)
+[node name="LaserHazard21" parent="Hazards" unique_id=1806705996 instance=ExtResource("7_5eyv6")]
+position = Vector2(116, -51)
 warning_time = 0.4
 active_time = 0.8
 off_time = 0.8
+phase_offset = 1.0
 
-[node name="RightCap" parent="Hazards/LaserHazard21/Caps" parent_id_path=PackedInt32Array(1122786156, 1936609040) index="0" unique_id=713689459]
+[node name="RightCap" parent="Hazards/LaserHazard21/Caps" parent_id_path=PackedInt32Array(1806705996, 1936609040) index="0" unique_id=713689459]
 position = Vector2(62, 0)
 
 [node name="Beam" parent="Hazards/LaserHazard21" index="1" unique_id=1755055180]
@@ -538,14 +591,14 @@ position = Vector2(88, 0)
 position = Vector2(44, 0)
 disabled = true
 
-[node name="LaserHazard22" parent="Hazards" unique_id=251014702 instance=ExtResource("7_5eyv6")]
-position = Vector2(116, 16)
+[node name="LaserHazard22" parent="Hazards" unique_id=990348586 instance=ExtResource("7_5eyv6")]
+position = Vector2(116, -59)
 warning_time = 0.4
 active_time = 0.8
 off_time = 0.8
 phase_offset = 1.0
 
-[node name="RightCap" parent="Hazards/LaserHazard22/Caps" parent_id_path=PackedInt32Array(251014702, 1936609040) index="0" unique_id=713689459]
+[node name="RightCap" parent="Hazards/LaserHazard22/Caps" parent_id_path=PackedInt32Array(990348586, 1936609040) index="0" unique_id=713689459]
 position = Vector2(62, 0)
 
 [node name="Beam" parent="Hazards/LaserHazard22" index="1" unique_id=1755055180]
@@ -565,13 +618,13 @@ position = Vector2(88, 0)
 position = Vector2(44, 0)
 disabled = true
 
-[node name="LaserHazard23" parent="Hazards" unique_id=1359121397 instance=ExtResource("7_5eyv6")]
-position = Vector2(116, 1)
+[node name="LaserHazard23" parent="Hazards" unique_id=934400498 instance=ExtResource("7_5eyv6")]
+position = Vector2(116, -67)
 warning_time = 0.4
 active_time = 0.8
 off_time = 0.8
 
-[node name="RightCap" parent="Hazards/LaserHazard23/Caps" parent_id_path=PackedInt32Array(1359121397, 1936609040) index="0" unique_id=713689459]
+[node name="RightCap" parent="Hazards/LaserHazard23/Caps" parent_id_path=PackedInt32Array(934400498, 1936609040) index="0" unique_id=713689459]
 position = Vector2(62, 0)
 
 [node name="Beam" parent="Hazards/LaserHazard23" index="1" unique_id=1755055180]
@@ -591,14 +644,13 @@ position = Vector2(88, 0)
 position = Vector2(44, 0)
 disabled = true
 
-[node name="LaserHazard24" parent="Hazards" unique_id=934696712 instance=ExtResource("7_5eyv6")]
-position = Vector2(116, -15)
+[node name="LaserHazard24" parent="Hazards" unique_id=1971879465 instance=ExtResource("7_5eyv6")]
+position = Vector2(116, -75)
 warning_time = 0.4
 active_time = 0.8
 off_time = 0.8
-phase_offset = 1.0
 
-[node name="RightCap" parent="Hazards/LaserHazard24/Caps" parent_id_path=PackedInt32Array(934696712, 1936609040) index="0" unique_id=713689459]
+[node name="RightCap" parent="Hazards/LaserHazard24/Caps" parent_id_path=PackedInt32Array(1971879465, 1936609040) index="0" unique_id=713689459]
 position = Vector2(62, 0)
 
 [node name="Beam" parent="Hazards/LaserHazard24" index="1" unique_id=1755055180]
@@ -618,13 +670,13 @@ position = Vector2(88, 0)
 position = Vector2(44, 0)
 disabled = true
 
-[node name="LaserHazard25" parent="Hazards" unique_id=1489360589 instance=ExtResource("7_5eyv6")]
-position = Vector2(116, -31)
+[node name="LaserHazard25" parent="Hazards" unique_id=729165566 instance=ExtResource("7_5eyv6")]
+position = Vector2(116, -83)
 warning_time = 0.4
 active_time = 0.8
 off_time = 0.8
 
-[node name="RightCap" parent="Hazards/LaserHazard25/Caps" parent_id_path=PackedInt32Array(1489360589, 1936609040) index="0" unique_id=713689459]
+[node name="RightCap" parent="Hazards/LaserHazard25/Caps" parent_id_path=PackedInt32Array(729165566, 1936609040) index="0" unique_id=713689459]
 position = Vector2(62, 0)
 
 [node name="Beam" parent="Hazards/LaserHazard25" index="1" unique_id=1755055180]
@@ -644,14 +696,14 @@ position = Vector2(88, 0)
 position = Vector2(44, 0)
 disabled = true
 
-[node name="LaserHazard26" parent="Hazards" unique_id=2002129348 instance=ExtResource("7_5eyv6")]
-position = Vector2(116, -47)
+[node name="LaserHazard26" parent="Hazards" unique_id=479876075 instance=ExtResource("7_5eyv6")]
+position = Vector2(116, -91)
 warning_time = 0.4
 active_time = 0.8
 off_time = 0.8
 phase_offset = 1.0
 
-[node name="RightCap" parent="Hazards/LaserHazard26/Caps" parent_id_path=PackedInt32Array(2002129348, 1936609040) index="0" unique_id=713689459]
+[node name="RightCap" parent="Hazards/LaserHazard26/Caps" parent_id_path=PackedInt32Array(479876075, 1936609040) index="0" unique_id=713689459]
 position = Vector2(62, 0)
 
 [node name="Beam" parent="Hazards/LaserHazard26" index="1" unique_id=1755055180]
@@ -671,13 +723,14 @@ position = Vector2(88, 0)
 position = Vector2(44, 0)
 disabled = true
 
-[node name="LaserHazard27" parent="Hazards" unique_id=1198470253 instance=ExtResource("7_5eyv6")]
-position = Vector2(116, -62)
+[node name="LaserHazard27" parent="Hazards" unique_id=1824510783 instance=ExtResource("7_5eyv6")]
+position = Vector2(116, -99)
 warning_time = 0.4
 active_time = 0.8
 off_time = 0.8
+phase_offset = 1.0
 
-[node name="RightCap" parent="Hazards/LaserHazard27/Caps" parent_id_path=PackedInt32Array(1198470253, 1936609040) index="0" unique_id=713689459]
+[node name="RightCap" parent="Hazards/LaserHazard27/Caps" parent_id_path=PackedInt32Array(1824510783, 1936609040) index="0" unique_id=713689459]
 position = Vector2(62, 0)
 
 [node name="Beam" parent="Hazards/LaserHazard27" index="1" unique_id=1755055180]
@@ -697,14 +750,14 @@ position = Vector2(88, 0)
 position = Vector2(44, 0)
 disabled = true
 
-[node name="LaserHazard28" parent="Hazards" unique_id=1677310193 instance=ExtResource("7_5eyv6")]
-position = Vector2(116, -78)
+[node name="LaserHazard28" parent="Hazards" unique_id=1669018629 instance=ExtResource("7_5eyv6")]
+position = Vector2(116, -107)
 warning_time = 0.4
 active_time = 0.8
 off_time = 0.8
 phase_offset = 1.0
 
-[node name="RightCap" parent="Hazards/LaserHazard28/Caps" parent_id_path=PackedInt32Array(1677310193, 1936609040) index="0" unique_id=713689459]
+[node name="RightCap" parent="Hazards/LaserHazard28/Caps" parent_id_path=PackedInt32Array(1669018629, 1936609040) index="0" unique_id=713689459]
 position = Vector2(62, 0)
 
 [node name="Beam" parent="Hazards/LaserHazard28" index="1" unique_id=1755055180]
@@ -724,13 +777,13 @@ position = Vector2(88, 0)
 position = Vector2(44, 0)
 disabled = true
 
-[node name="LaserHazard29" parent="Hazards" unique_id=1039157980 instance=ExtResource("7_5eyv6")]
-position = Vector2(116, -94)
+[node name="LaserHazard29" parent="Hazards" unique_id=1778977936 instance=ExtResource("7_5eyv6")]
+position = Vector2(116, -115)
 warning_time = 0.4
 active_time = 0.8
 off_time = 0.8
 
-[node name="RightCap" parent="Hazards/LaserHazard29/Caps" parent_id_path=PackedInt32Array(1039157980, 1936609040) index="0" unique_id=713689459]
+[node name="RightCap" parent="Hazards/LaserHazard29/Caps" parent_id_path=PackedInt32Array(1778977936, 1936609040) index="0" unique_id=713689459]
 position = Vector2(62, 0)
 
 [node name="Beam" parent="Hazards/LaserHazard29" index="1" unique_id=1755055180]
@@ -750,14 +803,13 @@ position = Vector2(88, 0)
 position = Vector2(44, 0)
 disabled = true
 
-[node name="LaserHazard30" parent="Hazards" unique_id=667443320 instance=ExtResource("7_5eyv6")]
-position = Vector2(116, -110)
+[node name="LaserHazard30" parent="Hazards" unique_id=976570340 instance=ExtResource("7_5eyv6")]
+position = Vector2(116, -123)
 warning_time = 0.4
 active_time = 0.8
 off_time = 0.8
-phase_offset = 1.0
 
-[node name="RightCap" parent="Hazards/LaserHazard30/Caps" parent_id_path=PackedInt32Array(667443320, 1936609040) index="0" unique_id=713689459]
+[node name="RightCap" parent="Hazards/LaserHazard30/Caps" parent_id_path=PackedInt32Array(976570340, 1936609040) index="0" unique_id=713689459]
 position = Vector2(62, 0)
 
 [node name="Beam" parent="Hazards/LaserHazard30" index="1" unique_id=1755055180]
@@ -777,13 +829,13 @@ position = Vector2(88, 0)
 position = Vector2(44, 0)
 disabled = true
 
-[node name="LaserHazard31" parent="Hazards" unique_id=1620463900 instance=ExtResource("7_5eyv6")]
-position = Vector2(116, -125)
+[node name="LaserHazard31" parent="Hazards" unique_id=1071832734 instance=ExtResource("7_5eyv6")]
+position = Vector2(116, -131)
 warning_time = 0.4
 active_time = 0.8
 off_time = 0.8
 
-[node name="RightCap" parent="Hazards/LaserHazard31/Caps" parent_id_path=PackedInt32Array(1620463900, 1936609040) index="0" unique_id=713689459]
+[node name="RightCap" parent="Hazards/LaserHazard31/Caps" parent_id_path=PackedInt32Array(1071832734, 1936609040) index="0" unique_id=713689459]
 position = Vector2(62, 0)
 
 [node name="Beam" parent="Hazards/LaserHazard31" index="1" unique_id=1755055180]
@@ -813,9 +865,9 @@ target = NodePath("../Player")
 fixed_position = Vector2(160, 90)
 
 [editable path="Hazards/LaserHazard2"]
-[editable path="Hazards/LaserHazard3"]
 [editable path="Hazards/LaserHazard4"]
 [editable path="Hazards/LaserHazard5"]
+[editable path="Hazards/LaserHazard3"]
 [editable path="Hazards/LaserHazard6"]
 [editable path="Hazards/LaserHazard7"]
 [editable path="Hazards/LaserHazard8"]
@@ -826,6 +878,8 @@ fixed_position = Vector2(160, 90)
 [editable path="Hazards/LaserHazard13"]
 [editable path="Hazards/LaserHazard14"]
 [editable path="Hazards/LaserHazard15"]
+[editable path="Hazards/LaserHazard16"]
+[editable path="Hazards/LaserHazard17"]
 [editable path="Hazards/LaserHazard18"]
 [editable path="Hazards/LaserHazard19"]
 [editable path="Hazards/LaserHazard20"]
