@@ -146,7 +146,6 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="MainTitleVbox" type="VBoxContainer" parent="." unique_id=407907503]
-visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -207,7 +206,6 @@ button_label_text = "QUIT"
 
 [node name="Transition" type="CanvasLayer" parent="." unique_id=1292473395]
 layer = 3
-visible = false
 
 [node name="TransitionRect" type="ColorRect" parent="Transition" unique_id=1353817285]
 material = ExtResource("34_702e2")
@@ -221,6 +219,7 @@ color = Color(0, 0, 0, 1)
 libraries/ = SubResource("AnimationLibrary_vxnr3")
 
 [node name="CustomizeMenu" parent="." unique_id=1550935903 instance=ExtResource("35_2egvm")]
+visible = false
 layout_mode = 1
 
 [connection signal="resized" from="MainTitleVbox/LogoContainer" to="." method="_on_logo_container_resized"]

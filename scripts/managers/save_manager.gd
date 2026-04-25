@@ -4,7 +4,11 @@ const SAVE_PATH := "user://save_data.json"
 const NO_TIME := 999999.0
 
 var save_data: Dictionary = {
-	"levels": {}
+	"levels": {},
+	"cosmetics": {
+		"selected_player_skin": "player_default",
+		"selected_goal_skin": "goal_default",
+	}
 }
 
 
@@ -133,3 +137,36 @@ func load_game() -> void:
 		save_data = {
 			"levels": {}
 		}
+
+
+func get_selected_skin(category: String) -> String:
+	ensure_cosmetics_data()
+	
+	if category == "player":
+		return save_data["cosmetics"]["selected_player_skin"]
+	if category == "goal":
+		return save_data["cosmetics"]["selected_goal_skin"]
+	
+	return ""
+
+
+func set_selected_skin(category: String, skin_id: String) -> void:
+	ensure_cosmetics_data()
+	
+	if category == "player":
+		save_data["cosmetics"]["selected_player_skin"] = skin_id
+	elif category == "goal":
+		save_data["cosmetics"]["selected_goal_skin"] = skin_id
+	
+	save_game()
+
+
+func ensure_cosmetics_data() -> void:
+	if not save_data.has("cosmetics"):
+		save_data["cosmetics"] = {}
+	
+	if not save_data["cosmetics"].has("selected_player_skin"):
+		save_data["cosmetics"]["selected_player_skin"] = "player_default"
+	
+	if not save_data["cosmetics"].has("selected_goal_skin"):
+		save_data["cosmetics"]["selected_goal_skin"] = "goal_default"
