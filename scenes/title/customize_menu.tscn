@@ -12,6 +12,10 @@
 base_font = ExtResource("1_2k432")
 spacing_glyph = 1
 
+[sub_resource type="FontVariation" id="FontVariation_b2iet"]
+base_font = ExtResource("1_2k432")
+spacing_glyph = 1
+
 [node name="CustomizeMenu" type="Control" unique_id=1550935903]
 layout_mode = 3
 anchors_preset = 15
@@ -178,20 +182,24 @@ layout_mode = 2
 size_flags_horizontal = 4
 
 [node name="MessageLabel" type="Label" parent="VBoxContainer/MarginContainer3/PanelContainer" unique_id=455789161]
-custom_minimum_size = Vector2(240, 0)
+custom_minimum_size = Vector2(240, 28)
 layout_mode = 2
 size_flags_horizontal = 4
 theme_override_constants/outline_size = 3
-theme_override_fonts/font = ExtResource("1_2k432")
+theme_override_fonts/font = SubResource("FontVariation_b2iet")
 theme_override_font_sizes/font_size = 8
-text = "Unlock by completing 10 levels!"
+text = "Playing Send It! while everyone else plays checkers."
 horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
 
 [node name="MarginContainer2" type="MarginContainer" parent="VBoxContainer" unique_id=1953481099]
 layout_mode = 2
 
 [node name="ConfirmButton" parent="VBoxContainer/MarginContainer2" unique_id=1166705071 instance=ExtResource("4_gev17")]
 layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
 button_label_text = "CONFIRM"
 
 [connection signal="focus_entered" from="VBoxContainer/HBoxContainer/PlayerPanel/VBoxContainer/NavigationContainer/PlayerLeftNavigationArrow" to="." method="_on_player_left_navigation_arrow_focus_entered"]

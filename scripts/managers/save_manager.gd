@@ -86,6 +86,7 @@ func player_has_medal(level_id: String) -> bool:
 	var best_time := get_best_time(level_id)
 	if best_time >= NO_TIME:
 		return false
+		
 	
 	var medal_time := LevelDatabase.get_medal_time(level_id)
 	return best_time <= medal_time
@@ -108,8 +109,6 @@ func save_game() -> void:
 
 
 func load_game() -> void:
-	return
-	
 	if not FileAccess.file_exists(SAVE_PATH):
 		return
 	

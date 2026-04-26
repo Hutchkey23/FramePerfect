@@ -63,6 +63,21 @@ tracks/0/keys = {
 "values": [0.0]
 }
 
+[sub_resource type="Animation" id="Animation_702e2"]
+resource_name = "global_transition_out"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Transition/TransitionRect:material:shader_parameter/progress")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [1.5, 0.0]
+}
+
 [sub_resource type="Animation" id="Animation_5fwbo"]
 resource_name = "transition_in"
 length = 0.4
@@ -79,8 +94,9 @@ tracks/0/keys = {
 "values": [0.0, 1.5]
 }
 
-[sub_resource type="Animation" id="Animation_702e2"]
+[sub_resource type="Animation" id="Animation_vxnr3"]
 resource_name = "transition_out"
+length = 0.6
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -97,8 +113,9 @@ tracks/0/keys = {
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_vxnr3"]
 _data = {
 &"RESET": SubResource("Animation_2egvm"),
+&"global_transition_out": SubResource("Animation_702e2"),
 &"transition_in": SubResource("Animation_5fwbo"),
-&"transition_out": SubResource("Animation_702e2")
+&"transition_out": SubResource("Animation_vxnr3")
 }
 
 [node name="TitleScreen" type="Control" unique_id=1223447454]
@@ -229,3 +246,5 @@ layout_mode = 1
 [connection signal="pressed" from="MainTitleVbox/CustomizeButton" to="." method="_on_customize_button_pressed"]
 [connection signal="pressed" from="MainTitleVbox/OptionsButton" to="." method="_on_options_button_pressed"]
 [connection signal="pressed" from="MainTitleVbox/QuitButton" to="." method="_on_quit_button_pressed"]
+[connection signal="exit_customize_menu" from="CustomizeMenu" to="." method="_on_customize_menu_exit_customize_menu"]
+[connection signal="visibility_changed" from="CustomizeMenu" to="CustomizeMenu" method="_on_visibility_changed"]

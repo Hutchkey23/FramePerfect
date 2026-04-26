@@ -140,6 +140,10 @@ func _ready() -> void:
 	sprite_normal_scale = player_sprite.scale
 	camera_reference = get_tree().get_first_node_in_group("game_camera")
 	fail_label.visible = false
+	
+	var skin_id = SaveManager.get_selected_skin("player")
+	var skin = SkinDatabase.retrieve_skin_texture("player", skin_id)
+	player_sprite.texture = skin
 
 func set_control_enabled(enabled: bool) -> void:
 	control_enabled = enabled

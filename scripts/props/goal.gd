@@ -6,6 +6,7 @@ class_name Goal
 @onready var flag_pivot: Node2D = $FlagPivot
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var medal_sprite: Sprite2D = $GoalSprite/MedalSprite
+@onready var goal_sprite: Sprite2D = $GoalSprite
 
 
 const NORMAL_GOAL_SCALE : Vector2 = Vector2(0.5, 0.5)
@@ -105,8 +106,9 @@ func _ready() -> void:
 	new_best_or_medal_label.visible = false
 	new_best_or_medal_label.pivot_offset = new_best_or_medal_label.size / 2
 	
-	if SaveManager.player_has_medal(level_id):
-		show_medal()
+	var skin_id = SaveManager.get_selected_skin("goal")
+	var skin = SkinDatabase.retrieve_skin_texture("goal", skin_id)
+	goal_sprite.texture = skin
 	
 
 func _process(delta: float) -> void:
@@ -118,8 +120,14 @@ func _process(delta: float) -> void:
 	var rotation_offset = sin(5.0 * time) * MAX_DEGREE_ROTATION
 	rotation_degrees = initial_rotation_degrees + rotation_offset
 
-func show_medal() -> void:
-	medal_sprite.visible = true
+
+func setup_level(new_level_id: String) -> void:
+	level_id = new_level_id
+	update_medal_sprite()
+
+
+func update_medal_sprite() -> void:
+	medal_sprite.visible = SaveManager.player_has_medal(level_id)
 
 func get_medal_message(result: Dictionary) -> String:
 	if result["earned_medal_this_run"]:

@@ -52,8 +52,6 @@ func start_run() -> void:
 	
 	await get_tree().create_timer(TRANSITION_LENGTH).timeout
 	await transition_in()
-	level_controller_reference.level_id = current_level_id
-	level_controller_reference.enter_intro_state()
 	
 	game_pausable = true
 
@@ -107,6 +105,10 @@ func load_level(level_index: int) -> void:
 	level_container.add_child(new_level)
 	
 	get_level_controller_reference()
+	
+	if level_controller_reference:
+		level_controller_reference.setup_level(current_level_id)
+	
 
 func load_next_level() -> void:
 	if current_level_index + 1 >= levels.size():
@@ -124,10 +126,6 @@ func load_next_level() -> void:
 	
 	await get_tree().create_timer(TRANSITION_LENGTH).timeout
 	await transition_in()
-	
-	if level_controller_reference:
-		level_controller_reference.enter_intro_state()
-		level_controller_reference.level_id = current_level_id
 
 func unload_current_level() -> void:
 	if level_container.get_child_count() == 0:

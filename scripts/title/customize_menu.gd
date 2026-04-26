@@ -1,6 +1,8 @@
 extends Control
 class_name CustomizeMenu
 
+signal exit_customize_menu
+
 @onready var player_panel: PanelContainer = $VBoxContainer/HBoxContainer/PlayerPanel
 @onready var player_left_navigation_arrow: Button = $VBoxContainer/HBoxContainer/PlayerPanel/VBoxContainer/NavigationContainer/PlayerLeftNavigationArrow
 @onready var player_skin_label: Label = $VBoxContainer/HBoxContainer/PlayerPanel/VBoxContainer/NavigationContainer/PlayerSkinLabel
@@ -85,6 +87,11 @@ func _ready() -> void:
 	update_player_skin_display()
 	update_goal_skin_display()
 
+func _unhandled_input(event: InputEvent) -> void:
+	if event.is_action_pressed("ui_cancel"):
+		exit_customize_menu.emit()
+		get_viewport().set_input_as_handled()
+
 func load_saved_skin_indexes() -> void:
 	var saved_player_skin := SaveManager.get_selected_skin("player")
 	var saved_goal_skin := SaveManager.get_selected_skin("goal")
@@ -151,7 +158,9 @@ func _on_confirm_button_pressed() -> void:
 	if SkinDatabase.is_skin_unlocked(goal_skin):
 		SaveManager.set_selected_skin("goal", goal_skin["id"])
 	
-	message_label.text = "Equipped!"
+	release_focus()
+	
+	exit_customize_menu.emit()
 
 
 func _on_confirm_button_focus_entered() -> void:
@@ -166,9 +175,11 @@ func focus_panel(panel: PanelContainer) -> void:
 	if panel == player_panel:
 		animate_panel(player_panel, FOCUSED_PANEL_SCALE, FOCUSED_PANEL_MODULATE)
 		animate_panel(goal_panel, NORMAL_PANEL_SCALE, DIM_PANEL_MODULATE)
+		update_player_skin_display()
 	else:
 		animate_panel(goal_panel, FOCUSED_PANEL_SCALE, FOCUSED_PANEL_MODULATE)
 		animate_panel(player_panel, NORMAL_PANEL_SCALE, DIM_PANEL_MODULATE)
+		update_goal_skin_display()
 
 
 func unfocus_panels() -> void:
@@ -212,3 +223,9 @@ func update_message_for_skin(skin: Dictionary) -> void:
 		message_label.text = skin.get("description", "")
 	else:
 		message_label.text = skin.get("locked_message", "Locked.")
+
+
+func _on_visibility_changed() -> void:
+	if visible:
+		confirm_button.update_pivot()
+		player_left_navigation_arrow.grab_focus()

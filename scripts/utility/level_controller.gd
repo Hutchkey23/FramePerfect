@@ -52,8 +52,6 @@ func _ready() -> void:
 		fixed_camera_level = true
 	
 	spawn_stamps()
-	
-	goal.level_id = level_id
 
 func _process(delta: float) -> void:
 	match current_state:
@@ -66,6 +64,11 @@ func _process(delta: float) -> void:
 		LevelState.COMPLETED:
 			check_for_level_completed_input()
 
+func setup_level(new_level_id: String) -> void:
+	level_id = new_level_id
+	
+	if goal:
+		goal.setup_level(level_id)
 
 func connect_signals() -> void:
 	if player.has_signal("died"):

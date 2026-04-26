@@ -42,6 +42,8 @@ func _on_focus_entered() -> void:
 	
 	button_text.add_theme_color_override("font_color", LABEL_FOCUSED_COLOR)
 	
+	indicator.texture = SkinDatabase.retrieve_skin_texture("player", SaveManager.save_data.cosmetics.selected_player_skin)
+	
 	indicator.modulate.a = 1.0
 
 func _on_focus_exited() -> void:
