@@ -18,7 +18,7 @@ const LEVEL_DATA : Dictionary = {
 	"level_012": { "display_name": "it's all timing", "medal_time": 5.00 },
 	"level_013": { "display_name": "Level 13", "medal_time": 16.50 },
 	"level_014": { "display_name": "Level 14", "medal_time": 12.00 },
-	"level_015": { "display_name": "Level 15", "medal_time": 18.50 },
+	"level_015": { "display_name": "merging", "medal_time": 18.50 },
 	"level_016": { "display_name": "Level 16", "medal_time": 21.00 },
 
 	"level_017": { "display_name": "Level 17", "medal_time": 15.00 },

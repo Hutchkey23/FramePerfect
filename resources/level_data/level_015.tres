@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="LevelData" format=3 uid="uid://bdf6n1gsalxlj"]
+
+[ext_resource type="PackedScene" uid="uid://t4ec2bc2hihk" path="res://scenes/levels/level_015.tscn" id="1_ak74l"]
+[ext_resource type="Script" uid="uid://do5fdotl7d638" path="res://resources/level_data/level_data.gd" id="2_7u2lo"]
+
+[resource]
+script = ExtResource("2_7u2lo")
+level_id = "level_015"
+level_title = "merging"
+level_scene = ExtResource("1_ak74l")
+metadata/_custom_type_script = "uid://do5fdotl7d638"

@@ -46,7 +46,7 @@ tile_set = ExtResource("4_bo1da")
 [node name="Hazards" type="TileMapLayer" parent="Map" unique_id=876696869 groups=["hazards"]]
 modulate = Color(0.5092862, 0.5092861, 0.5092864, 1)
 material = SubResource("ShaderMaterial_wwkcr")
-tile_map_data = PackedByteArray("AAAKAAUAAAAAAAEAAAAKAAYAAAAAAAEAAAA=")
+tile_map_data = PackedByteArray("AAAKAAUAAAAAAAEAAAAKAAYAAAAAAAEAAAAJAAUAAAAAAAEAAAAJAAYAAAAAAAEAAAA=")
 tile_set = ExtResource("4_bo1da")
 
 [node name="Shadows" type="TileMapLayer" parent="Map" unique_id=255637794]

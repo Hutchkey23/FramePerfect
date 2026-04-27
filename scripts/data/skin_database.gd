@@ -121,10 +121,91 @@ const GOAL_SKINS := [
 		"unlock_type": "default",
 	},
 	{
-		"id": "goal_checker",
+		"id": "goal_brown",
 		"display_name": "Brown",
 		"texture": preload("res://assets/sprites/goal/skins/brown.png"),
 		"description": "The classic mailbox but... brown!",
+		"unlock_type": "levels_completed",
+		"unlock_value": 10,
+		"locked_message": "Unlock by completing 10 levels!"
+	},
+	{
+		"id": "goal_black",
+		"display_name": "Black",
+		"texture": preload("res://assets/sprites/goal/skins/black.png"),
+		"description": "The classic mailbox but... black!",
+		"unlock_type": "levels_completed",
+		"unlock_value": 10,
+		"locked_message": "Unlock by completing 10 levels!"
+	},
+	{
+		"id": "goal_green",
+		"display_name": "Green",
+		"texture": preload("res://assets/sprites/goal/skins/green.png"),
+		"description": "The classic mailbox but... green!",
+		"unlock_type": "levels_completed",
+		"unlock_value": 10,
+		"locked_message": "Unlock by completing 10 levels!"
+	},
+	{
+		"id": "goal_pink",
+		"display_name": "Pink",
+		"texture": preload("res://assets/sprites/goal/skins/pink.png"),
+		"description": "The classic mailbox but... pink!",
+		"unlock_type": "levels_completed",
+		"unlock_value": 10,
+		"locked_message": "Unlock by completing 10 levels!"
+	},
+	{
+		"id": "goal_purple",
+		"display_name": "Purple",
+		"texture": preload("res://assets/sprites/goal/skins/purple.png"),
+		"description": "The classic mailbox but... purple!",
+		"unlock_type": "levels_completed",
+		"unlock_value": 10,
+		"locked_message": "Unlock by completing 10 levels!"
+	},
+	{
+		"id": "goal_red",
+		"display_name": "Red",
+		"texture": preload("res://assets/sprites/goal/skins/red.png"),
+		"description": "The classic mailbox but... red!",
+		"unlock_type": "levels_completed",
+		"unlock_value": 10,
+		"locked_message": "Unlock by completing 10 levels!"
+	},
+	{
+		"id": "goal_white",
+		"display_name": "White",
+		"texture": preload("res://assets/sprites/goal/skins/white.png"),
+		"description": "The classic mailbox but... white!",
+		"unlock_type": "levels_completed",
+		"unlock_value": 10,
+		"locked_message": "Unlock by completing 10 levels!"
+	},
+	{
+		"id": "goal_yellow",
+		"display_name": "Yellow",
+		"texture": preload("res://assets/sprites/goal/skins/yellow.png"),
+		"description": "The classic mailbox but... yellow!",
+		"unlock_type": "levels_completed",
+		"unlock_value": 10,
+		"locked_message": "Unlock by completing 10 levels!"
+	},
+	{
+		"id": "goal_stripe",
+		"display_name": "Striped",
+		"texture": preload("res://assets/sprites/goal/skins/stripe.png"),
+		"description": "Ready to race!",
+		"unlock_type": "levels_completed",
+		"unlock_value": 10,
+		"locked_message": "Unlock by completing 10 levels!"
+	},
+	{
+		"id": "goal_bob",
+		"display_name": "Bob",
+		"texture": preload("res://assets/sprites/goal/skins/bob.png"),
+		"description": "He looks hungry.",
 		"unlock_type": "levels_completed",
 		"unlock_value": 10,
 		"locked_message": "Unlock by completing 10 levels!"
