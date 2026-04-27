@@ -8,15 +8,21 @@ extends Node2D
 
 const TRANSITION_LENGTH : float = 1.25
 
-@export var levels: Array[LevelData]
-var current_level_index : int = 0
+@export var worlds: Array[WorldData]
+var current_world_index: int = 0
+var current_level_index: int = 0
 var current_level_id : String
+var current_world_level_names: Array = []
 var level_controller_reference: LevelController
 
 var game_pausable: bool = false
 var is_paused: bool = false
 
 func _ready() -> void:
+	LevelDatabase.setup(worlds)
+	
+	current_world_level_names = get_world_level_names(current_world_index)
+	set_level_title_label_text(current_level_index)
 	await start_run()
 	
 
@@ -45,8 +51,20 @@ func _on_pause_screen_retry_level() -> void:
 	if level_controller_reference:
 		level_controller_reference.retry_level()
 
+func get_world_level_names(world_index: int) -> Array:
+	var level_names = []
+	var current_world = worlds[world_index]
+	for level: LevelData in current_world.levels:
+		level_names.append(level.level_title)
+	
+	return level_names
+
+func set_level_title_label_text(level_index: int) -> void:
+	var level_title = current_world_level_names[level_index]
+	level_title_label.text = level_title
+
 func start_run() -> void:
-	load_level(current_level_index)
+	load_level()
 	animation_player.play("global_transition_in")
 	await animation_player.animation_finished
 	
@@ -86,20 +104,19 @@ func enable_pause() -> void:
 func disable_pause() -> void:
 	game_pausable = false
 
-func get_level_data(level_index: int) -> LevelData:
-	if level_index < 0 or level_index >= levels.size():
-		return null
-	return levels[level_index]
+#func get_level_data(level_index: int) -> LevelData:
+	#if level_index < 0 or level_index >= levels.size():
+		#return null
+	#return levels[level_index]
 
-func load_level(level_index: int) -> void:
-	var level_data: LevelData = get_level_data(level_index)
+func load_level() -> void:
+	set_level_title_label_text(current_level_index)
+	var level_data := get_current_level_data()
 	if level_data == null or level_data.level_scene == null:
-		push_error("Missing LevelData or level_scene at index %d" % level_index)
+		push_error("Missing LevelData or level_scene.")
 		return
 	
 	current_level_id = level_data.level_id
-	
-	level_title_label.text = level_data.level_title
 	
 	var new_level = level_data.level_scene.instantiate()
 	level_container.add_child(new_level)
@@ -111,21 +128,47 @@ func load_level(level_index: int) -> void:
 	
 
 func load_next_level() -> void:
-	if current_level_index + 1 >= levels.size():
-		print("No more levels.")
+	var world_data := get_current_world_data()
+	if world_data == null:
 		return
 	
-	var upcoming_level_data: LevelData = levels[current_level_index + 1]
-	level_title_label.text = upcoming_level_data.level_title
+	current_level_index += 1
+	
+	if current_level_index < world_data.levels.size():
+		set_level_title_label_text(current_level_index)
 	
 	await transition_out()
 	await unload_current_level()
 	
-	current_level_index += 1
-	load_level(current_level_index)
+	
+	
+	if current_level_index >= world_data.levels.size():
+		current_world_index += 1
+		current_level_index = 0
+		
+		if current_world_index >= worlds.size():
+			print("Game complete.")
+			return
+		
+		current_world_level_names.clear()
+		get_world_level_names(current_world_index)
+		
+		await show_world_transition()
+	
+	load_level()
 	
 	await get_tree().create_timer(TRANSITION_LENGTH).timeout
 	await transition_in()
+
+func show_world_transition() -> void:
+	var world_data := get_current_world_data()
+	if world_data == null:
+		return
+	
+	level_title_label.text = world_data.world_title
+	
+	animation_player.play("transition_out")
+	await animation_player.animation_finished
 
 func unload_current_level() -> void:
 	if level_container.get_child_count() == 0:
@@ -135,3 +178,19 @@ func unload_current_level() -> void:
 	current_level.queue_free()
 	await get_tree().process_frame
 	level_controller_reference = null
+	
+func get_current_world_data() -> WorldData:
+	if current_world_index < 0 or current_world_index >= worlds.size():
+		return null
+	return worlds[current_world_index]
+
+
+func get_current_level_data() -> LevelData:
+	var world_data := get_current_world_data()
+	if world_data == null:
+		return null
+	
+	if current_level_index < 0 or current_level_index >= world_data.levels.size():
+		return null
+	
+	return world_data.levels[current_level_index]

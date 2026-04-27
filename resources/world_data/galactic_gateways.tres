@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="WorldData" format=3 uid="uid://ec3th64jjhhr"]
+
+[ext_resource type="Script" uid="uid://do5fdotl7d638" path="res://resources/level_data/level_data.gd" id="1_pcbvh"]
+[ext_resource type="Script" uid="uid://gba83foepn6x" path="res://resources/world_data/world_data.gd" id="2_u51m2"]
+
+[resource]
+script = ExtResource("2_u51m2")
+world_id = "galactic_gateways"
+world_title = "Galactic Gateways"
+world_intro_text = "Galactic Gateways"
+metadata/_custom_type_script = "uid://gba83foepn6x"

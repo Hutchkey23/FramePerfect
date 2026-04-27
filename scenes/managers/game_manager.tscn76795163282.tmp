@@ -1,12 +1,11 @@
 [gd_scene format=3 uid="uid://bohea1k6xl1cw"]
 
 [ext_resource type="Script" uid="uid://3333pvj2i3at" path="res://scripts/managers/game_manager.gd" id="1_cax2t"]
-[ext_resource type="Resource" uid="uid://dv7uy4up300c1" path="res://resources/world_data/scorched_sands.tres" id="4_psj4q"]
 [ext_resource type="Material" uid="uid://cbe3wuululcrv" path="res://materials/transition_material.tres" id="5_c2g8d"]
 [ext_resource type="FontFile" uid="uid://vklaqlxxc5o7" path="res://assets/fonts/Whacky_Joe.ttf" id="6_c2g8d"]
 [ext_resource type="Script" uid="uid://cfjlvij64shw7" path="res://scripts/ui/level_title_label.gd" id="7_fagfu"]
 [ext_resource type="Script" uid="uid://gba83foepn6x" path="res://resources/world_data/world_data.gd" id="16_mcnga"]
-[ext_resource type="Resource" uid="uid://uotkih62v0dd" path="res://resources/world_data/peaceful_plains.tres" id="17_f7c0x"]
+[ext_resource type="Resource" uid="uid://uotkih62v0dd" path="res://resources/world_data/greenhorn_fields.tres" id="17_f7c0x"]
 [ext_resource type="PackedScene" uid="uid://cf6jl534sqofh" path="res://scenes/utility/pause_screen.tscn" id="17_gbtpl"]
 
 [sub_resource type="Shader" id="Shader_w4fii"]
@@ -371,7 +370,7 @@ _data = {
 
 [node name="GameManager" type="Node2D" unique_id=99875122]
 script = ExtResource("1_cax2t")
-worlds = Array[ExtResource("16_mcnga")]([ExtResource("17_f7c0x"), ExtResource("4_psj4q")])
+worlds = Array[ExtResource("16_mcnga")]([ExtResource("17_f7c0x")])
 
 [node name="LevelContainer" type="Node2D" parent="." unique_id=517045765]
 

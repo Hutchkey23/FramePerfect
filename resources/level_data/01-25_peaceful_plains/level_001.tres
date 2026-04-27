@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="LevelData" format=3 uid="uid://2tr6xgduo5id"]
+
+[ext_resource type="PackedScene" uid="uid://vetoob5jdo52" path="res://scenes/levels/01-25_peaceful_plains/level_001.tscn" id="1_4ajwa"]
+[ext_resource type="Script" uid="uid://do5fdotl7d638" path="res://resources/level_data/level_data.gd" id="2_xe4ga"]
+
+[resource]
+script = ExtResource("2_xe4ga")
+level_id = "level_001"
+level_title = "it begins"
+medal_time = 1.5
+level_scene = ExtResource("1_4ajwa")
+metadata/_custom_type_script = "uid://do5fdotl7d638"

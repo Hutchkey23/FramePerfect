@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="LevelData" format=3 uid="uid://0di38jtexyf1"]
+
+[ext_resource type="PackedScene" uid="uid://bayxto03n1yeu" path="res://scenes/levels/01-25_peaceful_plains/level_017.tscn" id="1_j1o1b"]
+[ext_resource type="Script" uid="uid://do5fdotl7d638" path="res://resources/level_data/level_data.gd" id="2_tyxci"]
+
+[resource]
+script = ExtResource("2_tyxci")
+level_id = "level_017"
+level_title = "boomerang"
+medal_time = 6.0
+level_scene = ExtResource("1_j1o1b")
+metadata/_custom_type_script = "uid://do5fdotl7d638"

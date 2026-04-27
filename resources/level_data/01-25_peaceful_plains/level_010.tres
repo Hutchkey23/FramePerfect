@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="LevelData" format=3 uid="uid://bens3cck2h4q6"]
+
+[ext_resource type="PackedScene" uid="uid://dmmykwyw3tuag" path="res://scenes/levels/01-25_peaceful_plains/level_010.tscn" id="1_u47nn"]
+[ext_resource type="Script" uid="uid://do5fdotl7d638" path="res://resources/level_data/level_data.gd" id="2_umit8"]
+
+[resource]
+script = ExtResource("2_umit8")
+level_id = "level_010"
+level_title = "chain dash"
+medal_time = 3.0
+level_scene = ExtResource("1_u47nn")
+metadata/_custom_type_script = "uid://do5fdotl7d638"

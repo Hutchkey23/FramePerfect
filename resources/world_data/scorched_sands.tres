@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="WorldData" format=3 uid="uid://dv7uy4up300c1"]
+
+[ext_resource type="Script" uid="uid://do5fdotl7d638" path="res://resources/level_data/level_data.gd" id="1_7ykru"]
+[ext_resource type="Resource" uid="uid://dkkju3rcpb0jw" path="res://resources/level_data/26-50_scorched_sands/level_028.tres" id="2_6nu2j"]
+[ext_resource type="Script" uid="uid://gba83foepn6x" path="res://resources/world_data/world_data.gd" id="15_u417j"]
+
+[resource]
+script = ExtResource("15_u417j")
+world_id = "scorched_sands"
+world_title = "Scorched Sands"
+world_intro_text = "Scorched Sands"
+levels = Array[ExtResource("1_7ykru")]([ExtResource("2_6nu2j")])
+metadata/_custom_type_script = "uid://gba83foepn6x"
