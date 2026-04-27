@@ -151,7 +151,7 @@ func load_next_level() -> void:
 			return
 		
 		current_world_level_names.clear()
-		get_world_level_names(current_world_index)
+		current_world_level_names = get_world_level_names(current_world_index)
 		
 		await show_world_transition()
 	
