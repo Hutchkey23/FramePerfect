@@ -132,6 +132,7 @@ pause={
 2d_physics/layer_4="Goal"
 2d_physics/layer_5="Pickup"
 2d_physics/layer_6="Floors"
+2d_physics/layer_7="JumpOverBlockers"
 
 [physics]
 

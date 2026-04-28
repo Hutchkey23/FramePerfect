@@ -71,13 +71,9 @@ phase_offset = 1.0
 position = Vector2(62, 0)
 
 [node name="Beam" parent="Hazards/LaserHazard2" index="1" unique_id=1755055180]
-visible = false
 points = PackedVector2Array(0, 0, 88, 0)
-width = 0.0
 
 [node name="WarningBeam" parent="Hazards/LaserHazard2" index="2" unique_id=1833803067]
-visible = true
-modulate = Color(1, 1, 1, 0.65)
 points = PackedVector2Array(0, 0, 88, 0)
 
 [node name="RCapParticles" parent="Hazards/LaserHazard2" index="4" unique_id=1655741551]
@@ -85,7 +81,6 @@ position = Vector2(88, 0)
 
 [node name="BeamCollision" parent="Hazards/LaserHazard2" index="5" unique_id=1900670564]
 position = Vector2(44, 0)
-disabled = true
 
 [node name="LaserHazard4" parent="Hazards" unique_id=2109695187 instance=ExtResource("7_gaqx0")]
 position = Vector2(116, 93)
@@ -98,13 +93,9 @@ phase_offset = 1.0
 position = Vector2(62, 0)
 
 [node name="Beam" parent="Hazards/LaserHazard4" index="1" unique_id=1755055180]
-visible = false
 points = PackedVector2Array(0, 0, 88, 0)
-width = 0.0
 
 [node name="WarningBeam" parent="Hazards/LaserHazard4" index="2" unique_id=1833803067]
-visible = true
-modulate = Color(1, 1, 1, 0.65)
 points = PackedVector2Array(0, 0, 88, 0)
 
 [node name="RCapParticles" parent="Hazards/LaserHazard4" index="4" unique_id=1655741551]
@@ -112,7 +103,6 @@ position = Vector2(88, 0)
 
 [node name="BeamCollision" parent="Hazards/LaserHazard4" index="5" unique_id=1900670564]
 position = Vector2(44, 0)
-disabled = true
 
 [node name="LaserHazard5" parent="Hazards" unique_id=1467604101 instance=ExtResource("7_gaqx0")]
 position = Vector2(116, 85)
@@ -125,13 +115,9 @@ phase_offset = 1.0
 position = Vector2(62, 0)
 
 [node name="Beam" parent="Hazards/LaserHazard5" index="1" unique_id=1755055180]
-visible = false
 points = PackedVector2Array(0, 0, 88, 0)
-width = 0.0
 
 [node name="WarningBeam" parent="Hazards/LaserHazard5" index="2" unique_id=1833803067]
-visible = true
-modulate = Color(1, 1, 1, 0.65)
 points = PackedVector2Array(0, 0, 88, 0)
 
 [node name="RCapParticles" parent="Hazards/LaserHazard5" index="4" unique_id=1655741551]
@@ -139,7 +125,6 @@ position = Vector2(88, 0)
 
 [node name="BeamCollision" parent="Hazards/LaserHazard5" index="5" unique_id=1900670564]
 position = Vector2(44, 0)
-disabled = true
 
 [node name="LaserHazard3" parent="Hazards" unique_id=538597525 instance=ExtResource("7_gaqx0")]
 position = Vector2(116, 77)
@@ -151,13 +136,9 @@ off_time = 0.8
 position = Vector2(62, 0)
 
 [node name="Beam" parent="Hazards/LaserHazard3" index="1" unique_id=1755055180]
-visible = false
 points = PackedVector2Array(0, 0, 88, 0)
-width = 0.0
 
 [node name="WarningBeam" parent="Hazards/LaserHazard3" index="2" unique_id=1833803067]
-visible = true
-modulate = Color(1, 1, 1, 0.65)
 points = PackedVector2Array(0, 0, 88, 0)
 
 [node name="RCapParticles" parent="Hazards/LaserHazard3" index="4" unique_id=1655741551]
@@ -165,7 +146,6 @@ position = Vector2(88, 0)
 
 [node name="BeamCollision" parent="Hazards/LaserHazard3" index="5" unique_id=1900670564]
 position = Vector2(44, 0)
-disabled = true
 
 [node name="LaserHazard6" parent="Hazards" unique_id=1455763684 instance=ExtResource("7_gaqx0")]
 position = Vector2(116, 69)
@@ -177,13 +157,9 @@ off_time = 0.8
 position = Vector2(62, 0)
 
 [node name="Beam" parent="Hazards/LaserHazard6" index="1" unique_id=1755055180]
-visible = false
 points = PackedVector2Array(0, 0, 88, 0)
-width = 0.0
 
 [node name="WarningBeam" parent="Hazards/LaserHazard6" index="2" unique_id=1833803067]
-visible = true
-modulate = Color(1, 1, 1, 0.65)
 points = PackedVector2Array(0, 0, 88, 0)
 
 [node name="RCapParticles" parent="Hazards/LaserHazard6" index="4" unique_id=1655741551]
@@ -191,7 +167,6 @@ position = Vector2(88, 0)
 
 [node name="BeamCollision" parent="Hazards/LaserHazard6" index="5" unique_id=1900670564]
 position = Vector2(44, 0)
-disabled = true
 
 [node name="LaserHazard7" parent="Hazards" unique_id=1210890068 instance=ExtResource("7_gaqx0")]
 position = Vector2(116, 61)
@@ -203,13 +178,9 @@ off_time = 0.8
 position = Vector2(62, 0)
 
 [node name="Beam" parent="Hazards/LaserHazard7" index="1" unique_id=1755055180]
-visible = false
 points = PackedVector2Array(0, 0, 88, 0)
-width = 0.0
 
 [node name="WarningBeam" parent="Hazards/LaserHazard7" index="2" unique_id=1833803067]
-visible = true
-modulate = Color(1, 1, 1, 0.65)
 points = PackedVector2Array(0, 0, 88, 0)
 
 [node name="RCapParticles" parent="Hazards/LaserHazard7" index="4" unique_id=1655741551]
@@ -217,7 +188,6 @@ position = Vector2(88, 0)
 
 [node name="BeamCollision" parent="Hazards/LaserHazard7" index="5" unique_id=1900670564]
 position = Vector2(44, 0)
-disabled = true
 
 [node name="LaserHazard8" parent="Hazards" unique_id=2099301068 instance=ExtResource("7_gaqx0")]
 position = Vector2(116, 53)
@@ -230,13 +200,9 @@ phase_offset = 1.0
 position = Vector2(62, 0)
 
 [node name="Beam" parent="Hazards/LaserHazard8" index="1" unique_id=1755055180]
-visible = false
 points = PackedVector2Array(0, 0, 88, 0)
-width = 0.0
 
 [node name="WarningBeam" parent="Hazards/LaserHazard8" index="2" unique_id=1833803067]
-visible = true
-modulate = Color(1, 1, 1, 0.65)
 points = PackedVector2Array(0, 0, 88, 0)
 
 [node name="RCapParticles" parent="Hazards/LaserHazard8" index="4" unique_id=1655741551]
@@ -244,7 +210,6 @@ position = Vector2(88, 0)
 
 [node name="BeamCollision" parent="Hazards/LaserHazard8" index="5" unique_id=1900670564]
 position = Vector2(44, 0)
-disabled = true
 
 [node name="LaserHazard9" parent="Hazards" unique_id=491956818 instance=ExtResource("7_gaqx0")]
 position = Vector2(116, 45)
@@ -257,13 +222,9 @@ phase_offset = 1.0
 position = Vector2(62, 0)
 
 [node name="Beam" parent="Hazards/LaserHazard9" index="1" unique_id=1755055180]
-visible = false
 points = PackedVector2Array(0, 0, 88, 0)
-width = 0.0
 
 [node name="WarningBeam" parent="Hazards/LaserHazard9" index="2" unique_id=1833803067]
-visible = true
-modulate = Color(1, 1, 1, 0.65)
 points = PackedVector2Array(0, 0, 88, 0)
 
 [node name="RCapParticles" parent="Hazards/LaserHazard9" index="4" unique_id=1655741551]
@@ -271,7 +232,6 @@ position = Vector2(88, 0)
 
 [node name="BeamCollision" parent="Hazards/LaserHazard9" index="5" unique_id=1900670564]
 position = Vector2(44, 0)
-disabled = true
 
 [node name="LaserHazard10" parent="Hazards" unique_id=2035603992 instance=ExtResource("7_gaqx0")]
 position = Vector2(116, 37)
@@ -284,13 +244,9 @@ phase_offset = 1.0
 position = Vector2(62, 0)
 
 [node name="Beam" parent="Hazards/LaserHazard10" index="1" unique_id=1755055180]
-visible = false
 points = PackedVector2Array(0, 0, 88, 0)
-width = 0.0
 
 [node name="WarningBeam" parent="Hazards/LaserHazard10" index="2" unique_id=1833803067]
-visible = true
-modulate = Color(1, 1, 1, 0.65)
 points = PackedVector2Array(0, 0, 88, 0)
 
 [node name="RCapParticles" parent="Hazards/LaserHazard10" index="4" unique_id=1655741551]
@@ -298,7 +254,6 @@ position = Vector2(88, 0)
 
 [node name="BeamCollision" parent="Hazards/LaserHazard10" index="5" unique_id=1900670564]
 position = Vector2(44, 0)
-disabled = true
 
 [node name="LaserHazard11" parent="Hazards" unique_id=1184360923 instance=ExtResource("7_gaqx0")]
 position = Vector2(116, 29)
@@ -310,13 +265,9 @@ off_time = 0.8
 position = Vector2(62, 0)
 
 [node name="Beam" parent="Hazards/LaserHazard11" index="1" unique_id=1755055180]
-visible = false
 points = PackedVector2Array(0, 0, 88, 0)
-width = 0.0
 
 [node name="WarningBeam" parent="Hazards/LaserHazard11" index="2" unique_id=1833803067]
-visible = true
-modulate = Color(1, 1, 1, 0.65)
 points = PackedVector2Array(0, 0, 88, 0)
 
 [node name="RCapParticles" parent="Hazards/LaserHazard11" index="4" unique_id=1655741551]
@@ -324,7 +275,6 @@ position = Vector2(88, 0)
 
 [node name="BeamCollision" parent="Hazards/LaserHazard11" index="5" unique_id=1900670564]
 position = Vector2(44, 0)
-disabled = true
 
 [node name="LaserHazard12" parent="Hazards" unique_id=446855386 instance=ExtResource("7_gaqx0")]
 position = Vector2(116, 21)
@@ -336,13 +286,9 @@ off_time = 0.8
 position = Vector2(62, 0)
 
 [node name="Beam" parent="Hazards/LaserHazard12" index="1" unique_id=1755055180]
-visible = false
 points = PackedVector2Array(0, 0, 88, 0)
-width = 0.0
 
 [node name="WarningBeam" parent="Hazards/LaserHazard12" index="2" unique_id=1833803067]
-visible = true
-modulate = Color(1, 1, 1, 0.65)
 points = PackedVector2Array(0, 0, 88, 0)
 
 [node name="RCapParticles" parent="Hazards/LaserHazard12" index="4" unique_id=1655741551]
@@ -350,7 +296,6 @@ position = Vector2(88, 0)
 
 [node name="BeamCollision" parent="Hazards/LaserHazard12" index="5" unique_id=1900670564]
 position = Vector2(44, 0)
-disabled = true
 
 [node name="LaserHazard13" parent="Hazards" unique_id=656278547 instance=ExtResource("7_gaqx0")]
 position = Vector2(116, 13)
@@ -362,13 +307,9 @@ off_time = 0.8
 position = Vector2(62, 0)
 
 [node name="Beam" parent="Hazards/LaserHazard13" index="1" unique_id=1755055180]
-visible = false
 points = PackedVector2Array(0, 0, 88, 0)
-width = 0.0
 
 [node name="WarningBeam" parent="Hazards/LaserHazard13" index="2" unique_id=1833803067]
-visible = true
-modulate = Color(1, 1, 1, 0.65)
 points = PackedVector2Array(0, 0, 88, 0)
 
 [node name="RCapParticles" parent="Hazards/LaserHazard13" index="4" unique_id=1655741551]
@@ -376,7 +317,6 @@ position = Vector2(88, 0)
 
 [node name="BeamCollision" parent="Hazards/LaserHazard13" index="5" unique_id=1900670564]
 position = Vector2(44, 0)
-disabled = true
 
 [node name="LaserHazard14" parent="Hazards" unique_id=1779760145 instance=ExtResource("7_gaqx0")]
 position = Vector2(116, 5)
@@ -389,13 +329,9 @@ phase_offset = 1.0
 position = Vector2(62, 0)
 
 [node name="Beam" parent="Hazards/LaserHazard14" index="1" unique_id=1755055180]
-visible = false
 points = PackedVector2Array(0, 0, 88, 0)
-width = 0.0
 
 [node name="WarningBeam" parent="Hazards/LaserHazard14" index="2" unique_id=1833803067]
-visible = true
-modulate = Color(1, 1, 1, 0.65)
 points = PackedVector2Array(0, 0, 88, 0)
 
 [node name="RCapParticles" parent="Hazards/LaserHazard14" index="4" unique_id=1655741551]
@@ -403,7 +339,6 @@ position = Vector2(88, 0)
 
 [node name="BeamCollision" parent="Hazards/LaserHazard14" index="5" unique_id=1900670564]
 position = Vector2(44, 0)
-disabled = true
 
 [node name="LaserHazard15" parent="Hazards" unique_id=1857889462 instance=ExtResource("7_gaqx0")]
 position = Vector2(116, -3)
@@ -416,13 +351,9 @@ phase_offset = 1.0
 position = Vector2(62, 0)
 
 [node name="Beam" parent="Hazards/LaserHazard15" index="1" unique_id=1755055180]
-visible = false
 points = PackedVector2Array(0, 0, 88, 0)
-width = 0.0
 
 [node name="WarningBeam" parent="Hazards/LaserHazard15" index="2" unique_id=1833803067]
-visible = true
-modulate = Color(1, 1, 1, 0.65)
 points = PackedVector2Array(0, 0, 88, 0)
 
 [node name="RCapParticles" parent="Hazards/LaserHazard15" index="4" unique_id=1655741551]
@@ -430,7 +361,6 @@ position = Vector2(88, 0)
 
 [node name="BeamCollision" parent="Hazards/LaserHazard15" index="5" unique_id=1900670564]
 position = Vector2(44, 0)
-disabled = true
 
 [node name="LaserHazard16" parent="Hazards" unique_id=705323639 instance=ExtResource("7_gaqx0")]
 position = Vector2(116, -11)
@@ -443,13 +373,9 @@ phase_offset = 1.0
 position = Vector2(62, 0)
 
 [node name="Beam" parent="Hazards/LaserHazard16" index="1" unique_id=1755055180]
-visible = false
 points = PackedVector2Array(0, 0, 88, 0)
-width = 0.0
 
 [node name="WarningBeam" parent="Hazards/LaserHazard16" index="2" unique_id=1833803067]
-visible = true
-modulate = Color(1, 1, 1, 0.65)
 points = PackedVector2Array(0, 0, 88, 0)
 
 [node name="RCapParticles" parent="Hazards/LaserHazard16" index="4" unique_id=1655741551]
@@ -457,7 +383,6 @@ position = Vector2(88, 0)
 
 [node name="BeamCollision" parent="Hazards/LaserHazard16" index="5" unique_id=1900670564]
 position = Vector2(44, 0)
-disabled = true
 
 [node name="LaserHazard17" parent="Hazards" unique_id=375417430 instance=ExtResource("7_gaqx0")]
 position = Vector2(116, -19)
@@ -469,13 +394,9 @@ off_time = 0.8
 position = Vector2(62, 0)
 
 [node name="Beam" parent="Hazards/LaserHazard17" index="1" unique_id=1755055180]
-visible = false
 points = PackedVector2Array(0, 0, 88, 0)
-width = 0.0
 
 [node name="WarningBeam" parent="Hazards/LaserHazard17" index="2" unique_id=1833803067]
-visible = true
-modulate = Color(1, 1, 1, 0.65)
 points = PackedVector2Array(0, 0, 88, 0)
 
 [node name="RCapParticles" parent="Hazards/LaserHazard17" index="4" unique_id=1655741551]
@@ -483,7 +404,6 @@ position = Vector2(88, 0)
 
 [node name="BeamCollision" parent="Hazards/LaserHazard17" index="5" unique_id=1900670564]
 position = Vector2(44, 0)
-disabled = true
 
 [node name="LaserHazard18" parent="Hazards" unique_id=2123713500 instance=ExtResource("7_gaqx0")]
 position = Vector2(116, -27)
@@ -495,13 +415,9 @@ off_time = 0.8
 position = Vector2(62, 0)
 
 [node name="Beam" parent="Hazards/LaserHazard18" index="1" unique_id=1755055180]
-visible = false
 points = PackedVector2Array(0, 0, 88, 0)
-width = 0.0
 
 [node name="WarningBeam" parent="Hazards/LaserHazard18" index="2" unique_id=1833803067]
-visible = true
-modulate = Color(1, 1, 1, 0.65)
 points = PackedVector2Array(0, 0, 88, 0)
 
 [node name="RCapParticles" parent="Hazards/LaserHazard18" index="4" unique_id=1655741551]
@@ -509,7 +425,6 @@ position = Vector2(88, 0)
 
 [node name="BeamCollision" parent="Hazards/LaserHazard18" index="5" unique_id=1900670564]
 position = Vector2(44, 0)
-disabled = true
 
 [node name="LaserHazard19" parent="Hazards" unique_id=1713802339 instance=ExtResource("7_gaqx0")]
 position = Vector2(116, -35)
@@ -521,13 +436,9 @@ off_time = 0.8
 position = Vector2(62, 0)
 
 [node name="Beam" parent="Hazards/LaserHazard19" index="1" unique_id=1755055180]
-visible = false
 points = PackedVector2Array(0, 0, 88, 0)
-width = 0.0
 
 [node name="WarningBeam" parent="Hazards/LaserHazard19" index="2" unique_id=1833803067]
-visible = true
-modulate = Color(1, 1, 1, 0.65)
 points = PackedVector2Array(0, 0, 88, 0)
 
 [node name="RCapParticles" parent="Hazards/LaserHazard19" index="4" unique_id=1655741551]
@@ -535,7 +446,6 @@ position = Vector2(88, 0)
 
 [node name="BeamCollision" parent="Hazards/LaserHazard19" index="5" unique_id=1900670564]
 position = Vector2(44, 0)
-disabled = true
 
 [node name="LaserHazard20" parent="Hazards" unique_id=348171946 instance=ExtResource("7_gaqx0")]
 position = Vector2(116, -43)
@@ -548,13 +458,9 @@ phase_offset = 1.0
 position = Vector2(62, 0)
 
 [node name="Beam" parent="Hazards/LaserHazard20" index="1" unique_id=1755055180]
-visible = false
 points = PackedVector2Array(0, 0, 88, 0)
-width = 0.0
 
 [node name="WarningBeam" parent="Hazards/LaserHazard20" index="2" unique_id=1833803067]
-visible = true
-modulate = Color(1, 1, 1, 0.65)
 points = PackedVector2Array(0, 0, 88, 0)
 
 [node name="RCapParticles" parent="Hazards/LaserHazard20" index="4" unique_id=1655741551]
@@ -562,7 +468,6 @@ position = Vector2(88, 0)
 
 [node name="BeamCollision" parent="Hazards/LaserHazard20" index="5" unique_id=1900670564]
 position = Vector2(44, 0)
-disabled = true
 
 [node name="LaserHazard21" parent="Hazards" unique_id=1806705996 instance=ExtResource("7_gaqx0")]
 position = Vector2(116, -51)
@@ -575,13 +480,9 @@ phase_offset = 1.0
 position = Vector2(62, 0)
 
 [node name="Beam" parent="Hazards/LaserHazard21" index="1" unique_id=1755055180]
-visible = false
 points = PackedVector2Array(0, 0, 88, 0)
-width = 0.0
 
 [node name="WarningBeam" parent="Hazards/LaserHazard21" index="2" unique_id=1833803067]
-visible = true
-modulate = Color(1, 1, 1, 0.65)
 points = PackedVector2Array(0, 0, 88, 0)
 
 [node name="RCapParticles" parent="Hazards/LaserHazard21" index="4" unique_id=1655741551]
@@ -589,7 +490,6 @@ position = Vector2(88, 0)
 
 [node name="BeamCollision" parent="Hazards/LaserHazard21" index="5" unique_id=1900670564]
 position = Vector2(44, 0)
-disabled = true
 
 [node name="LaserHazard22" parent="Hazards" unique_id=990348586 instance=ExtResource("7_gaqx0")]
 position = Vector2(116, -59)
@@ -602,13 +502,9 @@ phase_offset = 1.0
 position = Vector2(62, 0)
 
 [node name="Beam" parent="Hazards/LaserHazard22" index="1" unique_id=1755055180]
-visible = false
 points = PackedVector2Array(0, 0, 88, 0)
-width = 0.0
 
 [node name="WarningBeam" parent="Hazards/LaserHazard22" index="2" unique_id=1833803067]
-visible = true
-modulate = Color(1, 1, 1, 0.65)
 points = PackedVector2Array(0, 0, 88, 0)
 
 [node name="RCapParticles" parent="Hazards/LaserHazard22" index="4" unique_id=1655741551]
@@ -616,7 +512,6 @@ position = Vector2(88, 0)
 
 [node name="BeamCollision" parent="Hazards/LaserHazard22" index="5" unique_id=1900670564]
 position = Vector2(44, 0)
-disabled = true
 
 [node name="LaserHazard23" parent="Hazards" unique_id=934400498 instance=ExtResource("7_gaqx0")]
 position = Vector2(116, -67)
@@ -628,13 +523,9 @@ off_time = 0.8
 position = Vector2(62, 0)
 
 [node name="Beam" parent="Hazards/LaserHazard23" index="1" unique_id=1755055180]
-visible = false
 points = PackedVector2Array(0, 0, 88, 0)
-width = 0.0
 
 [node name="WarningBeam" parent="Hazards/LaserHazard23" index="2" unique_id=1833803067]
-visible = true
-modulate = Color(1, 1, 1, 0.65)
 points = PackedVector2Array(0, 0, 88, 0)
 
 [node name="RCapParticles" parent="Hazards/LaserHazard23" index="4" unique_id=1655741551]
@@ -642,7 +533,6 @@ position = Vector2(88, 0)
 
 [node name="BeamCollision" parent="Hazards/LaserHazard23" index="5" unique_id=1900670564]
 position = Vector2(44, 0)
-disabled = true
 
 [node name="LaserHazard24" parent="Hazards" unique_id=1971879465 instance=ExtResource("7_gaqx0")]
 position = Vector2(116, -75)
@@ -654,13 +544,9 @@ off_time = 0.8
 position = Vector2(62, 0)
 
 [node name="Beam" parent="Hazards/LaserHazard24" index="1" unique_id=1755055180]
-visible = false
 points = PackedVector2Array(0, 0, 88, 0)
-width = 0.0
 
 [node name="WarningBeam" parent="Hazards/LaserHazard24" index="2" unique_id=1833803067]
-visible = true
-modulate = Color(1, 1, 1, 0.65)
 points = PackedVector2Array(0, 0, 88, 0)
 
 [node name="RCapParticles" parent="Hazards/LaserHazard24" index="4" unique_id=1655741551]
@@ -668,7 +554,6 @@ position = Vector2(88, 0)
 
 [node name="BeamCollision" parent="Hazards/LaserHazard24" index="5" unique_id=1900670564]
 position = Vector2(44, 0)
-disabled = true
 
 [node name="LaserHazard25" parent="Hazards" unique_id=729165566 instance=ExtResource("7_gaqx0")]
 position = Vector2(116, -83)
@@ -680,13 +565,9 @@ off_time = 0.8
 position = Vector2(62, 0)
 
 [node name="Beam" parent="Hazards/LaserHazard25" index="1" unique_id=1755055180]
-visible = false
 points = PackedVector2Array(0, 0, 88, 0)
-width = 0.0
 
 [node name="WarningBeam" parent="Hazards/LaserHazard25" index="2" unique_id=1833803067]
-visible = true
-modulate = Color(1, 1, 1, 0.65)
 points = PackedVector2Array(0, 0, 88, 0)
 
 [node name="RCapParticles" parent="Hazards/LaserHazard25" index="4" unique_id=1655741551]
@@ -694,7 +575,6 @@ position = Vector2(88, 0)
 
 [node name="BeamCollision" parent="Hazards/LaserHazard25" index="5" unique_id=1900670564]
 position = Vector2(44, 0)
-disabled = true
 
 [node name="LaserHazard26" parent="Hazards" unique_id=479876075 instance=ExtResource("7_gaqx0")]
 position = Vector2(116, -91)
@@ -707,13 +587,9 @@ phase_offset = 1.0
 position = Vector2(62, 0)
 
 [node name="Beam" parent="Hazards/LaserHazard26" index="1" unique_id=1755055180]
-visible = false
 points = PackedVector2Array(0, 0, 88, 0)
-width = 0.0
 
 [node name="WarningBeam" parent="Hazards/LaserHazard26" index="2" unique_id=1833803067]
-visible = true
-modulate = Color(1, 1, 1, 0.65)
 points = PackedVector2Array(0, 0, 88, 0)
 
 [node name="RCapParticles" parent="Hazards/LaserHazard26" index="4" unique_id=1655741551]
@@ -721,7 +597,6 @@ position = Vector2(88, 0)
 
 [node name="BeamCollision" parent="Hazards/LaserHazard26" index="5" unique_id=1900670564]
 position = Vector2(44, 0)
-disabled = true
 
 [node name="LaserHazard27" parent="Hazards" unique_id=1824510783 instance=ExtResource("7_gaqx0")]
 position = Vector2(116, -99)
@@ -734,13 +609,9 @@ phase_offset = 1.0
 position = Vector2(62, 0)
 
 [node name="Beam" parent="Hazards/LaserHazard27" index="1" unique_id=1755055180]
-visible = false
 points = PackedVector2Array(0, 0, 88, 0)
-width = 0.0
 
 [node name="WarningBeam" parent="Hazards/LaserHazard27" index="2" unique_id=1833803067]
-visible = true
-modulate = Color(1, 1, 1, 0.65)
 points = PackedVector2Array(0, 0, 88, 0)
 
 [node name="RCapParticles" parent="Hazards/LaserHazard27" index="4" unique_id=1655741551]
@@ -748,7 +619,6 @@ position = Vector2(88, 0)
 
 [node name="BeamCollision" parent="Hazards/LaserHazard27" index="5" unique_id=1900670564]
 position = Vector2(44, 0)
-disabled = true
 
 [node name="LaserHazard28" parent="Hazards" unique_id=1669018629 instance=ExtResource("7_gaqx0")]
 position = Vector2(116, -107)
@@ -761,13 +631,9 @@ phase_offset = 1.0
 position = Vector2(62, 0)
 
 [node name="Beam" parent="Hazards/LaserHazard28" index="1" unique_id=1755055180]
-visible = false
 points = PackedVector2Array(0, 0, 88, 0)
-width = 0.0
 
 [node name="WarningBeam" parent="Hazards/LaserHazard28" index="2" unique_id=1833803067]
-visible = true
-modulate = Color(1, 1, 1, 0.65)
 points = PackedVector2Array(0, 0, 88, 0)
 
 [node name="RCapParticles" parent="Hazards/LaserHazard28" index="4" unique_id=1655741551]
@@ -775,7 +641,6 @@ position = Vector2(88, 0)
 
 [node name="BeamCollision" parent="Hazards/LaserHazard28" index="5" unique_id=1900670564]
 position = Vector2(44, 0)
-disabled = true
 
 [node name="LaserHazard29" parent="Hazards" unique_id=1778977936 instance=ExtResource("7_gaqx0")]
 position = Vector2(116, -115)
@@ -787,13 +652,9 @@ off_time = 0.8
 position = Vector2(62, 0)
 
 [node name="Beam" parent="Hazards/LaserHazard29" index="1" unique_id=1755055180]
-visible = false
 points = PackedVector2Array(0, 0, 88, 0)
-width = 0.0
 
 [node name="WarningBeam" parent="Hazards/LaserHazard29" index="2" unique_id=1833803067]
-visible = true
-modulate = Color(1, 1, 1, 0.65)
 points = PackedVector2Array(0, 0, 88, 0)
 
 [node name="RCapParticles" parent="Hazards/LaserHazard29" index="4" unique_id=1655741551]
@@ -801,7 +662,6 @@ position = Vector2(88, 0)
 
 [node name="BeamCollision" parent="Hazards/LaserHazard29" index="5" unique_id=1900670564]
 position = Vector2(44, 0)
-disabled = true
 
 [node name="LaserHazard30" parent="Hazards" unique_id=976570340 instance=ExtResource("7_gaqx0")]
 position = Vector2(116, -123)
@@ -813,13 +673,9 @@ off_time = 0.8
 position = Vector2(62, 0)
 
 [node name="Beam" parent="Hazards/LaserHazard30" index="1" unique_id=1755055180]
-visible = false
 points = PackedVector2Array(0, 0, 88, 0)
-width = 0.0
 
 [node name="WarningBeam" parent="Hazards/LaserHazard30" index="2" unique_id=1833803067]
-visible = true
-modulate = Color(1, 1, 1, 0.65)
 points = PackedVector2Array(0, 0, 88, 0)
 
 [node name="RCapParticles" parent="Hazards/LaserHazard30" index="4" unique_id=1655741551]
@@ -827,7 +683,6 @@ position = Vector2(88, 0)
 
 [node name="BeamCollision" parent="Hazards/LaserHazard30" index="5" unique_id=1900670564]
 position = Vector2(44, 0)
-disabled = true
 
 [node name="LaserHazard31" parent="Hazards" unique_id=1071832734 instance=ExtResource("7_gaqx0")]
 position = Vector2(116, -131)
@@ -839,13 +694,9 @@ off_time = 0.8
 position = Vector2(62, 0)
 
 [node name="Beam" parent="Hazards/LaserHazard31" index="1" unique_id=1755055180]
-visible = false
 points = PackedVector2Array(0, 0, 88, 0)
-width = 0.0
 
 [node name="WarningBeam" parent="Hazards/LaserHazard31" index="2" unique_id=1833803067]
-visible = true
-modulate = Color(1, 1, 1, 0.65)
 points = PackedVector2Array(0, 0, 88, 0)
 
 [node name="RCapParticles" parent="Hazards/LaserHazard31" index="4" unique_id=1655741551]
@@ -853,7 +704,6 @@ position = Vector2(88, 0)
 
 [node name="BeamCollision" parent="Hazards/LaserHazard31" index="5" unique_id=1900670564]
 position = Vector2(44, 0)
-disabled = true
 
 [node name="Stamps" type="Node2D" parent="." unique_id=123113769]
 

@@ -75,7 +75,7 @@ const DASH_JUMP_SPEED_MULTIPLIER: float = 1.0
 const JUMP_FORWARD_DRAG: float = 120.0
 const JUMP_STEER_SPEED: float = 45.0
 const JUMP_STEER_ACCELERATION: float = 180.0
-
+const JUMP_OVER_BLOCKER_LAYER : int = 7
 
 var jumped_from_dash: bool = false
 var jump_locked_direction: Vector2 = Vector2.ZERO
@@ -246,6 +246,8 @@ func retry_level() -> void:
 	rotation_degrees = 0.0
 	player_sprite.position.y = sprite_ground_y
 	velocity = Vector2.ZERO
+	
+	set_jump_over_blockers_enabled(true)
 	
 	dash_cooldown_timer = 0.0
 	
@@ -422,7 +424,9 @@ func try_start_jump() -> void:
 	current_state = PlayerState.JUMP
 	jump_timer = JUMP_DURATION
 	jump_cooldown_timer = JUMP_COOLDOWN
-
+	
+	set_jump_over_blockers_enabled(false)
+	
 	if jumped_from_dash:
 		jump_locked_direction = dash_direction
 		velocity = jump_locked_direction * DASH_SPEED
@@ -436,6 +440,8 @@ func try_start_jump() -> void:
 	get_parent().add_child(jump_cloud_instance)
 	jump_cloud_instance.global_position = global_position
 
+func set_jump_over_blockers_enabled(enabled: bool) -> void:
+	set_collision_mask_value(JUMP_OVER_BLOCKER_LAYER, enabled)
 
 func handle_jump(delta: float) -> void:
 	jump_timer -= delta
@@ -471,6 +477,8 @@ func handle_jump(delta: float) -> void:
 		play_landing_squash()
 		camera_reference.add_shake(2.0)
 		current_state = PlayerState.NORMAL
+		
+		set_jump_over_blockers_enabled(true)
 		
 		if overlapping_hazard_count > 0:
 			die()
