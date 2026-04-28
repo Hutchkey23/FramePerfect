@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="LevelData" format=3 uid="uid://dkkju3rcpb0jw"]
 
-[ext_resource type="PackedScene" uid="uid://c7ivvepw52k3j" path="res://scenes/levels/26-50_frosted_frontier/level_028.tscn" id="1_al85r"]
+[ext_resource type="PackedScene" uid="uid://c7ivvepw52k3j" path="res://scenes/levels/26-50_scorched_sands/level_028.tscn" id="1_al85r"]
 [ext_resource type="Script" uid="uid://do5fdotl7d638" path="res://resources/level_data/level_data.gd" id="1_dgrdu"]
 
 [resource]
