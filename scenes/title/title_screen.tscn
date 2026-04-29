@@ -35,6 +35,7 @@
 [ext_resource type="Texture2D" uid="uid://bqa1g5t3ixn8f" path="res://assets/sprites/stamps/stamp_26.png" id="30_pjmvw"]
 [ext_resource type="Material" uid="uid://cbe3wuululcrv" path="res://materials/transition_material.tres" id="34_702e2"]
 [ext_resource type="PackedScene" uid="uid://dgc7jyqg5ohww" path="res://scenes/title/customize_menu.tscn" id="35_2egvm"]
+[ext_resource type="PackedScene" uid="uid://bom8xcym2nd4i" path="res://scenes/level_select/world_select.tscn" id="36_5fwbo"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_84bpe"]
 shader = ExtResource("2_8xedo")
@@ -136,6 +137,7 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_bottom = 5.0
 grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("2_qrms8")
@@ -238,6 +240,10 @@ color = Color(0, 0, 0, 1)
 libraries/ = SubResource("AnimationLibrary_vxnr3")
 
 [node name="CustomizeMenu" parent="." unique_id=1550935903 instance=ExtResource("35_2egvm")]
+visible = false
+layout_mode = 1
+
+[node name="WorldSelect" parent="." unique_id=1970402749 instance=ExtResource("36_5fwbo")]
 visible = false
 layout_mode = 1
 

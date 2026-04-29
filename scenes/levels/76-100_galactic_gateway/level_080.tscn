@@ -57,10 +57,10 @@ level_controller_path = NodePath("../LevelController")
 visible = false
 
 [node name="Player" parent="." unique_id=1458309070 instance=ExtResource("4_hgjic")]
-position = Vector2(80, 90)
+position = Vector2(62, 90)
 
 [node name="PlayerSpawn" type="Node2D" parent="." unique_id=535208430]
-position = Vector2(80, 90)
+position = Vector2(62, 90)
 
 [node name="Map" type="Node2D" parent="." unique_id=1665801705]
 position = Vector2(159, 91)
@@ -89,7 +89,7 @@ position = Vector2(168, 79)
 position = Vector2(168, 79)
 
 [node name="Goal" parent="." unique_id=652280647 instance=ExtResource("7_xq4t3")]
-position = Vector2(273, 90)
+position = Vector2(257, 90)
 
 [node name="GameCamera" parent="." unique_id=13152400 node_paths=PackedStringArray("target") instance=ExtResource("8_pyww6")]
 mode = 1

@@ -11,6 +11,7 @@ extends Control
 
 @onready var main_title_vbox: VBoxContainer = $MainTitleVbox
 @onready var customize_menu: CustomizeMenu = $CustomizeMenu
+@onready var world_select: Control = $WorldSelect
 
 @onready var main_menu_buttons := [
 	play_button,
@@ -66,7 +67,11 @@ func _on_marathon_button_pressed() -> void:
 
 
 func _on_level_select_button_pressed() -> void:
-	pass # Replace with function body.
+	animation_player.play("transition_out")
+	await animation_player.animation_finished
+	main_title_vbox.visible = false
+	world_select.visible = true
+	animation_player.play("transition_in")
 
 
 func _on_customize_button_pressed() -> void:
