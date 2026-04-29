@@ -8,7 +8,7 @@ const POSTCARD_NOT_SELECTED_SCALE: Vector2 = Vector2(1.2, 1.2)
 
 @onready var postcard_holder: Control = $PostcardHolder
 
-@onready var postcards: Array[Control] = [
+@onready var postcards: Array[Postcard] = [
 	$PostcardHolder/PeacefulPlainsPostcard,
 	$PostcardHolder/ScorchedSandsPostcard,
 	$PostcardHolder/FrostedFrontierPostcard,
@@ -18,6 +18,7 @@ const POSTCARD_NOT_SELECTED_SCALE: Vector2 = Vector2(1.2, 1.2)
 var current_world_index: int = 0
 var move_tween: Tween
 
+var postcard_selected: bool = false
 
 func _ready() -> void:
 	_position_postcards()
@@ -27,6 +28,10 @@ func _ready() -> void:
 func _unhandled_input(event: InputEvent) -> void:
 	if not visible:
 		return
+	
+	if postcard_selected:
+		return
+	
 	if event.is_action_pressed("ui_left"):
 		_move_selection(-1)
 	elif event.is_action_pressed("ui_right"):
@@ -80,5 +85,7 @@ func _set_postcard_selected(card: Control, selected: bool) -> void:
 
 
 func _confirm_world() -> void:
+	postcard_selected = true
 	var world_number := current_world_index + 1
-	print("Selected World: ", world_number)
+	var selected_card : Postcard = postcards[current_world_index]
+	selected_card.flip_to_back()
