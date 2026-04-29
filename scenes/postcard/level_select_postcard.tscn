@@ -1,0 +1,235 @@
+[gd_scene format=3 uid="uid://cw0nnoswwvmfj"]
+
+[ext_resource type="Material" uid="uid://dknc1y18jnjkw" path="res://materials/postcard.tres" id="1_eaqgo"]
+[ext_resource type="Script" uid="uid://c2aogy85icab3" path="res://scripts/level_select/postcard.gd" id="2_v62m0"]
+[ext_resource type="Texture2D" uid="uid://bjg3cv8wdoj1o" path="res://assets/sprites/postcards/peaceful_plains.png" id="3_u4ejd"]
+[ext_resource type="FontFile" uid="uid://vklaqlxxc5o7" path="res://assets/fonts/Whacky_Joe.ttf" id="4_h7sqx"]
+[ext_resource type="Texture2D" uid="uid://b3u3pejv1cujw" path="res://assets/sprites/postcards/medal_indicator.png" id="5_314ui"]
+[ext_resource type="Texture2D" uid="uid://c3aj3ftm4kt52" path="res://assets/sprites/postcards/peaceful_plains_back.png" id="5_v62m0"]
+[ext_resource type="Texture2D" uid="uid://bt30hs65dg8yk" path="res://assets/sprites/postcards/medal_icon.png" id="6_ad138"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ig6t8"]
+
+[sub_resource type="FontVariation" id="FontVariation_0dgb3"]
+base_font = ExtResource("4_h7sqx")
+spacing_glyph = 2
+
+[sub_resource type="FontVariation" id="FontVariation_4804g"]
+base_font = ExtResource("4_h7sqx")
+spacing_glyph = 1
+
+[sub_resource type="FontVariation" id="FontVariation_v62m0"]
+base_font = ExtResource("4_h7sqx")
+spacing_glyph = 1
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ig6t8"]
+texture = ExtResource("5_314ui")
+
+[sub_resource type="FontVariation" id="FontVariation_or34r"]
+base_font = ExtResource("4_h7sqx")
+spacing_glyph = 1
+
+[node name="LevelSelectPostcard" type="Control" unique_id=258655972]
+material = ExtResource("1_eaqgo")
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("2_v62m0")
+
+[node name="Front" type="PanelContainer" parent="." unique_id=864027999]
+custom_minimum_size = Vector2(120, 80)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -60.0
+offset_top = -40.0
+offset_right = 60.0
+offset_bottom = 40.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_ig6t8")
+
+[node name="PostcardFrontTexture" type="TextureRect" parent="Front" unique_id=541487953]
+layout_mode = 2
+texture = ExtResource("3_u4ejd")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Front" unique_id=1161476891]
+layout_mode = 2
+theme_override_constants/separation = 0
+alignment = 2
+
+[node name="WorldNumberLabelMarginContainer" type="MarginContainer" parent="Front/VBoxContainer" unique_id=1744342551]
+layout_mode = 2
+
+[node name="WorldNumberLabel" type="Label" parent="Front/VBoxContainer/WorldNumberLabelMarginContainer" unique_id=1507080761]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0.5294118, 0.31764707, 1)
+theme_override_fonts/font = SubResource("FontVariation_0dgb3")
+theme_override_font_sizes/font_size = 5
+text = "WORLD 1"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="WorldTitleLabelMarginContainer" type="MarginContainer" parent="Front/VBoxContainer" unique_id=1921907965]
+layout_mode = 2
+theme_override_constants/margin_bottom = 7
+
+[node name="WorldTitleLabel" type="Label" parent="Front/VBoxContainer/WorldTitleLabelMarginContainer" unique_id=1097589269]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0.5294118, 0.31764707, 1)
+theme_override_fonts/font = SubResource("FontVariation_4804g")
+theme_override_font_sizes/font_size = 6
+text = "PEACEFUL PLAINS"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Back" type="PanelContainer" parent="." unique_id=2078096175]
+visible = false
+custom_minimum_size = Vector2(120, 80)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -60.0
+offset_top = -40.0
+offset_right = 60.0
+offset_bottom = 40.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_ig6t8")
+
+[node name="PostcardBackTexture" type="TextureRect" parent="Back" unique_id=167503695]
+layout_mode = 2
+texture = ExtResource("5_v62m0")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Back" unique_id=2022569084]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="MarginContainer" type="MarginContainer" parent="Back/VBoxContainer" unique_id=308315216]
+layout_mode = 2
+theme_override_constants/margin_top = 6
+theme_override_constants/margin_bottom = 6
+
+[node name="LevelTitleLabel" type="Label" parent="Back/VBoxContainer/MarginContainer" unique_id=314916953]
+custom_minimum_size = Vector2(105, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(0, 0.5294118, 0.31764707, 1)
+theme_override_constants/line_spacing = -4
+theme_override_fonts/font = SubResource("FontVariation_v62m0")
+theme_override_font_sizes/font_size = 8
+text = "thread the needle"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Back/VBoxContainer" unique_id=942170663]
+layout_mode = 2
+alignment = 1
+
+[node name="LeftArrow" type="Label" parent="Back/VBoxContainer/HBoxContainer" unique_id=992782891]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0.5294118, 0.31764707, 1)
+theme_override_fonts/font = ExtResource("4_h7sqx")
+theme_override_font_sizes/font_size = 8
+text = "<"
+
+[node name="LevelNumberLabel" type="Label" parent="Back/VBoxContainer/HBoxContainer" unique_id=179077578]
+custom_minimum_size = Vector2(38, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0.5294118, 0.31764707, 1)
+theme_override_fonts/font = ExtResource("4_h7sqx")
+theme_override_font_sizes/font_size = 16
+text = "00"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="RightArrow" type="Label" parent="Back/VBoxContainer/HBoxContainer" unique_id=716890212]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0.5294118, 0.31764707, 1)
+theme_override_fonts/font = ExtResource("4_h7sqx")
+theme_override_font_sizes/font_size = 8
+text = ">"
+
+[node name="MarginContainer2" type="MarginContainer" parent="Back/VBoxContainer" unique_id=2070743297]
+layout_mode = 2
+theme_override_constants/margin_top = 4
+
+[node name="BestTimeTextLabel" type="Label" parent="Back/VBoxContainer/MarginContainer2" unique_id=988807267]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0.5294118, 0.31764707, 1)
+theme_override_fonts/font = ExtResource("4_h7sqx")
+theme_override_font_sizes/font_size = 6
+text = "best time"
+horizontal_alignment = 1
+
+[node name="BestTimeAndMedalContainer" type="HBoxContainer" parent="Back/VBoxContainer" unique_id=1265182818]
+layout_mode = 2
+theme_override_constants/separation = 2
+alignment = 1
+
+[node name="BestTimeLabel" type="Label" parent="Back/VBoxContainer/BestTimeAndMedalContainer" unique_id=217336236]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0.5294118, 0.31764707, 1)
+theme_override_fonts/font = ExtResource("4_h7sqx")
+theme_override_font_sizes/font_size = 6
+text = "06.85"
+
+[node name="MedalCountContainer" type="Panel" parent="." unique_id=1640658476]
+visible = false
+custom_minimum_size = Vector2(48, 12)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -24.0
+offset_top = -42.0
+offset_right = 24.0
+offset_bottom = -30.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+theme_override_styles/panel = SubResource("StyleBoxTexture_ig6t8")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MedalCountContainer" unique_id=864925646]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 0
+alignment = 1
+
+[node name="MedalTexture" type="TextureRect" parent="MedalCountContainer/HBoxContainer" unique_id=1877380810]
+layout_mode = 2
+texture = ExtResource("6_ad138")
+stretch_mode = 3
+
+[node name="MedalCountLabel" type="Label" parent="MedalCountContainer/HBoxContainer" unique_id=1482115226]
+custom_minimum_size = Vector2(30, 7)
+layout_mode = 2
+theme_override_constants/outline_size = 2
+theme_override_fonts/font = SubResource("FontVariation_or34r")
+theme_override_font_sizes/font_size = 6
+text = "05/25"
+horizontal_alignment = 1
+
+[node name="MedalTextureSpacing" type="TextureRect" parent="MedalCountContainer/HBoxContainer" unique_id=140567592]
+visible = false
+modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+texture = ExtResource("6_ad138")
+stretch_mode = 3

@@ -1,0 +1,54 @@
+[gd_scene format=3 uid="uid://b01y51hk4evjt"]
+
+[ext_resource type="Texture2D" uid="uid://bys587757goca" path="res://assets/ui/level_select/level_node_regular.png" id="1_5kx5i"]
+[ext_resource type="Script" uid="uid://bjvr5jjaq6h4r" path="res://scripts/ui/level_select_node.gd" id="1_aoxwf"]
+[ext_resource type="FontFile" uid="uid://vklaqlxxc5o7" path="res://assets/fonts/Whacky_Joe.ttf" id="2_w4jqb"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_5kx5i"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_w4jqb"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_aoxwf"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_udgcm"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_xffyj"]
+
+[node name="LevelSelectNode" type="Button" unique_id=686058681]
+custom_minimum_size = Vector2(10, 10)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -4.0
+offset_top = -4.0
+offset_right = 4.0
+offset_bottom = 4.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/normal = SubResource("StyleBoxEmpty_5kx5i")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_w4jqb")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_aoxwf")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_udgcm")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_xffyj")
+script = ExtResource("1_aoxwf")
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=1299663916]
+layout_mode = 0
+offset_right = 10.0
+offset_bottom = 10.0
+texture = ExtResource("1_5kx5i")
+
+[node name="Label" type="Label" parent="." unique_id=265554328]
+layout_mode = 0
+offset_right = 12.0
+offset_bottom = 12.0
+theme_override_constants/outline_size = 2
+theme_override_fonts/font = ExtResource("2_w4jqb")
+theme_override_font_sizes/font_size = 4
+text = "01"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="pressed" from="." to="." method="_on_pressed"]
