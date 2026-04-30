@@ -106,6 +106,7 @@ func _unhandled_input(event: InputEvent) -> void:
 		exit_world.emit(self)
 		get_viewport().set_input_as_handled()
 	elif event.is_action_pressed("ui_accept"):
+		UIAudioManager.play_ui_confirm_sfx()
 		level_selected.emit(current_world_index, current_level_index)
 
 #region Back of Postcard
@@ -114,6 +115,8 @@ func _move_selection(direction: int) -> void:
 
 	if new_index == current_level_index:
 		return
+	
+	UIAudioManager.play_ui_pip_sfx()
 	
 	current_level_index = new_index
 	

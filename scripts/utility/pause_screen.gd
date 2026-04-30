@@ -52,7 +52,7 @@ func prepare_pause_menu() -> void:
 	await get_tree().process_frame
 	
 	update_pivot()
-	resume_button.grab_focus()
+	resume_button.grab_silent_focus()
 
 
 func _on_paused_label_resized() -> void:

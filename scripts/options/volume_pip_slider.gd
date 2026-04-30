@@ -28,6 +28,8 @@ const ROTATION_OPTIONS: Array[float] = [-2.0, 2.0]
 
 var active: bool = false
 
+var ignore_focus_sfx: bool = false
+
 var bus_label_tween: Tween
 
 func _ready() -> void:
@@ -73,6 +75,9 @@ func change_value(amount: int) -> void:
 		pip_tween(pips[value], false)
 	
 	update_display()
+	
+	UIAudioManager.play_ui_confirm_sfx()
+	
 	value_changed.emit(value)
 
 
@@ -109,6 +114,9 @@ func _on_focus_entered() -> void:
 	
 	if bus_label_tween:
 		bus_label_tween.kill()
+	
+	if not ignore_focus_sfx:
+		UIAudioManager.play_ui_nav_sfx()
 	
 	bus_label_tween = create_tween()
 	bus_label_tween.set_parallel(true)

@@ -35,7 +35,7 @@ func _ready() -> void:
 	
 	animation_player.play("transition_in")
 	
-	play_button.grab_focus()
+	play_button.grab_silent_focus()
 
 
 func setup_pivots() -> void:
@@ -87,7 +87,7 @@ func _on_customize_menu_exit_customize_menu() -> void:
 	await animation_player.animation_finished
 	customize_menu.visible = false
 	main_title_vbox.visible = true
-	customize_button.grab_focus()
+	customize_button.grab_silent_focus()
 	animation_player.play("transition_in")
 
 func _on_level_select_exit_level_select() -> void:
@@ -95,7 +95,7 @@ func _on_level_select_exit_level_select() -> void:
 	await animation_player.animation_finished
 	level_select.visible = false
 	main_title_vbox.visible = true
-	level_select_button.grab_focus()
+	level_select_button.grab_silent_focus()
 	animation_player.play("transition_in")
 
 func _on_options_button_pressed() -> void:
@@ -110,7 +110,7 @@ func _on_options_menu_exit_options_menu() -> void:
 	await animation_player.animation_finished
 	options_menu.visible = false
 	main_title_vbox.visible = true
-	options_button.grab_focus()
+	options_button.grab_silent_focus()
 	animation_player.play("transition_in")
 
 

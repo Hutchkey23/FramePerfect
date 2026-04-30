@@ -15,8 +15,13 @@ run/main_scene="uid://bohea1k6xl1cw"
 config/features=PackedStringArray("4.6", "GL Compatibility")
 config/icon="res://icon.svg"
 
+[audio]
+
+buses/default_bus_layout="uid://e3w3xp2vgyau"
+
 [autoload]
 
+UIAudioManager="*uid://bmfxy8q6m8glb"
 InputHelper="*uid://cholww48njaeh"
 SaveManager="*uid://b5ifq4a5txl6a"
 LevelDatabase="*uid://kjoca7iumvos"
@@ -27,6 +32,7 @@ RunState="*uid://epodyc4mls2n"
 
 window/size/viewport_width=320
 window/size/viewport_height=180
+window/size/mode=3
 window/size/window_width_override=1280
 window/size/window_height_override=720
 window/stretch/mode="canvas_items"

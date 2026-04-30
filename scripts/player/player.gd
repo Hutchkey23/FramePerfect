@@ -11,6 +11,30 @@ signal goal_reached
 @onready var interaction_area: Area2D = $InteractionArea
 @onready var floor_hazard_detection_area: Area2D = $FloorHazardDetectionArea
 
+# AUDIO #
+@onready var sfx_pool: Node2D = $SFXPool
+
+const BONK_SFX = preload("uid://ivid35oq2etg")
+const BONK_VOLUME: float = -5.0
+const BONK_PITCH_RANGE: Vector2 = Vector2(0.7, 0.8)
+
+const DASH_SFX = preload("uid://cfxseyj0qrubq")
+const DASH_VOLUME: float = -5.0
+const DASH_PITCH_RANGE: Vector2 = Vector2(0.6, 0.7)
+
+const DEATH_SFX = preload("uid://b8ityln8bof8n")
+const DEATH_VOLUME: float = 3.0
+const DEATH_PITCH_RANGE: Vector2 = Vector2(0.4, 0.55)
+
+const JUMP_SFX = preload("uid://ckty4lxykwkco")
+const JUMP_VOLUME: float = -8.0
+const JUMP_PITCH_RANGE: Vector2 = Vector2(0.8, 1.15)
+
+const LAND_SFX = preload("uid://bu8d7x2t5ipm7")
+const LAND_VOLUME: float = -10.0
+const LAND_PITCH_RANGE: Vector2 = Vector2(0.8, 1.0)
+#########
+
 var fail_words: Array = [
 	"OUCH!",
 	"YIKES!",
@@ -282,6 +306,7 @@ func die() -> void:
 	floor_hazard_detection_area.set_deferred("monitorable", false)
 	floor_hazard_detection_area.set_deferred("monitoring", false)
 	
+	play_sfx(DEATH_SFX, DEATH_VOLUME, DEATH_PITCH_RANGE)
 	spawn_death_clouds(8)
 	show_fail_label()
 	
@@ -346,10 +371,7 @@ func try_start_dash() -> void:
 
 	if dash_cooldown_timer > 0.0:
 		return
-
-	#if move_input == Vector2.ZERO:
-		#return
-
+	
 	current_state = PlayerState.DASH
 	dash_timer = DASH_DURATION
 	dash_cooldown_timer = DASH_COOLDOWN
@@ -358,7 +380,7 @@ func try_start_dash() -> void:
 	velocity = dash_direction * DASH_SPEED
 	
 	camera_reference.add_shake(3.0)
-	
+	play_sfx(DASH_SFX, DASH_VOLUME, DASH_PITCH_RANGE)
 	spawn_dash_clouds(dash_direction)
 
 func spawn_dash_clouds(direction: Vector2, number_of_clouds: int = 5) -> void:
@@ -414,6 +436,7 @@ func check_for_bonk() -> void:
 			return
 
 func start_bonk(wall_normal: Vector2) -> void:
+	play_sfx(BONK_SFX, BONK_VOLUME, BONK_PITCH_RANGE)
 	current_state = PlayerState.BONK
 	bonk_timer = BONK_STUN_DURATION
 	
@@ -486,7 +509,9 @@ func try_start_jump() -> void:
 			jump_locked_direction = velocity.normalized()
 		else:
 			jump_locked_direction = last_move_input.normalized()
-
+	
+	play_sfx(JUMP_SFX, JUMP_VOLUME, JUMP_PITCH_RANGE)
+	
 	var jump_cloud_instance = JUMP_CLOUD.instantiate()
 	get_parent().add_child(jump_cloud_instance)
 	jump_cloud_instance.global_position = global_position
@@ -528,6 +553,8 @@ func handle_jump(delta: float) -> void:
 		play_landing_squash()
 		camera_reference.add_shake(2.0)
 		current_state = PlayerState.NORMAL
+		
+		play_sfx(LAND_SFX, LAND_VOLUME, LAND_PITCH_RANGE)
 		
 		set_jump_over_blockers_enabled(true)
 		
@@ -626,3 +653,14 @@ func try_to_activate_goal() -> void:
 	current_state = PlayerState.GOAL_REACHED
 	player_sprite.visible = false
 	shadow_sprite.visible = false
+
+####### AUDIO HANDLING ########
+func play_sfx(sfx: AudioStream, volume_db: float = 0.0, pitch_range: Vector2 = Vector2(0.95, 1.05)):
+	for audio_player: AudioStreamPlayer2D in sfx_pool.get_children():
+		if not audio_player.playing:
+			audio_player.volume_db = volume_db
+			audio_player.stream = sfx
+			audio_player.pitch_scale = randf_range(pitch_range.x, pitch_range.y)
+			audio_player.play()
+			return
+###############################

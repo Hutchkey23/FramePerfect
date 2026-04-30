@@ -36,7 +36,7 @@ theme = ExtResource("1_mdmh4")
 
 [node name="OptionsVbox" type="VBoxContainer" parent="PanelContainer" unique_id=1192650601]
 layout_mode = 2
-theme_override_constants/separation = 6
+theme_override_constants/separation = 5
 
 [node name="MarginContainer" type="MarginContainer" parent="PanelContainer/OptionsVbox" unique_id=651389255]
 layout_mode = 2
@@ -55,6 +55,10 @@ horizontal_alignment = 1
 layout_mode = 2
 button_label_text = "RETURN"
 
+[node name="ControlsButton" parent="PanelContainer/OptionsVbox" unique_id=1166705071 instance=ExtResource("5_urps3")]
+layout_mode = 2
+button_label_text = "CONTROLS"
+
 [node name="SFXSlider" parent="PanelContainer/OptionsVbox" unique_id=1206881810 instance=ExtResource("3_nb6mw")]
 layout_mode = 2
 
@@ -62,7 +66,7 @@ layout_mode = 2
 layout_mode = 2
 label_text = "Music"
 
-[node name="DisplayModeButton" parent="PanelContainer/OptionsVbox" unique_id=1166705071 instance=ExtResource("5_urps3")]
+[node name="DisplayModeButton" parent="PanelContainer/OptionsVbox" unique_id=463214732 instance=ExtResource("5_urps3")]
 layout_mode = 2
 button_label_text = "WINDOWED"
 
@@ -79,6 +83,7 @@ visible = false
 layout_mode = 1
 
 [connection signal="pressed" from="PanelContainer/OptionsVbox/ReturnButton" to="." method="_on_return_pressed"]
+[connection signal="pressed" from="PanelContainer/OptionsVbox/ControlsButton" to="." method="_on_return_pressed"]
 [connection signal="pressed" from="PanelContainer/OptionsVbox/DisplayModeButton" to="." method="_on_display_mode_pressed"]
 [connection signal="pressed" from="PanelContainer/OptionsVbox/ScreenShakeButton" to="." method="_on_screen_shake_pressed"]
 [connection signal="cancel_button_pressed" from="ClearDataConfirmPopup" to="." method="_on_clear_data_confirm_popup_cancel_button_pressed"]

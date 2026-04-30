@@ -13,6 +13,8 @@ const INDICATOR_ROTATION_SPEED : float = 350.0
 const LABEL_FOCUSED_COLOR : Color = "#ffec27"
 const PRESSED_SCALE : Vector2 = Vector2(0.9, 0.9)
 
+var ignore_focus_sfx: bool = false
+
 var button_tween: Tween
 var press_tween: Tween
 
@@ -31,12 +33,20 @@ func update_pivot() -> void:
 func update_button_label_text(new_text: String) -> void:
 	button_text.text = new_text
 
+func grab_silent_focus() -> void:
+	ignore_focus_sfx = true
+	await get_tree().process_frame
+	grab_focus()
+
 func _on_resized() -> void:
 	pivot_offset = size / 2.0
 
 func _on_focus_entered() -> void:
 	if button_tween:
 		button_tween.kill()
+	
+	if not ignore_focus_sfx:
+		UIAudioManager.play_ui_nav_sfx()
 	
 	button_tween = create_tween()
 	button_tween.set_parallel(true)
@@ -48,6 +58,8 @@ func _on_focus_entered() -> void:
 	indicator.texture = SkinDatabase.retrieve_skin_texture("player", SaveManager.save_data.cosmetics.selected_player_skin)
 	
 	indicator.modulate.a = 1.0
+	
+	ignore_focus_sfx = false
 
 func _on_focus_exited() -> void:
 	if button_tween:
@@ -66,6 +78,8 @@ func _on_focus_exited() -> void:
 func _on_pressed() -> void:
 	if press_tween:
 		press_tween.kill()
+	
+	UIAudioManager.play_ui_confirm_sfx()
 	
 	press_tween = create_tween()
 	press_tween.set_parallel(true)

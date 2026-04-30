@@ -13,6 +13,8 @@ const ROTATION_OPTIONS: Array[float] = [-2.0, 2.0]
 const INDICATOR_ROTATION_SPEED : float = 350.0
 const PRESSED_SCALE : Vector2 = Vector2(0.9, 0.9)
 
+var ignore_focus_sfx: bool = false
+
 var arrow_tween: Tween
 var press_tween: Tween
 
@@ -22,9 +24,18 @@ func _ready() -> void:
 func update_pivot() -> void:
 	pivot_offset = size / 2
 
+func grab_silent_focus() -> void:
+	ignore_focus_sfx = true
+	grab_focus()
+	await get_tree().process_frame
+	ignore_focus_sfx = false
+
 func _on_focus_entered() -> void:
 	if arrow_tween:
 		arrow_tween.kill()
+	
+	if not ignore_focus_sfx:
+		UIAudioManager.play_ui_nav_sfx()
 	
 	arrow_tween = create_tween()
 	arrow_tween.set_parallel(true)

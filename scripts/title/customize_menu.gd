@@ -92,6 +92,7 @@ func _unhandled_input(event: InputEvent) -> void:
 		return
 	if event.is_action_pressed("ui_cancel"):
 		exit_customize_menu.emit()
+		UIAudioManager.play_ui_cancel_sfx()
 		get_viewport().set_input_as_handled()
 
 func load_saved_skin_indexes() -> void:
@@ -115,11 +116,13 @@ func setup_panel_pivots() -> void:
 
 
 func _on_player_left_navigation_arrow_pressed() -> void:
+	UIAudioManager.play_ui_pip_sfx()
 	player_skin_index = wrapi(player_skin_index - 1, 0, player_skins.size())
 	update_player_skin_display()
 
 
 func _on_player_right_navigation_arrow_pressed() -> void:
+	UIAudioManager.play_ui_pip_sfx()
 	player_skin_index = wrapi(player_skin_index + 1, 0, player_skins.size())
 	update_player_skin_display()
 
@@ -133,11 +136,13 @@ func _on_player_right_navigation_arrow_focus_entered() -> void:
 
 
 func _on_goal_left_navigation_arrow_pressed() -> void:
+	UIAudioManager.play_ui_pip_sfx()
 	goal_skin_index = wrapi(goal_skin_index - 1, 0, goal_skins.size())
 	update_goal_skin_display()
 
 
 func _on_goal_right_navigation_arrow_pressed() -> void:
+	UIAudioManager.play_ui_pip_sfx()
 	goal_skin_index = wrapi(goal_skin_index + 1, 0, goal_skins.size())
 	update_goal_skin_display()
 
@@ -230,4 +235,4 @@ func update_message_for_skin(skin: Dictionary) -> void:
 func _on_visibility_changed() -> void:
 	if visible:
 		confirm_button.update_pivot()
-		player_left_navigation_arrow.grab_focus()
+		player_left_navigation_arrow.grab_silent_focus()

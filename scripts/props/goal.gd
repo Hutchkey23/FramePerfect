@@ -7,7 +7,17 @@ class_name Goal
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var medal_sprite: Sprite2D = $GoalSprite/MedalSprite
 @onready var goal_sprite: Sprite2D = $GoalSprite
+@onready var sfx_pool: Node2D = $SFXPool
 
+######### AUDIO #########
+const MAILBOX_HIT_SFX = preload("uid://b2eh2mpw0e1lw")
+const MAILBOX_HIT_VOLUME: float = -8.0
+const MAILBOX_HIT_PITCH_RANGE: Vector2 = Vector2(0.9, 1.1)
+
+const MAILBOX_FLAG_SFX = preload("uid://v6omtb425ska")
+const MAILBOX_FLAG_VOLUME: float = -8.0
+const MAILBOX_FLAG_PITCH_RANGE: Vector2 = Vector2(0.9, 1.1)
+#########################
 
 const NORMAL_GOAL_SCALE : Vector2 = Vector2(0.5, 0.5)
 const MAX_DEGREE_ROTATION : float = 10
@@ -170,6 +180,7 @@ func retry_level() -> void:
 func show_level_complete_result(result: Dictionary) -> void:
 	show_completion_label(result)
 	
+	play_sfx(MAILBOX_HIT_SFX, MAILBOX_HIT_VOLUME, MAILBOX_HIT_PITCH_RANGE)
 	await goal_reached_animation()
 	
 	# Show new best only if medal has been earned and player sets high score
@@ -290,3 +301,14 @@ func activate_goal() -> void:
 	pop_tween.tween_property(self, "rotation_degrees", 0.0, 0.14) \
 		.set_trans(Tween.TRANS_ELASTIC) \
 		.set_ease(Tween.EASE_OUT)
+
+####### AUDIO HANDLING ########
+func play_sfx(sfx: AudioStream, volume_db: float = 0.0, pitch_range: Vector2 = Vector2(0.95, 1.05)):
+	for audio_player: AudioStreamPlayer2D in sfx_pool.get_children():
+		if not audio_player.playing:
+			audio_player.volume_db = volume_db
+			audio_player.stream = sfx
+			audio_player.pitch_scale = randf_range(pitch_range.x, pitch_range.y)
+			audio_player.play()
+			return
+###############################

@@ -4,6 +4,7 @@ class_name OptionsMenu
 signal exit_options_menu
 
 @onready var return_button: CustomMenuButton = $PanelContainer/OptionsVbox/ReturnButton
+@onready var controls_button: CustomMenuButton = $PanelContainer/OptionsVbox/ControlsButton
 @onready var sfx_slider: VolumePipSlider = $PanelContainer/OptionsVbox/SFXSlider
 @onready var music_slider: VolumePipSlider = $PanelContainer/OptionsVbox/MusicSlider
 @onready var display_mode_button: CustomMenuButton = $PanelContainer/OptionsVbox/DisplayModeButton
@@ -26,7 +27,7 @@ var screen_shake_enabled: bool = true
 
 
 func _ready() -> void:
-	return_button.grab_focus()
+	return_button.grab_silent_focus()
 	
 	sfx_slider.value_changed.connect(_on_sfx_volume_changed)
 	music_slider.value_changed.connect(_on_music_volume_changed)
@@ -34,6 +35,7 @@ func _ready() -> void:
 	
 	interactables = [
 		return_button,
+		controls_button,
 		sfx_slider,
 		music_slider,
 		display_mode_button,
@@ -49,6 +51,7 @@ func _unhandled_input(event: InputEvent) -> void:
 		return
 	if event.is_action_pressed("ui_cancel"):
 		exit_options_menu.emit()
+		UIAudioManager.play_ui_cancel_sfx()
 		get_viewport().set_input_as_handled()
 
 func update_pivot() -> void:
@@ -139,7 +142,7 @@ func update_screen_shake_text() -> void:
 func _on_clear_data_pressed() -> void:
 	disable_interactables()
 	clear_data_confirm_popup.visible = true
-	clear_data_confirm_popup.cancel_button.grab_focus()
+	clear_data_confirm_popup.cancel_button.grab_silent_focus()
 
 func disable_interactables() -> void:
 	for interactable in interactables:
@@ -153,7 +156,7 @@ func enable_interactables() -> void:
 func _on_clear_data_confirm_popup_cancel_button_pressed() -> void:
 	enable_interactables()
 	clear_data_confirm_popup.visible = false
-	clear_data_button.grab_focus()
+	clear_data_button.grab_silent_focus()
 
 
 func _on_clear_data_confirm_popup_confirm_button_pressed() -> void:
@@ -161,13 +164,13 @@ func _on_clear_data_confirm_popup_confirm_button_pressed() -> void:
 	SaveManager.clear_save_data()
 	load_options()
 	clear_data_confirm_popup.visible = false
-	clear_data_button.grab_focus()
+	clear_data_button.grab_silent_focus()
 
 
 func _on_visibility_changed() -> void:
 	if visible:
 		enable_interactables()
 		await update_pivot()
-		return_button.grab_focus()
+		return_button.grab_silent_focus()
 	else:
 		disable_interactables()

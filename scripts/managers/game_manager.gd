@@ -153,8 +153,6 @@ func load_next_level() -> void:
 	await transition_out()
 	await unload_current_level()
 	
-	
-	
 	if current_level_index >= world_data.levels.size():
 		current_world_index += 1
 		current_level_index = 0

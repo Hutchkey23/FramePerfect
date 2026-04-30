@@ -21,6 +21,8 @@ const POSTCARD_NOT_SELECTED_SCALE: Vector2 = Vector2(1.2, 1.2)
 	$PostcardHolder/GalacticGatewayPostcard
 ]
 
+var navigation_arrows: Array[Control] = []
+
 var current_world_index: int = 0
 var move_tween: Tween
 var left_arrow_tween: Tween
@@ -34,6 +36,7 @@ var right_arrow_idle_tween: Tween
 var postcard_selected: bool = false
 
 func _ready() -> void:
+	navigation_arrows = [left_arrow, right_arrow]
 	_position_postcards()
 	_update_selection(false)
 	update_arrows()
@@ -63,6 +66,7 @@ func _unhandled_input(event: InputEvent) -> void:
 		_move_selection(1)
 	elif event.is_action_pressed("ui_cancel"):
 		exit_level_select.emit()
+		UIAudioManager.play_ui_cancel_sfx()
 		get_viewport().set_input_as_handled()
 	elif event.is_action_pressed("ui_accept"):
 		_confirm_world()
@@ -89,6 +93,7 @@ func _move_selection(direction: int) -> void:
 	if new_index == current_world_index:
 		return
 	
+	UIAudioManager.play_ui_slide_sfx()
 	current_world_index = new_index
 	
 	
@@ -128,11 +133,15 @@ func _set_postcard_selected(card: Control, selected: bool) -> void:
 func on_exit_world(postcard: Postcard) -> void:
 	postcard.flip_to_front()
 	postcard_selected = false
+	UIAudioManager.play_postcard_flip_to_front_sfx()
+	toggle_navigation_arrows(true)
 
 func _confirm_world() -> void:
 	postcard_selected = true
 	var selected_card : Postcard = postcards[current_world_index]
 	selected_card.flip_to_back()
+	UIAudioManager.play_postcard_flip_to_back_sfx()
+	toggle_navigation_arrows(false)
 
 func on_level_selected(world_index: int, level_index: int) -> void:
 	level_selected.emit(world_index, level_index)
@@ -182,3 +191,9 @@ func _start_arrow_idle_animation(arrow: Control, direction: int) -> void:
 		left_arrow_idle_tween = tween
 	else:
 		right_arrow_idle_tween = tween
+
+func toggle_navigation_arrows(is_showing: bool) -> void:
+	for arrow in navigation_arrows:
+		arrow.visible = is_showing
+	if is_showing:
+		update_arrows()
