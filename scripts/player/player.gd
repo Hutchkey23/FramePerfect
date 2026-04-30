@@ -50,6 +50,12 @@ enum PlayerState {
 var current_state: PlayerState = PlayerState.NORMAL
 var control_enabled: bool = true
 
+###########  Analog  ###########
+const ANALOG_PRESS_THRESHOLD: float = 0.55
+const ANALOG_RELEASE_THRESHOLD: float = 0.35
+
+var analog_active: bool = false
+
 ########### Movement ###########
 const NORMAL_SPEED: float = 140.0
 const ACCELERATION: float = 450.0
@@ -154,7 +160,7 @@ func _physics_process(delta: float) -> void:
 		move_and_slide()
 		return
 	
-	move_input = Input.get_vector("move_left", "move_right", "move_up", "move_down")
+	move_input = get_move_input()
 	
 	
 	if move_input != Vector2.ZERO:
@@ -188,6 +194,51 @@ func _physics_process(delta: float) -> void:
 	if current_state == PlayerState.DASH or (current_state == PlayerState.JUMP and jumped_from_dash):
 		check_for_bonk()
 	
+func get_move_input() -> Vector2:
+	var digital_input := Vector2.ZERO
+	
+	if Input.is_action_pressed("move_left"):
+		digital_input.x -= 1.0
+	if Input.is_action_pressed("move_right"):
+		digital_input.x += 1.0
+	if Input.is_action_pressed("move_up"):
+		digital_input.y -= 1.0
+	if Input.is_action_pressed("move_down"):
+		digital_input.y += 1.0
+	
+	if digital_input != Vector2.ZERO:
+		analog_active = false
+		return digital_input.normalized()
+	
+	var stick := Vector2(
+		Input.get_joy_axis(0, JOY_AXIS_LEFT_X),
+		Input.get_joy_axis(0, JOY_AXIS_LEFT_Y)
+	)
+	
+	var strength := stick.length()
+	
+	if not analog_active:
+		if strength < ANALOG_PRESS_THRESHOLD:
+			return Vector2.ZERO
+		analog_active = true
+	
+	if strength < ANALOG_RELEASE_THRESHOLD:
+		analog_active = false
+		return Vector2.ZERO
+	
+	var analog_input := Vector2.ZERO
+	
+	if stick.x < -ANALOG_PRESS_THRESHOLD:
+		analog_input.x = -1.0
+	elif stick.x > ANALOG_PRESS_THRESHOLD:
+		analog_input.x = 1.0
+	
+	if stick.y < -ANALOG_PRESS_THRESHOLD:
+		analog_input.y = -1.0
+	elif stick.y > ANALOG_PRESS_THRESHOLD:
+		analog_input.y = 1.0
+	
+	return analog_input.normalized()
 
 func _process(delta: float) -> void:
 	var target_rotation_speed: float = NORMAL_ROTATION_SPEED
