@@ -257,4 +257,3 @@ layout_mode = 1
 [connection signal="exit_customize_menu" from="CustomizeMenu" to="." method="_on_customize_menu_exit_customize_menu"]
 [connection signal="visibility_changed" from="CustomizeMenu" to="CustomizeMenu" method="_on_visibility_changed"]
 [connection signal="exit_level_select" from="LevelSelect" to="." method="_on_level_select_exit_level_select"]
-[connection signal="level_selected" from="LevelSelect" to="." method="_on_level_select_level_selected"]

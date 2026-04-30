@@ -1,13 +1,19 @@
 [gd_resource type="Resource" script_class="WorldData" format=3 uid="uid://ct5yadc3b6fc6"]
 
 [ext_resource type="Script" uid="uid://do5fdotl7d638" path="res://resources/level_data/level_data.gd" id="1_nkmhr"]
+[ext_resource type="Texture2D" uid="uid://c3aj3ftm4kt52" path="res://assets/sprites/postcards/peaceful_plains_back.png" id="1_og4rg"]
 [ext_resource type="Script" uid="uid://gba83foepn6x" path="res://resources/world_data/world_data.gd" id="2_75rkk"]
 [ext_resource type="Resource" uid="uid://cisp2c6ereu3c" path="res://resources/level_data/51-75_frosted_frontier/level_055.tres" id="2_mr0f6"]
+[ext_resource type="Texture2D" uid="uid://donmn42nyajoq" path="res://assets/sprites/postcards/frosted_frontier.png" id="2_pejcj"]
 
 [resource]
 script = ExtResource("2_75rkk")
 world_id = "frosted_frontier"
 world_title = "Frosted Frontier"
+world_number = 3
 world_intro_text = "Frosted Frontier"
 levels = Array[ExtResource("1_nkmhr")]([ExtResource("2_mr0f6")])
+front_image = ExtResource("2_pejcj")
+back_image = ExtResource("1_og4rg")
+font_color = Color(0.09803922, 0.29803923, 0.53333336, 1)
 metadata/_custom_type_script = "uid://gba83foepn6x"

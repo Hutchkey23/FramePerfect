@@ -1,7 +1,9 @@
 [gd_resource type="Resource" script_class="WorldData" format=3 uid="uid://uotkih62v0dd"]
 
 [ext_resource type="Script" uid="uid://do5fdotl7d638" path="res://resources/level_data/level_data.gd" id="1_5v2me"]
+[ext_resource type="Texture2D" uid="uid://c3aj3ftm4kt52" path="res://assets/sprites/postcards/peaceful_plains_back.png" id="1_8gwj1"]
 [ext_resource type="Resource" uid="uid://2tr6xgduo5id" path="res://resources/level_data/01-25_peaceful_plains/level_001.tres" id="2_5v2me"]
+[ext_resource type="Texture2D" uid="uid://bjg3cv8wdoj1o" path="res://assets/sprites/postcards/peaceful_plains.png" id="2_h8a0a"]
 [ext_resource type="Resource" uid="uid://dhrfu1r1ue2do" path="res://resources/level_data/01-25_peaceful_plains/level_002.tres" id="3_4upq4"]
 [ext_resource type="Resource" uid="uid://rsy15ntu6h7o" path="res://resources/level_data/01-25_peaceful_plains/level_003.tres" id="4_8gwj1"]
 [ext_resource type="Resource" uid="uid://brjbmrdbcuc7v" path="res://resources/level_data/01-25_peaceful_plains/level_004.tres" id="5_h8a0a"]
@@ -20,6 +22,10 @@
 script = ExtResource("15_s2pok")
 world_id = "peaceful_plains"
 world_title = "Peaceful Plains"
+world_number = 1
 world_intro_text = "Peaceful Plains"
 levels = Array[ExtResource("1_5v2me")]([ExtResource("2_5v2me"), ExtResource("3_4upq4"), ExtResource("4_8gwj1"), ExtResource("5_h8a0a"), ExtResource("6_0usb8"), ExtResource("7_tot2l"), ExtResource("8_88s6l"), ExtResource("9_bhswo"), ExtResource("10_0qkhs"), ExtResource("11_6yikn"), ExtResource("13_uqnyp"), ExtResource("14_3pjah"), ExtResource("12_i7s2j")])
+front_image = ExtResource("2_h8a0a")
+back_image = ExtResource("1_8gwj1")
+font_color = Color(0, 0.5294118, 0.31764707, 1)
 metadata/_custom_type_script = "uid://gba83foepn6x"

@@ -6,7 +6,7 @@
 [resource]
 script = ExtResource("2_nfbn6")
 level_id = "level_002"
-level_title = "beware the red squares"
+level_title = "bad squares"
 medal_time = 1.5
 level_scene = ExtResource("1_3s24k")
 metadata/_custom_type_script = "uid://do5fdotl7d638"

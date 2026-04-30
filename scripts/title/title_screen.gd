@@ -11,7 +11,7 @@ extends Control
 
 @onready var main_title_vbox: VBoxContainer = $MainTitleVbox
 @onready var customize_menu: CustomizeMenu = $CustomizeMenu
-@onready var world_select: Control = $WorldSelect
+@onready var level_select: Control = $LevelSelect
 
 @onready var main_menu_buttons := [
 	play_button,
@@ -70,7 +70,7 @@ func _on_level_select_button_pressed() -> void:
 	animation_player.play("transition_out")
 	await animation_player.animation_finished
 	main_title_vbox.visible = false
-	world_select.visible = true
+	level_select.visible = true
 	animation_player.play("transition_in")
 
 
@@ -89,9 +89,22 @@ func _on_customize_menu_exit_customize_menu() -> void:
 	customize_button.grab_focus()
 	animation_player.play("transition_in")
 
+func _on_level_select_exit_level_select() -> void:
+	animation_player.play("transition_out")
+	await animation_player.animation_finished
+	level_select.visible = false
+	main_title_vbox.visible = true
+	level_select_button.grab_focus()
+	animation_player.play("transition_in")
+
 func _on_options_button_pressed() -> void:
 	pass # Replace with function body.
 
 
 func _on_quit_button_pressed() -> void:
 	get_tree().quit()
+
+
+func _on_level_select_level_selected(world_index: int, level_index: int) -> void:
+	RunState.select_level(world_index, level_index)
+	_on_play_button_pressed()

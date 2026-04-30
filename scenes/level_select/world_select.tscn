@@ -3,11 +3,10 @@
 [ext_resource type="Script" uid="uid://blnu0ir6uxc0d" path="res://scripts/level_select/world_select.gd" id="1_0ykvm"]
 [ext_resource type="PackedScene" uid="uid://cw0nnoswwvmfj" path="res://scenes/postcard/level_select_postcard.tscn" id="1_xf5wa"]
 [ext_resource type="FontFile" uid="uid://vklaqlxxc5o7" path="res://assets/fonts/Whacky_Joe.ttf" id="2_c7dkd"]
-[ext_resource type="Texture2D" uid="uid://mgecgx064wa3" path="res://assets/sprites/postcards/scorched_sands.png" id="3_0ykvm"]
-[ext_resource type="Texture2D" uid="uid://bjg3cv8wdoj1o" path="res://assets/sprites/postcards/peaceful_plains.png" id="3_vwvko"]
-[ext_resource type="Texture2D" uid="uid://donmn42nyajoq" path="res://assets/sprites/postcards/frosted_frontier.png" id="4_fim0u"]
-[ext_resource type="Texture2D" uid="uid://c3aj3ftm4kt52" path="res://assets/sprites/postcards/peaceful_plains_back.png" id="5_b0423"]
-[ext_resource type="Texture2D" uid="uid://cqr4ra4dronfp" path="res://assets/sprites/postcards/galactic_gateway.png" id="8_12otw"]
+[ext_resource type="Resource" uid="uid://uotkih62v0dd" path="res://resources/world_data/peaceful_plains.tres" id="4_fim0u"]
+[ext_resource type="Resource" uid="uid://dv7uy4up300c1" path="res://resources/world_data/scorched_sands.tres" id="5_b0423"]
+[ext_resource type="Resource" uid="uid://ct5yadc3b6fc6" path="res://resources/world_data/frosted_frontier.tres" id="6_vwvko"]
+[ext_resource type="Resource" uid="uid://ec3th64jjhhr" path="res://resources/world_data/galactic_gateways.tres" id="7_c7dkd"]
 
 [node name="WorldSelect" type="Control" unique_id=1970402749]
 layout_mode = 3
@@ -41,9 +40,9 @@ horizontal_alignment = 1
 [node name="PostcardHolder" type="Control" parent="." unique_id=851761849]
 layout_mode = 1
 anchor_left = 0.5
-anchor_top = 0.55
+anchor_top = 0.58
 anchor_right = 0.5
-anchor_bottom = 0.55
+anchor_bottom = 0.58
 offset_top = -20.0
 offset_bottom = 20.0
 grow_horizontal = 2
@@ -51,31 +50,16 @@ grow_vertical = 2
 
 [node name="PeacefulPlainsPostcard" parent="PostcardHolder" unique_id=258655972 instance=ExtResource("1_xf5wa")]
 layout_mode = 1
-postcard_front_image = ExtResource("3_vwvko")
-postcard_back_image = ExtResource("5_b0423")
-world_number = 1
-world_title = "PEACEFUL PLAINS"
+world_data = ExtResource("4_fim0u")
 
 [node name="ScorchedSandsPostcard" parent="PostcardHolder" unique_id=1794725973 instance=ExtResource("1_xf5wa")]
 layout_mode = 1
-postcard_front_image = ExtResource("3_0ykvm")
-postcard_back_image = ExtResource("5_b0423")
-world_number = 2
-world_title = "SCORCHED SANDS"
-font_color = 1
+world_data = ExtResource("5_b0423")
 
 [node name="FrostedFrontierPostcard" parent="PostcardHolder" unique_id=559293839 instance=ExtResource("1_xf5wa")]
 layout_mode = 1
-postcard_front_image = ExtResource("4_fim0u")
-postcard_back_image = ExtResource("5_b0423")
-world_number = 3
-world_title = "FROSTED FRONTIER"
-font_color = 2
+world_data = ExtResource("6_vwvko")
 
 [node name="GalacticGatewayPostcard" parent="PostcardHolder" unique_id=1073607619 instance=ExtResource("1_xf5wa")]
 layout_mode = 1
-postcard_front_image = ExtResource("8_12otw")
-postcard_back_image = ExtResource("5_b0423")
-world_number = 4
-world_title = "GALACTIC GATEWAY"
-font_color = 3
+world_data = ExtResource("7_c7dkd")

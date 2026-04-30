@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://b3u3pejv1cujw" path="res://assets/sprites/postcards/medal_indicator.png" id="5_314ui"]
 [ext_resource type="Texture2D" uid="uid://c3aj3ftm4kt52" path="res://assets/sprites/postcards/peaceful_plains_back.png" id="5_v62m0"]
 [ext_resource type="Texture2D" uid="uid://bt30hs65dg8yk" path="res://assets/sprites/postcards/medal_icon.png" id="6_ad138"]
+[ext_resource type="Texture2D" uid="uid://bwwkja68c8teb" path="res://assets/ui/level_select/filled_medal_slot.png" id="6_u4ejd"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ig6t8"]
 
@@ -40,6 +41,7 @@ grow_vertical = 2
 script = ExtResource("2_v62m0")
 
 [node name="Front" type="PanelContainer" parent="." unique_id=864027999]
+visible = false
 custom_minimum_size = Vector2(120, 80)
 layout_mode = 1
 anchors_preset = 8
@@ -90,7 +92,6 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Back" type="PanelContainer" parent="." unique_id=2078096175]
-visible = false
 custom_minimum_size = Vector2(120, 80)
 layout_mode = 1
 anchors_preset = 8
@@ -116,7 +117,7 @@ theme_override_constants/separation = 0
 
 [node name="MarginContainer" type="MarginContainer" parent="Back/VBoxContainer" unique_id=308315216]
 layout_mode = 2
-theme_override_constants/margin_top = 6
+theme_override_constants/margin_top = 10
 theme_override_constants/margin_bottom = 6
 
 [node name="LevelTitleLabel" type="Label" parent="Back/VBoxContainer/MarginContainer" unique_id=314916953]
@@ -127,7 +128,7 @@ theme_override_colors/font_color = Color(0, 0.5294118, 0.31764707, 1)
 theme_override_constants/line_spacing = -4
 theme_override_fonts/font = SubResource("FontVariation_v62m0")
 theme_override_font_sizes/font_size = 8
-text = "thread the needle"
+text = "bad squares"
 horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 2
@@ -166,6 +167,7 @@ theme_override_constants/margin_top = 4
 
 [node name="BestTimeTextLabel" type="Label" parent="Back/VBoxContainer/MarginContainer2" unique_id=988807267]
 layout_mode = 2
+size_flags_horizontal = 4
 theme_override_colors/font_color = Color(0, 0.5294118, 0.31764707, 1)
 theme_override_fonts/font = ExtResource("4_h7sqx")
 theme_override_font_sizes/font_size = 6
@@ -178,11 +180,27 @@ theme_override_constants/separation = 2
 alignment = 1
 
 [node name="BestTimeLabel" type="Label" parent="Back/VBoxContainer/BestTimeAndMedalContainer" unique_id=217336236]
+custom_minimum_size = Vector2(24, 0)
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0.5294118, 0.31764707, 1)
 theme_override_fonts/font = ExtResource("4_h7sqx")
 theme_override_font_sizes/font_size = 6
 text = "06.85"
+horizontal_alignment = 1
+
+[node name="MedalContainer" type="Control" parent="Back" unique_id=1598797390]
+layout_mode = 2
+
+[node name="MedalSlot" type="TextureRect" parent="Back/MedalContainer" unique_id=2057328525]
+layout_mode = 0
+offset_left = 107.0
+offset_top = 2.0
+offset_right = 115.0
+offset_bottom = 15.0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("6_u4ejd")
+stretch_mode = 3
 
 [node name="MedalCountContainer" type="Panel" parent="." unique_id=1640658476]
 visible = false
@@ -194,9 +212,9 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -24.0
-offset_top = -42.0
+offset_top = -44.0
 offset_right = 24.0
-offset_bottom = -30.0
+offset_bottom = -32.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 4

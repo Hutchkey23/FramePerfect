@@ -20,9 +20,19 @@ var is_paused: bool = false
 
 func _ready() -> void:
 	LevelDatabase.setup(worlds)
-	
+
+	if RunState.has_pending_level_select:
+		current_world_index = RunState.start_world_index
+		current_level_index = RunState.start_level_index
+		RunState.clear_pending_selection()
+	else:
+		# Default new game behavior
+		current_world_index = 0
+		current_level_index = 0
+
 	current_world_level_names = get_world_level_names(current_world_index)
 	set_level_title_label_text(current_level_index)
+
 	await start_run()
 	
 

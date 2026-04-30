@@ -1,4 +1,8 @@
 extends Control
+class_name LevelSelect
+
+signal exit_level_select
+signal level_selected(world_index: int, level_index: int)
 
 @export var postcard_spacing: float = 260.0
 @export var tween_time: float = 0.36
@@ -23,6 +27,11 @@ var postcard_selected: bool = false
 func _ready() -> void:
 	_position_postcards()
 	_update_selection(false)
+	
+	for i in postcards.size():
+		postcards[i].exit_world.connect(on_exit_world)
+		postcards[i].level_selected.connect(on_level_selected)
+		postcards[i].current_world_index = i
 
 
 func _unhandled_input(event: InputEvent) -> void:
@@ -36,6 +45,9 @@ func _unhandled_input(event: InputEvent) -> void:
 		_move_selection(-1)
 	elif event.is_action_pressed("ui_right"):
 		_move_selection(1)
+	elif event.is_action_pressed("ui_cancel"):
+		exit_level_select.emit()
+		get_viewport().set_input_as_handled()
 	elif event.is_action_pressed("ui_accept"):
 		_confirm_world()
 
@@ -76,16 +88,20 @@ func _update_selection(animated: bool) -> void:
 	for i in postcards.size():
 		_set_postcard_selected(postcards[i], i == current_world_index)
 
-
 func _set_postcard_selected(card: Control, selected: bool) -> void:
 	if card.has_method("set_selected"):
 		card.set_selected(selected)
 	else:
 		card.scale = POSTCARD_SELECTED_SCALE if selected else POSTCARD_NOT_SELECTED_SCALE
 
+func on_exit_world(postcard: Postcard) -> void:
+	postcard.flip_to_front()
+	postcard_selected = false
 
 func _confirm_world() -> void:
 	postcard_selected = true
-	var world_number := current_world_index + 1
 	var selected_card : Postcard = postcards[current_world_index]
 	selected_card.flip_to_back()
+
+func on_level_selected(world_index: int, level_index: int) -> void:
+	level_selected.emit(world_index, level_index)
