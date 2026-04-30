@@ -82,6 +82,9 @@ func set_mode_fixed(new_position: Vector2) -> void:
 
 
 func add_shake(amount: float) -> void:
+	if not SaveManager.get_option("screen_shake", true):
+		return
+	
 	shake_strength = max(shake_strength, amount)
 
 func zoom_to_target(target_node: Node2D, zoom_amount: Vector2, zoom_duration: float) -> void:

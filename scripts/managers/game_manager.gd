@@ -81,6 +81,9 @@ func start_run() -> void:
 	await get_tree().create_timer(TRANSITION_LENGTH).timeout
 	await transition_in()
 	
+	if level_controller_reference:
+		level_controller_reference.enter_intro_state()
+	
 	game_pausable = true
 
 func transition_in() -> void:
@@ -169,6 +172,9 @@ func load_next_level() -> void:
 	
 	await get_tree().create_timer(TRANSITION_LENGTH).timeout
 	await transition_in()
+	
+	if level_controller_reference:
+		level_controller_reference.enter_intro_state()
 
 func show_world_transition() -> void:
 	var world_data := get_current_world_data()

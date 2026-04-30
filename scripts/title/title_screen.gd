@@ -12,6 +12,7 @@ extends Control
 @onready var main_title_vbox: VBoxContainer = $MainTitleVbox
 @onready var customize_menu: CustomizeMenu = $CustomizeMenu
 @onready var level_select: Control = $LevelSelect
+@onready var options_menu: OptionsMenu = $OptionsMenu
 
 @onready var main_menu_buttons := [
 	play_button,
@@ -98,7 +99,19 @@ func _on_level_select_exit_level_select() -> void:
 	animation_player.play("transition_in")
 
 func _on_options_button_pressed() -> void:
-	pass # Replace with function body.
+	animation_player.play("transition_out")
+	await animation_player.animation_finished
+	main_title_vbox.visible = false
+	options_menu.visible = true
+	animation_player.play("transition_in")
+
+func _on_options_menu_exit_options_menu() -> void:
+	animation_player.play("transition_out")
+	await animation_player.animation_finished
+	options_menu.visible = false
+	main_title_vbox.visible = true
+	options_button.grab_focus()
+	animation_player.play("transition_in")
 
 
 func _on_quit_button_pressed() -> void:

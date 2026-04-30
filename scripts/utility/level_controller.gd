@@ -40,9 +40,13 @@ var loading_next_level : bool = false
 @onready var goal: Goal = get_node(goal_path)
 @onready var stamps: Node2D = $"../Stamps"
 
+# ANALOG #
+const ANALOG_START_THRESHOLD: float = 0.55
+var analog_start_was_pressed: bool = false
+
 func _ready() -> void:
 	 #DEBUG
-	enter_intro_state()
+	#enter_intro_state()
 	 #END DEBUG
 	
 	connect_signals()
@@ -142,13 +146,30 @@ func update_timer(delta: float) -> void:
 
 
 func check_for_level_start_input() -> void:
+	var analog_start_pressed := is_analog_start_just_pressed()
+	
 	if Input.is_action_just_pressed("move_left") \
 	or Input.is_action_just_pressed("move_right") \
 	or Input.is_action_just_pressed("move_up") \
 	or Input.is_action_just_pressed("move_down") \
 	or Input.is_action_just_pressed("jump") \
-	or Input.is_action_just_pressed("dash"):
+	or Input.is_action_just_pressed("dash") \
+	or analog_start_pressed:
 		start_level()
+
+
+func is_analog_start_just_pressed() -> bool:
+	var stick := Vector2(
+		Input.get_joy_axis(0, JOY_AXIS_LEFT_X),
+		Input.get_joy_axis(0, JOY_AXIS_LEFT_Y)
+	)
+	
+	var is_pressed := stick.length() >= ANALOG_START_THRESHOLD
+	var just_pressed := is_pressed and not analog_start_was_pressed
+	
+	analog_start_was_pressed = is_pressed
+	
+	return just_pressed
 
 func check_for_level_completed_input() -> void:
 	if Input.is_action_just_pressed("continue_game"):

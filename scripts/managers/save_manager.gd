@@ -3,13 +3,7 @@ extends Node
 const SAVE_PATH := "user://save_data.json"
 const NO_TIME := 999999.0
 
-var save_data: Dictionary = {
-	"levels": {},
-	"cosmetics": {
-		"selected_player_skin": "player_default",
-		"selected_goal_skin": "goal_default",
-	}
-}
+var save_data: Dictionary = get_default_save_data()
 
 
 func _ready() -> void:
@@ -93,9 +87,20 @@ func player_has_medal(level_id: String) -> bool:
 
 
 func reset_save_data() -> void:
-	save_data = {
-		"levels": {}
-	}
+	save_data = get_default_save_data()
+	save_game()
+
+
+func clear_save_data() -> void:
+	save_data = get_default_save_data()
+	
+	if FileAccess.file_exists(SAVE_PATH):
+		var error := DirAccess.remove_absolute(ProjectSettings.globalize_path(SAVE_PATH))
+		if error != OK:
+			push_error("Failed to delete save file: " + SAVE_PATH)
+			save_game()
+			return
+	
 	save_game()
 
 
@@ -131,11 +136,55 @@ func load_game() -> void:
 		
 		if not save_data.has("levels"):
 			save_data["levels"] = {}
+		
+		ensure_cosmetics_data()
+		ensure_options_data()
 	else:
 		push_error("Save data was not a Dictionary. Resetting save data.")
 		save_data = {
 			"levels": {}
 		}
+
+func get_default_save_data() -> Dictionary:
+	return {
+		"levels": {},
+		"cosmetics": {
+			"selected_player_skin": "player_default",
+			"selected_goal_skin": "goal_default",
+		},
+		"options": {
+			"sfx_volume": 3,
+			"music_volume": 3,
+			"fullscreen": false,
+			"screen_shake": true,
+		}
+	}
+
+func ensure_options_data() -> void:
+	if not save_data.has("options"):
+		save_data["options"] = {}
+	
+	if not save_data["options"].has("sfx_volume"):
+		save_data["options"]["sfx_volume"] = 3
+	
+	if not save_data["options"].has("music_volume"):
+		save_data["options"]["music_volume"] = 3
+	
+	if not save_data["options"].has("fullscreen"):
+		save_data["options"]["fullscreen"] = false
+	
+	if not save_data["options"].has("screen_shake"):
+		save_data["options"]["screen_shake"] = true
+
+func get_option(option_name: String, fallback = null):
+	ensure_options_data()
+	return save_data["options"].get(option_name, fallback)
+
+
+func set_option(option_name: String, value) -> void:
+	ensure_options_data()
+	save_data["options"][option_name] = value
+	save_game()
 
 
 func get_selected_skin(category: String) -> String:

@@ -63,3 +63,35 @@ world_data = ExtResource("6_vwvko")
 [node name="GalacticGatewayPostcard" parent="PostcardHolder" unique_id=1073607619 instance=ExtResource("1_xf5wa")]
 layout_mode = 1
 world_data = ExtResource("7_c7dkd")
+
+[node name="LeftArrow" type="Control" parent="." unique_id=1597586396]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="LeftArrowLabel" type="Label" parent="LeftArrow" unique_id=615834356]
+layout_mode = 0
+offset_left = 29.0
+offset_top = 79.0
+offset_right = 69.0
+offset_bottom = 123.0
+theme_override_constants/outline_size = 4
+theme_override_fonts/font = ExtResource("2_c7dkd")
+theme_override_font_sizes/font_size = 32
+text = "<"
+
+[node name="RightArrow" type="Control" parent="." unique_id=159066148]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="RightArrowLabel" type="Label" parent="RightArrow" unique_id=647238682]
+layout_mode = 0
+offset_left = 269.0
+offset_top = 79.0
+offset_right = 309.0
+offset_bottom = 123.0
+theme_override_constants/outline_size = 4
+theme_override_fonts/font = ExtResource("2_c7dkd")
+theme_override_font_sizes/font_size = 32
+text = ">"

@@ -28,6 +28,9 @@ func update_pivot() -> void:
 	pivot_offset = size / 2.0
 	indicator.pivot_offset = indicator.size / 2.0
 
+func update_button_label_text(new_text: String) -> void:
+	button_text.text = new_text
+
 func _on_resized() -> void:
 	pivot_offset = size / 2.0
 

@@ -36,6 +36,7 @@
 [ext_resource type="Material" uid="uid://cbe3wuululcrv" path="res://materials/transition_material.tres" id="34_702e2"]
 [ext_resource type="PackedScene" uid="uid://dgc7jyqg5ohww" path="res://scenes/title/customize_menu.tscn" id="35_2egvm"]
 [ext_resource type="PackedScene" uid="uid://bom8xcym2nd4i" path="res://scenes/level_select/world_select.tscn" id="36_5fwbo"]
+[ext_resource type="PackedScene" uid="uid://dp4kan6n4la83" path="res://scenes/options/options_menu.tscn" id="37_vxnr3"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_84bpe"]
 shader = ExtResource("2_8xedo")
@@ -247,6 +248,10 @@ layout_mode = 1
 visible = false
 layout_mode = 1
 
+[node name="OptionsMenu" parent="." unique_id=1915877666 instance=ExtResource("37_vxnr3")]
+visible = false
+layout_mode = 1
+
 [connection signal="resized" from="MainTitleVbox/LogoContainer" to="." method="_on_logo_container_resized"]
 [connection signal="pressed" from="MainTitleVbox/PlayButton" to="." method="_on_play_button_pressed"]
 [connection signal="pressed" from="MainTitleVbox/MarathonButton" to="." method="_on_marathon_button_pressed"]
@@ -258,3 +263,5 @@ layout_mode = 1
 [connection signal="visibility_changed" from="CustomizeMenu" to="CustomizeMenu" method="_on_visibility_changed"]
 [connection signal="exit_level_select" from="LevelSelect" to="." method="_on_level_select_exit_level_select"]
 [connection signal="level_selected" from="LevelSelect" to="." method="_on_level_select_level_selected"]
+[connection signal="exit_options_menu" from="OptionsMenu" to="." method="_on_options_menu_exit_options_menu"]
+[connection signal="visibility_changed" from="OptionsMenu" to="OptionsMenu" method="_on_visibility_changed"]

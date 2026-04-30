@@ -1,0 +1,88 @@
+[gd_scene format=3 uid="uid://cib3atuyik8hq"]
+
+[ext_resource type="Script" uid="uid://2kueigwwhiqg" path="res://scripts/options/volume_pip_slider.gd" id="1_d8ap6"]
+[ext_resource type="FontFile" uid="uid://vklaqlxxc5o7" path="res://assets/fonts/Whacky_Joe.ttf" id="2_7ine0"]
+[ext_resource type="Texture2D" uid="uid://c3l36itqvmw2l" path="res://assets/sprites/player/player.png" id="2_mf1j0"]
+[ext_resource type="Texture2D" uid="uid://seqdmyej1pwt" path="res://assets/ui/options/inactive_pip.png" id="3_mf1j0"]
+
+[sub_resource type="FontVariation" id="FontVariation_l00yp"]
+base_font = ExtResource("2_7ine0")
+spacing_glyph = 1
+
+[node name="VolumePipSlider" type="Control" unique_id=1206881810]
+custom_minimum_size = Vector2(160, 12)
+layout_mode = 3
+anchors_preset = 0
+focus_mode = 2
+script = ExtResource("1_d8ap6")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=2056214546]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 12.0
+grow_horizontal = 2
+theme_override_constants/separation = 0
+alignment = 1
+
+[node name="BusLabelWrapper" type="Control" parent="HBoxContainer" unique_id=241982583]
+custom_minimum_size = Vector2(45, 0)
+layout_mode = 2
+
+[node name="BusLabel" type="Label" parent="HBoxContainer/BusLabelWrapper" unique_id=748073629]
+custom_minimum_size = Vector2(45, 0)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/outline_size = 3
+theme_override_fonts/font = SubResource("FontVariation_l00yp")
+theme_override_font_sizes/font_size = 8
+text = "MUSIC"
+
+[node name="Indicator" type="TextureRect" parent="HBoxContainer/BusLabelWrapper" unique_id=357788521]
+modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(5, 5)
+layout_mode = 0
+offset_left = -8.0
+offset_top = 4.0
+offset_right = -3.0
+offset_bottom = 9.000013
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("2_mf1j0")
+expand_mode = 1
+stretch_mode = 4
+
+[node name="PipContainer" type="HBoxContainer" parent="HBoxContainer" unique_id=1813457760]
+layout_mode = 2
+
+[node name="Pip1" type="TextureRect" parent="HBoxContainer/PipContainer" unique_id=772991236]
+layout_mode = 2
+texture = ExtResource("3_mf1j0")
+stretch_mode = 3
+
+[node name="Pip2" type="TextureRect" parent="HBoxContainer/PipContainer" unique_id=1194386984]
+layout_mode = 2
+texture = ExtResource("3_mf1j0")
+stretch_mode = 3
+
+[node name="Pip3" type="TextureRect" parent="HBoxContainer/PipContainer" unique_id=865942514]
+layout_mode = 2
+texture = ExtResource("3_mf1j0")
+stretch_mode = 3
+
+[node name="Pip4" type="TextureRect" parent="HBoxContainer/PipContainer" unique_id=1880414599]
+layout_mode = 2
+texture = ExtResource("3_mf1j0")
+stretch_mode = 3
+
+[node name="Pip5" type="TextureRect" parent="HBoxContainer/PipContainer" unique_id=662435568]
+layout_mode = 2
+texture = ExtResource("3_mf1j0")
+stretch_mode = 3
+
+[connection signal="focus_entered" from="." to="." method="_on_focus_entered"]
+[connection signal="focus_exited" from="." to="." method="_on_focus_exited"]

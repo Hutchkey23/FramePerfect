@@ -1,0 +1,58 @@
+[gd_scene format=3 uid="uid://dp4kan6n4la83"]
+
+[ext_resource type="Theme" uid="uid://bsvhjxlwp2c7r" path="res://themes/menu_theme.tres" id="1_mdmh4"]
+[ext_resource type="Script" uid="uid://5ejtgu6yxvdb" path="res://scripts/options/options_menu.gd" id="1_rww4t"]
+[ext_resource type="FontFile" uid="uid://vklaqlxxc5o7" path="res://assets/fonts/Whacky_Joe.ttf" id="2_vmlsx"]
+[ext_resource type="PackedScene" uid="uid://cib3atuyik8hq" path="res://scenes/options/volume_pip_slider.tscn" id="3_nb6mw"]
+
+[node name="OptionsMenu" type="Control" unique_id=1915877666]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 1.0
+offset_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_rww4t")
+
+[node name="PanelContainer" type="PanelContainer" parent="." unique_id=186203917]
+custom_minimum_size = Vector2(300, 160)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -6.0
+offset_top = -5.5
+offset_right = 6.0
+offset_bottom = 5.5
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_mdmh4")
+
+[node name="OptionsVbox" type="VBoxContainer" parent="PanelContainer" unique_id=1192650601]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/OptionsVbox" unique_id=651389255]
+layout_mode = 2
+theme_override_constants/margin_top = 2
+
+[node name="TitleLabel" type="Label" parent="PanelContainer/OptionsVbox/MarginContainer" unique_id=735934294]
+layout_mode = 2
+theme_override_constants/outline_size = 4
+theme_override_fonts/font = ExtResource("2_vmlsx")
+theme_override_font_sizes/font_size = 16
+text = "OPTIONS"
+horizontal_alignment = 1
+
+[node name="SFXSlider" parent="PanelContainer/OptionsVbox" unique_id=1206881810 instance=ExtResource("3_nb6mw")]
+layout_mode = 2
+label_text = "SFX"
+value = 3
+
+[node name="MusicSlider" parent="PanelContainer/OptionsVbox" unique_id=1780858214 instance=ExtResource("3_nb6mw")]
+layout_mode = 2
+label_text = "Music"
+value = 3
