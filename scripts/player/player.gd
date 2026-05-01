@@ -106,9 +106,17 @@ const JUMP_FORWARD_DRAG: float = 120.0
 const JUMP_STEER_SPEED: float = 45.0
 const JUMP_STEER_ACCELERATION: float = 180.0
 const JUMP_OVER_BLOCKER_LAYER : int = 7
+const JUMP_BUFFER_TIME: float = 0.08
 
+var jump_buffer_timer: float = 0.0
+var jump_buffer_used_this_jump: bool = false
 var jumped_from_dash: bool = false
 var jump_locked_direction: Vector2 = Vector2.ZERO
+
+const DASH_BUFFER_TIME: float = 0.08
+
+var dash_buffer_timer: float = 0.0
+var dash_buffer_used_this_jump: bool = false
 
 # Air movement during jump
 const JUMP_MOVE_SPEED: float = 140.0
@@ -184,6 +192,12 @@ func _physics_process(delta: float) -> void:
 		move_and_slide()
 		return
 	
+	if jump_buffer_timer > 0.0:
+		jump_buffer_timer -= delta
+	
+	if dash_buffer_timer > 0.0:
+		dash_buffer_timer -= delta
+	
 	move_input = get_move_input()
 	
 	
@@ -209,6 +223,8 @@ func _physics_process(delta: float) -> void:
 
 		PlayerState.JUMP:
 			handle_jump(delta)
+			try_start_dash()
+			try_start_jump()
 		
 		PlayerState.BONK:
 			handle_bonk(delta)
@@ -367,14 +383,22 @@ func try_start_dash() -> void:
 
 	# No air dash
 	if current_state == PlayerState.JUMP:
+		if not dash_buffer_used_this_jump:
+			dash_buffer_timer = DASH_BUFFER_TIME
+			dash_buffer_used_this_jump = true
 		return
 
 	if dash_cooldown_timer > 0.0:
 		return
 	
+	start_dash()
+	
+
+func start_dash() -> void:
 	current_state = PlayerState.DASH
 	dash_timer = DASH_DURATION
 	dash_cooldown_timer = DASH_COOLDOWN
+	dash_buffer_timer = 0.0
 
 	dash_direction = last_move_input.normalized()
 	velocity = dash_direction * DASH_SPEED
@@ -489,15 +513,30 @@ func play_bonk_squash(wall_normal: Vector2) -> void:
 func try_start_jump() -> void:
 	if not Input.is_action_just_pressed("jump"):
 		return
+	
+	if current_state == PlayerState.JUMP:
+		if not jump_buffer_used_this_jump:
+			jump_buffer_timer = JUMP_BUFFER_TIME
+			jump_buffer_used_this_jump = true
+		return
 
 	if jump_cooldown_timer > 0.0:
 		return
+	
+	start_jump()
 
+func start_jump() -> void:
 	jumped_from_dash = current_state == PlayerState.DASH
 
 	current_state = PlayerState.JUMP
 	jump_timer = JUMP_DURATION
 	jump_cooldown_timer = JUMP_COOLDOWN
+	
+	jump_buffer_timer = 0.0
+	jump_buffer_used_this_jump = false
+	
+	dash_buffer_timer = 0.0
+	dash_buffer_used_this_jump = false
 	
 	set_jump_over_blockers_enabled(false)
 	
@@ -560,10 +599,19 @@ func handle_jump(delta: float) -> void:
 		
 		if overlapping_hazard_count > 0:
 			die()
+			return
 		
 		if goal_overlapping:
 			try_to_activate_goal()
-			
+			return
+		
+		if dash_buffer_timer > 0.0:
+			start_dash()
+			return
+		
+		if jump_buffer_timer > 0.0:
+			start_jump()
+			return
 
 func play_landing_squash() -> void:
 	if player_sprite_landing_tween:
