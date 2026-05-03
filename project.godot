@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Frame Perfect"
-run/main_scene="uid://bohea1k6xl1cw"
+run/main_scene="uid://bt1dvkrmmjtgl"
 config/features=PackedStringArray("4.6", "GL Compatibility")
 config/icon="res://icon.svg"
 
@@ -27,12 +27,12 @@ SaveManager="*uid://b5ifq4a5txl6a"
 LevelDatabase="*uid://kjoca7iumvos"
 SkinDatabase="*uid://kalj3n3hq30u"
 RunState="*uid://epodyc4mls2n"
+BGMManager="*uid://bcrdlw22n4mk6"
 
 [display]
 
 window/size/viewport_width=320
 window/size/viewport_height=180
-window/size/mode=3
 window/size/window_width_override=1280
 window/size/window_height_override=720
 window/stretch/mode="canvas_items"
@@ -59,6 +59,7 @@ hazards=""
 floors=""
 floor_hazards=""
 goal=""
+safe_platforms=""
 
 [input]
 

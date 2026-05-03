@@ -5,7 +5,6 @@
 [ext_resource type="Texture2D" uid="uid://bqtpoqxknetqq" path="res://assets/sprites/goal/flag.png" id="2_rwyj0"]
 [ext_resource type="FontFile" uid="uid://vklaqlxxc5o7" path="res://assets/fonts/Whacky_Joe.ttf" id="3_n6pa6"]
 [ext_resource type="Texture2D" uid="uid://badx6a15clq2t" path="res://assets/sprites/goal/medal.png" id="4_2e18n"]
-[ext_resource type="AudioStream" uid="uid://v6omtb425ska" path="res://assets/audio/sfx/MailboxFlag.wav" id="6_hs6oo"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ub4hd"]
 size = Vector2(16, 16)
@@ -138,20 +137,6 @@ tracks/4/keys = {
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 0,
 "values": [Vector2(8, -4), Vector2(10, -6), Vector2(8, -4), Vector2(8, -4)]
-}
-tracks/5/type = "method"
-tracks/5/imported = false
-tracks/5/enabled = true
-tracks/5/path = NodePath(".")
-tracks/5/interp = 1
-tracks/5/loop_wrap = true
-tracks/5/keys = {
-"times": PackedFloat32Array(0.36666667),
-"transitions": PackedFloat32Array(1),
-"values": [{
-"args": [ExtResource("6_hs6oo"), 0.0, Vector2(0.6, 0.8)],
-"method": &"play_sfx"
-}]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_hs6oo"]

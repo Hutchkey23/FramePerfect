@@ -36,7 +36,7 @@ shape = SubResource("RectangleShape2D_dovo2")
 [node name="DashTimer" type="Timer" parent="." unique_id=313604202]
 
 [node name="InteractionArea" type="Area2D" parent="." unique_id=419232090]
-collision_mask = 28
+collision_mask = 60
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="InteractionArea" unique_id=74698378]
 shape = SubResource("RectangleShape2D_gmlin")
@@ -71,6 +71,12 @@ bus = &"SFX"
 bus = &"SFX"
 
 [node name="AudioStreamPlayer2D3" type="AudioStreamPlayer2D" parent="SFXPool" unique_id=435397396]
+bus = &"SFX"
+
+[node name="AudioStreamPlayer2D4" type="AudioStreamPlayer2D" parent="SFXPool" unique_id=181201461]
+bus = &"SFX"
+
+[node name="AudioStreamPlayer2D5" type="AudioStreamPlayer2D" parent="SFXPool" unique_id=1723615548]
 bus = &"SFX"
 
 [connection signal="area_entered" from="InteractionArea" to="." method="_on_interaction_area_area_entered"]

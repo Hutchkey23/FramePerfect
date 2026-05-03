@@ -56,20 +56,36 @@ func _get_keyboard_icon(event: InputEventKey) -> Texture2D:
 	return null
 
 func _get_gamepad_icon(event: InputEventJoypadButton) -> Texture2D:
-	var device := InputHelper.device  # xbox / playstation / etc.
+	var device := _normalize_device_name(InputHelper.device)
 	var label := InputHelper.get_label_for_input(event).to_lower()
 
-	# Clean label (e.g. "A Button" -> "a")
-	label = label.replace(" button", "").replace(" ", "_")
+	label = label.replace(" button", "")
+	label = label.replace(" ", "_")
 
 	var path := "res://assets/ui/glyphs/%s/%s.png" % [device, label]
 
 	if ResourceLoader.exists(path):
 		return load(path)
 
-	# fallback to generic
-	var fallback_path := "res://ui/glyphs/generic/%s.png" % label
+	var fallback_path := "res://assets/ui/glyphs/generic/%s.png" % label
 	if ResourceLoader.exists(fallback_path):
 		return load(fallback_path)
 
+	print("Missing gamepad glyph: device=", device, " label=", label, " path=", path)
 	return null
+
+
+func _normalize_device_name(device: String) -> String:
+	var d := device.to_lower()
+
+	match d:
+		"steam deck", "steam_deck", "steamdeck":
+			return "steam_deck"
+		"xbox", "xbox_controller", "xinput":
+			return "xbox"
+		"playstation", "ps", "ps4", "ps5", "dualshock", "dualsense":
+			return "playstation"
+		"switch", "nintendo":
+			return "switch"
+
+	return d

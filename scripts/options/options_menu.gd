@@ -12,13 +12,22 @@ signal exit_options_menu
 @onready var clear_data_button: CustomMenuButton = $PanelContainer/OptionsVbox/ClearDataButton
 @onready var clear_data_confirm_popup: Control = $ClearDataConfirmPopup
 
-const VOLUME_DB_LEVELS: Array[float] = [
+const SFX_VOLUME_DB_LEVELS: Array[float] = [
 	-80.0, # 0 - silent
-	-24.0, # 1 - very quiet
-	-14.0, # 2 - quiet
-	-8.0,  # 3 - normal
-	-3.0,  # 4 - loud
-	0.0    # 5 - very loud
+	-12.0, # 1 - very quiet
+	-6.0, # 2 - quiet
+	0.0,  # 3 - normal
+	4.0,  # 4 - loud
+	8.0    # 5 - very loud
+]
+
+const BGM_VOLUME_DB_LEVELS: Array[float] = [
+	-80.0, # 0 - silent
+	-16.0, # 1 - very quiet
+	-12.0, # 2 - quiet
+	-6.0,  # 3 - normal
+	0.0,  # 4 - loud
+	4.0    # 5 - very loud
 ]
 
 var interactables: Array = []
@@ -100,7 +109,14 @@ func set_bus_volume(bus_name: String, value: int) -> void:
 		push_warning("Audio bus not found: " + bus_name)
 		return
 	
-	AudioServer.set_bus_volume_db(bus_index, VOLUME_DB_LEVELS[value])
+	var volume_array: Array[float] = []
+	match bus_name:
+		"SFX":
+			volume_array = SFX_VOLUME_DB_LEVELS
+		"Music":
+			volume_array = BGM_VOLUME_DB_LEVELS
+	
+	AudioServer.set_bus_volume_db(bus_index, volume_array[value])
 	AudioServer.set_bus_mute(bus_index, value == 0)
 
 

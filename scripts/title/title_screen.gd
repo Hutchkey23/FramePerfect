@@ -36,6 +36,8 @@ func _ready() -> void:
 	animation_player.play("transition_in")
 	
 	play_button.grab_silent_focus()
+	
+	BGMManager.play(BGMManager.SEND_IT)
 
 
 func setup_pivots() -> void:

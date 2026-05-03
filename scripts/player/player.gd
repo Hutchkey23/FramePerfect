@@ -18,6 +18,10 @@ const BONK_SFX = preload("uid://ivid35oq2etg")
 const BONK_VOLUME: float = -5.0
 const BONK_PITCH_RANGE: Vector2 = Vector2(0.7, 0.8)
 
+const COLLECT_STAMP_SFX = preload("uid://bpce1xgwwn4rn")
+const COLLECT_STAMP_VOLUME: float = -3.0
+const COLLECT_STAMP_PITCH_RANGE: Vector2 = Vector2(0.9, 1.2)
+
 const DASH_SFX = preload("uid://cfxseyj0qrubq")
 const DASH_VOLUME: float = -5.0
 const DASH_PITCH_RANGE: Vector2 = Vector2(0.6, 0.7)
@@ -170,6 +174,10 @@ var shadow_sprite_landing_tween: Tween
 var camera_reference: GameCamera
 
 # Jump Interactions
+var safe_platform_count: int = 0
+var safe_platforms: Array[MovingPlatform] = []
+
+var overlapping_floor_hazard_count: int = 0
 var overlapping_hazard_count: int = 0
 var goal_overlapping: bool = false
 
@@ -230,6 +238,8 @@ func _physics_process(delta: float) -> void:
 			handle_bonk(delta)
 
 	move_and_slide()
+	apply_platform_movement()
+	
 	
 	if current_state == PlayerState.DASH or (current_state == PlayerState.JUMP and jumped_from_dash):
 		check_for_bonk()
@@ -331,6 +341,9 @@ func die() -> void:
 func check_if_should_die() -> void:
 	if overlapping_hazard_count > 0:
 		die()
+	
+	if overlapping_floor_hazard_count > 0 and safe_platform_count == 0:
+		die()
 
 func retry_level() -> void:
 	current_state = PlayerState.NORMAL
@@ -376,6 +389,14 @@ func handle_normal_movement(delta: float) -> void:
 	else:
 		velocity = velocity.move_toward(Vector2.ZERO, BRAKING * delta)
 
+func apply_platform_movement() -> void:
+	if current_state == PlayerState.JUMP:
+		return
+	
+	if safe_platforms.is_empty():
+		return
+	
+	global_position += safe_platforms[0].movement_delta
 
 func try_start_dash() -> void:
 	if not Input.is_action_just_pressed("dash"):
@@ -601,6 +622,10 @@ func handle_jump(delta: float) -> void:
 			die()
 			return
 		
+		if overlapping_floor_hazard_count > 0 and safe_platform_count == 0:
+			die()
+			return
+		
 		if goal_overlapping:
 			try_to_activate_goal()
 			return
@@ -662,7 +687,15 @@ func _on_interaction_area_area_entered(area: Area2D) -> void:
 		die()
 	
 	if area.is_in_group("stamps"):
+		if get_tree().get_node_count_in_group("stamps") > 1:
+			play_sfx(COLLECT_STAMP_SFX, COLLECT_STAMP_VOLUME, COLLECT_STAMP_PITCH_RANGE)
+		
 		area.collect()
+		
+	if area.is_in_group("safe_platforms"):
+		if area is MovingPlatform and not safe_platforms.has(area):
+			safe_platforms.append(area)
+		safe_platform_count += 1
 
 
 func _on_interaction_area_area_exited(area: Area2D) -> void:
@@ -671,18 +704,25 @@ func _on_interaction_area_area_exited(area: Area2D) -> void:
 	
 	if area.is_in_group("hazards"):
 		overlapping_hazard_count = max(0, overlapping_hazard_count - 1)
+	
+	if area.is_in_group("safe_platforms"):
+		if area is MovingPlatform:
+			safe_platforms.erase(area)
+		
+		safe_platform_count = max(0, safe_platform_count - 1)
 
 func _on_floor_hazard_detection_area_body_entered(body: Node2D) -> void:
 	if body.is_in_group("floor_hazards"):
-		overlapping_hazard_count += 1
+		overlapping_floor_hazard_count += 1
 		if current_state == PlayerState.JUMP:
 			return
-		die()
+		if safe_platform_count == 0:
+			die()
 
 
 func _on_floor_hazard_detection_area_body_exited(body: Node2D) -> void:
 	if body.is_in_group("floor_hazards"):
-		overlapping_hazard_count = max(0, overlapping_hazard_count - 1)
+		overlapping_floor_hazard_count = max(0, overlapping_floor_hazard_count - 1)
 
 func show_fail_label() -> void:
 	var random_word = fail_words.pick_random()

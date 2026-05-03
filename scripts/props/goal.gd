@@ -14,9 +14,13 @@ const MAILBOX_HIT_SFX = preload("uid://b2eh2mpw0e1lw")
 const MAILBOX_HIT_VOLUME: float = -8.0
 const MAILBOX_HIT_PITCH_RANGE: Vector2 = Vector2(0.9, 1.1)
 
-const MAILBOX_FLAG_SFX = preload("uid://v6omtb425ska")
-const MAILBOX_FLAG_VOLUME: float = -8.0
-const MAILBOX_FLAG_PITCH_RANGE: Vector2 = Vector2(0.9, 1.1)
+const MAILBOX_FLAG_SFX = preload("uid://wvlpoav0u1pc")
+const MAILBOX_FLAG_VOLUME: float = -6.0
+const MAILBOX_FLAG_PITCH_RANGE: Vector2 = Vector2(1.0, 1.0)
+
+const GOAL_UNLOCK_SFX = preload("uid://c4xw6nwf22trw")
+const GOAL_UNLOCK_VOLUME: float = -3.0
+const GOAL_UNLOCK_PITCH_RANGE: Vector2 = Vector2(0.8, 1.0)
 #########################
 
 const NORMAL_GOAL_SCALE : Vector2 = Vector2(0.5, 0.5)
@@ -181,6 +185,7 @@ func show_level_complete_result(result: Dictionary) -> void:
 	show_completion_label(result)
 	
 	play_sfx(MAILBOX_HIT_SFX, MAILBOX_HIT_VOLUME, MAILBOX_HIT_PITCH_RANGE)
+	play_sfx(MAILBOX_FLAG_SFX, MAILBOX_FLAG_VOLUME, MAILBOX_FLAG_PITCH_RANGE)
 	await goal_reached_animation()
 	
 	# Show new best only if medal has been earned and player sets high score
@@ -243,8 +248,7 @@ func setup_stamps() -> void:
 	for stamp: Stamp in get_tree().get_nodes_in_group("stamps"):
 		stamp.collected.connect(on_stamp_collected)
 
-func on_stamp_collected(stamp: Stamp) -> void:
-	stamp.queue_free()
+func on_stamp_collected(_stamp: Stamp) -> void:
 	stamps_remaining -= 1
 	check_if_goal_available()
 
@@ -257,7 +261,9 @@ func check_if_goal_available() -> void:
 func activate_goal() -> void:
 	if pop_tween:
 		pop_tween.kill()
-
+	
+	play_sfx(GOAL_UNLOCK_SFX, GOAL_UNLOCK_VOLUME, GOAL_UNLOCK_PITCH_RANGE)
+	
 	scale = Vector2.ONE
 	rotation_degrees = 0.0
 	modulate = Color.WHITE

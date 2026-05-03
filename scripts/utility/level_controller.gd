@@ -46,7 +46,7 @@ var analog_start_was_pressed: bool = false
 
 func _ready() -> void:
 	 #DEBUG
-	#enter_intro_state()
+	enter_intro_state()
 	 #END DEBUG
 	
 	connect_signals()

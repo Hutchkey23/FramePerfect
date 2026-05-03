@@ -43,10 +43,12 @@ func _process(_delta: float) -> void:
 
 
 func collect():
+	collected.emit(self)
+	
 	var tween = create_tween()
 	tween.tween_property(self, "scale", Vector2(1.3, 1.3), 0.08).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
 	tween.tween_property(self, "scale", Vector2.ZERO, 0.1).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
 	
 	await tween.finished
 	
-	collected.emit(self)
+	queue_free()
