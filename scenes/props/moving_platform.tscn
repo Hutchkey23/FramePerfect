@@ -4,14 +4,8 @@
 [ext_resource type="Script" uid="uid://cwjkbw62d3bfe" path="res://scripts/props/moving_platform.gd" id="1_wjq2s"]
 [ext_resource type="Script" uid="uid://dkiiy6ng5dy6g" path="res://scripts/props/moving_platform_area.gd" id="2_3m5r2"]
 
-[sub_resource type="Curve2D" id="Curve2D_iodpm"]
-_data = {
-"points": PackedVector2Array(0, 5.6079016, 0, 0, 116, 37, 0, 0, 37.853336, 5.9583955, 116, 153)
-}
-point_count = 2
-
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_wjq2s"]
-size = Vector2(32, 32)
+size = Vector2(24, 24)
 
 [sub_resource type="Animation" id="Animation_ee17m"]
 length = 0.001
@@ -52,11 +46,10 @@ _data = {
 }
 
 [node name="MovingPlatform" type="Path2D" unique_id=1588938296]
-curve = SubResource("Curve2D_iodpm")
 script = ExtResource("1_wjq2s")
 
 [node name="PathFollow2D" type="PathFollow2D" parent="." unique_id=710329759]
-position = Vector2(117, 33)
+position = Vector2(116, 37)
 rotation = 1.5707964
 
 [node name="RemoteTransform2D" type="RemoteTransform2D" parent="PathFollow2D" unique_id=215384334]
@@ -65,7 +58,7 @@ update_rotation = false
 update_scale = false
 
 [node name="MovingPlatformArea" type="Area2D" parent="." unique_id=1646021538 groups=["safe_platforms"]]
-position = Vector2(117, 33)
+position = Vector2(116, 37)
 collision_layer = 32
 script = ExtResource("2_3m5r2")
 

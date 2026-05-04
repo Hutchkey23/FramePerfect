@@ -17,6 +17,12 @@ shader_parameter/pulse_strength = 1.0
 shader_parameter/pulse_speed = 5.00000023424012
 shader_parameter/center_glow_strength = 0.0
 
+[sub_resource type="Curve2D" id="Curve2D_yq1v5"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 116, 36, 0, 0, 0, 0, 116, 137)
+}
+point_count = 2
+
 [node name="Level_030" type="Node2D" unique_id=1381461103]
 
 [node name="LevelController" parent="." unique_id=1058685242 groups=["level_controller"] instance=ExtResource("1_yq1v5")]
@@ -65,7 +71,8 @@ tile_set = ExtResource("5_us286")
 [node name="Platforms" type="Node2D" parent="." unique_id=519940876]
 
 [node name="MovingPlatform" parent="Platforms" unique_id=1588938296 instance=ExtResource("7_atfit")]
-position = Vector2(42, 0)
+position = Vector2(42, 7)
+curve = SubResource("Curve2D_yq1v5")
 moving = true
 loop = false
 speed_scale = 1.3
