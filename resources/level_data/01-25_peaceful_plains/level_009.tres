@@ -1,12 +1,12 @@
-[gd_resource type="Resource" script_class="LevelData" format=3 uid="uid://dpnigqohqu0bx"]
+[gd_resource type="Resource" script_class="LevelData" format=3 uid="uid://db34ou22hspt0"]
 
-[ext_resource type="PackedScene" uid="uid://br8ne0km6meta" path="res://scenes/levels/01-25_peaceful_plains/level_009.tscn" id="1_2c20x"]
+[ext_resource type="PackedScene" uid="uid://dbogk0h433oov" path="res://scenes/levels/01-25_peaceful_plains/level_009.tscn" id="1_2c20x"]
 [ext_resource type="Script" uid="uid://do5fdotl7d638" path="res://resources/level_data/level_data.gd" id="2_078s5"]
 
 [resource]
 script = ExtResource("2_078s5")
 level_id = "level_009"
-level_title = "snek run"
-medal_time = 5.0
+level_title = "s5s5s5"
+medal_time = 3.0
 level_scene = ExtResource("1_2c20x")
 metadata/_custom_type_script = "uid://do5fdotl7d638"

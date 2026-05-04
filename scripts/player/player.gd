@@ -339,6 +339,9 @@ func die() -> void:
 	died.emit()
 
 func check_if_should_die() -> void:
+	if current_state == PlayerState.JUMP:
+		return
+	
 	if overlapping_hazard_count > 0:
 		die()
 	
@@ -710,6 +713,7 @@ func _on_interaction_area_area_exited(area: Area2D) -> void:
 			safe_platforms.erase(area)
 		
 		safe_platform_count = max(0, safe_platform_count - 1)
+		check_if_should_die()
 
 func _on_floor_hazard_detection_area_body_entered(body: Node2D) -> void:
 	if body.is_in_group("floor_hazards"):

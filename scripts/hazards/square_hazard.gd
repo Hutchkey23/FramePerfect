@@ -33,4 +33,14 @@ func _ready() -> void:
 
 func _process(delta: float) -> void:
 	hazard.rotation_degrees += rotation_speed * delta
+	
+	if not moving:
+		return
+	
+	if not curve:
+		return
+	
+	if not path:
+		return
+	
 	path.progress += speed * delta

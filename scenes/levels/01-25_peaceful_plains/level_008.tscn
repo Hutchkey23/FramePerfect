@@ -39,11 +39,9 @@ level_ui_path = NodePath("../LevelUI")
 
 [node name="LevelUI" parent="." unique_id=687480857 instance=ExtResource("2_lwc15")]
 layer = 2
-visible = false
 level_controller_path = NodePath("../LevelController")
 
 [node name="CinematicBars" parent="." unique_id=3966864 instance=ExtResource("3_fpf3o")]
-visible = false
 
 [node name="Player" parent="." unique_id=1458309070 instance=ExtResource("4_y66tb")]
 position = Vector2(192, 207)
