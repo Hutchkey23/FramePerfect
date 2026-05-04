@@ -159,6 +159,7 @@ func load_next_level() -> void:
 		
 		if current_world_index >= worlds.size():
 			print("Game complete.")
+			get_tree().change_scene_to_file("res://scenes/title/title_screen.tscn")
 			return
 		
 		current_world_level_names.clear()
