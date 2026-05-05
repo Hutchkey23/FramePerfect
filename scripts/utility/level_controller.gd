@@ -22,6 +22,8 @@ const STAMP = preload("uid://dpvbyd8v5auob")
 @export var camera_path: NodePath
 @export var cinematic_bars_path: NodePath
 @export var level_ui_path: NodePath
+@export var hazards_path: NodePath
+@export var platforms_path: NodePath
 
 
 var level_id : String = ""
@@ -39,6 +41,8 @@ var loading_next_level : bool = false
 @onready var player_spawn: Node2D = get_node(player_spawn_path)
 @onready var goal: Goal = get_node(goal_path)
 @onready var stamps: Node2D = $"../Stamps"
+@onready var platforms_container: Node2D = get_node(platforms_path)
+@onready var hazards_container: Node2D = get_node(hazards_path)
 
 # ANALOG #
 const ANALOG_START_THRESHOLD: float = 0.55
@@ -196,6 +200,14 @@ func retry_level() -> void:
 	despawn_stamps()
 	await get_tree().process_frame
 	spawn_stamps()
+	
+	if platforms_container:
+		for platform in platforms_container.get_children():
+			platform._ready()
+	
+	if hazards_container:
+		for hazard in hazards_container.get_children():
+			hazard._ready()
 	
 	cinematic_bars.show_bars()
 	

@@ -85,56 +85,59 @@ position = Vector2(-52, 0)
 curve = SubResource("Curve2D_eoby7")
 moving = true
 loop = false
+speed_scale = 2.0
 
 [node name="MovingPlatform3" parent="Platforms" unique_id=1857100256 instance=ExtResource("7_lg13m")]
 position = Vector2(141, 0)
 curve = SubResource("Curve2D_eoby7")
 moving = true
 loop = false
+speed_scale = 2.0
+offset = 2.0
 
 [node name="Hazards" type="Node2D" parent="." unique_id=2062310091]
 
-[node name="Left" type="Node2D" parent="Hazards" unique_id=515077287]
-position = Vector2(-8, 0)
+[node name="RightNow" type="Node2D" parent="Hazards" unique_id=515077287]
+position = Vector2(40, 0)
 
-[node name="SquareHazard" parent="Hazards/Left" unique_id=736354374 instance=ExtResource("8_rferr")]
+[node name="SquareHazard" parent="Hazards/RightNow" unique_id=736354374 instance=ExtResource("8_rferr")]
 curve = SubResource("Curve2D_4urce")
 moving = true
 loop = false
 speed_scale = 1.5
 
-[node name="SquareHazard2" parent="Hazards/Left" unique_id=1246870122 instance=ExtResource("8_rferr")]
+[node name="SquareHazard2" parent="Hazards/RightNow" unique_id=1246870122 instance=ExtResource("8_rferr")]
 position = Vector2(16, 0)
 curve = SubResource("Curve2D_4urce")
 moving = true
 loop = false
 speed_scale = 1.5
 
-[node name="SquareHazard3" parent="Hazards/Left" unique_id=103799678 instance=ExtResource("8_rferr")]
+[node name="SquareHazard3" parent="Hazards/RightNow" unique_id=103799678 instance=ExtResource("8_rferr")]
 position = Vector2(32, 0)
 curve = SubResource("Curve2D_4urce")
 moving = true
 loop = false
 speed_scale = 1.5
 
-[node name="Right" type="Node2D" parent="Hazards" unique_id=1414164808]
-position = Vector2(-8, 0)
+[node name="LeftNow" type="Node2D" parent="Hazards" unique_id=1414164808]
+position = Vector2(-56, 0)
 
-[node name="SquareHazard" parent="Hazards/Right" unique_id=1187737881 instance=ExtResource("8_rferr")]
+[node name="SquareHazard" parent="Hazards/LeftNow" unique_id=1187737881 instance=ExtResource("8_rferr")]
 position = Vector2(48, 0)
 curve = SubResource("Curve2D_8lge6")
 moving = true
 loop = false
 speed_scale = 1.5
 
-[node name="SquareHazard2" parent="Hazards/Right" unique_id=1791324192 instance=ExtResource("8_rferr")]
+[node name="SquareHazard2" parent="Hazards/LeftNow" unique_id=1791324192 instance=ExtResource("8_rferr")]
 position = Vector2(64, 0)
 curve = SubResource("Curve2D_8lge6")
 moving = true
 loop = false
 speed_scale = 1.5
 
-[node name="SquareHazard3" parent="Hazards/Right" unique_id=1402761493 instance=ExtResource("8_rferr")]
+[node name="SquareHazard3" parent="Hazards/LeftNow" unique_id=1402761493 instance=ExtResource("8_rferr")]
 position = Vector2(80, 0)
 curve = SubResource("Curve2D_8lge6")
 moving = true

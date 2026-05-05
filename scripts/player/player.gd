@@ -133,7 +133,7 @@ var sprite_ground_y: float = 0.0
 
 # Bonk
 const BONK_REBOUND_SPEED : float = 140.0
-const BONK_STUN_DURATION : float = 0.08
+const BONK_STUN_DURATION : float = 0.04
 const BONK_FALL_SPEED : float = 220.0
 
 var bonk_timer : float = 0.0
@@ -222,6 +222,7 @@ func _physics_process(delta: float) -> void:
 		PlayerState.NORMAL:
 			handle_normal_movement(delta)
 			try_start_dash()
+			try_consume_dash_buffer()
 			try_start_jump()
 			check_if_should_die()
 
@@ -413,10 +414,22 @@ func try_start_dash() -> void:
 		return
 
 	if dash_cooldown_timer > 0.0:
+		dash_buffer_timer = DASH_BUFFER_TIME
 		return
 	
 	start_dash()
+
+func try_consume_dash_buffer() -> void:
+	if dash_buffer_timer <= 0.0:
+		return
 	
+	if dash_cooldown_timer > 0.0:
+		return
+	
+	if current_state != PlayerState.NORMAL:
+		return
+	
+	start_dash()
 
 func start_dash() -> void:
 	current_state = PlayerState.DASH
@@ -495,9 +508,6 @@ func start_bonk(wall_normal: Vector2) -> void:
 	
 	spawn_bonk_effects(wall_normal, 3)
 	
-	shadow_sprite.scale = Vector2.ONE
-	shadow_sprite.modulate.a = 1.0
-	
 	velocity = wall_normal * BONK_REBOUND_SPEED
 	dash_timer = 0.0
 	jump_timer = 0.0
@@ -510,9 +520,19 @@ func handle_bonk(delta: float) -> void:
 	bonk_timer -= delta
 	velocity = velocity.move_toward(Vector2.ZERO, 900.0 * delta)
 	
-	player_sprite.position.y = move_toward(player_sprite.position.y, sprite_ground_y, BONK_FALL_SPEED * delta)
+	player_sprite.position.y = move_toward(
+		player_sprite.position.y,
+		sprite_ground_y,
+		BONK_FALL_SPEED * delta
+	)
 	
-	if bonk_timer <= 0.0:
+	var sprite_is_grounded := is_equal_approx(player_sprite.position.y, sprite_ground_y)
+	
+	if bonk_timer <= 0.0 and sprite_is_grounded:
+		player_sprite.position.y = sprite_ground_y
+		shadow_sprite.scale = Vector2.ONE
+		shadow_sprite.modulate.a = 1.0
+		set_jump_over_blockers_enabled(true)
 		current_state = PlayerState.NORMAL
 
 func play_bonk_squash(wall_normal: Vector2) -> void:

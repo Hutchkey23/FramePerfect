@@ -31,10 +31,10 @@ level_controller_path = NodePath("../LevelController")
 [node name="CinematicBars" parent="." unique_id=3966864 instance=ExtResource("3_jnhv2")]
 
 [node name="Player" parent="." unique_id=1458309070 instance=ExtResource("4_n6a7c")]
-position = Vector2(60, 88)
+position = Vector2(80, 88)
 
 [node name="PlayerSpawn" type="Node2D" parent="." unique_id=535208430]
-position = Vector2(60, 88)
+position = Vector2(80, 88)
 
 [node name="Map" type="Node2D" parent="." unique_id=1665801705]
 

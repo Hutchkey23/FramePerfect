@@ -18,8 +18,10 @@
 [ext_resource type="Resource" uid="uid://gia06jvackle" path="res://resources/level_data/01-25_peaceful_plains/level_019.tres" id="12_i7s2j"]
 [ext_resource type="Resource" uid="uid://0di38jtexyf1" path="res://resources/level_data/01-25_peaceful_plains/level_017.tres" id="13_uqnyp"]
 [ext_resource type="Resource" uid="uid://b6gs23itcnv2o" path="res://resources/level_data/01-25_peaceful_plains/level_018.tres" id="14_3pjah"]
+[ext_resource type="Resource" uid="uid://db4svgeyfjfon" path="res://resources/level_data/01-25_peaceful_plains/level_011.tres" id="14_88s6l"]
 [ext_resource type="Script" uid="uid://gba83foepn6x" path="res://resources/world_data/world_data.gd" id="15_s2pok"]
 [ext_resource type="Resource" uid="uid://dpnigqohqu0bx" path="res://resources/level_data/01-25_peaceful_plains/level_022.tres" id="18_0usb8"]
+[ext_resource type="Resource" uid="uid://phr2mns25mbe" path="res://resources/level_data/01-25_peaceful_plains/level_025.tres" id="21_bhswo"]
 
 [resource]
 script = ExtResource("15_s2pok")
@@ -27,7 +29,7 @@ world_id = "peaceful_plains"
 world_title = "Peaceful Plains"
 world_number = 1
 world_intro_text = "Peaceful Plains"
-levels = Array[ExtResource("1_5v2me")]([ExtResource("2_5v2me"), ExtResource("3_4upq4"), ExtResource("4_8gwj1"), ExtResource("5_h8a0a"), ExtResource("6_0usb8"), ExtResource("7_tot2l"), ExtResource("8_88s6l"), ExtResource("11_h8a0a"), ExtResource("12_0usb8"), ExtResource("9_bhswo"), ExtResource("10_0qkhs"), ExtResource("11_6yikn"), ExtResource("13_uqnyp"), ExtResource("14_3pjah"), ExtResource("12_i7s2j"), ExtResource("18_0usb8")])
+levels = Array[ExtResource("1_5v2me")]([ExtResource("2_5v2me"), ExtResource("3_4upq4"), ExtResource("4_8gwj1"), ExtResource("5_h8a0a"), ExtResource("6_0usb8"), ExtResource("7_tot2l"), ExtResource("8_88s6l"), ExtResource("11_h8a0a"), ExtResource("12_0usb8"), ExtResource("9_bhswo"), ExtResource("14_88s6l"), ExtResource("10_0qkhs"), ExtResource("11_6yikn"), ExtResource("13_uqnyp"), ExtResource("14_3pjah"), ExtResource("12_i7s2j"), ExtResource("18_0usb8"), ExtResource("21_bhswo")])
 front_image = ExtResource("2_h8a0a")
 back_image = ExtResource("1_8gwj1")
 font_color = Color(0, 0.5294118, 0.31764707, 1)

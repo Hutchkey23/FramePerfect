@@ -20,13 +20,26 @@ func _ready() -> void:
 	if not curve:
 		return
 	
-	var anim_length : float = animation_player.get_animation("move").length
-	var wrapped_offset: float = fposmod(offset, anim_length)
-	
 	if not loop:
-		animation_player.play("move")
-		animation_player.speed_scale = speed_scale
-		animation_player.seek(wrapped_offset, true)
+		var anim := animation_player.get_animation("move")
+		if anim == null:
+			return
+		
+		var anim_length := anim.length
+		var full_pingpong_length := anim_length * 2.0
+		var wrapped_offset := fposmod(offset, full_pingpong_length)
+		
+		if wrapped_offset <= anim_length:
+			# Forward half
+			animation_player.play("move")
+			animation_player.speed_scale = speed_scale
+			animation_player.seek(wrapped_offset, true)
+		else:
+			# Backward half
+			var backward_time := anim_length - (wrapped_offset - anim_length)
+			animation_player.play_backwards("move")
+			animation_player.speed_scale = speed_scale
+			animation_player.seek(backward_time, true)
 	else:
 		path.loop = true
 		path.progress += starting_progress
@@ -37,10 +50,10 @@ func _process(delta: float) -> void:
 	if not moving:
 		return
 	
-	if not curve:
+	if not loop:
 		return
 	
-	if not path:
+	if not curve:
 		return
 	
 	path.progress += speed * delta
