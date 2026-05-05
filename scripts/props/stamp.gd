@@ -4,6 +4,7 @@ class_name Stamp
 signal collected
 
 @onready var stamp_sprite: Sprite2D = $StampSprite
+@onready var stamp_shadow: Sprite2D = $StampShadow
 
 const STAMP_TEXTURES := [
 	preload("res://assets/sprites/stamps/stamp1.png"),

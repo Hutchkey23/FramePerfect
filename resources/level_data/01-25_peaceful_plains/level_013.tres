@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="LevelData" format=3 uid="uid://dy26lehxoctol"]
+
+[ext_resource type="PackedScene" uid="uid://ce0xxdkv5lsdt" path="res://scenes/levels/01-25_peaceful_plains/level_013.tscn" id="1_qdrid"]
+[ext_resource type="Script" uid="uid://do5fdotl7d638" path="res://resources/level_data/level_data.gd" id="2_sco30"]
+
+[resource]
+script = ExtResource("2_sco30")
+level_id = "level_013"
+level_title = "windmill"
+medal_time = 4.0
+level_scene = ExtResource("1_qdrid")
+metadata/_custom_type_script = "uid://do5fdotl7d638"

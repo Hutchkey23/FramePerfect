@@ -1,0 +1,141 @@
+[gd_scene format=3 uid="uid://s1u03rhom1d4"]
+
+[ext_resource type="Script" uid="uid://b5ob78d7kd4nq" path="res://scripts/hazards/windmill_hazard.gd" id="1_5soyo"]
+[ext_resource type="PackedScene" uid="uid://b3b7a1qdd5k5g" path="res://scenes/hazards/square_hazard.tscn" id="1_d3gqx"]
+
+[node name="WindmillHazard" type="Node2D" unique_id=42799490]
+script = ExtResource("1_5soyo")
+
+[node name="Center" parent="." unique_id=736354374 instance=ExtResource("1_d3gqx")]
+position = Vector2(-53, 0)
+
+[node name="RightBlade" type="Node2D" parent="." unique_id=390389840]
+
+[node name="SquareHazard1" parent="RightBlade" unique_id=807418879 instance=ExtResource("1_d3gqx")]
+position = Vector2(-44, 0)
+
+[node name="SquareHazard2" parent="RightBlade" unique_id=1744049710 instance=ExtResource("1_d3gqx")]
+position = Vector2(-35, 0)
+
+[node name="SquareHazard3" parent="RightBlade" unique_id=793038850 instance=ExtResource("1_d3gqx")]
+position = Vector2(-26, 0)
+
+[node name="SquareHazard4" parent="RightBlade" unique_id=1428474467 instance=ExtResource("1_d3gqx")]
+position = Vector2(-17, 0)
+
+[node name="SquareHazard5" parent="RightBlade" unique_id=743139160 instance=ExtResource("1_d3gqx")]
+position = Vector2(-8, 0)
+
+[node name="SquareHazard6" parent="RightBlade" unique_id=1235775383 instance=ExtResource("1_d3gqx")]
+position = Vector2(1, 0)
+
+[node name="SquareHazard7" parent="RightBlade" unique_id=355704844 instance=ExtResource("1_d3gqx")]
+position = Vector2(10, 0)
+
+[node name="SquareHazard8" parent="RightBlade" unique_id=905029446 instance=ExtResource("1_d3gqx")]
+position = Vector2(19, 0)
+
+[node name="SquareHazard9" parent="RightBlade" unique_id=1753677049 instance=ExtResource("1_d3gqx")]
+position = Vector2(28, 0)
+
+[node name="SquareHazard10" parent="RightBlade" unique_id=1999588274 instance=ExtResource("1_d3gqx")]
+position = Vector2(37, 0)
+
+[node name="LeftBlade" type="Node2D" parent="." unique_id=1543305284]
+rotation = 3.1415927
+
+[node name="SquareHazard1" parent="LeftBlade" unique_id=1807123565 instance=ExtResource("1_d3gqx")]
+position = Vector2(-44, 0)
+
+[node name="SquareHazard2" parent="LeftBlade" unique_id=2056270036 instance=ExtResource("1_d3gqx")]
+position = Vector2(-35, 0)
+
+[node name="SquareHazard3" parent="LeftBlade" unique_id=689744759 instance=ExtResource("1_d3gqx")]
+position = Vector2(-26, 0)
+
+[node name="SquareHazard4" parent="LeftBlade" unique_id=1356571926 instance=ExtResource("1_d3gqx")]
+position = Vector2(-17, 0)
+
+[node name="SquareHazard5" parent="LeftBlade" unique_id=1539154451 instance=ExtResource("1_d3gqx")]
+position = Vector2(-8, 0)
+
+[node name="SquareHazard6" parent="LeftBlade" unique_id=1062634106 instance=ExtResource("1_d3gqx")]
+position = Vector2(1, 0)
+
+[node name="SquareHazard7" parent="LeftBlade" unique_id=505081609 instance=ExtResource("1_d3gqx")]
+position = Vector2(10, 0)
+
+[node name="SquareHazard8" parent="LeftBlade" unique_id=1671695857 instance=ExtResource("1_d3gqx")]
+position = Vector2(19, 0)
+
+[node name="SquareHazard9" parent="LeftBlade" unique_id=504410644 instance=ExtResource("1_d3gqx")]
+position = Vector2(28, 0)
+
+[node name="SquareHazard10" parent="LeftBlade" unique_id=675319292 instance=ExtResource("1_d3gqx")]
+position = Vector2(37, 0)
+
+[node name="TopBlade" type="Node2D" parent="." unique_id=628957337]
+rotation = -1.5707964
+
+[node name="SquareHazard1" parent="TopBlade" unique_id=2081284984 instance=ExtResource("1_d3gqx")]
+position = Vector2(-44, 0)
+
+[node name="SquareHazard2" parent="TopBlade" unique_id=696982101 instance=ExtResource("1_d3gqx")]
+position = Vector2(-35, 0)
+
+[node name="SquareHazard3" parent="TopBlade" unique_id=1603141396 instance=ExtResource("1_d3gqx")]
+position = Vector2(-26, 0)
+
+[node name="SquareHazard4" parent="TopBlade" unique_id=2046164548 instance=ExtResource("1_d3gqx")]
+position = Vector2(-17, 0)
+
+[node name="SquareHazard5" parent="TopBlade" unique_id=1265266746 instance=ExtResource("1_d3gqx")]
+position = Vector2(-8, 0)
+
+[node name="SquareHazard6" parent="TopBlade" unique_id=585127362 instance=ExtResource("1_d3gqx")]
+position = Vector2(1, 0)
+
+[node name="SquareHazard7" parent="TopBlade" unique_id=558831493 instance=ExtResource("1_d3gqx")]
+position = Vector2(10, 0)
+
+[node name="SquareHazard8" parent="TopBlade" unique_id=1997724160 instance=ExtResource("1_d3gqx")]
+position = Vector2(19, 0)
+
+[node name="SquareHazard9" parent="TopBlade" unique_id=1527287239 instance=ExtResource("1_d3gqx")]
+position = Vector2(28, 0)
+
+[node name="SquareHazard10" parent="TopBlade" unique_id=277625247 instance=ExtResource("1_d3gqx")]
+position = Vector2(37, 0)
+
+[node name="BottomBlade" type="Node2D" parent="." unique_id=345496558]
+rotation = 1.5707964
+
+[node name="SquareHazard1" parent="BottomBlade" unique_id=857320961 instance=ExtResource("1_d3gqx")]
+position = Vector2(-44, 0)
+
+[node name="SquareHazard2" parent="BottomBlade" unique_id=995488683 instance=ExtResource("1_d3gqx")]
+position = Vector2(-35, 0)
+
+[node name="SquareHazard3" parent="BottomBlade" unique_id=1099889267 instance=ExtResource("1_d3gqx")]
+position = Vector2(-26, 0)
+
+[node name="SquareHazard4" parent="BottomBlade" unique_id=635748852 instance=ExtResource("1_d3gqx")]
+position = Vector2(-17, 0)
+
+[node name="SquareHazard5" parent="BottomBlade" unique_id=176568824 instance=ExtResource("1_d3gqx")]
+position = Vector2(-8, 0)
+
+[node name="SquareHazard6" parent="BottomBlade" unique_id=543108240 instance=ExtResource("1_d3gqx")]
+position = Vector2(1, 0)
+
+[node name="SquareHazard7" parent="BottomBlade" unique_id=971183797 instance=ExtResource("1_d3gqx")]
+position = Vector2(10, 0)
+
+[node name="SquareHazard8" parent="BottomBlade" unique_id=1024478296 instance=ExtResource("1_d3gqx")]
+position = Vector2(19, 0)
+
+[node name="SquareHazard9" parent="BottomBlade" unique_id=989370297 instance=ExtResource("1_d3gqx")]
+position = Vector2(28, 0)
+
+[node name="SquareHazard10" parent="BottomBlade" unique_id=2020412566 instance=ExtResource("1_d3gqx")]
+position = Vector2(37, 0)

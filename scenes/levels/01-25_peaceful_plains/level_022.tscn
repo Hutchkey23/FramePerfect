@@ -43,6 +43,8 @@ player_spawn_path = NodePath("../PlayerSpawn")
 camera_path = NodePath("../GameCamera")
 cinematic_bars_path = NodePath("../CinematicBars")
 level_ui_path = NodePath("../LevelUI")
+platforms_path = NodePath("../Platforms")
+hazards_path = NodePath("../Hazards")
 
 [node name="LevelUI" parent="." unique_id=687480857 instance=ExtResource("2_kv16e")]
 layer = 2

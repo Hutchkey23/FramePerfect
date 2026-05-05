@@ -47,6 +47,8 @@ player_spawn_path = NodePath("../PlayerSpawn")
 camera_path = NodePath("../GameCamera")
 cinematic_bars_path = NodePath("../CinematicBars")
 level_ui_path = NodePath("../LevelUI")
+platforms_path = NodePath("../Platforms")
+hazards_path = NodePath("../Hazards")
 
 [node name="LevelUI" parent="." unique_id=687480857 instance=ExtResource("2_0v244")]
 layer = 2
@@ -81,6 +83,8 @@ tile_set = ExtResource("5_5vamg")
 [node name="Walls" type="TileMapLayer" parent="Map" unique_id=766012576]
 tile_map_data = PackedByteArray("AAD4/wIAAAAGAAoAAAD5/wIAAAAAAAsAAAD6/wIAAAAAAAsAAAD7/wIAAAAFAAoAAAD9/wEAAAAAAAsAAAD+//7/AAABAAsAAAD+/wEAAAAAAAsAAAD///7/AAABAAsAAAD//wEAAAAAAAsAAAAAAP7/AAABAAsAAAAAAAEAAAAAAAsAAAABAP7/AAABAAsAAAABAAEAAAAAAAsAAAACAAEAAAAAAAsAAAAEAAIAAAAGAAoAAAAFAAIAAAAAAAsAAAAGAAIAAAAAAAsAAAAHAAIAAAAFAAoAAAAEAAEAAAADAAoAAAD4/wEAAAADAAoAAAAEAP7/AAACAAoAAAAFAP3/AAABAAsAAAAGAP3/AAABAAsAAAADAAEAAAAAAAsAAAACAP7/AAABAAsAAAADAP7/AAABAAsAAAD3/wAAAAADAAsAAAD3/wEAAAAGAAoAAAAHAP3/AAAFAAsAAAAEAP3/AAAGAAsAAAD3//7/AAAGAAsAAAD3////AAADAAsAAAD4//3/AAAGAAsAAAD4//7/AAACAAoAAAD5//3/AAABAAsAAAD6//3/AAABAAsAAAD7//3/AAAFAAsAAAD9//7/AAABAAsAAAAHAP7/AAABAAoAAAAHAAEAAAAEAAoAAAAIAP7/AAAFAAsAAAAIAP//AAACAAsAAAAIAAAAAAACAAsAAAAIAAEAAAAFAAoAAAD7//7/AAABAAoAAAD7/wEAAAAEAAoAAAD8//7/AAABAAsAAAD8/wEAAAAAAAsAAAA=")
 tile_set = ExtResource("5_5vamg")
+
+[node name="Platforms" type="Node2D" parent="." unique_id=1928273324]
 
 [node name="Hazards" type="Node2D" parent="." unique_id=798262580]
 position = Vector2(168, 79)

@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://dpxl7jq3jum6f" path="res://scripts/props/stamp.gd" id="1_nggph"]
 [ext_resource type="Texture2D" uid="uid://ex76bgpxt2i3" path="res://assets/sprites/stamps/stamp1.png" id="1_p1px8"]
+[ext_resource type="Texture2D" uid="uid://iryghwbjj8a6" path="res://assets/sprites/player/player_shadow.png" id="2_ktmbg"]
 [ext_resource type="Texture2D" uid="uid://brbyo0k64joub" path="res://assets/sprites/stamps/stamp_sparkle.png" id="4_ktmbg"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_nggph"]
@@ -28,6 +29,10 @@ color_ramp = SubResource("GradientTexture1D_clklu")
 [node name="Stamp" type="Area2D" unique_id=1205574617 groups=["stamps"]]
 collision_layer = 16
 script = ExtResource("1_nggph")
+
+[node name="StampShadow" type="Sprite2D" parent="." unique_id=1301399369]
+position = Vector2(1, 1)
+texture = ExtResource("2_ktmbg")
 
 [node name="StampSprite" type="Sprite2D" parent="." unique_id=260929810]
 texture = ExtResource("1_p1px8")

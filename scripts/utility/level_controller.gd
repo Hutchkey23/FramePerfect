@@ -22,8 +22,8 @@ const STAMP = preload("uid://dpvbyd8v5auob")
 @export var camera_path: NodePath
 @export var cinematic_bars_path: NodePath
 @export var level_ui_path: NodePath
-@export var hazards_path: NodePath
 @export var platforms_path: NodePath
+@export var hazards_path: NodePath
 
 
 var level_id : String = ""
@@ -201,14 +201,6 @@ func retry_level() -> void:
 	await get_tree().process_frame
 	spawn_stamps()
 	
-	if platforms_container:
-		for platform in platforms_container.get_children():
-			platform._ready()
-	
-	if hazards_container:
-		for hazard in hazards_container.get_children():
-			hazard._ready()
-	
 	cinematic_bars.show_bars()
 	
 	player.retry_level()
@@ -236,3 +228,10 @@ func spawn_stamps() -> void:
 func despawn_stamps() -> void:
 	for stamp in get_tree().get_nodes_in_group("stamps"):
 		stamp.queue_free()
+
+func get_all_children(node: Node) -> Array:
+	var result := []
+	for child in node.get_children():
+		result.append(child)
+		result += get_all_children(child)
+	return result
