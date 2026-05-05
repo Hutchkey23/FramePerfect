@@ -23,8 +23,8 @@ player_spawn_path = NodePath("../PlayerSpawn")
 camera_path = NodePath("../GameCamera")
 cinematic_bars_path = NodePath("../CinematicBars")
 level_ui_path = NodePath("../LevelUI")
-hazards_path = NodePath("../Hazards")
 platforms_path = NodePath("../Platforms")
+hazards_path = NodePath("../Hazards")
 
 [node name="LevelUI" parent="." unique_id=687480857 instance=ExtResource("7_ba2xq")]
 layer = 2
@@ -34,6 +34,7 @@ level_controller_path = NodePath("../LevelController")
 
 [node name="Player" parent="." unique_id=1458309070 instance=ExtResource("2_r76bd")]
 position = Vector2(48, 96)
+game_camera_path = NodePath("../GameCamera")
 
 [node name="PlayerSpawn" type="Node2D" parent="." unique_id=535208430]
 position = Vector2(48, 96)

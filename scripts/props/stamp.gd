@@ -35,6 +35,8 @@ const STAMP_TEXTURES := [
 	preload("res://assets/sprites/stamps/stamp_26.png"),
 ]
 
+var is_collected: bool = false
+
 func _ready() -> void:
 	stamp_sprite.texture = STAMP_TEXTURES.pick_random()
 
@@ -44,6 +46,9 @@ func _process(_delta: float) -> void:
 
 
 func collect():
+	if is_collected:
+		return
+	is_collected = true
 	collected.emit(self)
 	
 	var tween = create_tween()

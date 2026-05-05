@@ -60,6 +60,7 @@ visible = false
 
 [node name="Player" parent="." unique_id=1458309070 instance=ExtResource("4_hgjic")]
 position = Vector2(62, 90)
+game_camera_path = NodePath("../GameCamera")
 
 [node name="PlayerSpawn" type="Node2D" parent="." unique_id=535208430]
 position = Vector2(62, 90)

@@ -12,6 +12,8 @@ signal goal_reached
 @onready var floor_hazard_detection_area: Area2D = $FloorHazardDetectionArea
 @onready var stamp_collection_area: Area2D = $StampCollectionArea
 
+@export var game_camera_path: NodePath
+
 # AUDIO #
 @onready var sfx_pool: Node2D = $SFXPool
 
@@ -172,7 +174,7 @@ var player_sprite_landing_tween: Tween
 var shadow_sprite_landing_tween: Tween
 
 # Camera
-var camera_reference: GameCamera
+@onready var camera_reference: GameCamera = get_node(game_camera_path)
 
 # Jump Interactions
 var safe_platform_count: int = 0
@@ -185,7 +187,6 @@ var goal_overlapping: bool = false
 func _ready() -> void:
 	sprite_ground_y = player_sprite.position.y
 	sprite_normal_scale = player_sprite.scale
-	camera_reference = get_tree().get_first_node_in_group("game_camera")
 	fail_label.visible = false
 	
 	var skin_id = SaveManager.get_selected_skin("player")
