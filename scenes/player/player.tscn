@@ -5,6 +5,9 @@
 [ext_resource type="Script" uid="uid://cry0ys24kicg1" path="res://scripts/player/player.gd" id="1_gmlin"]
 [ext_resource type="FontFile" uid="uid://vklaqlxxc5o7" path="res://assets/fonts/Whacky_Joe.ttf" id="4_lvxji"]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_p47bc"]
+size = Vector2(8, 8)
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dovo2"]
 size = Vector2(8, 8)
 
@@ -29,6 +32,12 @@ texture = ExtResource("1_dovo2")
 [node name="PlayerSprite" type="Sprite2D" parent="." unique_id=1276956797]
 texture = ExtResource("1_8afob")
 
+[node name="StampCollectionArea" type="Area2D" parent="PlayerSprite" unique_id=902950748]
+collision_mask = 16
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerSprite/StampCollectionArea" unique_id=48822568]
+shape = SubResource("RectangleShape2D_p47bc")
+
 [node name="PlayerCollision" type="CollisionShape2D" parent="." unique_id=894170625]
 visible = false
 shape = SubResource("RectangleShape2D_dovo2")
@@ -36,7 +45,7 @@ shape = SubResource("RectangleShape2D_dovo2")
 [node name="DashTimer" type="Timer" parent="." unique_id=313604202]
 
 [node name="InteractionArea" type="Area2D" parent="." unique_id=419232090]
-collision_mask = 60
+collision_mask = 44
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="InteractionArea" unique_id=74698378]
 shape = SubResource("RectangleShape2D_gmlin")
@@ -79,6 +88,7 @@ bus = &"SFX"
 [node name="AudioStreamPlayer2D5" type="AudioStreamPlayer2D" parent="SFXPool" unique_id=1723615548]
 bus = &"SFX"
 
+[connection signal="area_entered" from="PlayerSprite/StampCollectionArea" to="." method="_on_stamp_collection_area_area_entered"]
 [connection signal="area_entered" from="InteractionArea" to="." method="_on_interaction_area_area_entered"]
 [connection signal="area_exited" from="InteractionArea" to="." method="_on_interaction_area_area_exited"]
 [connection signal="body_entered" from="InteractionArea" to="." method="_on_interaction_area_body_entered"]

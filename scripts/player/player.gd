@@ -10,6 +10,7 @@ signal goal_reached
 @onready var fail_label: RichTextLabel = $FailLabel
 @onready var interaction_area: Area2D = $InteractionArea
 @onready var floor_hazard_detection_area: Area2D = $FloorHazardDetectionArea
+@onready var stamp_collection_area: Area2D = $StampCollectionArea
 
 # AUDIO #
 @onready var sfx_pool: Node2D = $SFXPool
@@ -708,12 +709,6 @@ func _on_interaction_area_area_entered(area: Area2D) -> void:
 		if current_state == PlayerState.JUMP:
 			return
 		die()
-	
-	if area.is_in_group("stamps"):
-		if get_tree().get_node_count_in_group("stamps") > 1:
-			play_sfx(COLLECT_STAMP_SFX, COLLECT_STAMP_VOLUME, COLLECT_STAMP_PITCH_RANGE)
-		
-		area.collect()
 		
 	if area.is_in_group("safe_platforms"):
 		if area is MovingPlatform and not safe_platforms.has(area):
@@ -747,6 +742,13 @@ func _on_floor_hazard_detection_area_body_entered(body: Node2D) -> void:
 func _on_floor_hazard_detection_area_body_exited(body: Node2D) -> void:
 	if body.is_in_group("floor_hazards"):
 		overlapping_floor_hazard_count = max(0, overlapping_floor_hazard_count - 1)
+
+func _on_stamp_collection_area_area_entered(area: Area2D) -> void:
+	if area.is_in_group("stamps"):
+		if get_tree().get_node_count_in_group("stamps") > 1:
+			play_sfx(COLLECT_STAMP_SFX, COLLECT_STAMP_VOLUME, COLLECT_STAMP_PITCH_RANGE)
+		
+		area.collect()
 
 func show_fail_label() -> void:
 	var random_word = fail_words.pick_random()
