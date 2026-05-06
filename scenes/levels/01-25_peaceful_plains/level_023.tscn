@@ -31,9 +31,11 @@ hazards_path = NodePath("../Hazards")
 
 [node name="LevelUI" parent="." unique_id=687480857 instance=ExtResource("2_35vhp")]
 layer = 2
+visible = false
 level_controller_path = NodePath("../LevelController")
 
 [node name="CinematicBars" parent="." unique_id=3966864 instance=ExtResource("3_3vq6s")]
+visible = false
 
 [node name="Player" parent="." unique_id=1458309070 instance=ExtResource("4_leqjh")]
 z_index = 2
@@ -58,6 +60,7 @@ tile_map_data = PackedByteArray("AAD4/wAAAAAAAAEAAAD4/wEAAAAAAAEAAAD5/wAAAAAAAAE
 tile_set = ExtResource("5_1fh80")
 
 [node name="Shadows" type="TileMapLayer" parent="Map" unique_id=255637794]
+tile_map_data = PackedByteArray("AAD3//3/AAABAAMAAAD3//7/AAABAAMAAAD3////AAABAAMAAAD4/wAAAAABAAMAAAD4/wEAAAABAAMAAAD4/wIAAAABAAMAAAD4/wMAAAABAAMAAAD4/wQAAAABAAMAAAD4/wUAAAABAAMAAAD4/wYAAAABAAMAAAD4/wcAAAABAAMAAAD4/wgAAAABAAMAAAD4/wkAAAABAAMAAAD4/woAAAABAAMAAAD4/wsAAAABAAMAAAD4/wwAAAABAAMAAAD4/w0AAAABAAMAAAD4/w4AAAABAAMAAAD4/w8AAAABAAMAAAD4/xAAAAABAAMAAAD3//z/AAAFAAMAAAD4//z/AAAAAAMAAAD5//z/AAAAAAMAAAD6//z/AAAAAAMAAAD7//z/AAAAAAMAAAABAPz/AAAAAAMAAAACAPz/AAAAAAMAAAADAPz/AAAAAAMAAAAEAPz/AAAAAAMAAAAAAPz/AAAFAAMAAAAAAP3/AAABAAMAAAAAAP7/AAABAAMAAAAAAP//AAABAAMAAAABAAAAAAABAAMAAAABAAEAAAABAAMAAAABAAIAAAABAAMAAAABAAMAAAABAAMAAAABAAQAAAABAAMAAAABAAUAAAABAAMAAAABAAYAAAABAAMAAAABAAcAAAABAAMAAAABAAgAAAABAAMAAAABAAkAAAABAAMAAAABAAoAAAABAAMAAAABAAsAAAABAAMAAAABAAwAAAABAAMAAAABAA0AAAABAAMAAAD7/w4AAAAAAAMAAAD8/w4AAAAAAAMAAAD9/w4AAAAAAAMAAAD+/w4AAAAAAAMAAAD//w4AAAAAAAMAAAAAAA4AAAAAAAMAAAABAA4AAAABAAQAAAA=")
 tile_set = ExtResource("5_1fh80")
 
 [node name="Walls" type="TileMapLayer" parent="Map" unique_id=766012576]
@@ -169,5 +172,8 @@ position = Vector2(40, -16)
 position = Vector2(-104, -16)
 
 [node name="GameCamera" parent="." unique_id=13152400 node_paths=PackedStringArray("target") instance=ExtResource("11_v26p3")]
+z_index = 3
 target = NodePath("../Player")
 fixed_position = Vector2(160, 90)
+use_bounds = true
+bounds = Rect2(-327.95, -65, 620.39, 372.785)

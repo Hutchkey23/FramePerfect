@@ -10,7 +10,6 @@ class_name MovingPlatformPath
 
 @onready var path: PathFollow2D = $PathFollow2D
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
-@onready var hazard: Area2D = $Hazard
 
 var last_global_position: Vector2
 var movement_delta: Vector2 = Vector2.ZERO

@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="LevelData" format=3 uid="uid://d4dik6gl5f4or"]
+
+[ext_resource type="PackedScene" uid="uid://dqhvqsdypskj5" path="res://scenes/levels/01-25_peaceful_plains/level_020.tscn" id="1_gvsg5"]
+[ext_resource type="Script" uid="uid://do5fdotl7d638" path="res://resources/level_data/level_data.gd" id="2_vvyyy"]
+
+[resource]
+script = ExtResource("2_vvyyy")
+level_id = "level_020"
+level_title = "w"
+medal_time = 6.5
+level_scene = ExtResource("1_gvsg5")
+metadata/_custom_type_script = "uid://do5fdotl7d638"

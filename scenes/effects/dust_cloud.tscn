@@ -4,6 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://c71x4oxii7akn" path="res://assets/sprites/particles/dust_cloud.png" id="2_cvg8x"]
 
 [node name="DustCloud" type="Node2D" unique_id=711861348]
+z_index = 2
 script = ExtResource("1_afl6q")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1595034794]

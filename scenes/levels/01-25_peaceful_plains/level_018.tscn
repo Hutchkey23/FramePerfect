@@ -718,6 +718,8 @@ position = Vector2(158, -212)
 [node name="GameCamera" parent="." unique_id=13152400 node_paths=PackedStringArray("target") instance=ExtResource("9_p8sxm")]
 target = NodePath("../Player")
 fixed_position = Vector2(160, 90)
+use_bounds = true
+bounds = Rect2(60, -296, 200, 491.88)
 
 [editable path="Hazards/LaserHazard2"]
 [editable path="Hazards/LaserHazard4"]

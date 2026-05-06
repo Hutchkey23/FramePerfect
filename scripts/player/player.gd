@@ -10,7 +10,6 @@ signal goal_reached
 @onready var fail_label: RichTextLabel = $FailLabel
 @onready var interaction_area: Area2D = $InteractionArea
 @onready var floor_hazard_detection_area: Area2D = $FloorHazardDetectionArea
-@onready var stamp_collection_area: Area2D = $StampCollectionArea
 
 @export var game_camera_path: NodePath
 

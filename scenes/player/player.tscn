@@ -57,6 +57,7 @@ collision_mask = 4
 shape = SubResource("RectangleShape2D_lvxji")
 
 [node name="FailLabel" type="RichTextLabel" parent="." unique_id=1408916861]
+z_index = 3
 offset_left = -33.0
 offset_top = -14.0
 offset_right = 33.0
