@@ -1,3 +1,4 @@
+@tool
 extends Node2D
 class_name GameCamera
 
@@ -12,6 +13,21 @@ enum CameraMode {
 @export var fixed_position: Vector2 = Vector2.ZERO
 @export var shake_decay: float = 18.0
 
+@export var use_bounds: bool = false:
+	set(value):
+		use_bounds = value
+		queue_redraw()
+
+@export var bounds: Rect2:
+	set(value):
+		bounds = value
+		queue_redraw()
+
+@export var show_bounds_in_editor: bool = true:
+	set(value):
+		show_bounds_in_editor = value
+		queue_redraw()
+
 @onready var camera: Camera2D = $Camera2D
 
 var shake_strength: float = 0.0
@@ -24,19 +40,40 @@ func _ready() -> void:
 	if mode == CameraMode.FIXED:
 		fixed_camera_level = true
 
+func _draw() -> void:
+	if not Engine.is_editor_hint():
+		return
+	
+	if not show_bounds_in_editor:
+		return
+	
+	if not use_bounds:
+		return
+	
+	draw_rect(bounds, Color.WHITE, false, 2.0)
 
 func _process(delta: float) -> void:
+	if Engine.is_editor_hint():
+		queue_redraw()
+		return
+	
 	update_base_position(delta)
 	update_shake(delta)
-
 
 func update_base_position(delta: float) -> void:
 	var target_position := get_base_position()
 
+	var new_position: Vector2
+
 	if mode == CameraMode.FOLLOW:
-		global_position = global_position.lerp(target_position, follow_smoothing * delta)
+		new_position = global_position.lerp(target_position, follow_smoothing * delta)
 	else:
-		global_position = target_position
+		new_position = target_position
+
+	# Clamp if enabled
+	new_position = get_clamped_position(new_position)
+
+	global_position = new_position
 
 
 func get_base_position() -> Vector2:
@@ -51,6 +88,28 @@ func get_base_position() -> Vector2:
 
 	return global_position
 
+func get_clamped_position(pos: Vector2) -> Vector2:
+	if not use_bounds:
+		return pos
+	
+	var viewport_size := get_viewport_rect().size
+	var half_view := (viewport_size * 0.5) / camera.zoom
+	
+	var min_pos := bounds.position + half_view
+	var max_pos := bounds.end - half_view
+	
+	# If bounds are smaller than the camera view, center camera in bounds.
+	if min_pos.x > max_pos.x:
+		pos.x = bounds.get_center().x
+	else:
+		pos.x = clamp(pos.x, min_pos.x, max_pos.x)
+	
+	if min_pos.y > max_pos.y:
+		pos.y = bounds.get_center().y
+	else:
+		pos.y = clamp(pos.y, min_pos.y, max_pos.y)
+	
+	return pos
 
 func update_shake(delta: float) -> void:
 	if shake_strength > 0.0:
