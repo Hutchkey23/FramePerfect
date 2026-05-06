@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="LevelData" format=3 uid="uid://bc3kk8rb6ukbw"]
+
+[ext_resource type="PackedScene" uid="uid://dr611alfsel72" path="res://scenes/levels/26-50_scorched_sands/level_027.tscn" id="1_d7440"]
+[ext_resource type="Script" uid="uid://do5fdotl7d638" path="res://resources/level_data/level_data.gd" id="2_8p0dl"]
+
+[resource]
+script = ExtResource("2_8p0dl")
+level_id = "level_027"
+level_title = "be smart"
+medal_time = 3.2
+level_scene = ExtResource("1_d7440")
+metadata/_custom_type_script = "uid://do5fdotl7d638"

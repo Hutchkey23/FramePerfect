@@ -1,0 +1,17 @@
+[gd_scene format=3 uid="uid://cy567go6v1isl"]
+
+[ext_resource type="Texture2D" uid="uid://qk2cmdyouqgj" path="res://assets/sprites/props/toggle_block/toggle_platform_on.png" id="1_bhaou"]
+[ext_resource type="Script" uid="uid://6b67141e3552" path="res://scripts/props/toggle_platform.gd" id="1_i4a23"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_i4a23"]
+size = Vector2(24, 24)
+
+[node name="TogglePlatform" type="Area2D" unique_id=588717540 groups=["safe_platforms"]]
+collision_layer = 32
+script = ExtResource("1_i4a23")
+
+[node name="TogglePlatformSprite" type="Sprite2D" parent="." unique_id=530651167]
+texture = ExtResource("1_bhaou")
+
+[node name="TogglePlatformCollision" type="CollisionShape2D" parent="." unique_id=1768008268]
+shape = SubResource("RectangleShape2D_i4a23")

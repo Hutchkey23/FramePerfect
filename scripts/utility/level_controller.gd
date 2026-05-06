@@ -25,6 +25,7 @@ const STAMP = preload("uid://dpvbyd8v5auob")
 @export var level_ui_path: NodePath
 @export var platforms_path: NodePath
 @export var hazards_path: NodePath
+@export var toggle_blocks_path: NodePath
 
 
 var level_id : String = ""
@@ -44,15 +45,16 @@ var loading_next_level : bool = false
 @onready var stamps: Node2D = $"../Stamps"
 @onready var platforms_container: Node2D = get_node(platforms_path)
 @onready var hazards_container: Node2D = get_node(hazards_path)
+@onready var toggle_blocks_container: Node2D = get_node(toggle_blocks_path)
 
 # ANALOG #
 const ANALOG_START_THRESHOLD: float = 0.55
 var analog_start_was_pressed: bool = false
 
 func _ready() -> void:
-	 #DEBUG
-	enter_intro_state()
-	 #END DEBUG
+	 ##DEBUG
+	#enter_intro_state()
+	 ##END DEBUG
 	
 	connect_signals()
 	player.position = player_spawn.position
@@ -198,11 +200,13 @@ func _on_goal_reached() -> void:
 	complete_level()
 
 func retry_level() -> void:
-	#retry_level_requested.emit()
-	#return
+	retry_level_requested.emit()
+	return
 	despawn_stamps()
 	await get_tree().process_frame
 	spawn_stamps()
+	
+	reset_toggle_blocks()
 	
 	cinematic_bars.show_bars()
 	
@@ -214,6 +218,13 @@ func retry_level() -> void:
 	level_ui.retry_level()
 	player.position = player_spawn.position
 	enter_intro_state()
+
+func reset_toggle_blocks() -> void:
+	if not toggle_blocks_container:
+		return
+	
+	for toggle_block in toggle_blocks_container.get_children():
+		toggle_block._ready()
 
 func spawn_stamps() -> void:
 	var stamps_in_level: bool = false

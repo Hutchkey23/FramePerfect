@@ -1,6 +1,7 @@
 extends CharacterBody2D
 class_name Player
 
+signal player_jumped
 signal died
 signal goal_reached
 
@@ -595,6 +596,8 @@ func start_jump() -> void:
 			jump_locked_direction = last_move_input.normalized()
 	
 	play_sfx(JUMP_SFX, JUMP_VOLUME, JUMP_PITCH_RANGE)
+	
+	player_jumped.emit()
 	
 	var jump_cloud_instance = JUMP_CLOUD.instantiate()
 	get_parent().add_child(jump_cloud_instance)

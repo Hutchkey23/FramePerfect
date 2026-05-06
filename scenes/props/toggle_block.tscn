@@ -1,0 +1,17 @@
+[gd_scene format=3 uid="uid://bopp28ci4s4xu"]
+
+[ext_resource type="Script" uid="uid://84tny8aiopr4" path="res://scripts/props/toggle_block.gd" id="1_0151w"]
+[ext_resource type="Texture2D" uid="uid://3031j7vqm26d" path="res://assets/sprites/props/toggle_block/toggle_block_on.png" id="1_fjdo1"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0151w"]
+size = Vector2(16, 16)
+
+[node name="ToggleBlock" type="StaticBody2D" unique_id=384204412]
+collision_layer = 2
+script = ExtResource("1_0151w")
+
+[node name="ToggleBlockCollision" type="CollisionShape2D" parent="." unique_id=189464383]
+shape = SubResource("RectangleShape2D_0151w")
+
+[node name="ToggleBlockSprite" type="Sprite2D" parent="." unique_id=1446868098]
+texture = ExtResource("1_fjdo1")

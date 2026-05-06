@@ -176,7 +176,7 @@ position = Vector2(2, -1)
 shape = SubResource("RectangleShape2D_ub4hd")
 
 [node name="CompletionLabel" type="RichTextLabel" parent="." unique_id=1839295232]
-z_index = 1
+z_index = 5
 custom_minimum_size = Vector2(100, 0)
 offset_left = -64.0
 offset_top = -21.0
@@ -194,7 +194,7 @@ horizontal_alignment = 1
 vertical_alignment = 2
 
 [node name="NewBestOrMedalLabel" type="RichTextLabel" parent="." unique_id=1180496778]
-z_index = 1
+z_index = 5
 offset_left = -57.0
 offset_top = 9.0
 offset_right = 57.0

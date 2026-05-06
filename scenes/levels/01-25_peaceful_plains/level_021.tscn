@@ -61,6 +61,7 @@ material = SubResource("ShaderMaterial_wwkcr")
 tile_set = ExtResource("5_tsnkd")
 
 [node name="Shadows" type="TileMapLayer" parent="Map" unique_id=255637794]
+tile_map_data = PackedByteArray("AAAAAAEAAAABAAMAAAAAAAIAAAABAAMAAAAAAAMAAAABAAMAAAAAAAQAAAABAAMAAAAAAAUAAAABAAMAAAAAAAYAAAABAAMAAAAAAAcAAAABAAMAAAAAAAgAAAABAAMAAAAAAAkAAAABAAMAAAAAAAAAAAAFAAMAAAABAAAAAAAAAAMAAAACAAAAAAAAAAMAAAADAAAAAAAAAAMAAAAEAAAAAAAAAAMAAAAFAAAAAAAAAAMAAAAGAAAAAAAAAAMAAAAHAAAAAAAAAAMAAAAIAAAAAAAAAAMAAAAJAAAAAAAAAAMAAAAKAAAAAAAAAAMAAAALAAAAAAAAAAMAAAAMAAAAAAAAAAMAAAANAAAAAAAAAAMAAAAOAAAAAAAAAAMAAAAPAAAAAAAAAAMAAAAQAAAAAAAAAAMAAAARAAAAAAAAAAMAAAASAAAAAAAAAAMAAAA=")
 tile_set = ExtResource("5_tsnkd")
 
 [node name="Walls" type="TileMapLayer" parent="Map" unique_id=766012576]
@@ -404,7 +405,7 @@ position = Vector2(296, 88)
 
 [node name="GameCamera" parent="." unique_id=13152400 node_paths=PackedStringArray("target") instance=ExtResource("11_hqf3d")]
 visible = false
-position = Vector2(64, 71)
+position = Vector2(160, 90)
 mode = 1
 target = NodePath("../Player")
 fixed_position = Vector2(160, 90)

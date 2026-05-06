@@ -165,6 +165,7 @@ position = Vector2(245, 90)
 
 [node name="GameCamera" parent="." unique_id=13152400 node_paths=PackedStringArray("target") instance=ExtResource("9_drxho")]
 visible = false
+position = Vector2(160, 90)
 mode = 1
 target = NodePath("../Player")
 fixed_position = Vector2(160, 90)

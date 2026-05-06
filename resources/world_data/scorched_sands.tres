@@ -4,6 +4,8 @@
 [ext_resource type="Texture2D" uid="uid://c3aj3ftm4kt52" path="res://assets/sprites/postcards/peaceful_plains_back.png" id="1_jc37b"]
 [ext_resource type="Resource" uid="uid://dkkju3rcpb0jw" path="res://resources/level_data/26-50_scorched_sands/level_028.tres" id="2_6nu2j"]
 [ext_resource type="Texture2D" uid="uid://mgecgx064wa3" path="res://assets/sprites/postcards/scorched_sands.png" id="2_qlhq7"]
+[ext_resource type="Resource" uid="uid://wsj02jqhdi0x" path="res://resources/level_data/26-50_scorched_sands/level_026.tres" id="4_88p53"]
+[ext_resource type="Resource" uid="uid://bc3kk8rb6ukbw" path="res://resources/level_data/26-50_scorched_sands/level_027.tres" id="5_gqwom"]
 [ext_resource type="Resource" uid="uid://cbugyq0hyq1c8" path="res://resources/level_data/26-50_scorched_sands/level_030.tres" id="5_qlhq7"]
 [ext_resource type="Script" uid="uid://gba83foepn6x" path="res://resources/world_data/world_data.gd" id="15_u417j"]
 
@@ -13,7 +15,7 @@ world_id = "scorched_sands"
 world_title = "Scorched Sands"
 world_number = 2
 world_intro_text = "Scorched Sands"
-levels = Array[ExtResource("1_7ykru")]([ExtResource("2_6nu2j"), ExtResource("5_qlhq7")])
+levels = Array[ExtResource("1_7ykru")]([ExtResource("4_88p53"), ExtResource("5_gqwom"), ExtResource("2_6nu2j"), ExtResource("5_qlhq7")])
 front_image = ExtResource("2_qlhq7")
 back_image = ExtResource("1_jc37b")
 font_color = Color(0.972549, 0.627451, 0.09803922, 1)
