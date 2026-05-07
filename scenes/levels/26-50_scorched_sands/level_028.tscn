@@ -7,7 +7,9 @@
 [ext_resource type="TileSet" uid="uid://7q8eymh2ksuh" path="res://scenes/tilesets/main_floor_and_walls.tres" id="5_t4r33"]
 [ext_resource type="Shader" uid="uid://cyftftn8qvqe5" path="res://shaders/hazard_shader.gdshader" id="6_e7y3a"]
 [ext_resource type="PackedScene" uid="uid://cwv3wpwmybmey" path="res://scenes/props/goal.tscn" id="7_lafkg"]
+[ext_resource type="Script" uid="uid://cyfx3hv4kfs08" path="res://scripts/props/toggle_items_manager.gd" id="7_oygm1"]
 [ext_resource type="PackedScene" uid="uid://ca2uxdoweqwc1" path="res://scenes/utility/game_camera.tscn" id="8_2m0j3"]
+[ext_resource type="PackedScene" uid="uid://bopp28ci4s4xu" path="res://scenes/props/toggle_block.tscn" id="8_m06s3"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_wwkcr"]
 shader = ExtResource("6_e7y3a")
@@ -64,6 +66,24 @@ tile_set = ExtResource("5_t4r33")
 
 [node name="Hazards" type="Node2D" parent="." unique_id=798262580]
 
+[node name="ToggleItems" type="Node2D" parent="." unique_id=998379046]
+script = ExtResource("7_oygm1")
+player_path = NodePath("../Player")
+
+[node name="ToggleBlock" parent="ToggleItems" unique_id=384204412 instance=ExtResource("8_m06s3")]
+position = Vector2(128, 4)
+start_toggled = false
+
+[node name="ToggleBlock2" parent="ToggleItems" unique_id=1658235032 instance=ExtResource("8_m06s3")]
+position = Vector2(144, 4)
+start_toggled = false
+
+[node name="ToggleBlock3" parent="ToggleItems" unique_id=871416020 instance=ExtResource("8_m06s3")]
+position = Vector2(128, 99)
+
+[node name="ToggleBlock4" parent="ToggleItems" unique_id=1200068128 instance=ExtResource("8_m06s3")]
+position = Vector2(144, 99)
+
 [node name="Stamps" type="Node2D" parent="." unique_id=123113769]
 
 [node name="StampLocation1" type="Node2D" parent="Stamps" unique_id=1733500007]
@@ -79,5 +99,6 @@ position = Vector2(136, -38)
 position = Vector2(136, 186)
 
 [node name="GameCamera" parent="." unique_id=13152400 node_paths=PackedStringArray("target") instance=ExtResource("8_2m0j3")]
+position = Vector2(136, 349)
 target = NodePath("../Player")
 fixed_position = Vector2(160, 90)

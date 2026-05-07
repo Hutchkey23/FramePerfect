@@ -19,7 +19,7 @@ shader_parameter/center_glow_strength = 0.0
 
 [sub_resource type="Curve2D" id="Curve2D_mah6v"]
 _data = {
-"points": PackedVector2Array(0, 0, 0, 0, 32, 24, 0, 0, 0, 0, 32, 159)
+"points": PackedVector2Array(0, 0, 0, 0, 32, 21, 0, 0, 0, 0, 32, 162)
 }
 point_count = 2
 

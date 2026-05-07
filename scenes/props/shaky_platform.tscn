@@ -1,0 +1,17 @@
+[gd_scene format=3 uid="uid://corxf66b7yfmg"]
+
+[ext_resource type="Texture2D" uid="uid://bktg04no8fejk" path="res://assets/sprites/props/shaky_platform.png" id="1_3nwj2"]
+[ext_resource type="Script" uid="uid://c14wq0wej035a" path="res://scripts/props/shaky_platform.gd" id="1_rd5x0"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rd5x0"]
+size = Vector2(24, 24)
+
+[node name="ShakyPlatform" type="Area2D" unique_id=1856849630 groups=["safe_platforms"]]
+collision_layer = 32
+script = ExtResource("1_rd5x0")
+
+[node name="ShakyPlatformSprite" type="Sprite2D" parent="." unique_id=1589250785]
+texture = ExtResource("1_3nwj2")
+
+[node name="ShakyPlatformCollision" type="CollisionShape2D" parent="." unique_id=106956825]
+shape = SubResource("RectangleShape2D_rd5x0")
