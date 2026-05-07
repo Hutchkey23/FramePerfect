@@ -58,7 +58,6 @@ tile_map_data = PackedByteArray("AAAHABUAAAAAAAUAAAAHABYAAAAAAAUAAAAHABcAAAAAAAU
 tile_set = ExtResource("6_s0fv7")
 
 [node name="Platforms" type="Node2D" parent="." unique_id=926397958]
-modulate = Color(0.78431374, 0.78431374, 0.78431374, 1)
 
 [node name="ShakyPlatform5" parent="Platforms" unique_id=130138097 instance=ExtResource("7_f3rsn")]
 position = Vector2(140, 240)
@@ -366,7 +365,7 @@ position = Vector2(68, 144)
 position = Vector2(160, 381)
 
 [node name="GameCamera" parent="." unique_id=13152400 node_paths=PackedStringArray("target") instance=ExtResource("10_01dv5")]
-position = Vector2(160, 90)
+position = Vector2(160, 381)
 target = NodePath("../Player")
 fixed_position = Vector2(160, 90)
 

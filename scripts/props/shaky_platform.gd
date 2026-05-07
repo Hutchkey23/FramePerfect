@@ -9,6 +9,9 @@ class_name ShakyPlatform
 @onready var shaky_platform_sprite: Sprite2D = $ShakyPlatformSprite
 @onready var shaky_platform_collision: CollisionShape2D = $ShakyPlatformCollision
 
+const REGULAR_SPRITE: Texture2D = preload("uid://bktg04no8fejk")
+const CRACKED_SPRITE: Texture2D = preload("uid://cdcuhb7k01kt7")
+
 
 var triggered: bool = false
 var start_position: Vector2
@@ -18,6 +21,7 @@ var player_reference: Player
 var checking_for_player_landing: bool = false
 
 func _ready() -> void:
+	shaky_platform_sprite.texture = REGULAR_SPRITE
 	start_position = shaky_platform_sprite.position
 	body_entered.connect(_on_body_entered)
 
@@ -46,7 +50,9 @@ func _on_body_entered(body: Node2D) -> void:
 func start_fall_sequence() -> void:
 	if fall_tween:
 		fall_tween.kill()
-
+	
+	shaky_platform_sprite.texture = CRACKED_SPRITE
+	
 	fall_tween = create_tween()
 
 	# Tiny shake
@@ -75,9 +81,6 @@ func start_fall_sequence() -> void:
 
 	# Brief pause before falling
 	fall_tween.tween_interval(pause_duration)
-
-	# Disable safety/collision before it vanishes
-	fall_tween.tween_callback(disable_platform)
 
 	# "Fall" by shrinking away
 	fall_tween.tween_property(
