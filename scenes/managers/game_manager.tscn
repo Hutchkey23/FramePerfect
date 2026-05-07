@@ -5,6 +5,7 @@
 [ext_resource type="Material" uid="uid://cbe3wuululcrv" path="res://materials/transition_material.tres" id="5_c2g8d"]
 [ext_resource type="Resource" uid="uid://ct5yadc3b6fc6" path="res://resources/world_data/frosted_frontier.tres" id="5_ssqxr"]
 [ext_resource type="FontFile" uid="uid://vklaqlxxc5o7" path="res://assets/fonts/Whacky_Joe.ttf" id="6_c2g8d"]
+[ext_resource type="Resource" uid="uid://ec3th64jjhhr" path="res://resources/world_data/galactic_gateways.tres" id="6_s6d7f"]
 [ext_resource type="Script" uid="uid://cfjlvij64shw7" path="res://scripts/ui/level_title_label.gd" id="7_fagfu"]
 [ext_resource type="Script" uid="uid://gba83foepn6x" path="res://resources/world_data/world_data.gd" id="16_mcnga"]
 [ext_resource type="Resource" uid="uid://uotkih62v0dd" path="res://resources/world_data/peaceful_plains.tres" id="17_f7c0x"]
@@ -409,7 +410,7 @@ _data = {
 
 [node name="GameManager" type="Node2D" unique_id=99875122]
 script = ExtResource("1_cax2t")
-worlds = Array[ExtResource("16_mcnga")]([ExtResource("17_f7c0x"), ExtResource("4_psj4q"), ExtResource("5_ssqxr")])
+worlds = Array[ExtResource("16_mcnga")]([ExtResource("17_f7c0x"), ExtResource("4_psj4q"), ExtResource("5_ssqxr"), ExtResource("6_s6d7f")])
 
 [node name="LevelContainer" type="Node2D" parent="." unique_id=517045765]
 

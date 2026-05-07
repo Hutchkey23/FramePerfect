@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="LevelData" format=3 uid="uid://etng3pdn2hd"]
+
+[ext_resource type="PackedScene" uid="uid://8icwnxvs3v7b" path="res://scenes/levels/76-100_galactic_gateway/level_077.tscn" id="1_lbga7"]
+[ext_resource type="Script" uid="uid://do5fdotl7d638" path="res://resources/level_data/level_data.gd" id="2_82eom"]
+
+[resource]
+script = ExtResource("2_82eom")
+level_id = "level_077"
+level_title = "warp jump"
+medal_time = 2.0
+level_scene = ExtResource("1_lbga7")
+metadata/_custom_type_script = "uid://do5fdotl7d638"
