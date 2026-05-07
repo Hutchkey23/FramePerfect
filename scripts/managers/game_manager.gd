@@ -19,7 +19,6 @@ var level_controller_reference: LevelController
 var game_pausable: bool = false
 var is_paused: bool = false
 
-
 func _ready() -> void:
 	LevelDatabase.setup(worlds)
 

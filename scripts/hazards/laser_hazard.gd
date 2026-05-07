@@ -37,8 +37,10 @@ var warning_tween: Tween
 
 var current_state: LaserState = LaserState.OFF
 
+var elapsed_time: float = 0.0
 
 func _ready() -> void:
+	elapsed_time = 0.0
 	update_laser()
 
 	if Engine.is_editor_hint():
@@ -48,7 +50,7 @@ func _ready() -> void:
 	apply_state_immediate(get_target_state(false))
 
 
-func _process(_delta: float) -> void:
+func _process(delta: float) -> void:
 	update_laser()
 
 	if Engine.is_editor_hint():
@@ -60,6 +62,8 @@ func _process(_delta: float) -> void:
 		if editor_state != current_state:
 			apply_state_immediate(editor_state)
 		return
+
+	elapsed_time += delta
 
 	var target_state := get_target_state(false)
 	if target_state != current_state:
@@ -119,7 +123,7 @@ func get_target_state(use_editor_preview: bool) -> LaserState:
 	if use_editor_preview:
 		t = preview_cycle_position * cycle_length
 	else:
-		t = fposmod(Time.get_ticks_msec() / 1000.0 + phase_offset, cycle_length)
+		t = fposmod(elapsed_time + phase_offset, cycle_length)
 
 	if start_in_active_phase:
 		t = fposmod(t + warning_time, cycle_length)
