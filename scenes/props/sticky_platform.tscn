@@ -1,0 +1,17 @@
+[gd_scene format=3 uid="uid://cysgmj4wdrxaw"]
+
+[ext_resource type="Script" uid="uid://dnkeeys6l4a78" path="res://scripts/props/sticky_platform.gd" id="1_gmi41"]
+[ext_resource type="Texture2D" uid="uid://c0og8bf4wmqjp" path="res://assets/sprites/props/sticky_platform.png" id="1_tpxlf"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gmi41"]
+size = Vector2(24, 24)
+
+[node name="StickyPlatform" type="Area2D" unique_id=1938104615 groups=["safe_platforms"]]
+collision_layer = 32
+script = ExtResource("1_gmi41")
+
+[node name="StickyPlatformSprite" type="Sprite2D" parent="." unique_id=890588401]
+texture = ExtResource("1_tpxlf")
+
+[node name="StickyPlatformCollision" type="CollisionShape2D" parent="." unique_id=1317716527]
+shape = SubResource("RectangleShape2D_gmi41")

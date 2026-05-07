@@ -55,6 +55,7 @@ tile_map_data = PackedByteArray("AAADAAIAAAAAAAUAAAADAAMAAAAAAAUAAAADAAQAAAAAAAU
 tile_set = ExtResource("5_vhbdr")
 
 [node name="Shadows" type="TileMapLayer" parent="Map" unique_id=255637794]
+tile_map_data = PackedByteArray("AAACAAMAAAABAAMAAAACAAQAAAABAAMAAAACAAUAAAABAAMAAAACAAYAAAABAAMAAAACAAcAAAABAAMAAAACAAIAAAAFAAMAAAADAAIAAAAAAAMAAAAEAAIAAAAAAAMAAAAFAAIAAAAAAAMAAAAGAAIAAAAAAAMAAAAHAAIAAAAAAAMAAAAIAAIAAAAAAAMAAAAJAAIAAAAAAAMAAAAKAAIAAAAAAAMAAAALAAIAAAAAAAMAAAAMAAIAAAAAAAMAAAANAAIAAAAAAAMAAAAOAAIAAAAAAAMAAAAPAAIAAAAAAAMAAAAQAAIAAAAAAAMAAAA=")
 tile_set = ExtResource("5_vhbdr")
 
 [node name="Walls" type="TileMapLayer" parent="Map" unique_id=766012576]
@@ -66,7 +67,7 @@ tile_set = ExtResource("5_vhbdr")
 [node name="ShakyPlatform" parent="Platforms" unique_id=1856849630 instance=ExtResource("7_opojc")]
 position = Vector2(160, 66)
 
-[node name="ShakyPlatform3" parent="Platforms" unique_id=1756426353 instance=ExtResource("7_opojc")]
+[node name="ShakyPlatform2" parent="Platforms" unique_id=1756426353 instance=ExtResource("7_opojc")]
 position = Vector2(160, 118)
 
 [node name="Hazards" type="Node2D" parent="." unique_id=798262580]
@@ -84,7 +85,7 @@ position = Vector2(265, 90)
 position = Vector2(58, 90)
 
 [node name="GameCamera" parent="." unique_id=13152400 node_paths=PackedStringArray("target") instance=ExtResource("10_jgmml")]
-position = Vector2(47, 90)
+position = Vector2(160, 90)
 mode = 1
 target = NodePath("../Player")
 fixed_position = Vector2(160, 90)
