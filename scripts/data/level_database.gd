@@ -1,6 +1,17 @@
 extends Node
 
-var worlds: Array[WorldData] = []
+const PEACEFUL_PLAINS = preload("uid://uotkih62v0dd")
+const SCORCHED_SANDS = preload("uid://dv7uy4up300c1")
+const FROSTED_FRONTIER = preload("uid://ct5yadc3b6fc6")
+const GALACTIC_GATEWAYS = preload("uid://ec3th64jjhhr")
+
+
+var worlds: Array[WorldData] = [
+	PEACEFUL_PLAINS,
+	SCORCHED_SANDS,
+	FROSTED_FRONTIER,
+	GALACTIC_GATEWAYS
+]
 
 func setup(new_worlds: Array[WorldData]) -> void:
 	worlds = new_worlds

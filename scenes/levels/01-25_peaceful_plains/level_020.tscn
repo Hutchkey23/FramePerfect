@@ -97,7 +97,6 @@ curve = SubResource("Curve2D_3vy47")
 moving = true
 loop = false
 speed_scale = 1.5
-offset = 2.0
 
 [node name="SquareHazard3" parent="Hazards" unique_id=1319683781 instance=ExtResource("8_7g5xr")]
 position = Vector2(0, 16)
@@ -112,7 +111,6 @@ curve = SubResource("Curve2D_3vy47")
 moving = true
 loop = false
 speed_scale = 1.5
-offset = 2.0
 
 [node name="SquareHazard5" parent="Hazards" unique_id=1456762901 instance=ExtResource("8_7g5xr")]
 position = Vector2(0, 32)
@@ -127,7 +125,7 @@ curve = SubResource("Curve2D_3vy47")
 moving = true
 loop = false
 speed_scale = 1.5
-offset = 3.0
+offset = 1.0
 
 [node name="SquareHazard7" parent="Hazards" unique_id=329365067 instance=ExtResource("8_7g5xr")]
 position = Vector2(0, 64)
@@ -143,7 +141,7 @@ curve = SubResource("Curve2D_3vy47")
 moving = true
 loop = false
 speed_scale = 1.5
-offset = 3.0
+offset = 1.0
 
 [node name="SquareHazard9" parent="Hazards" unique_id=1797449002 instance=ExtResource("8_7g5xr")]
 position = Vector2(0, 80)
@@ -159,7 +157,7 @@ curve = SubResource("Curve2D_3vy47")
 moving = true
 loop = false
 speed_scale = 1.5
-offset = 3.0
+offset = 1.0
 
 [node name="SquareHazard11" parent="Hazards" unique_id=1399932312 instance=ExtResource("8_7g5xr")]
 position = Vector2(0, 112)
@@ -174,7 +172,6 @@ curve = SubResource("Curve2D_3vy47")
 moving = true
 loop = false
 speed_scale = 1.5
-offset = 2.0
 
 [node name="SquareHazard13" parent="Hazards" unique_id=2079209198 instance=ExtResource("8_7g5xr")]
 position = Vector2(0, 128)
@@ -189,7 +186,6 @@ curve = SubResource("Curve2D_3vy47")
 moving = true
 loop = false
 speed_scale = 1.5
-offset = 2.0
 
 [node name="SquareHazard15" parent="Hazards" unique_id=1917740825 instance=ExtResource("8_7g5xr")]
 position = Vector2(0, 144)

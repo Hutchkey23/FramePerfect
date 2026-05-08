@@ -23,7 +23,6 @@ var checking_for_player_landing: bool = false
 func _ready() -> void:
 	shaky_platform_sprite.texture = REGULAR_SPRITE
 	start_position = shaky_platform_sprite.position
-	body_entered.connect(_on_body_entered)
 
 func _process(_delta: float) -> void:
 	if not checking_for_player_landing:
@@ -97,3 +96,11 @@ func disable_platform() -> void:
 	shaky_platform_collision.disabled = true
 	monitoring = false
 	monitorable = false
+
+
+func _on_body_exited(body: Node2D) -> void:
+	if not body.is_in_group("player"):
+		return
+	
+	player_reference = null
+	checking_for_player_landing = false

@@ -15,3 +15,6 @@ texture = ExtResource("1_3nwj2")
 
 [node name="ShakyPlatformCollision" type="CollisionShape2D" parent="." unique_id=106956825]
 shape = SubResource("RectangleShape2D_rd5x0")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]
