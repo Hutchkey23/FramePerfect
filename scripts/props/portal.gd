@@ -1,3 +1,4 @@
+@tool
 extends Area2D
 class_name Portal
 
@@ -17,7 +18,10 @@ const PURPLE_SPRITE: Texture2D = preload("uid://5ii31bwcp0dx")
 
 @onready var portal_sprite: Sprite2D = $PortalSprite
 
-@export var portal_color: PortalColor = PortalColor.BLUE
+@export var portal_color: PortalColor = PortalColor.BLUE:
+	set(value):
+		portal_color = value
+		set_color(portal_color)
 @export var target_portal: Portal
 
 var teleport_pop_scale: float = 1.25
@@ -38,6 +42,9 @@ func _ready() -> void:
 	set_color(portal_color)
 
 func _process(_delta: float) -> void:
+	if Engine.is_editor_hint():
+		return
+	
 	if not checking_for_player_landing:
 		return
 	
@@ -133,6 +140,12 @@ func play_portal_pop() -> void:
 
 
 func set_color(new_color: PortalColor) -> void:
+	if portal_sprite == null:
+		portal_sprite = get_node_or_null("PortalSprite")
+	
+	if portal_sprite == null:
+		return
+
 	match new_color:
 		PortalColor.BLUE:
 			portal_sprite.texture = BLUE_SPRITE

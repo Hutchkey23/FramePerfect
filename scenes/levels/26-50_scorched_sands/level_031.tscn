@@ -129,46 +129,46 @@ position = Vector2(164, 208)
 position = Vector2(164, 184)
 
 [node name="LeftPlatforms21" parent="ToggleItems" unique_id=1494310293 instance=ExtResource("8_d5vk4")]
-position = Vector2(164, 159)
+position = Vector2(164, 160)
 
 [node name="LeftPlatforms22" parent="ToggleItems" unique_id=1768272396 instance=ExtResource("8_d5vk4")]
-position = Vector2(164, 135)
+position = Vector2(164, 136)
 
 [node name="LeftPlatforms23" parent="ToggleItems" unique_id=1077170047 instance=ExtResource("8_d5vk4")]
-position = Vector2(164, 111)
+position = Vector2(164, 112)
 
 [node name="LeftPlatforms24" parent="ToggleItems" unique_id=1657163366 instance=ExtResource("8_d5vk4")]
-position = Vector2(164, 87)
+position = Vector2(164, 88)
 
 [node name="LeftPlatforms25" parent="ToggleItems" unique_id=654590008 instance=ExtResource("8_d5vk4")]
-position = Vector2(164, 63)
+position = Vector2(164, 64)
 
 [node name="LeftPlatforms26" parent="ToggleItems" unique_id=274292643 instance=ExtResource("8_d5vk4")]
-position = Vector2(164, 39)
+position = Vector2(164, 40)
 
 [node name="LeftPlatforms27" parent="ToggleItems" unique_id=2139179627 instance=ExtResource("8_d5vk4")]
-position = Vector2(164, 15)
+position = Vector2(164, 16)
 
 [node name="LeftPlatforms28" parent="ToggleItems" unique_id=1920743004 instance=ExtResource("8_d5vk4")]
-position = Vector2(164, -9)
+position = Vector2(164, -8)
 
 [node name="LeftPlatforms29" parent="ToggleItems" unique_id=980551442 instance=ExtResource("8_d5vk4")]
-position = Vector2(164, -33)
+position = Vector2(164, -32)
 
 [node name="LeftPlatforms30" parent="ToggleItems" unique_id=1243072281 instance=ExtResource("8_d5vk4")]
-position = Vector2(164, -57)
+position = Vector2(164, -56)
 
 [node name="LeftPlatforms31" parent="ToggleItems" unique_id=114454599 instance=ExtResource("8_d5vk4")]
-position = Vector2(164, -81)
+position = Vector2(164, -80)
 
 [node name="LeftPlatforms32" parent="ToggleItems" unique_id=325557646 instance=ExtResource("8_d5vk4")]
-position = Vector2(164, -105)
+position = Vector2(164, -104)
 
 [node name="LeftPlatforms33" parent="ToggleItems" unique_id=864621772 instance=ExtResource("8_d5vk4")]
-position = Vector2(164, -129)
+position = Vector2(164, -128)
 
 [node name="LeftPlatforms34" parent="ToggleItems" unique_id=1973926625 instance=ExtResource("8_d5vk4")]
-position = Vector2(164, -153)
+position = Vector2(164, -152)
 
 [node name="RightPlatforms" parent="ToggleItems" unique_id=2128023161 instance=ExtResource("8_d5vk4")]
 position = Vector2(220, 640)
@@ -251,59 +251,59 @@ position = Vector2(220, 184)
 start_toggled = false
 
 [node name="RightPlatforms21" parent="ToggleItems" unique_id=884028785 instance=ExtResource("8_d5vk4")]
-position = Vector2(220, 159)
+position = Vector2(220, 160)
 start_toggled = false
 
 [node name="RightPlatforms22" parent="ToggleItems" unique_id=562636428 instance=ExtResource("8_d5vk4")]
-position = Vector2(220, 135)
+position = Vector2(220, 136)
 start_toggled = false
 
 [node name="RightPlatforms23" parent="ToggleItems" unique_id=1233970596 instance=ExtResource("8_d5vk4")]
-position = Vector2(220, 111)
+position = Vector2(220, 112)
 start_toggled = false
 
 [node name="RightPlatforms24" parent="ToggleItems" unique_id=937976305 instance=ExtResource("8_d5vk4")]
-position = Vector2(220, 87)
+position = Vector2(220, 88)
 start_toggled = false
 
 [node name="RightPlatforms25" parent="ToggleItems" unique_id=1121891485 instance=ExtResource("8_d5vk4")]
-position = Vector2(220, 63)
+position = Vector2(220, 64)
 start_toggled = false
 
 [node name="RightPlatforms26" parent="ToggleItems" unique_id=733537611 instance=ExtResource("8_d5vk4")]
-position = Vector2(220, 39)
+position = Vector2(220, 40)
 start_toggled = false
 
 [node name="RightPlatforms27" parent="ToggleItems" unique_id=938802649 instance=ExtResource("8_d5vk4")]
-position = Vector2(220, 15)
+position = Vector2(220, 16)
 start_toggled = false
 
 [node name="RightPlatforms28" parent="ToggleItems" unique_id=1419088531 instance=ExtResource("8_d5vk4")]
-position = Vector2(220, -9)
+position = Vector2(220, -8)
 start_toggled = false
 
 [node name="RightPlatforms29" parent="ToggleItems" unique_id=1411586593 instance=ExtResource("8_d5vk4")]
-position = Vector2(220, -33)
+position = Vector2(220, -32)
 start_toggled = false
 
 [node name="RightPlatforms30" parent="ToggleItems" unique_id=614897774 instance=ExtResource("8_d5vk4")]
-position = Vector2(220, -57)
+position = Vector2(220, -56)
 start_toggled = false
 
 [node name="RightPlatforms31" parent="ToggleItems" unique_id=1326297234 instance=ExtResource("8_d5vk4")]
-position = Vector2(220, -81)
+position = Vector2(220, -80)
 start_toggled = false
 
 [node name="RightPlatforms32" parent="ToggleItems" unique_id=1159463502 instance=ExtResource("8_d5vk4")]
-position = Vector2(220, -105)
+position = Vector2(220, -104)
 start_toggled = false
 
 [node name="RightPlatforms33" parent="ToggleItems" unique_id=1486509312 instance=ExtResource("8_d5vk4")]
-position = Vector2(220, -129)
+position = Vector2(220, -128)
 start_toggled = false
 
 [node name="RightPlatforms34" parent="ToggleItems" unique_id=822511479 instance=ExtResource("8_d5vk4")]
-position = Vector2(220, -153)
+position = Vector2(220, -152)
 start_toggled = false
 
 [node name="Hazards" type="Node2D" parent="." unique_id=798262580]

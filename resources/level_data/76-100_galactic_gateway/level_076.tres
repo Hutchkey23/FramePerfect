@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="LevelData" format=3 uid="uid://bpuhtun2p80xi"]
+
+[ext_resource type="PackedScene" uid="uid://0h0ohmkg0hd0" path="res://scenes/levels/76-100_galactic_gateway/level_076.tscn" id="1_1icpe"]
+[ext_resource type="Script" uid="uid://do5fdotl7d638" path="res://resources/level_data/level_data.gd" id="2_h26o2"]
+
+[resource]
+script = ExtResource("2_h26o2")
+level_id = "level_076"
+level_title = "welcome to space"
+medal_time = 1.6
+level_scene = ExtResource("1_1icpe")
+metadata/_custom_type_script = "uid://do5fdotl7d638"

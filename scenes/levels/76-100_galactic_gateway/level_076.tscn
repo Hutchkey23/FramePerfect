@@ -1,0 +1,121 @@
+[gd_scene format=4 uid="uid://0h0ohmkg0hd0"]
+
+[ext_resource type="Shader" uid="uid://cy8e5yqoo68kc" path="res://shaders/starry_sky.gdshader" id="1_xn3bu"]
+[ext_resource type="PackedScene" uid="uid://cvsktm1iw46q4" path="res://scenes/utility/level_controller.tscn" id="2_nrg4a"]
+[ext_resource type="PackedScene" uid="uid://ecmje7pp4gyy" path="res://scenes/utility/level_ui.tscn" id="3_xs7l7"]
+[ext_resource type="PackedScene" uid="uid://bxry211ole85r" path="res://scenes/utility/cinematic_bars.tscn" id="4_uk624"]
+[ext_resource type="PackedScene" uid="uid://drnundi171cmh" path="res://scenes/player/player.tscn" id="5_o56gx"]
+[ext_resource type="TileSet" uid="uid://7q8eymh2ksuh" path="res://scenes/tilesets/main_floor_and_walls.tres" id="6_3cxxm"]
+[ext_resource type="Shader" uid="uid://cyftftn8qvqe5" path="res://shaders/hazard_shader.gdshader" id="7_f5uec"]
+[ext_resource type="PackedScene" uid="uid://ct44xka20hdp7" path="res://scenes/props/portal.tscn" id="8_jm2jf"]
+[ext_resource type="PackedScene" uid="uid://cwv3wpwmybmey" path="res://scenes/props/goal.tscn" id="9_0xcoo"]
+[ext_resource type="PackedScene" uid="uid://ca2uxdoweqwc1" path="res://scenes/utility/game_camera.tscn" id="10_la74x"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_jur53"]
+shader = ExtResource("1_xn3bu")
+shader_parameter/background_color = Color(0.012298316, 0.024600385, 0.090413176, 1)
+shader_parameter/star_color = Color(0.85, 0.82, 1, 1)
+shader_parameter/aspect_ratio = 1.0
+shader_parameter/density = 0.79999997976
+shader_parameter/layer_parascale = 3
+shader_parameter/star_speed = Vector2(0.01, 0.01)
+shader_parameter/star_wave = Vector2(0, 0)
+shader_parameter/star_size = 1.999999955296
+shader_parameter/star_rotate_speed = 0.08300014644250009
+shader_parameter/twinkle_effect = 1.0
+shader_parameter/twinkle_speed = 0.249999994412
+shader_parameter/pixelate_enabled = true
+shader_parameter/pixelate_count = 1000.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_wwkcr"]
+shader = ExtResource("7_f5uec")
+shader_parameter/pulse_color = Color(0.40390328, 8.4228816e-07, 9.62615e-08, 1)
+shader_parameter/pulse_strength = 1.0
+shader_parameter/pulse_speed = 5.00000023424012
+shader_parameter/center_glow_strength = 0.0
+
+[node name="Level_076" type="Node2D" unique_id=1381461103]
+metadata/_edit_vertical_guides_ = [160.0]
+
+[node name="Background" type="ColorRect" parent="." unique_id=882240186]
+material = SubResource("ShaderMaterial_jur53")
+offset_left = -84.0
+offset_top = -108.0
+offset_right = 396.0
+offset_bottom = 324.0
+metadata/_edit_use_anchors_ = true
+
+[node name="LevelController" parent="." unique_id=1058685242 groups=["level_controller"] instance=ExtResource("2_nrg4a")]
+player_spawn_path = NodePath("../PlayerSpawn")
+camera_path = NodePath("../GameCamera")
+cinematic_bars_path = NodePath("../CinematicBars")
+level_ui_path = NodePath("../LevelUI")
+platforms_path = NodePath("../Platforms")
+hazards_path = NodePath("../Hazards")
+
+[node name="LevelUI" parent="." unique_id=687480857 instance=ExtResource("3_xs7l7")]
+layer = 2
+level_controller_path = NodePath("../LevelController")
+
+[node name="CinematicBars" parent="." unique_id=3966864 instance=ExtResource("4_uk624")]
+
+[node name="Player" parent="." unique_id=1458309070 instance=ExtResource("5_o56gx")]
+position = Vector2(83, 123)
+game_camera_path = NodePath("../GameCamera")
+
+[node name="PlayerSpawn" type="Node2D" parent="." unique_id=535208430]
+position = Vector2(83, 123)
+
+[node name="MapBottomLayer" type="Node2D" parent="." unique_id=1665801705]
+position = Vector2(144, 106)
+
+[node name="Floors" type="TileMapLayer" parent="MapBottomLayer" unique_id=1507503636 groups=["floors"]]
+tile_map_data = PackedByteArray("AAD7//z/AAAAAAkAAAD7//3/AAAAAAkAAAD8//z/AAAAAAkAAAD8//3/AAAAAAkAAAD9//z/AAAAAAkAAAD9//3/AAAAAAkAAAD+//z/AAAAAAkAAAD+//3/AAAAAAkAAAD///z/AAAAAAkAAAD///3/AAAAAAkAAAAAAPz/AAAAAAkAAAAAAP3/AAAAAAkAAAABAPz/AAAAAAkAAAABAP3/AAAAAAkAAAACAPz/AAAAAAkAAAACAP3/AAAAAAkAAAADAPz/AAAAAAkAAAADAP3/AAAAAAkAAAAEAPz/AAAAAAkAAAAEAP3/AAAAAAkAAAAFAPz/AAAAAAkAAAAFAP3/AAAAAAkAAAAGAPz/AAAAAAkAAAAGAP3/AAAAAAkAAAD7/wEAAAAAAAkAAGD8/wEAAAAAAAkAAGD9/wEAAAAAAAkAAGD+/wEAAAAAAAkAAGD//wEAAAAAAAkAAGAAAAEAAAAAAAkAAGABAAEAAAAAAAkAAGACAAEAAAAAAAkAAGADAAEAAAAAAAkAAGAEAAEAAAAAAAkAAGAFAAEAAAAAAAkAAGAGAAEAAAAAAAkAAGD7/wAAAAAAAAkAAGD8/wAAAAAAAAkAAGD9/wAAAAAAAAkAAGD+/wAAAAAAAAkAAGD//wAAAAAAAAkAAGAAAAAAAAAAAAkAAGABAAAAAAAAAAkAAGACAAAAAAAAAAkAAGADAAAAAAAAAAkAAGAEAAAAAAAAAAkAAGAFAAAAAAAAAAkAAGAGAAAAAAAAAAkAAGA=")
+tile_set = ExtResource("6_3cxxm")
+
+[node name="Hazards" type="TileMapLayer" parent="MapBottomLayer" unique_id=876696869 groups=["floor_hazards"]]
+modulate = Color(0.5092862, 0.5092861, 0.5092864, 1)
+material = SubResource("ShaderMaterial_wwkcr")
+tile_map_data = PackedByteArray("AAAAAPz/AAAAAAEAAAAAAP3/AAAAAAEAAAABAPz/AAAAAAEAAAABAP3/AAAAAAEAAAAAAAEAAAAAAAEAAAABAAEAAAAAAAEAAAAAAAAAAAAAAAEAAAABAAAAAAAAAAEAAAA=")
+tile_set = ExtResource("6_3cxxm")
+
+[node name="Platforms" type="Node2D" parent="." unique_id=1928273324]
+
+[node name="Portals" type="Node2D" parent="." unique_id=304918047]
+position = Vector2(-15, 0)
+
+[node name="Portal" parent="Portals" unique_id=1176273934 node_paths=PackedStringArray("target_portal") instance=ExtResource("8_jm2jf")]
+position = Vector2(98, 58)
+target_portal = NodePath("../Portal2")
+
+[node name="Portal2" parent="Portals" unique_id=1339896333 node_paths=PackedStringArray("target_portal") instance=ExtResource("8_jm2jf")]
+position = Vector2(254, 123)
+target_portal = NodePath("../Portal")
+
+[node name="Hazards" type="Node2D" parent="." unique_id=798262580]
+position = Vector2(168, 79)
+
+[node name="Stamps" type="Node2D" parent="." unique_id=123113769]
+position = Vector2(168, 79)
+
+[node name="Goal" parent="." unique_id=652280647 instance=ExtResource("9_0xcoo")]
+position = Vector2(239, 58)
+
+[node name="GameCamera" parent="." unique_id=13152400 node_paths=PackedStringArray("target") instance=ExtResource("10_la74x")]
+position = Vector2(160, 90)
+mode = 1
+target = NodePath("../Player")
+fixed_position = Vector2(160, 90)
+
+[node name="MapTopLayer" type="Node2D" parent="." unique_id=1059944217]
+position = Vector2(-15, 15)
+
+[node name="Shadows" type="TileMapLayer" parent="MapTopLayer" unique_id=255637794]
+position = Vector2(159, 91)
+tile_map_data = PackedByteArray("AAD7//z/AAAGAAMAAAD7//3/AAABAAMAAAD8//z/AAAAAAMAAAD9//z/AAAAAAMAAAD+//z/AAAAAAMAAAD///z/AAAAAAMAAAAAAPz/AAAAAAMAAAABAPz/AAAAAAMAAAACAPz/AAAAAAMAAAADAPz/AAAAAAMAAAAEAPz/AAAAAAMAAAAFAPz/AAAAAAMAAAAGAPz/AAAAAAMAAAD7/wEAAAABAAMAAAD7/wAAAAAGAAMAAAD8/wAAAAAAAAMAAAD9/wAAAAAAAAMAAAD+/wAAAAAAAAMAAAD//wAAAAAAAAMAAAAAAAAAAAAAAAMAAAABAAAAAAAAAAMAAAACAAAAAAAAAAMAAAADAAAAAAAAAAMAAAAEAAAAAAAAAAMAAAAFAAAAAAAAAAMAAAAGAAAAAAAAAAMAAAA=")
+tile_set = ExtResource("6_3cxxm")
+
+[node name="Walls" type="TileMapLayer" parent="MapTopLayer" unique_id=766012576]
+position = Vector2(159, 91)
+tile_map_data = PackedByteArray("AAD6//z/AAADAAsAAAD6//3/AAADAAsAAAD7//v/AAABAAsAAAD8//v/AAABAAsAAAD9//v/AAABAAsAAAD+//v/AAABAAsAAAD///v/AAABAAsAAAAAAPv/AAABAAsAAAABAPv/AAABAAsAAAACAPv/AAABAAsAAAADAPv/AAABAAsAAAAEAPv/AAABAAsAAAAFAPv/AAABAAsAAAAGAPv/AAABAAsAAAAHAPz/AAACAAsAAAAHAP3/AAACAAsAAAD7//7/AAAAAAsAAAD8//7/AAAAAAsAAAD9//7/AAAAAAsAAAD+//7/AAAAAAsAAAD///7/AAAAAAsAAAAAAP7/AAAAAAsAAAABAP7/AAAAAAsAAAACAP7/AAAAAAsAAAADAP7/AAAAAAsAAAAEAP7/AAAAAAsAAAAFAP7/AAAAAAsAAAAGAP7/AAAAAAsAAAD6//7/AAAGAAoAAAD6//v/AAAGAAsAAAAHAPv/AAAFAAsAAAAHAP7/AAAFAAoAAAD6/wAAAAADAAsAAAD6/wEAAAADAAsAAAD6/wIAAAAGAAoAAAAHAAAAAAACAAsAAAAHAAEAAAACAAsAAAAHAAIAAAAFAAoAAAD6////AAAGAAsAAAD7////AAABAAsAAAD7/wIAAAAAAAsAAAD8////AAABAAsAAAD8/wIAAAAAAAsAAAD9////AAABAAsAAAD9/wIAAAAAAAsAAAD+////AAABAAsAAAD+/wIAAAAAAAsAAAD/////AAABAAsAAAD//wIAAAAAAAsAAAAAAP//AAABAAsAAAAAAAIAAAAAAAsAAAABAP//AAABAAsAAAABAAIAAAAAAAsAAAACAP//AAABAAsAAAACAAIAAAAAAAsAAAADAP//AAABAAsAAAADAAIAAAAAAAsAAAAEAP//AAABAAsAAAAEAAIAAAAAAAsAAAAFAP//AAABAAsAAAAFAAIAAAAAAAsAAAAGAP//AAABAAsAAAAGAAIAAAAAAAsAAAAHAP//AAAFAAsAAAA=")
+tile_set = ExtResource("6_3cxxm")
