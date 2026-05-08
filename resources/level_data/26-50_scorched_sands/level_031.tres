@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="LevelData" format=3 uid="uid://cgvo7u2nhuovq"]
+
+[ext_resource type="PackedScene" uid="uid://dejion4lwmjmm" path="res://scenes/levels/26-50_scorched_sands/level_031.tscn" id="1_ob0qx"]
+[ext_resource type="Script" uid="uid://do5fdotl7d638" path="res://resources/level_data/level_data.gd" id="2_nlld0"]
+
+[resource]
+script = ExtResource("2_nlld0")
+level_id = "level_031"
+level_title = "back and forth"
+medal_time = 6.0
+level_scene = ExtResource("1_ob0qx")
+metadata/_custom_type_script = "uid://do5fdotl7d638"

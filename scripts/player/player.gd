@@ -226,7 +226,7 @@ func _physics_process(delta: float) -> void:
 			try_start_dash()
 			try_consume_dash_buffer()
 			try_start_jump()
-			check_if_should_die()
+			
 
 		PlayerState.DASH:
 			handle_dash(delta)
@@ -239,10 +239,10 @@ func _physics_process(delta: float) -> void:
 		
 		PlayerState.BONK:
 			handle_bonk(delta)
-
+	
 	move_and_slide()
 	apply_platform_movement()
-	
+	check_if_should_die()
 	
 	if current_state == PlayerState.DASH or (current_state == PlayerState.JUMP and jumped_from_dash):
 		check_for_bonk()
@@ -348,7 +348,10 @@ func check_if_should_die() -> void:
 	if overlapping_hazard_count > 0:
 		die()
 	
-	if overlapping_floor_hazard_count > 0 and safe_platform_count == 0:
+	if safe_platform_count > 0:
+		return
+
+	if overlapping_floor_hazard_count > 0:
 		die()
 
 func retry_level() -> void:
@@ -689,9 +692,6 @@ func play_landing_squash() -> void:
 func _on_interaction_area_body_entered(body: Node2D) -> void:
 	if body.is_in_group("hazards"):
 		overlapping_hazard_count += 1
-		if current_state == PlayerState.JUMP:
-			return
-		die()
 
 func _on_interaction_area_body_exited(body: Node2D) -> void:
 	if body.is_in_group("hazards"):
@@ -709,9 +709,6 @@ func _on_interaction_area_area_entered(area: Area2D) -> void:
 	
 	if area.is_in_group("hazards"):
 		overlapping_hazard_count += 1
-		if current_state == PlayerState.JUMP:
-			return
-		die()
 		
 	if area.is_in_group("safe_platforms"):
 		if area is MovingPlatform and not safe_platforms.has(area):
@@ -736,10 +733,6 @@ func _on_interaction_area_area_exited(area: Area2D) -> void:
 func _on_floor_hazard_detection_area_body_entered(body: Node2D) -> void:
 	if body.is_in_group("floor_hazards"):
 		overlapping_floor_hazard_count += 1
-		if current_state == PlayerState.JUMP:
-			return
-		if safe_platform_count == 0:
-			die()
 
 
 func _on_floor_hazard_detection_area_body_exited(body: Node2D) -> void:
