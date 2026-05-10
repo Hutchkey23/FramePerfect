@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="LevelData" format=3 uid="uid://c0xv85lo8malh"]
+
+[ext_resource type="PackedScene" uid="uid://b84rqdj47x0j0" path="res://scenes/levels/26-50_scorched_sands/level_032.tscn" id="1_upoam"]
+[ext_resource type="Script" uid="uid://do5fdotl7d638" path="res://resources/level_data/level_data.gd" id="2_g1m42"]
+
+[resource]
+script = ExtResource("2_g1m42")
+level_id = "level_032"
+level_title = "keep moving"
+medal_time = 5.5
+level_scene = ExtResource("1_upoam")
+metadata/_custom_type_script = "uid://do5fdotl7d638"
