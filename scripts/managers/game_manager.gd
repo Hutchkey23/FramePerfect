@@ -5,6 +5,7 @@ extends Node2D
 @onready var transition: CanvasLayer = $Transition
 @onready var level_title_label: RichTextLabel = $Transition/LevelTitleLabel
 @onready var pause_screen: PauseMenu = $PauseLayer/PauseScreen
+@onready var world_transition: CanvasLayer = $WorldTransition
 
 const TRANSITION_LENGTH: float = 1.25
 
@@ -211,11 +212,15 @@ func load_next_level() -> void:
 
 	if current_level_index < world_data.levels.size():
 		set_level_title_label_text(current_level_index)
+	else:
+		level_title_label.text = ""
 
 	await transition_out()
 	await unload_current_level()
 
 	if current_level_index >= world_data.levels.size():
+		var completed_world := world_data
+		
 		current_world_index += 1
 		current_level_index = 0
 
@@ -224,29 +229,40 @@ func load_next_level() -> void:
 			get_tree().change_scene_to_file("res://scenes/title/title_screen.tscn")
 			return
 
+		var next_world := get_current_world_data()
+
 		current_world_level_names.clear()
 		current_world_level_names = get_world_level_names(current_world_index)
 
-		await show_world_transition()
+		await show_world_transition(completed_world, next_world)
 
 	load_level()
 
 	await get_tree().create_timer(TRANSITION_LENGTH).timeout
+	
+	world_transition.visible = false
+	
 	await transition_in()
 
 	if level_controller_reference:
 		level_controller_reference.enter_intro_state()
 
 
-func show_world_transition() -> void:
+func show_world_transition(completed_world: WorldData, next_world: WorldData) -> void:
 	var world_data := get_current_world_data()
 	if world_data == null:
 		return
+	
+	await get_tree().create_timer(1.0).timeout
+	
+	await world_transition.play_transition(completed_world, next_world)
+	
+	set_level_title_label_text(current_level_index)
+	
+	await transition_out()
 
-	level_title_label.text = world_data.world_title
-
-	animation_player.play("transition_out")
-	await animation_player.animation_finished
+func _on_world_transition_transition_in() -> void:
+	transition_in()
 
 
 func unload_current_level() -> void:

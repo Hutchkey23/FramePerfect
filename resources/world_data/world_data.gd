@@ -13,3 +13,4 @@ class_name WorldData
 @export var front_image: Texture2D
 @export var back_image: Texture2D
 @export var font_color: Color
+@export var background_texture: Texture2D

@@ -1,0 +1,145 @@
+[gd_scene format=3 uid="uid://cd2jnrtsuccig"]
+
+[ext_resource type="Script" uid="uid://1oj4txeeevjn" path="res://scripts/utility/world_transition.gd" id="1_hm1wo"]
+[ext_resource type="PackedScene" uid="uid://cmgc81mh8yvo3" path="res://scenes/postcard/world_transition_postcard.tscn" id="1_t2glc"]
+[ext_resource type="Shader" uid="uid://co7tg7n73nnfy" path="res://shaders/scrolling_bg.gdshader" id="2_0pi7r"]
+[ext_resource type="Resource" uid="uid://uotkih62v0dd" path="res://resources/world_data/peaceful_plains.tres" id="2_syfks"]
+[ext_resource type="Resource" uid="uid://dv7uy4up300c1" path="res://resources/world_data/scorched_sands.tres" id="3_76ku4"]
+[ext_resource type="Texture2D" uid="uid://ddw3dh2erb3yj" path="res://assets/title/bg2.png" id="3_sitx3"]
+[ext_resource type="Texture2D" uid="uid://ddksbycmsdtui" path="res://assets/title/bg1.png" id="3_t4rbq"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_t4rbq"]
+shader = ExtResource("2_0pi7r")
+shader_parameter/scroll_speed = Vector2(-1, 0)
+shader_parameter/texture_scale = Vector2(1, 1)
+shader_parameter/tint_color = Color(0.63375676, 0.63375676, 0.63375705, 1)
+shader_parameter/fade_alpha = 1.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_sitx3"]
+shader = ExtResource("2_0pi7r")
+shader_parameter/scroll_speed = Vector2(-1, 0)
+shader_parameter/texture_scale = Vector2(1, 1)
+shader_parameter/tint_color = Color(0.63375676, 0.63375676, 0.63375705, 1)
+shader_parameter/fade_alpha = 1.0
+
+[sub_resource type="Animation" id="Animation_syfks"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CurrentWorldPostcard:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("NextWorldPostcard:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(320, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("CurrentWorldBackground:material:shader_parameter/fade_alpha")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1.0]
+}
+
+[sub_resource type="Animation" id="Animation_2xswy"]
+resource_name = "world_transition"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CurrentWorldPostcard:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(-320, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("NextWorldPostcard:position")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(320, 0), Vector2(0, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("CurrentWorldBackground:material:shader_parameter/fade_alpha")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [1.0, 0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_wi6jd"]
+_data = {
+&"RESET": SubResource("Animation_syfks"),
+&"transition_to_next_world": SubResource("Animation_2xswy")
+}
+
+[node name="WorldTransition" type="CanvasLayer" unique_id=265102022]
+script = ExtResource("1_hm1wo")
+completed_world_debug = ExtResource("2_syfks")
+next_world_debug = ExtResource("3_76ku4")
+
+[node name="NextWorldBackground" type="TextureRect" parent="." unique_id=185042567]
+modulate = Color(0.78431374, 0.78431374, 0.78431374, 1)
+material = SubResource("ShaderMaterial_t4rbq")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_bottom = 5.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_sitx3")
+stretch_mode = 1
+
+[node name="CurrentWorldBackground" type="TextureRect" parent="." unique_id=1733200402]
+modulate = Color(0.78431374, 0.78431374, 0.78431374, 1)
+material = SubResource("ShaderMaterial_sitx3")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_bottom = 5.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_t4rbq")
+stretch_mode = 1
+
+[node name="CurrentWorldPostcard" parent="." unique_id=258655972 instance=ExtResource("1_t2glc")]
+
+[node name="NextWorldPostcard" parent="." unique_id=1298628100 instance=ExtResource("1_t2glc")]
+offset_left = 320.0
+offset_right = 320.0
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=698118083]
+libraries/ = SubResource("AnimationLibrary_wi6jd")

@@ -43,6 +43,7 @@ shader = ExtResource("2_8xedo")
 shader_parameter/scroll_speed = Vector2(-1, 0)
 shader_parameter/texture_scale = Vector2(1, 1)
 shader_parameter/tint_color = Color(0.63375676, 0.63375676, 0.63375705, 1)
+shader_parameter/fade_alpha = 1.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_iy4b5"]
 shader = ExtResource("4_84bpe")

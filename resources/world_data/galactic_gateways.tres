@@ -2,6 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://c3aj3ftm4kt52" path="res://assets/sprites/postcards/peaceful_plains_back.png" id="1_l5xfb"]
 [ext_resource type="Script" uid="uid://do5fdotl7d638" path="res://resources/level_data/level_data.gd" id="1_pcbvh"]
+[ext_resource type="Texture2D" uid="uid://drq6jrdahq8a6" path="res://assets/title/bg4.png" id="2_82udv"]
 [ext_resource type="Script" uid="uid://gba83foepn6x" path="res://resources/world_data/world_data.gd" id="2_u51m2"]
 [ext_resource type="Texture2D" uid="uid://cqr4ra4dronfp" path="res://assets/sprites/postcards/galactic_gateway.png" id="2_v77qx"]
 [ext_resource type="Resource" uid="uid://bpuhtun2p80xi" path="res://resources/level_data/76-100_galactic_gateway/level_076.tres" id="4_pg1hn"]
@@ -19,4 +20,5 @@ levels = Array[ExtResource("1_pcbvh")]([ExtResource("4_pg1hn"), ExtResource("4_v
 front_image = ExtResource("2_v77qx")
 back_image = ExtResource("1_l5xfb")
 font_color = Color(0.3529412, 0.3019608, 0.6392157, 1)
+background_texture = ExtResource("2_82udv")
 metadata/_custom_type_script = "uid://gba83foepn6x"

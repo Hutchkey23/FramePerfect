@@ -7,6 +7,7 @@
 [ext_resource type="FontFile" uid="uid://vklaqlxxc5o7" path="res://assets/fonts/Whacky_Joe.ttf" id="6_c2g8d"]
 [ext_resource type="Resource" uid="uid://ec3th64jjhhr" path="res://resources/world_data/galactic_gateways.tres" id="6_s6d7f"]
 [ext_resource type="Script" uid="uid://cfjlvij64shw7" path="res://scripts/ui/level_title_label.gd" id="7_fagfu"]
+[ext_resource type="PackedScene" uid="uid://cd2jnrtsuccig" path="res://scenes/utility/world_transition.tscn" id="11_vcwo2"]
 [ext_resource type="Script" uid="uid://gba83foepn6x" path="res://resources/world_data/world_data.gd" id="16_mcnga"]
 [ext_resource type="Resource" uid="uid://uotkih62v0dd" path="res://resources/world_data/peaceful_plains.tres" id="17_f7c0x"]
 [ext_resource type="PackedScene" uid="uid://cf6jl534sqofh" path="res://scenes/utility/pause_screen.tscn" id="17_gbtpl"]
@@ -471,6 +472,10 @@ layer = 10
 [node name="PauseScreen" parent="PauseLayer" unique_id=1531861683 instance=ExtResource("17_gbtpl")]
 visible = false
 
+[node name="WorldTransition" parent="." unique_id=265102022 instance=ExtResource("11_vcwo2")]
+visible = false
+
 [connection signal="go_to_main_menu" from="PauseLayer/PauseScreen" to="." method="_on_pause_screen_go_to_main_menu"]
 [connection signal="resume_game" from="PauseLayer/PauseScreen" to="." method="_on_pause_screen_resume_game"]
 [connection signal="retry_level" from="PauseLayer/PauseScreen" to="." method="_on_pause_screen_retry_level"]
+[connection signal="transition_in" from="WorldTransition" to="." method="_on_world_transition_transition_in"]

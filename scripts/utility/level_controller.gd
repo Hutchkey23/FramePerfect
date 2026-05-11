@@ -200,8 +200,8 @@ func _on_goal_reached() -> void:
 	complete_level()
 
 func retry_level() -> void:
-	retry_level_requested.emit()
-	return
+	#retry_level_requested.emit()
+	#return
 	despawn_stamps()
 	await get_tree().process_frame
 	spawn_stamps()

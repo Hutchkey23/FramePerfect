@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://do5fdotl7d638" path="res://resources/level_data/level_data.gd" id="1_5v2me"]
 [ext_resource type="Texture2D" uid="uid://c3aj3ftm4kt52" path="res://assets/sprites/postcards/peaceful_plains_back.png" id="1_8gwj1"]
 [ext_resource type="Resource" uid="uid://2tr6xgduo5id" path="res://resources/level_data/01-25_peaceful_plains/level_001.tres" id="2_5v2me"]
+[ext_resource type="Texture2D" uid="uid://ddksbycmsdtui" path="res://assets/title/bg1.png" id="2_f04ss"]
 [ext_resource type="Texture2D" uid="uid://bjg3cv8wdoj1o" path="res://assets/sprites/postcards/peaceful_plains.png" id="2_h8a0a"]
 [ext_resource type="Resource" uid="uid://dhrfu1r1ue2do" path="res://resources/level_data/01-25_peaceful_plains/level_002.tres" id="3_4upq4"]
 [ext_resource type="Resource" uid="uid://rsy15ntu6h7o" path="res://resources/level_data/01-25_peaceful_plains/level_003.tres" id="4_8gwj1"]
@@ -40,4 +41,5 @@ levels = Array[ExtResource("1_5v2me")]([ExtResource("2_5v2me"), ExtResource("3_4
 front_image = ExtResource("2_h8a0a")
 back_image = ExtResource("1_8gwj1")
 font_color = Color(0, 0.5294118, 0.31764707, 1)
+background_texture = ExtResource("2_f04ss")
 metadata/_custom_type_script = "uid://gba83foepn6x"

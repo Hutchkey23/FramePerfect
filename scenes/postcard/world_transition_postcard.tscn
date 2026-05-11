@@ -1,0 +1,78 @@
+[gd_scene format=3 uid="uid://cmgc81mh8yvo3"]
+
+[ext_resource type="Material" uid="uid://dknc1y18jnjkw" path="res://materials/postcard.tres" id="1_8040e"]
+[ext_resource type="Script" uid="uid://cmudbukrukogv" path="res://scripts/ui/world_transition_postcard.gd" id="2_220ef"]
+[ext_resource type="Texture2D" uid="uid://bjg3cv8wdoj1o" path="res://assets/sprites/postcards/peaceful_plains.png" id="3_i84tu"]
+[ext_resource type="FontFile" uid="uid://vklaqlxxc5o7" path="res://assets/fonts/Whacky_Joe.ttf" id="4_7lr8b"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ig6t8"]
+
+[sub_resource type="FontVariation" id="FontVariation_0dgb3"]
+base_font = ExtResource("4_7lr8b")
+spacing_glyph = 2
+
+[sub_resource type="FontVariation" id="FontVariation_4804g"]
+base_font = ExtResource("4_7lr8b")
+spacing_glyph = 1
+
+[node name="WorldTransitionPostcard" type="Control" unique_id=258655972]
+material = ExtResource("1_8040e")
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("2_220ef")
+
+[node name="Front" type="PanelContainer" parent="." unique_id=864027999]
+custom_minimum_size = Vector2(120, 80)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -60.0
+offset_top = -40.0
+offset_right = 60.0
+offset_bottom = 40.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1.6, 1.6)
+pivot_offset_ratio = Vector2(0.5, 0.5)
+theme_override_styles/panel = SubResource("StyleBoxEmpty_ig6t8")
+
+[node name="PostcardFrontTexture" type="TextureRect" parent="Front" unique_id=541487953]
+layout_mode = 2
+texture = ExtResource("3_i84tu")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Front" unique_id=1161476891]
+layout_mode = 2
+theme_override_constants/separation = 0
+alignment = 2
+
+[node name="WorldNumberLabelMarginContainer" type="MarginContainer" parent="Front/VBoxContainer" unique_id=1744342551]
+layout_mode = 2
+
+[node name="WorldNumberLabel" type="Label" parent="Front/VBoxContainer/WorldNumberLabelMarginContainer" unique_id=1507080761]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0.5294118, 0.31764707, 1)
+theme_override_fonts/font = SubResource("FontVariation_0dgb3")
+theme_override_font_sizes/font_size = 5
+text = "WORLD 1"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="WorldTitleLabelMarginContainer" type="MarginContainer" parent="Front/VBoxContainer" unique_id=1921907965]
+layout_mode = 2
+theme_override_constants/margin_bottom = 7
+
+[node name="WorldTitleLabel" type="Label" parent="Front/VBoxContainer/WorldTitleLabelMarginContainer" unique_id=1097589269]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0.5294118, 0.31764707, 1)
+theme_override_fonts/font = SubResource("FontVariation_4804g")
+theme_override_font_sizes/font_size = 6
+text = "PEACEFUL PLAINS"
+horizontal_alignment = 1
+vertical_alignment = 1
