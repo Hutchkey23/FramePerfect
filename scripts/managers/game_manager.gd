@@ -95,6 +95,10 @@ func set_level_title_label_text(level_index: int) -> void:
 
 
 func start_run() -> void:
+	var bg_music_array = worlds[current_world_index].background_music
+	if bg_music_array.size() > 0:
+		BGMManager.play(bg_music_array[0])
+	
 	if should_show_initial_world_transition:
 		transition.visible = false
 		world_transition.play_initial_transition(worlds[current_world_index])

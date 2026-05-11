@@ -25,6 +25,7 @@ func play_initial_transition(current_world: WorldData) -> void:
 	await get_tree().create_timer(2.0).timeout
 
 func play_transition(completed_world: WorldData, next_world: WorldData) -> void:
+	BGMManager.fade_out(1.5)
 	animation_player.play("RESET")
 	visible = true
 	
@@ -39,6 +40,10 @@ func play_transition(completed_world: WorldData, next_world: WorldData) -> void:
 	await get_tree().create_timer(1.0).timeout
 	await shake_then_pop(current_world_postcard)
 	await get_tree().create_timer(1.0).timeout
+	
+	if next_world.background_music.size() > 0:
+		BGMManager.play(next_world.background_music[0])
+	
 	animation_player.play("transition_to_next_world")
 	await animation_player.animation_finished
 	await get_tree().create_timer(1.0).timeout

@@ -60,6 +60,8 @@ func _on_play_button_pressed() -> void:
 	
 	changing_scenes = true
 	
+	BGMManager.fade_out(1.5)
+	
 	animation_player.play("global_transition_out")
 	await animation_player.animation_finished
 	get_tree().change_scene_to_file("res://scenes/managers/game_manager.tscn")
