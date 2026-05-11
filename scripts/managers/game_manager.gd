@@ -5,7 +5,7 @@ extends Node2D
 @onready var transition: CanvasLayer = $Transition
 @onready var level_title_label: RichTextLabel = $Transition/LevelTitleLabel
 @onready var pause_screen: PauseMenu = $PauseLayer/PauseScreen
-@onready var world_transition: CanvasLayer = $WorldTransition
+@onready var world_transition: WorldTransition = $WorldTransition
 
 const TRANSITION_LENGTH: float = 1.25
 
@@ -17,6 +17,8 @@ var current_level_id: String
 var current_world_level_names: Array = []
 var level_controller_reference: LevelController
 
+var should_show_initial_world_transition: bool = false
+
 var game_pausable: bool = false
 var is_paused: bool = false
 
@@ -26,10 +28,12 @@ func _ready() -> void:
 	if RunState.has_pending_level_select:
 		current_world_index = RunState.start_world_index
 		current_level_index = RunState.start_level_index
+		should_show_initial_world_transition = false
 		RunState.clear_pending_selection()
 	else:
 		current_world_index = 0
 		current_level_index = 0
+		should_show_initial_world_transition = true
 
 	current_world_level_names = get_world_level_names(current_world_index)
 	set_level_title_label_text(current_level_index)
@@ -91,10 +95,21 @@ func set_level_title_label_text(level_index: int) -> void:
 
 
 func start_run() -> void:
-	load_level()
-
-	animation_player.play("global_transition_in")
-	await animation_player.animation_finished
+	if should_show_initial_world_transition:
+		transition.visible = false
+		world_transition.play_initial_transition(worlds[current_world_index])
+		animation_player.play("global_transition_in")
+		await animation_player.animation_finished
+		await get_tree().create_timer(1.5).timeout
+		load_level()
+		transition.visible = true
+		await transition_out()
+		world_transition.visible = false
+	
+	else:
+		load_level()
+		animation_player.play("global_transition_in")
+		await animation_player.animation_finished
 
 	await get_tree().create_timer(TRANSITION_LENGTH).timeout
 	await transition_in()

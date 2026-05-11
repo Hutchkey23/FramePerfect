@@ -21,9 +21,18 @@ const POSTCARD_NOT_SELECTED_SCALE: Vector2 = Vector2(1.2, 1.2)
 	$PostcardHolder/GalacticGatewayPostcard
 ]
 
+@onready var peaceful_plains_background: TextureRect = $BackgroundHolder/PeacefulPlainsBackground
+@onready var scorched_sands_background: TextureRect = $BackgroundHolder/ScorchedSandsBackground
+@onready var frosted_frontier_background: TextureRect = $BackgroundHolder/FrostedFrontierBackground
+@onready var galactic_gateway_background: TextureRect = $BackgroundHolder/GalacticGatewayBackground
+
+
+var backgrounds: Array[TextureRect] = []
+
 var navigation_arrows: Array[Control] = []
 
 var current_world_index: int = 0
+var current_background_index: int = 0
 var move_tween: Tween
 var left_arrow_tween: Tween
 var right_arrow_tween: Tween
@@ -35,8 +44,29 @@ var right_arrow_idle_tween: Tween
 
 var postcard_selected: bool = false
 
+var background_tween: Tween
+
 func _ready() -> void:
 	navigation_arrows = [left_arrow, right_arrow]
+	backgrounds = [
+		peaceful_plains_background,
+		scorched_sands_background,
+		frosted_frontier_background,
+		galactic_gateway_background
+	]
+	
+	for i in backgrounds.size():
+		var bg := backgrounds[i]
+		var mat := bg.material as ShaderMaterial
+
+		if i == current_world_index:
+			mat.set_shader_parameter("fade_alpha", 1.0)
+			bg.move_to_front()
+		else:
+			mat.set_shader_parameter("fade_alpha", 0.0)
+
+	current_background_index = current_world_index
+	
 	_position_postcards()
 	_update_selection(false)
 	update_arrows()
@@ -100,8 +130,46 @@ func _move_selection(direction: int) -> void:
 	play_arrow_animation(direction)
 	
 	update_arrows()
+	update_background()
 	_update_selection(true)
 
+func update_background() -> void:
+	var old_bg := backgrounds[current_background_index]
+	var new_bg := backgrounds[current_world_index]
+
+	if old_bg == new_bg:
+		return
+
+	current_background_index = current_world_index
+
+	if background_tween:
+		background_tween.kill()
+
+	var old_mat := old_bg.material as ShaderMaterial
+	var new_mat := new_bg.material as ShaderMaterial
+
+	# Keep old visible underneath.
+	old_mat.set_shader_parameter("fade_alpha", 1.0)
+
+	# Put new background above old background.
+	new_bg.move_to_front()
+	new_mat.set_shader_parameter("fade_alpha", 0.0)
+
+	background_tween = create_tween()
+	background_tween.tween_property(
+		new_mat,
+		"shader_parameter/fade_alpha",
+		1.0,
+		0.2
+	)
+
+	await background_tween.finished
+
+	# After the new bg fully covers the screen, hide the old backgrounds.
+	for bg in backgrounds:
+		if bg != new_bg:
+			var mat := bg.material as ShaderMaterial
+			mat.set_shader_parameter("fade_alpha", 0.0)
 
 func _update_selection(animated: bool) -> void:
 	var selected_card := postcards[current_world_index]
@@ -197,3 +265,15 @@ func toggle_navigation_arrows(is_showing: bool) -> void:
 		arrow.visible = is_showing
 	if is_showing:
 		update_arrows()
+
+
+func fade_background_out(background: TextureRect) -> void:
+	var mat := background.material as ShaderMaterial
+	var tween := create_tween()
+	tween.tween_property(mat, "shader_parameter/fade_alpha", 0.0, 0.25).set_ease(Tween.EASE_OUT)
+
+
+func fade_background_in(background: TextureRect) -> void:
+	var mat := background.material as ShaderMaterial
+	var tween := create_tween()
+	tween.tween_property(mat, "shader_parameter/fade_alpha", 1.0, 0.25)

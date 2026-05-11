@@ -427,7 +427,7 @@ offset_bottom = 268.0
 color = Color(0, 0, 0, 1)
 
 [node name="Transition" type="CanvasLayer" parent="." unique_id=27428994]
-layer = 3
+layer = 4
 
 [node name="TransitionRect" type="ColorRect" parent="Transition" unique_id=341189479]
 material = ExtResource("5_c2g8d")
@@ -473,6 +473,7 @@ layer = 10
 visible = false
 
 [node name="WorldTransition" parent="." unique_id=265102022 instance=ExtResource("11_vcwo2")]
+layer = 3
 visible = false
 
 [connection signal="go_to_main_menu" from="PauseLayer/PauseScreen" to="." method="_on_pause_screen_go_to_main_menu"]

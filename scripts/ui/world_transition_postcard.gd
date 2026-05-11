@@ -5,10 +5,9 @@ class_name WorldTransitionPostcard
 
 @onready var postcard_front_texture: TextureRect = $Front/PostcardFrontTexture
 @onready var world_number_label: Label = $Front/VBoxContainer/WorldNumberLabelMarginContainer/WorldNumberLabel
-@onready var world_title_label: Label = $Front/VBoxContainer/WorldTitleLabelMarginContainer/WorldTitleLabel
+@onready var world_title_label: RichTextLabel = $Front/VBoxContainer/WorldTitleLabelMarginContainer/WorldTitleLabel
 
-var labels: Array[Label]
-
+var labels: Array
 var postcard_tween: Tween
 
 func _ready() -> void:
@@ -19,8 +18,8 @@ func _ready() -> void:
 
 func setup(data: WorldData) -> void:
 	world_data = data
-
 	world_number_label.text = "WORLD " + str(data.world_number)
+	world_title_label.add_theme_constant_override("outline_size", 0)
 	world_title_label.text = data.world_title
 	postcard_front_texture.texture = data.front_image
 	set_font_color(data.font_color)
@@ -28,6 +27,8 @@ func setup(data: WorldData) -> void:
 func set_font_color(chosen_color: Color):
 	for label in labels:
 		label.add_theme_color_override("font_color", chosen_color)
+		label.add_theme_color_override("default_color", chosen_color)
 
 func change_to_delivered() -> void:
-	world_title_label.text = "DELIVERED!"
+	world_title_label.add_theme_constant_override("outline_size", 2)
+	world_title_label.text = "[rainbow]DELIVERED![/rainbow]"

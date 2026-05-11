@@ -15,6 +15,14 @@ signal transition_in
 
 var postcard_tween: Tween
 
+func play_initial_transition(current_world: WorldData) -> void:
+	animation_player.play("RESET")
+	visible = true
+	
+	current_world_background.texture = current_world.background_texture
+	current_world_postcard.setup(current_world)
+	
+	await get_tree().create_timer(2.0).timeout
 
 func play_transition(completed_world: WorldData, next_world: WorldData) -> void:
 	animation_player.play("RESET")

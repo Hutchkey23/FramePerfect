@@ -2,11 +2,71 @@
 
 [ext_resource type="Script" uid="uid://blnu0ir6uxc0d" path="res://scripts/level_select/world_select.gd" id="1_0ykvm"]
 [ext_resource type="PackedScene" uid="uid://cw0nnoswwvmfj" path="res://scenes/postcard/level_select_postcard.tscn" id="1_xf5wa"]
+[ext_resource type="Shader" uid="uid://co7tg7n73nnfy" path="res://shaders/scrolling_bg.gdshader" id="2_7vvew"]
 [ext_resource type="FontFile" uid="uid://vklaqlxxc5o7" path="res://assets/fonts/Whacky_Joe.ttf" id="2_c7dkd"]
+[ext_resource type="Texture2D" uid="uid://ddksbycmsdtui" path="res://assets/title/bg1.png" id="3_aigqt"]
 [ext_resource type="Resource" uid="uid://uotkih62v0dd" path="res://resources/world_data/peaceful_plains.tres" id="4_fim0u"]
+[ext_resource type="Texture2D" uid="uid://ddw3dh2erb3yj" path="res://assets/title/bg2.png" id="4_qhb3o"]
 [ext_resource type="Resource" uid="uid://dv7uy4up300c1" path="res://resources/world_data/scorched_sands.tres" id="5_b0423"]
+[ext_resource type="Texture2D" uid="uid://cc0yjr551pgxx" path="res://assets/title/bg3.png" id="5_ycr7h"]
+[ext_resource type="Texture2D" uid="uid://drq6jrdahq8a6" path="res://assets/title/bg4.png" id="6_rpp7b"]
 [ext_resource type="Resource" uid="uid://ct5yadc3b6fc6" path="res://resources/world_data/frosted_frontier.tres" id="6_vwvko"]
 [ext_resource type="Resource" uid="uid://ec3th64jjhhr" path="res://resources/world_data/galactic_gateways.tres" id="7_c7dkd"]
+[ext_resource type="Script" uid="uid://svlunj5u68xy" path="res://scripts/title/drifting_elements.gd" id="7_r78nu"]
+[ext_resource type="Texture2D" uid="uid://ex76bgpxt2i3" path="res://assets/sprites/stamps/stamp1.png" id="8_angsd"]
+[ext_resource type="Texture2D" uid="uid://bh3wawtgjaejn" path="res://assets/sprites/stamps/stamp2.png" id="9_jc3xf"]
+[ext_resource type="Texture2D" uid="uid://fy3rghw8mw4j" path="res://assets/sprites/stamps/stamp3.png" id="10_75176"]
+[ext_resource type="Texture2D" uid="uid://bay3lmh1abxb0" path="res://assets/sprites/stamps/stamp4.png" id="11_tt4su"]
+[ext_resource type="Texture2D" uid="uid://cggsyhmgi36i5" path="res://assets/sprites/stamps/stamp5.png" id="12_7gpw8"]
+[ext_resource type="Texture2D" uid="uid://yy0vai07m3di" path="res://assets/sprites/stamps/stamp6.png" id="13_lsf4d"]
+[ext_resource type="Texture2D" uid="uid://cjd1jyq5d22ec" path="res://assets/sprites/stamps/stamp7.png" id="14_mhh2c"]
+[ext_resource type="Texture2D" uid="uid://mdfpf6uae1nx" path="res://assets/sprites/stamps/stamp8.png" id="15_5mbbi"]
+[ext_resource type="Texture2D" uid="uid://r4bw8q8fire4" path="res://assets/sprites/stamps/stamp9.png" id="16_ki8hv"]
+[ext_resource type="Texture2D" uid="uid://vrmgj5lgy25c" path="res://assets/sprites/stamps/stamp10.png" id="17_61xw5"]
+[ext_resource type="Texture2D" uid="uid://blq8utwpcrili" path="res://assets/sprites/stamps/stamp_11.png" id="18_qglux"]
+[ext_resource type="Texture2D" uid="uid://det4leh5p2ah0" path="res://assets/sprites/stamps/stamp_12.png" id="19_tbuly"]
+[ext_resource type="Texture2D" uid="uid://c0w6hkdewi0lf" path="res://assets/sprites/stamps/stamp_13.png" id="20_bxbqt"]
+[ext_resource type="Texture2D" uid="uid://bqpto7824lhf1" path="res://assets/sprites/stamps/stamp_14.png" id="21_uuweh"]
+[ext_resource type="Texture2D" uid="uid://chmnc2vbvm2td" path="res://assets/sprites/stamps/stamp_15.png" id="22_ktyvj"]
+[ext_resource type="Texture2D" uid="uid://kxyvohx4e6n3" path="res://assets/sprites/stamps/stamp_16.png" id="23_1l568"]
+[ext_resource type="Texture2D" uid="uid://dfy01ogpiowo0" path="res://assets/sprites/stamps/stamp_17.png" id="24_pniy4"]
+[ext_resource type="Texture2D" uid="uid://dochrmgx1j22m" path="res://assets/sprites/stamps/stamp_18.png" id="25_yy48a"]
+[ext_resource type="Texture2D" uid="uid://dsh7v73l1ygaf" path="res://assets/sprites/stamps/stamp_19.png" id="26_a26ew"]
+[ext_resource type="Texture2D" uid="uid://csp5pcg2jb58p" path="res://assets/sprites/stamps/stamp_20.png" id="27_6gs7n"]
+[ext_resource type="Texture2D" uid="uid://3km0enih3xr2" path="res://assets/sprites/stamps/stamp_21.png" id="28_ifd7l"]
+[ext_resource type="Texture2D" uid="uid://c8shnmw52xngg" path="res://assets/sprites/stamps/stamp_22.png" id="29_bkkgo"]
+[ext_resource type="Texture2D" uid="uid://vjvor1gukj6e" path="res://assets/sprites/stamps/stamp_23.png" id="30_o1lmf"]
+[ext_resource type="Texture2D" uid="uid://buu7ksa12l8h6" path="res://assets/sprites/stamps/stamp_24.png" id="31_hvxjf"]
+[ext_resource type="Texture2D" uid="uid://b3n4e7ymoqlty" path="res://assets/sprites/stamps/stamp_25.png" id="32_o8i2j"]
+[ext_resource type="Texture2D" uid="uid://bqa1g5t3ixn8f" path="res://assets/sprites/stamps/stamp_26.png" id="33_ikgps"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ypb0n"]
+shader = ExtResource("2_7vvew")
+shader_parameter/scroll_speed = Vector2(-1, 0)
+shader_parameter/texture_scale = Vector2(1, 1)
+shader_parameter/tint_color = Color(0.63375676, 0.63375676, 0.63375705, 1)
+shader_parameter/fade_alpha = 1.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_nji2q"]
+shader = ExtResource("2_7vvew")
+shader_parameter/scroll_speed = Vector2(-1, 0)
+shader_parameter/texture_scale = Vector2(1, 1)
+shader_parameter/tint_color = Color(0.63375676, 0.63375676, 0.63375705, 1)
+shader_parameter/fade_alpha = 0.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_b1r15"]
+shader = ExtResource("2_7vvew")
+shader_parameter/scroll_speed = Vector2(-1, 0)
+shader_parameter/texture_scale = Vector2(1, 1)
+shader_parameter/tint_color = Color(0.63375676, 0.63375676, 0.63375705, 1)
+shader_parameter/fade_alpha = 0.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_bgwcu"]
+shader = ExtResource("2_7vvew")
+shader_parameter/scroll_speed = Vector2(-1, 0)
+shader_parameter/texture_scale = Vector2(1, 1)
+shader_parameter/tint_color = Color(0.63375676, 0.63375676, 0.63375705, 1)
+shader_parameter/fade_alpha = 0.0
 
 [node name="WorldSelect" type="Control" unique_id=1970402749]
 layout_mode = 3
@@ -16,6 +76,80 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_0ykvm")
+
+[node name="BackgroundHolder" type="Control" parent="." unique_id=1479825667]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PeacefulPlainsBackground" type="TextureRect" parent="BackgroundHolder" unique_id=1691716971]
+modulate = Color(0.78431374, 0.78431374, 0.78431374, 1)
+material = SubResource("ShaderMaterial_ypb0n")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_bottom = 5.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_aigqt")
+stretch_mode = 1
+
+[node name="ScorchedSandsBackground" type="TextureRect" parent="BackgroundHolder" unique_id=746444052]
+modulate = Color(0.78431374, 0.78431374, 0.78431374, 1)
+material = SubResource("ShaderMaterial_nji2q")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_bottom = 5.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("4_qhb3o")
+stretch_mode = 1
+
+[node name="FrostedFrontierBackground" type="TextureRect" parent="BackgroundHolder" unique_id=106304202]
+modulate = Color(0.78431374, 0.78431374, 0.78431374, 1)
+material = SubResource("ShaderMaterial_b1r15")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_bottom = 5.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("5_ycr7h")
+stretch_mode = 1
+
+[node name="GalacticGatewayBackground" type="TextureRect" parent="BackgroundHolder" unique_id=1621772299]
+modulate = Color(0.78431374, 0.78431374, 0.78431374, 1)
+material = SubResource("ShaderMaterial_bgwcu")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_bottom = 5.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("6_rpp7b")
+stretch_mode = 1
+
+[node name="DriftingElements" type="Node2D" parent="." unique_id=1301687504]
+script = ExtResource("7_r78nu")
+textures = Array[Texture2D]([ExtResource("8_angsd"), ExtResource("9_jc3xf"), ExtResource("10_75176"), ExtResource("11_tt4su"), ExtResource("12_7gpw8"), ExtResource("13_lsf4d"), ExtResource("14_mhh2c"), ExtResource("15_5mbbi"), ExtResource("16_ki8hv"), ExtResource("17_61xw5"), ExtResource("18_qglux"), ExtResource("19_tbuly"), ExtResource("20_bxbqt"), ExtResource("21_uuweh"), ExtResource("22_ktyvj"), ExtResource("23_1l568"), ExtResource("24_pniy4"), ExtResource("25_yy48a"), ExtResource("26_a26ew"), ExtResource("27_6gs7n"), ExtResource("28_ifd7l"), ExtResource("29_bkkgo"), ExtResource("30_o1lmf"), ExtResource("31_hvxjf"), ExtResource("32_o8i2j"), ExtResource("33_ikgps")])
+spawn_interval = 0.4
+max_elements = 40
+initial_element_count = 12
+min_speed = 5.0
+max_speed = 12.0
+min_scale = 0.9
+max_scale = 1.5
+min_alpha = 0.08
+max_alpha = 0.15
+logo_safe_zone = Rect2(94, 0, 132.23, 500)
 
 [node name="MarginContainer" type="MarginContainer" parent="." unique_id=1485999039]
 layout_mode = 1
