@@ -5,6 +5,7 @@
 [ext_resource type="Script" uid="uid://gba83foepn6x" path="res://resources/world_data/world_data.gd" id="2_75rkk"]
 [ext_resource type="Resource" uid="uid://cisp2c6ereu3c" path="res://resources/level_data/51-75_frosted_frontier/level_055.tres" id="2_mr0f6"]
 [ext_resource type="Texture2D" uid="uid://donmn42nyajoq" path="res://assets/sprites/postcards/frosted_frontier.png" id="2_pejcj"]
+[ext_resource type="AudioStream" uid="uid://d1sd866t3t8am" path="res://assets/audio/bgm/05_Grab a Coat!.wav" id="2_pwnbe"]
 [ext_resource type="Texture2D" uid="uid://cc0yjr551pgxx" path="res://assets/title/bg3.png" id="2_qxq4w"]
 [ext_resource type="Resource" uid="uid://dcty6k2bv6cl" path="res://resources/level_data/51-75_frosted_frontier/level_051.tres" id="4_pejcj"]
 [ext_resource type="Resource" uid="uid://e4xke5f67rtt" path="res://resources/level_data/51-75_frosted_frontier/level_052.tres" id="5_sbbhd"]
@@ -15,6 +16,7 @@ world_id = "frosted_frontier"
 world_title = "Frosted Frontier"
 world_number = 3
 world_intro_text = "Frosted Frontier"
+background_music = Array[AudioStream]([ExtResource("2_pwnbe")])
 levels = Array[ExtResource("1_nkmhr")]([ExtResource("4_pejcj"), ExtResource("5_sbbhd"), ExtResource("2_mr0f6")])
 front_image = ExtResource("2_pejcj")
 back_image = ExtResource("1_og4rg")

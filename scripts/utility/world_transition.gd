@@ -42,7 +42,7 @@ func play_transition(completed_world: WorldData, next_world: WorldData) -> void:
 	await get_tree().create_timer(1.0).timeout
 	
 	if next_world.background_music.size() > 0:
-		BGMManager.play(next_world.background_music[0])
+		BGMManager.play_world_playlist(next_world.background_music, false)
 	
 	animation_player.play("transition_to_next_world")
 	await animation_player.animation_finished

@@ -6,11 +6,13 @@ const SEND_IT = preload("uid://dm4lfm5ey1aya")
 
 ###############################################################################
 
-#const WORLD_BGM_MIN_TIME := 120.0
-#const WORLD_BGM_MAX_TIME := 180.0
-const WORLD_BGM_MIN_TIME := 20.0
-const WORLD_BGM_MAX_TIME := 30.0
-const WORLD_BGM_CROSSFADE_TIME := 8.0
+const WORLD_BGM_MIN_TIME := 120.0
+const WORLD_BGM_MAX_TIME := 180.0
+#const WORLD_BGM_MIN_TIME := 20.0
+#const WORLD_BGM_MAX_TIME := 30.0
+const WORLD_BGM_PLAY_TIME := 150.0
+const WORLD_BGM_FADE_OUT_TIME := 2.0
+const WORLD_BGM_SILENCE_TIME := 2.0
 
 var world_playlist: Array[AudioStream] = []
 var world_song_index: int = -1
@@ -50,7 +52,7 @@ func play_world_playlist(
 	else:
 		world_song_index = 0
 
-	play(world_playlist[world_song_index], volume_db, 1.5)
+	play(world_playlist[world_song_index], volume_db, 0.0)
 	_schedule_next_world_song(volume_db)
 
 
@@ -65,9 +67,17 @@ func _schedule_next_world_song(volume_db: float = BGM_VOLUME) -> void:
 	if not world_bgm_active:
 		return
 
-	var wait_time := randf_range(WORLD_BGM_MIN_TIME, WORLD_BGM_MAX_TIME)
+	await get_tree().create_timer(WORLD_BGM_PLAY_TIME).timeout
 
-	await get_tree().create_timer(wait_time).timeout
+	if not world_bgm_active:
+		return
+
+	await fade_out(WORLD_BGM_FADE_OUT_TIME)
+
+	if not world_bgm_active:
+		return
+
+	await get_tree().create_timer(WORLD_BGM_SILENCE_TIME).timeout
 
 	if not world_bgm_active:
 		return
@@ -86,7 +96,7 @@ func _play_next_world_song(volume_db: float = BGM_VOLUME) -> void:
 
 	var next_song := world_playlist[world_song_index]
 
-	cross_fade(next_song, WORLD_BGM_CROSSFADE_TIME, volume_db)
+	play(next_song, volume_db, 0.0)
 
 	_schedule_next_world_song(volume_db)
 
