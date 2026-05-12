@@ -3,7 +3,20 @@ extends Node
 ################################ MUSIC ################################
 const BGM_VOLUME : float = -8.0
 const SEND_IT = preload("uid://dm4lfm5ey1aya")
+
 ###############################################################################
+
+#const WORLD_BGM_MIN_TIME := 120.0
+#const WORLD_BGM_MAX_TIME := 180.0
+const WORLD_BGM_MIN_TIME := 20.0
+const WORLD_BGM_MAX_TIME := 30.0
+const WORLD_BGM_CROSSFADE_TIME := 8.0
+
+var world_playlist: Array[AudioStream] = []
+var world_song_index: int = -1
+var world_bgm_active: bool = false
+
+var song_change_timer: SceneTreeTimer
 
 @onready var audio_player := AudioStreamPlayer.new()
 var fade_tween: Tween
@@ -16,6 +29,66 @@ func _ready() -> void:
 
 	if AudioServer.get_bus_index("Music") == -1:
 		push_error("Music bus not found! Make sure it exists in Audio Bus Layout.")
+
+func play_world_playlist(
+	songs: Array[AudioStream],
+	start_random: bool = true,
+	volume_db: float = BGM_VOLUME
+) -> void:
+	if songs.is_empty():
+		fade_out(1.0)
+		world_bgm_active = false
+		world_playlist.clear()
+		world_song_index = -1
+		return
+
+	world_playlist = songs.duplicate()
+	world_bgm_active = true
+
+	if start_random:
+		world_song_index = randi_range(0, world_playlist.size() - 1)
+	else:
+		world_song_index = 0
+
+	play(world_playlist[world_song_index], volume_db, 1.5)
+	_schedule_next_world_song(volume_db)
+
+
+func stop_world_playlist(fade_duration: float = 1.0) -> void:
+	world_bgm_active = false
+	world_playlist.clear()
+	world_song_index = -1
+	fade_out(fade_duration)
+
+
+func _schedule_next_world_song(volume_db: float = BGM_VOLUME) -> void:
+	if not world_bgm_active:
+		return
+
+	var wait_time := randf_range(WORLD_BGM_MIN_TIME, WORLD_BGM_MAX_TIME)
+
+	await get_tree().create_timer(wait_time).timeout
+
+	if not world_bgm_active:
+		return
+
+	_play_next_world_song(volume_db)
+
+
+func _play_next_world_song(volume_db: float = BGM_VOLUME) -> void:
+	if world_playlist.is_empty():
+		return
+
+	world_song_index += 1
+
+	if world_song_index >= world_playlist.size():
+		world_song_index = 0
+
+	var next_song := world_playlist[world_song_index]
+
+	cross_fade(next_song, WORLD_BGM_CROSSFADE_TIME, volume_db)
+
+	_schedule_next_world_song(volume_db)
 
 # ----------------------------------------------------
 # Basic Play (no fade)

@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://drq6jrdahq8a6" path="res://assets/title/bg4.png" id="2_82udv"]
 [ext_resource type="Script" uid="uid://gba83foepn6x" path="res://resources/world_data/world_data.gd" id="2_u51m2"]
 [ext_resource type="Texture2D" uid="uid://cqr4ra4dronfp" path="res://assets/sprites/postcards/galactic_gateway.png" id="2_v77qx"]
+[ext_resource type="AudioStream" uid="uid://wnsmokoo6wvo" path="res://assets/audio/bgm/08_Starlight Express.wav" id="3_d1xaw"]
 [ext_resource type="Resource" uid="uid://bpuhtun2p80xi" path="res://resources/level_data/76-100_galactic_gateway/level_076.tres" id="4_pg1hn"]
 [ext_resource type="Resource" uid="uid://etng3pdn2hd" path="res://resources/level_data/76-100_galactic_gateway/level_077.tres" id="4_v77qx"]
 [ext_resource type="Resource" uid="uid://2oi37uydf0yx" path="res://resources/level_data/76-100_galactic_gateway/level_085.tres" id="6_1l6e2"]
@@ -17,7 +18,7 @@ world_id = "galactic_gateways"
 world_title = "Galactic Gateways"
 world_number = 4
 world_intro_text = "Galactic Gateways"
-background_music = Array[AudioStream]([ExtResource("2_8qwsd")])
+background_music = Array[AudioStream]([ExtResource("2_8qwsd"), ExtResource("3_d1xaw")])
 levels = Array[ExtResource("1_pcbvh")]([ExtResource("4_pg1hn"), ExtResource("4_v77qx"), ExtResource("6_m8206"), ExtResource("6_1l6e2")])
 front_image = ExtResource("2_v77qx")
 back_image = ExtResource("1_l5xfb")
