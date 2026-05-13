@@ -6,7 +6,7 @@ class_name WorldData
 @export var world_number: int
 @export var world_intro_text: String
 @export var cutscene_scene: PackedScene
-@export var background_music: Array[AudioStream]
+@export var background_music: Array[MusicData]
 @export var levels: Array[LevelData]
 
 @export_group("Level Select")

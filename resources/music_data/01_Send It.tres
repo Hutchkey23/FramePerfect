@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="MusicData" format=3 uid="uid://ckgdg8tcg17da"]
+
+[ext_resource type="AudioStream" uid="uid://dm4lfm5ey1aya" path="res://assets/audio/bgm/01_Send It!.wav" id="1_aoq32"]
+[ext_resource type="Script" uid="uid://bhxby642rllaj" path="res://resources/music_data/music_data.gd" id="1_ydx52"]
+
+[resource]
+script = ExtResource("1_ydx52")
+bgm_file = ExtResource("1_aoq32")
+metadata/_custom_type_script = "uid://bhxby642rllaj"

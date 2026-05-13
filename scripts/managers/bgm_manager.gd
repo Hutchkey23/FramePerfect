@@ -5,13 +5,12 @@ extends Node
 const BGM_VOLUME: float = -8.0
 const SEND_IT = preload("uid://dm4lfm5ey1aya")
 
-const WORLD_BGM_PLAY_TIME := 150.0 # 2.5 minutes
 const WORLD_BGM_FADE_OUT_TIME := 2.0
 const WORLD_BGM_SILENCE_TIME := 2.0
 
 ###############################################################################
 
-var world_playlist: Array[AudioStream] = []
+var world_playlist: Array[MusicData] = []
 var world_song_index: int = -1
 var world_bgm_active: bool = false
 
@@ -32,9 +31,8 @@ func _ready() -> void:
 
 
 func play_world_playlist(
-	songs: Array[AudioStream],
-	start_random: bool = true,
-	volume_db: float = BGM_VOLUME
+	songs: Array[MusicData],
+	start_random: bool = true
 ) -> void:
 	# Cancels any previous playlist loop.
 	playlist_version += 1
@@ -52,8 +50,7 @@ func play_world_playlist(
 	else:
 		world_song_index = 0
 
-	play(world_playlist[world_song_index], volume_db, 0.0)
-	_schedule_next_world_song(volume_db, my_version)
+	_play_current_world_song(my_version)
 
 
 func stop_world_playlist(fade_duration: float = 1.0) -> void:
@@ -66,14 +63,37 @@ func stop_world_playlist(fade_duration: float = 1.0) -> void:
 	fade_out(fade_duration)
 
 
+func _play_current_world_song(version: int = playlist_version) -> void:
+	if not world_bgm_active or version != playlist_version:
+		return
+
+	if world_playlist.is_empty():
+		return
+
+	var music_data := world_playlist[world_song_index]
+
+	if music_data == null:
+		_play_next_world_song(version)
+		return
+
+	if music_data.bgm_file == null:
+		_play_next_world_song(version)
+		return
+
+	play(music_data.bgm_file, music_data.volume_db, 0.0)
+
+	var play_time := get_random_play_length(music_data)
+	_schedule_next_world_song(play_time, version)
+
+
 func _schedule_next_world_song(
-	volume_db: float = BGM_VOLUME,
+	play_time: float,
 	version: int = playlist_version
 ) -> void:
 	if not world_bgm_active or version != playlist_version:
 		return
 
-	await get_tree().create_timer(WORLD_BGM_PLAY_TIME).timeout
+	await get_tree().create_timer(play_time).timeout
 
 	if not world_bgm_active or version != playlist_version:
 		return
@@ -88,13 +108,10 @@ func _schedule_next_world_song(
 	if not world_bgm_active or version != playlist_version:
 		return
 
-	_play_next_world_song(volume_db, version)
+	_play_next_world_song(version)
 
 
-func _play_next_world_song(
-	volume_db: float = BGM_VOLUME,
-	version: int = playlist_version
-) -> void:
+func _play_next_world_song(version: int = playlist_version) -> void:
 	if not world_bgm_active or version != playlist_version:
 		return
 
@@ -106,8 +123,17 @@ func _play_next_world_song(
 	if world_song_index >= world_playlist.size():
 		world_song_index = 0
 
-	play(world_playlist[world_song_index], volume_db, 0.0)
-	_schedule_next_world_song(volume_db, version)
+	_play_current_world_song(version)
+
+
+func get_random_play_length(music_data: MusicData) -> float:
+	var min_length := music_data.play_length_min
+	var max_length := music_data.play_length_max
+
+	if max_length < min_length:
+		max_length = min_length
+
+	return float(randi_range(min_length, max_length))
 
 
 # ----------------------------------------------------

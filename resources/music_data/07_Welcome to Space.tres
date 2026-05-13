@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="MusicData" format=3 uid="uid://dctkaedhn601n"]
+
+[ext_resource type="AudioStream" uid="uid://c531ol1ubj74i" path="res://assets/audio/bgm/07_Welcome to Space!.wav" id="1_mx04x"]
+[ext_resource type="Script" uid="uid://bhxby642rllaj" path="res://resources/music_data/music_data.gd" id="2_hfiqi"]
+
+[resource]
+script = ExtResource("2_hfiqi")
+bgm_file = ExtResource("1_mx04x")
+metadata/_custom_type_script = "uid://bhxby642rllaj"

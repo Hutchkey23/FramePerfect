@@ -21,6 +21,10 @@ const MAILBOX_FLAG_PITCH_RANGE: Vector2 = Vector2(1.0, 1.0)
 const GOAL_UNLOCK_SFX = preload("uid://c4xw6nwf22trw")
 const GOAL_UNLOCK_VOLUME: float = -3.0
 const GOAL_UNLOCK_PITCH_RANGE: Vector2 = Vector2(0.8, 1.0)
+
+const NEW_BEST_SFX = preload("uid://bbxn1phuna1rs")
+const NEW_BEST_VOLUME: float = -3.0
+const NEW_BEST_PITCH_RANGE: Vector2 = Vector2(0.8, 1.0)
 #########################
 
 const NORMAL_GOAL_SCALE : Vector2 = Vector2(0.5, 0.5)
@@ -188,15 +192,18 @@ func show_level_complete_result(result: Dictionary) -> void:
 	play_sfx(MAILBOX_FLAG_SFX, MAILBOX_FLAG_VOLUME, MAILBOX_FLAG_PITCH_RANGE)
 	await goal_reached_animation()
 	
+	
 	# Show new best only if medal has been earned and player sets high score
 	if result.earned_medal and result.medal_already_achieved:
 		var new_best_message = get_new_best_message(result)
 		new_best_or_medal_label.text = new_best_message
+		play_sfx(GOAL_UNLOCK_SFX, -3.0, Vector2(0.7, 0.8))
 	
 	# If player has not earned a medal, show time save needed for medal
 	else:
 		var medal_message = get_medal_message(result)
 		new_best_or_medal_label.text = medal_message
+		play_sfx(NEW_BEST_SFX, NEW_BEST_VOLUME, NEW_BEST_PITCH_RANGE)
 	
 	show_new_best_or_medal_label(result)
 	
