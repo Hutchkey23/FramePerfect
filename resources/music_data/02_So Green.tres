@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="MusicData" format=3 uid="uid://c725xt1moqblj"]
+
+[ext_resource type="AudioStream" uid="uid://dr4vlrrf72dwp" path="res://assets/audio/bgm/02_So Green.wav" id="1_ykhte"]
+[ext_resource type="Script" uid="uid://bhxby642rllaj" path="res://resources/music_data/music_data.gd" id="2_ld7yj"]
+
+[resource]
+script = ExtResource("2_ld7yj")
+bgm_file = ExtResource("1_ykhte")
+volume_db = -5.0
+metadata/_custom_type_script = "uid://bhxby642rllaj"

@@ -5,8 +5,8 @@ extends Node
 const BGM_VOLUME: float = -8.0
 const SEND_IT = preload("uid://dm4lfm5ey1aya")
 
-const WORLD_BGM_FADE_OUT_TIME := 2.0
-const WORLD_BGM_SILENCE_TIME := 2.0
+const WORLD_BGM_FADE_OUT_TIME := 5.0
+const WORLD_BGM_SILENCE_TIME := 1.0
 
 ###############################################################################
 
@@ -16,13 +16,14 @@ var world_bgm_active: bool = false
 
 var playlist_version: int = 0
 
-@onready var audio_player := AudioStreamPlayer.new()
+var audio_player : AudioStreamPlayer
 var fade_tween: Tween
 
 
 func _ready() -> void:
 	process_mode = Node.PROCESS_MODE_ALWAYS
-
+	
+	audio_player = AudioStreamPlayer.new()
 	audio_player.bus = "Music"
 	add_child(audio_player)
 
@@ -79,7 +80,7 @@ func _play_current_world_song(version: int = playlist_version) -> void:
 	if music_data.bgm_file == null:
 		_play_next_world_song(version)
 		return
-
+	
 	play(music_data.bgm_file, music_data.volume_db, 0.0)
 
 	var play_time := get_random_play_length(music_data)

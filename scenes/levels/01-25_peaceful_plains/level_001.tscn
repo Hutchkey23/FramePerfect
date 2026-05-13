@@ -6,6 +6,7 @@
 [ext_resource type="TileSet" uid="uid://7q8eymh2ksuh" path="res://scenes/tilesets/main_floor_and_walls.tres" id="4_bo1da"]
 [ext_resource type="Shader" uid="uid://cyftftn8qvqe5" path="res://shaders/hazard_shader.gdshader" id="5_qw7j4"]
 [ext_resource type="PackedScene" uid="uid://cwv3wpwmybmey" path="res://scenes/props/goal.tscn" id="6_bt4du"]
+[ext_resource type="Script" uid="uid://cyfx3hv4kfs08" path="res://scripts/props/toggle_items_manager.gd" id="7_4rg2i"]
 [ext_resource type="PackedScene" uid="uid://ecmje7pp4gyy" path="res://scenes/utility/level_ui.tscn" id="7_ba2xq"]
 [ext_resource type="PackedScene" uid="uid://bxry211ole85r" path="res://scenes/utility/cinematic_bars.tscn" id="8_dwuxq"]
 
@@ -25,6 +26,7 @@ cinematic_bars_path = NodePath("../CinematicBars")
 level_ui_path = NodePath("../LevelUI")
 platforms_path = NodePath("../Platforms")
 hazards_path = NodePath("../Hazards")
+toggle_blocks_path = NodePath("../ToggleItems")
 
 [node name="LevelUI" parent="." unique_id=687480857 instance=ExtResource("7_ba2xq")]
 layer = 2
@@ -65,12 +67,17 @@ tile_set = ExtResource("4_bo1da")
 
 [node name="Hazards" type="Node2D" parent="." unique_id=464547116]
 
+[node name="ToggleItems" type="Node2D" parent="." unique_id=1623641006]
+script = ExtResource("7_4rg2i")
+player_path = NodePath("../Player")
+
 [node name="Stamps" type="Node2D" parent="." unique_id=777576707]
 
 [node name="Goal" parent="." unique_id=652280647 instance=ExtResource("6_bt4du")]
 position = Vector2(272, 96)
 
 [node name="GameCamera" parent="." unique_id=13152400 node_paths=PackedStringArray("target") instance=ExtResource("3_v74by")]
+position = Vector2(160, 90)
 mode = 1
 target = NodePath("../Player")
 fixed_position = Vector2(160, 90)
