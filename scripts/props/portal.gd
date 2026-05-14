@@ -17,6 +17,7 @@ const ORANGE_SPRITE: Texture2D = preload("uid://c03tp8ghifs3q")
 const PURPLE_SPRITE: Texture2D = preload("uid://5ii31bwcp0dx")
 
 @onready var portal_sprite: Sprite2D = $PortalSprite
+@onready var sfx_pool: Node2D = $SFXPool
 
 @export var portal_color: PortalColor = PortalColor.BLUE:
 	set(value):
@@ -24,13 +25,17 @@ const PURPLE_SPRITE: Texture2D = preload("uid://5ii31bwcp0dx")
 		set_color(portal_color)
 @export var target_portal: Portal
 
+######### AUDIO #########
+const WARP_SOUND_EFFECT: AudioStream = preload("uid://bxo3f7wmnnmid")
+const WARP_VOLUME: float = -8.0
+const WARP_PITCH_RANGE: Vector2 = Vector2(0.5, 0.7)
+#########################
+
 var teleport_pop_scale: float = 1.25
 var teleport_pop_time: float = 0.06
 var teleport_settle_time: float = 0.12
 
 const ROTATION_RANGE: float = 35.0
-
-
 var teleport_tween: Tween
 
 var checking_for_player_landing: bool = false
@@ -67,6 +72,7 @@ func teleport(player: Player, portal: Portal) -> void:
 	target_portal.can_teleport = false
 	player.global_position = portal.global_position
 	
+	play_sfx(WARP_SOUND_EFFECT, WARP_VOLUME, WARP_PITCH_RANGE)
 	play_portal_pop()
 	portal.play_portal_pop()
 
@@ -162,3 +168,14 @@ func _on_body_exited(body: Node2D) -> void:
 	if body.is_in_group("player"):
 		player_reference = null
 		can_teleport = true
+
+####### AUDIO HANDLING ########
+func play_sfx(sfx: AudioStream, volume_db: float = 0.0, pitch_range: Vector2 = Vector2(0.95, 1.05)):
+	for audio_player: AudioStreamPlayer2D in sfx_pool.get_children():
+		if not audio_player.playing:
+			audio_player.volume_db = volume_db
+			audio_player.stream = sfx
+			audio_player.pitch_scale = randf_range(pitch_range.x, pitch_range.y)
+			audio_player.play()
+			return
+###############################

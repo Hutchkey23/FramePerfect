@@ -35,7 +35,6 @@ layer = 2
 level_controller_path = NodePath("../LevelController")
 
 [node name="CinematicBars" parent="." unique_id=3966864 instance=ExtResource("3_wkssq")]
-visible = false
 
 [node name="Player" parent="." unique_id=1458309070 instance=ExtResource("4_ly88b")]
 position = Vector2(120, 267)

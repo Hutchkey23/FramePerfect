@@ -7,6 +7,8 @@
 [ext_resource type="Resource" uid="uid://dv7uy4up300c1" path="res://resources/world_data/scorched_sands.tres" id="3_76ku4"]
 [ext_resource type="Texture2D" uid="uid://ddw3dh2erb3yj" path="res://assets/title/bg2.png" id="3_sitx3"]
 [ext_resource type="Texture2D" uid="uid://ddksbycmsdtui" path="res://assets/title/bg1.png" id="3_t4rbq"]
+[ext_resource type="AudioStream" uid="uid://cag0lu35jttel" path="res://assets/audio/sfx/WorldTransitionFanfare.wav" id="8_76ku4"]
+[ext_resource type="AudioStream" uid="uid://cn7s8lv0bte0k" path="res://assets/audio/sfx/WorldTransitionShake.wav" id="9_2xswy"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_t4rbq"]
 shader = ExtResource("2_0pi7r")
@@ -143,3 +145,11 @@ offset_right = 320.0
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=698118083]
 libraries/ = SubResource("AnimationLibrary_wi6jd")
+
+[node name="TransitionSFX" type="AudioStreamPlayer2D" parent="." unique_id=341019631]
+stream = ExtResource("8_76ku4")
+bus = &"SFX"
+
+[node name="ShakeSFX" type="AudioStreamPlayer2D" parent="." unique_id=352374279]
+stream = ExtResource("9_2xswy")
+volume_db = 4.0

@@ -12,8 +12,14 @@ signal transition_in
 @onready var next_world_postcard: WorldTransitionPostcard = $NextWorldPostcard
 @onready var next_world_background: TextureRect = $NextWorldBackground
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
+@onready var transition_sfx: AudioStreamPlayer2D = $TransitionSFX
+@onready var shake_sfx: AudioStreamPlayer2D = $ShakeSFX
 
 var postcard_tween: Tween
+
+func _ready() -> void:
+	# DEBUG
+	play_transition(completed_world_debug, next_world_debug)
 
 func play_initial_transition(current_world: WorldData) -> void:
 	animation_player.play("RESET")
@@ -39,7 +45,7 @@ func play_transition(completed_world: WorldData, next_world: WorldData) -> void:
 	
 	await get_tree().create_timer(1.0).timeout
 	await shake_then_pop(current_world_postcard)
-	await get_tree().create_timer(1.0).timeout
+	await get_tree().create_timer(2.0).timeout
 	
 	if next_world.background_music.size() > 0:
 		BGMManager.play_world_playlist(next_world.background_music, false)
@@ -60,11 +66,13 @@ func shake_then_pop(postcard: WorldTransitionPostcard) -> void:
 	var base_pos := postcard.position
 	var base_scale := postcard.scale
 	var base_rotation := postcard.rotation_degrees
-
+	
+	shake_sfx.play()
+	
 	postcard.pivot_offset = postcard.size / 2.0
 
 	postcard_tween = create_tween()
-
+	
 	# Build-up shake
 	var shake_steps := 16
 	for i in shake_steps:
@@ -88,7 +96,10 @@ func shake_then_pop(postcard: WorldTransitionPostcard) -> void:
 
 	# Big pop
 	postcard_tween.tween_callback(postcard.change_to_delivered)
-
+	
+	postcard_tween.tween_callback(transition_sfx.play)
+	postcard_tween.tween_callback(shake_sfx.stop)
+	
 	# Huge impact squash
 	postcard_tween.parallel().tween_property(
 		postcard,
