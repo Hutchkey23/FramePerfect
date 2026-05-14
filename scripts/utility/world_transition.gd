@@ -17,9 +17,9 @@ signal transition_in
 
 var postcard_tween: Tween
 
-func _ready() -> void:
-	# DEBUG
-	play_transition(completed_world_debug, next_world_debug)
+#func _ready() -> void:
+	## DEBUG
+	#play_transition(completed_world_debug, next_world_debug)
 
 func play_initial_transition(current_world: WorldData) -> void:
 	animation_player.play("RESET")

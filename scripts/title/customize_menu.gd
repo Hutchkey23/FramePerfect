@@ -233,6 +233,9 @@ func update_message_for_skin(skin: Dictionary) -> void:
 
 
 func _on_visibility_changed() -> void:
+	load_saved_skin_indexes()
+	update_player_skin_display()
+	update_goal_skin_display()
 	if visible:
 		confirm_button.update_pivot()
 		player_left_navigation_arrow.grab_silent_focus()
