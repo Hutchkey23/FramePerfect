@@ -90,10 +90,17 @@ var analog_active: bool = false
 ########### Movement ###########
 const NORMAL_SPEED: float = 140.0
 const ACCELERATION: float = 450.0
-const BRAKING: float = 350.0
+const BRAKING: float = 550.0
 
 var move_input: Vector2 = Vector2.ZERO
 var last_move_input: Vector2 = Vector2.RIGHT
+
+# Ice
+const ICE_SPEED_MULTIPLIER: float = 1.08
+const ICE_ACCELERATION_MULTIPLIER: float = 0.45
+const ICE_BRAKING_MULTIPLIER: float = 0.3
+
+var ice_surface_count: int = 0
 
 # Dashing
 const DASH_SPEED: float = 220.0
@@ -392,11 +399,22 @@ func spawn_death_clouds(number_of_clouds: int) -> void:
 		dust_cloud_instance.move_to(random_travel_distance, spread_direction)
 
 func handle_normal_movement(delta: float) -> void:
+	var on_ice := ice_surface_count > 0
+	
+	var current_speed := NORMAL_SPEED
+	var current_acceleration := ACCELERATION
+	var current_braking := BRAKING
+	
+	if on_ice:
+		current_speed *= ICE_SPEED_MULTIPLIER
+		current_acceleration *= ICE_ACCELERATION_MULTIPLIER
+		current_braking *= ICE_BRAKING_MULTIPLIER
+	
 	if move_input != Vector2.ZERO:
-		var target_velocity := move_input * NORMAL_SPEED
-		velocity = velocity.move_toward(target_velocity, ACCELERATION * delta)
+		var target_velocity := move_input * current_speed
+		velocity = velocity.move_toward(target_velocity, current_acceleration * delta)
 	else:
-		velocity = velocity.move_toward(Vector2.ZERO, BRAKING * delta)
+		velocity = velocity.move_toward(Vector2.ZERO, current_braking * delta)
 
 func apply_platform_movement() -> void:
 	if current_state == PlayerState.JUMP:
@@ -714,6 +732,9 @@ func _on_interaction_area_area_entered(area: Area2D) -> void:
 		if area is MovingPlatform and not safe_platforms.has(area):
 			safe_platforms.append(area)
 		safe_platform_count += 1
+	
+	if area.is_in_group("ice_surfaces"):
+		ice_surface_count += 1
 
 
 func _on_interaction_area_area_exited(area: Area2D) -> void:
@@ -729,15 +750,24 @@ func _on_interaction_area_area_exited(area: Area2D) -> void:
 		
 		safe_platform_count = max(0, safe_platform_count - 1)
 		check_if_should_die()
+	
+	if area.is_in_group("ice_surfaces"):
+		ice_surface_count = max(0, ice_surface_count - 1)
 
 func _on_floor_hazard_detection_area_body_entered(body: Node2D) -> void:
 	if body.is_in_group("floor_hazards"):
 		overlapping_floor_hazard_count += 1
+	
+	if body.is_in_group("ice_surfaces"):
+		ice_surface_count += 1
 
 
 func _on_floor_hazard_detection_area_body_exited(body: Node2D) -> void:
 	if body.is_in_group("floor_hazards"):
 		overlapping_floor_hazard_count = max(0, overlapping_floor_hazard_count - 1)
+	
+	if body.is_in_group("ice_surfaces"):
+		ice_surface_count = max(0, ice_surface_count - 1)
 
 func _on_stamp_collection_area_area_entered(area: Area2D) -> void:
 	if area.is_in_group("stamps"):

@@ -28,7 +28,7 @@ const PURPLE_SPRITE: Texture2D = preload("uid://5ii31bwcp0dx")
 ######### AUDIO #########
 const WARP_SOUND_EFFECT: AudioStream = preload("uid://bxo3f7wmnnmid")
 const WARP_VOLUME: float = -8.0
-const WARP_PITCH_RANGE: Vector2 = Vector2(0.5, 0.7)
+const WARP_PITCH_RANGE: Vector2 = Vector2(0.4, 0.8)
 #########################
 
 var teleport_pop_scale: float = 1.25

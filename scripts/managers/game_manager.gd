@@ -96,7 +96,6 @@ func set_level_title_label_text(level_index: int) -> void:
 
 func start_run() -> void:
 	var bg_music_array = worlds[current_world_index].background_music
-	print(bg_music_array)
 	if bg_music_array.size() > 0:
 		BGMManager.play_world_playlist(bg_music_array, false)
 	

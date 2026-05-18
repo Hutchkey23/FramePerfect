@@ -33,7 +33,6 @@ BGMManager="*uid://bcrdlw22n4mk6"
 
 window/size/viewport_width=320
 window/size/viewport_height=180
-window/size/mode=3
 window/size/window_width_override=1280
 window/size/window_height_override=720
 window/stretch/mode="canvas_items"
@@ -62,6 +61,7 @@ floor_hazards=""
 goal=""
 safe_platforms=""
 player=""
+ice_surfaces=""
 
 [input]
 
@@ -143,6 +143,7 @@ pause={
 2d_physics/layer_5="Pickup"
 2d_physics/layer_6="Floors"
 2d_physics/layer_7="JumpOverBlockers"
+2d_physics/layer_8="Ice"
 
 [physics]
 

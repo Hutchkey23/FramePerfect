@@ -42,19 +42,20 @@ var loading_next_level : bool = false
 @onready var player: Player = get_node(player_path)
 @onready var player_spawn: Node2D = get_node(player_spawn_path)
 @onready var goal: Goal = get_node(goal_path)
-@onready var stamps: Node2D = $"../Stamps"
-@onready var platforms_container: Node2D = get_node(platforms_path)
-@onready var hazards_container: Node2D = get_node(hazards_path)
-@onready var toggle_blocks_container: Node2D = get_node(toggle_blocks_path)
+
+@onready var stamps: Node2D = get_node_or_null("../Stamps")
+@onready var platforms_container: Node2D = get_node_or_null(platforms_path)
+@onready var hazards_container: Node2D = get_node_or_null(hazards_path)
+@onready var toggle_blocks_container: Node2D = get_node_or_null(toggle_blocks_path)
 
 # ANALOG #
 const ANALOG_START_THRESHOLD: float = 0.55
 var analog_start_was_pressed: bool = false
 
 func _ready() -> void:
-	 ##DEBUG
-	#enter_intro_state()
-	 ##END DEBUG
+	 #DEBUG
+	enter_intro_state()
+	 #END DEBUG
 	
 	connect_signals()
 	player.position = player_spawn.position
