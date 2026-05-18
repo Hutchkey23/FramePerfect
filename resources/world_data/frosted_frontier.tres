@@ -11,6 +11,7 @@
 [ext_resource type="Resource" uid="uid://dcty6k2bv6cl" path="res://resources/level_data/51-75_frosted_frontier/level_051.tres" id="4_pejcj"]
 [ext_resource type="Resource" uid="uid://e4xke5f67rtt" path="res://resources/level_data/51-75_frosted_frontier/level_052.tres" id="5_sbbhd"]
 [ext_resource type="Resource" uid="uid://dcrk1hilx4an5" path="res://resources/level_data/51-75_frosted_frontier/level_053.tres" id="9_a4nmb"]
+[ext_resource type="Resource" uid="uid://cushikult13dn" path="res://resources/level_data/51-75_frosted_frontier/level_075.tres" id="11_im71k"]
 
 [resource]
 script = ExtResource("2_75rkk")
@@ -19,7 +20,7 @@ world_title = "Frosted Frontier"
 world_number = 3
 world_intro_text = "Frosted Frontier"
 background_music = Array[ExtResource("2_mh3fp")]([ExtResource("3_a4nmb")])
-levels = Array[ExtResource("1_nkmhr")]([ExtResource("4_pejcj"), ExtResource("5_sbbhd"), ExtResource("9_a4nmb"), ExtResource("2_mr0f6")])
+levels = Array[ExtResource("1_nkmhr")]([ExtResource("4_pejcj"), ExtResource("5_sbbhd"), ExtResource("9_a4nmb"), ExtResource("2_mr0f6"), ExtResource("11_im71k")])
 front_image = ExtResource("2_pejcj")
 back_image = ExtResource("1_og4rg")
 font_color = Color(0.09803922, 0.29803923, 0.53333336, 1)

@@ -105,7 +105,7 @@ var ice_surface_count: int = 0
 # Dashing
 const DASH_SPEED: float = 220.0
 const DASH_DURATION: float = 0.20
-const DASH_COOLDOWN: float = 0.35
+const DASH_COOLDOWN: float = 0.30
 
 var dash_direction: Vector2 = Vector2.ZERO
 var dash_timer: float = 0.0
