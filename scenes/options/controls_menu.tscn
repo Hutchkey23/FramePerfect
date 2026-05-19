@@ -1,0 +1,69 @@
+[gd_scene format=3 uid="uid://d4nbnrbc4srio"]
+
+[ext_resource type="Script" uid="uid://bv3uwoh2dhesd" path="res://scripts/options/controls_menu.gd" id="1_f8qfn"]
+[ext_resource type="Theme" uid="uid://bsvhjxlwp2c7r" path="res://themes/menu_theme.tres" id="2_7cm8l"]
+[ext_resource type="FontFile" uid="uid://vklaqlxxc5o7" path="res://assets/fonts/Whacky_Joe.ttf" id="3_ixosr"]
+[ext_resource type="PackedScene" uid="uid://c1ayescpontpb" path="res://scenes/options/input_remap_row.tscn" id="4_f8qfn"]
+[ext_resource type="PackedScene" uid="uid://dv8sgqilw7oo1" path="res://scenes/title/menu_button.tscn" id="4_ul7y5"]
+[ext_resource type="PackedScene" uid="uid://wicomdjhcn7q" path="res://scenes/options/input_capture_popup.tscn" id="5_7cm8l"]
+
+[sub_resource type="FontVariation" id="FontVariation_f0rgw"]
+base_font = ExtResource("3_ixosr")
+spacing_glyph = 1
+
+[node name="ControlsMenu" type="Control" unique_id=1506999962]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_f8qfn")
+
+[node name="PanelContainer" type="PanelContainer" parent="." unique_id=1748607282]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -89.0
+offset_top = -60.5
+offset_right = 89.0
+offset_bottom = 60.5
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("2_7cm8l")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer" unique_id=348643990]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="EraseAllDataLabel" type="Label" parent="PanelContainer/VBoxContainer" unique_id=832178232]
+layout_mode = 2
+theme_override_constants/outline_size = 4
+theme_override_fonts/font = SubResource("FontVariation_f0rgw")
+theme_override_font_sizes/font_size = 12
+text = "CONTROLS"
+horizontal_alignment = 1
+
+[node name="JumpRemapRow" parent="PanelContainer/VBoxContainer" unique_id=481926230 instance=ExtResource("4_f8qfn")]
+layout_mode = 2
+action_name = &"jump"
+action_label = "JUMP"
+
+[node name="DashRemapRow" parent="PanelContainer/VBoxContainer" unique_id=173035621 instance=ExtResource("4_f8qfn")]
+layout_mode = 2
+action_name = &"dash"
+action_label = "DASH"
+
+[node name="ReturnButton" parent="PanelContainer/VBoxContainer" unique_id=1166705071 instance=ExtResource("4_ul7y5")]
+layout_mode = 2
+button_label_text = "RETURN"
+
+[node name="InputCapturePopup" parent="." unique_id=1679533517 instance=ExtResource("5_7cm8l")]
+visible = false
+layout_mode = 1
+
+[connection signal="visibility_changed" from="." to="." method="_on_visibility_changed"]
+[connection signal="pressed" from="PanelContainer/VBoxContainer/ReturnButton" to="." method="_on_return_button_pressed"]

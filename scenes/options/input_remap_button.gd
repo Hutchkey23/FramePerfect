@@ -1,17 +1,22 @@
 extends Button
-class_name CustomMenuButton
+class_name InputRemapButton
 
-@onready var button_text: Label = $HBoxContainer/ButtonText
+@onready var button_texture: TextureRect = $HBoxContainer/ButtonTexture
 @onready var indicator: TextureRect = $HBoxContainer/IndicatorControl/Indicator
 
+enum RemapDevice {
+	KEYBOARD,
+	GAMEPAD
+}
 
-@export var button_label_text : String = ""
-@export var y_pos_offset: float = 0.0
+@export var action_name: StringName
+@export var remap_device: RemapDevice = RemapDevice.KEYBOARD
+@export var waiting_text: String = "..."
 
 const FOCUSED_SIZE: Vector2 = Vector2(1.4, 1.4)
 const ROTATION_OPTIONS: Array[float] = [-2.0, 2.0]
 const INDICATOR_ROTATION_SPEED : float = 350.0
-const LABEL_FOCUSED_COLOR : Color = "#ffec27"
+const BUTTON_FOCUSED_COLOR : Color = "#ffec27"
 const PRESSED_SCALE : Vector2 = Vector2(0.9, 0.9)
 
 var ignore_focus_sfx: bool = false
@@ -21,9 +26,7 @@ var press_tween: Tween
 
 
 func _ready() -> void:
-	indicator.position.y += y_pos_offset
 	call_deferred("update_pivot")
-	button_text.text = button_label_text
 
 func _process(delta: float) -> void:
 	indicator.rotation_degrees += INDICATOR_ROTATION_SPEED * delta
@@ -32,17 +35,13 @@ func update_pivot() -> void:
 	pivot_offset = size / 2.0
 	indicator.pivot_offset = indicator.size / 2.0
 
-func update_button_label_text(new_text: String) -> void:
-	button_text.text = new_text
-
 func grab_silent_focus() -> void:
 	ignore_focus_sfx = true
 	await get_tree().process_frame
-	update_pivot()
 	grab_focus()
 
 func _on_resized() -> void:
-	update_pivot()
+	pivot_offset = size / 2.0
 
 func _on_focus_entered() -> void:
 	if button_tween:
@@ -56,7 +55,7 @@ func _on_focus_entered() -> void:
 	button_tween.tween_property(self, "scale", FOCUSED_SIZE, 0.12).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
 	button_tween.tween_property(self, "rotation_degrees", ROTATION_OPTIONS.pick_random(), 0.12).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
 	
-	button_text.add_theme_color_override("font_color", LABEL_FOCUSED_COLOR)
+	button_texture.modulate = BUTTON_FOCUSED_COLOR
 	
 	indicator.texture = SkinDatabase.retrieve_skin_texture("player", SaveManager.save_data.cosmetics.selected_player_skin)
 	
@@ -73,7 +72,7 @@ func _on_focus_exited() -> void:
 	button_tween.tween_property(self, "scale", Vector2.ONE, 0.12).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
 	button_tween.tween_property(self, "rotation_degrees", 0.0, 0.12).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
 	
-	button_text.add_theme_color_override("font_color", Color.WHITE)
+	button_texture.modulate = Color.WHITE
 	
 	indicator.modulate.a = 0.0
 
@@ -102,9 +101,3 @@ func _on_pressed() -> void:
 	press_tween.tween_property(self, "rotation_degrees", 0.0, 0.08)\
 		.set_trans(Tween.TRANS_QUAD)\
 		.set_ease(Tween.EASE_OUT)
-
-
-func _on_visibility_changed() -> void:
-	if visible:
-		await get_tree().process_frame
-		update_pivot()

@@ -3,6 +3,11 @@ extends Node
 const SAVE_PATH := "user://save_data.json"
 const NO_TIME := 999999.0
 
+const REMAPPABLE_ACTIONS: PackedStringArray = [
+	"jump",
+	"dash",
+]
+
 var save_data: Dictionary = get_default_save_data()
 
 
@@ -139,6 +144,7 @@ func load_game() -> void:
 		
 		ensure_cosmetics_data()
 		ensure_options_data()
+		load_input_map()
 	else:
 		push_error("Save data was not a Dictionary. Resetting save data.")
 		save_data = {
@@ -164,6 +170,9 @@ func ensure_options_data() -> void:
 	if not save_data.has("options"):
 		save_data["options"] = {}
 	
+	if not save_data["options"].has("input_map"):
+		save_data["options"]["input_map"] = ""
+	
 	if not save_data["options"].has("sfx_volume"):
 		save_data["options"]["sfx_volume"] = 3
 	
@@ -175,6 +184,25 @@ func ensure_options_data() -> void:
 	
 	if not save_data["options"].has("screen_shake"):
 		save_data["options"]["screen_shake"] = true
+
+func save_input_map() -> void:
+	ensure_options_data()
+
+	var serialized_inputs := InputHelper.serialize_inputs_for_actions(REMAPPABLE_ACTIONS)
+	save_data["options"]["input_map"] = serialized_inputs
+
+	save_game()
+
+
+func load_input_map() -> void:
+	ensure_options_data()
+
+	var serialized_inputs: String = save_data["options"].get("input_map", "")
+
+	if serialized_inputs == "":
+		return
+
+	InputHelper.deserialize_inputs_for_actions(serialized_inputs)
 
 func get_option(option_name: String, fallback = null):
 	ensure_options_data()

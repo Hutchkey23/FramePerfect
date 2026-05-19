@@ -11,6 +11,7 @@ signal exit_options_menu
 @onready var screen_shake_button: CustomMenuButton = $PanelContainer/OptionsVbox/ScreenShakeButton
 @onready var clear_data_button: CustomMenuButton = $PanelContainer/OptionsVbox/ClearDataButton
 @onready var clear_data_confirm_popup: Control = $ClearDataConfirmPopup
+@onready var controls_menu: ControlsMenu = $ControlsMenu
 
 const SFX_VOLUME_DB_LEVELS: Array[float] = [
 	-80.0, # 0 - silent
@@ -37,6 +38,8 @@ var screen_shake_enabled: bool = true
 
 func _ready() -> void:
 	return_button.grab_silent_focus()
+	
+	controls_menu.close_controls_menu.connect(_on_close_controls_menu)
 	
 	sfx_slider.value_changed.connect(_on_sfx_volume_changed)
 	music_slider.value_changed.connect(_on_music_volume_changed)
@@ -92,6 +95,14 @@ func load_options() -> void:
 func _on_return_pressed() -> void:
 	exit_options_menu.emit()
 
+func _on_controls_button_pressed() -> void:
+	disable_interactables()
+	controls_menu.visible = true
+
+func _on_close_controls_menu() -> void:
+	controls_menu.visible = false
+	enable_interactables()
+	controls_button.grab_silent_focus()
 
 func _on_sfx_volume_changed(value: int) -> void:
 	set_bus_volume("SFX", value)

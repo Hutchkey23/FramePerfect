@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://cib3atuyik8hq" path="res://scenes/options/volume_pip_slider.tscn" id="3_nb6mw"]
 [ext_resource type="PackedScene" uid="uid://dv8sgqilw7oo1" path="res://scenes/title/menu_button.tscn" id="5_urps3"]
 [ext_resource type="PackedScene" uid="uid://cb02sx0r6jmwb" path="res://scenes/options/clear_data_confirm_popup.tscn" id="6_nisuf"]
+[ext_resource type="PackedScene" uid="uid://d4nbnrbc4srio" path="res://scenes/options/controls_menu.tscn" id="7_ykgti"]
 
 [node name="OptionsMenu" type="Control" unique_id=1915877666]
 layout_mode = 3
@@ -82,8 +83,12 @@ button_label_text = "CLEAR DATA"
 visible = false
 layout_mode = 1
 
+[node name="ControlsMenu" parent="." unique_id=316122729 instance=ExtResource("7_ykgti")]
+visible = false
+layout_mode = 1
+
 [connection signal="pressed" from="PanelContainer/OptionsVbox/ReturnButton" to="." method="_on_return_pressed"]
-[connection signal="pressed" from="PanelContainer/OptionsVbox/ControlsButton" to="." method="_on_return_pressed"]
+[connection signal="pressed" from="PanelContainer/OptionsVbox/ControlsButton" to="." method="_on_controls_button_pressed"]
 [connection signal="pressed" from="PanelContainer/OptionsVbox/DisplayModeButton" to="." method="_on_display_mode_pressed"]
 [connection signal="pressed" from="PanelContainer/OptionsVbox/ScreenShakeButton" to="." method="_on_screen_shake_pressed"]
 [connection signal="cancel_button_pressed" from="ClearDataConfirmPopup" to="." method="_on_clear_data_confirm_popup_cancel_button_pressed"]

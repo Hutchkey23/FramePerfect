@@ -1,0 +1,52 @@
+[gd_scene format=3 uid="uid://c1ayescpontpb"]
+
+[ext_resource type="PackedScene" uid="uid://dv8sgqilw7oo1" path="res://scenes/title/menu_button.tscn" id="1_bbyn7"]
+[ext_resource type="Script" uid="uid://so733wcwb5pp" path="res://scripts/options/input_remap_row.gd" id="1_vcgrw"]
+[ext_resource type="Texture2D" uid="uid://bl0wokupk3rau" path="res://assets/ui/glyphs/keyboard/a.png" id="2_vcgrw"]
+[ext_resource type="Texture2D" uid="uid://ty1xumis28un" path="res://assets/ui/glyphs/playstation/cross.png" id="3_yt4k7"]
+
+[node name="InputRemapRow" type="Control" unique_id=481926230]
+custom_minimum_size = Vector2(0, 16)
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_vcgrw")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=1712626065]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 12
+alignment = 1
+
+[node name="ActionNameButton" parent="HBoxContainer" unique_id=1166705071 instance=ExtResource("1_bbyn7")]
+custom_minimum_size = Vector2(30, 0)
+layout_mode = 2
+button_label_text = "Action"
+y_pos_offset = 3.0
+
+[node name="KeyboardTexture" type="TextureRect" parent="HBoxContainer" unique_id=1421873018]
+custom_minimum_size = Vector2(30, 18)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("2_vcgrw")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="GamepadTexture" type="TextureRect" parent="HBoxContainer" unique_id=904258491]
+custom_minimum_size = Vector2(30, 18)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("3_yt4k7")
+expand_mode = 1
+stretch_mode = 5
+
+[connection signal="pressed" from="HBoxContainer/ActionNameButton" to="." method="_on_action_name_button_pressed"]
