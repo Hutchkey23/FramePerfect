@@ -23,6 +23,10 @@ spacing_glyph = 1
 base_font = ExtResource("4_jc7oe")
 spacing_glyph = 1
 
+[sub_resource type="FontVariation" id="FontVariation_q2a5x"]
+base_font = ExtResource("4_jc7oe")
+spacing_glyph = 1
+
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ig6t8"]
 texture = ExtResource("7_yhm4d")
 
@@ -41,6 +45,7 @@ grow_vertical = 2
 script = ExtResource("2_q2a5x")
 
 [node name="Front" type="PanelContainer" parent="." unique_id=864027999]
+visible = false
 custom_minimum_size = Vector2(120, 80)
 layout_mode = 1
 anchors_preset = 8
@@ -91,7 +96,6 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Back" type="PanelContainer" parent="." unique_id=2078096175]
-visible = false
 custom_minimum_size = Vector2(120, 80)
 layout_mode = 1
 anchors_preset = 8
@@ -162,7 +166,7 @@ alignment = 1
 custom_minimum_size = Vector2(24, 0)
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0.5294118, 0.31764707, 1)
-theme_override_fonts/font = ExtResource("4_jc7oe")
+theme_override_fonts/font = SubResource("FontVariation_q2a5x")
 theme_override_font_sizes/font_size = 6
 text = "06.85"
 horizontal_alignment = 1
@@ -192,7 +196,7 @@ alignment = 1
 custom_minimum_size = Vector2(24, 0)
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0.5294118, 0.31764707, 1)
-theme_override_fonts/font = ExtResource("4_jc7oe")
+theme_override_fonts/font = SubResource("FontVariation_q2a5x")
 theme_override_font_sizes/font_size = 6
 text = "06.85"
 horizontal_alignment = 1

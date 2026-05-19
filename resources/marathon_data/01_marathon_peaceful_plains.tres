@@ -13,6 +13,7 @@ marathon_id = "world_01"
 display_name = "Peaceful Plains"
 world_number = 1
 worlds = Array[ExtResource("2_2xqiu")]([ExtResource("3_2xqiu")])
+medal_time = 130.0
 front_image = ExtResource("3_hr1dy")
 back_image = ExtResource("1_wttwk")
 font_color = Color(0, 0.5294118, 0.31764707, 1)

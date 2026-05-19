@@ -2,7 +2,11 @@
 
 [ext_resource type="Script" uid="uid://cnkegtjtgdls" path="res://scripts/utility/level_ui.gd" id="1_krbps"]
 [ext_resource type="FontFile" uid="uid://vklaqlxxc5o7" path="res://assets/fonts/Whacky_Joe.ttf" id="1_tvlq7"]
+[ext_resource type="FontFile" uid="uid://ihq4mv204mj5" path="res://assets/fonts/Whacky_Joe_Monospaced.ttf" id="2_y3gap"]
 [ext_resource type="PackedScene" uid="uid://xov8xfl4yj0t" path="res://scenes/utility/input_prompt.tscn" id="3_j6qd6"]
+
+[sub_resource type="FontVariation" id="FontVariation_y3gap"]
+base_font = ExtResource("2_y3gap")
 
 [sub_resource type="FontVariation" id="FontVariation_j6qd6"]
 base_font = ExtResource("1_tvlq7")
@@ -20,16 +24,17 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="TimerLabel" type="Label" parent="LevelUIControl" unique_id=1846635214]
+custom_minimum_size = Vector2(120, 0)
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
-offset_bottom = 23.0
+offset_bottom = 18.0
 grow_horizontal = 2
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_constants/shadow_offset_x = 1
 theme_override_constants/shadow_offset_y = 1
 theme_override_constants/shadow_outline_size = 0
-theme_override_fonts/font = ExtResource("1_tvlq7")
+theme_override_fonts/font = SubResource("FontVariation_y3gap")
 theme_override_font_sizes/font_size = 12
 text = "00.00"
 horizontal_alignment = 1
@@ -92,3 +97,8 @@ alignment = 1
 layout_mode = 2
 action_name = "retry"
 action_label = "RETRY"
+
+[node name="Control" type="Control" parent="LevelUIControl" unique_id=2107891577]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0

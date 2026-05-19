@@ -21,6 +21,11 @@ func get_default_level_data() -> Dictionary:
 		"best_time": NO_TIME,
 	}
 
+func format_time(time: float) -> String:
+	var minutes := int(time / 60.0)
+	var seconds := fmod(time, 60.0)
+
+	return "%d:%05.2f" % [minutes, seconds]
 
 func get_or_create_level_data(level_id: String) -> Dictionary:
 	if not save_data.has("levels"):

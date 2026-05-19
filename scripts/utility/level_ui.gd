@@ -69,6 +69,8 @@ func show_level_fail_prompts() -> void:
 
 func update_timer_display() -> void:
 	var time : float
+	var is_marathon: bool
+	
 	if game_manager and game_manager.game_mode == game_manager.GameMode.MARATHON:
 		time = game_manager.marathon_time
 	else:
@@ -77,7 +79,13 @@ func update_timer_display() -> void:
 
 
 func format_time(time: float) -> String:
-	return "%.2f" % time
+	if time < 60.0:
+		return "%.2f" % time
+	else:
+		var minutes := int(time / 60.0)
+		var seconds := fmod(time, 60.0)
+
+		return "%d:%05.2f" % [minutes, seconds]
 
 
 func retry_level():

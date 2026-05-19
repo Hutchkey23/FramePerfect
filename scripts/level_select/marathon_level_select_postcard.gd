@@ -98,16 +98,11 @@ func setup(data: MarathonData) -> void:
 	)
 	set_medal_slot(medal_earned)
 	
-	var best_time: float = SaveManager.get_best_marathon_time(data.marathon_id)
-	
-	if best_time < 9999.0:
-		best_time_label.text = "%.2f" % best_time
-	else:
-		best_time_label.text = "--.--"
-	
+	var best_time: float = SaveManager.get_best_marathon_time(data.marathon_id)	
 	var medal_time: float = data.medal_time
 	
-	medal_time_label.text = "%.2f" % medal_time
+	best_time_label.text = SaveManager.format_time(best_time)
+	medal_time_label.text = SaveManager.format_time(medal_time)
 	
 	postcard_front_texture.texture = data.front_image
 	postcard_back_texture.texture = data.back_image
