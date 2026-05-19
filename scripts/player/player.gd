@@ -357,7 +357,10 @@ func check_if_should_die() -> void:
 	
 	if safe_platform_count > 0:
 		return
-
+	
+	if ice_surface_count > 0:
+		return
+	
 	if overlapping_floor_hazard_count > 0:
 		die()
 
@@ -670,7 +673,7 @@ func handle_jump(delta: float) -> void:
 			die()
 			return
 		
-		if overlapping_floor_hazard_count > 0 and safe_platform_count == 0:
+		if overlapping_floor_hazard_count > 0 and safe_platform_count == 0 and ice_surface_count == 0:
 			die()
 			return
 		
