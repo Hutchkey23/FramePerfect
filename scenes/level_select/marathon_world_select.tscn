@@ -1,0 +1,263 @@
+[gd_scene format=3 uid="uid://cwdxoki3242c1"]
+
+[ext_resource type="Script" uid="uid://bc0lends5n2rd" path="res://scripts/level_select/marathon_world_select.gd" id="1_j7t3y"]
+[ext_resource type="Shader" uid="uid://co7tg7n73nnfy" path="res://shaders/scrolling_bg.gdshader" id="2_j7t3y"]
+[ext_resource type="Texture2D" uid="uid://ddksbycmsdtui" path="res://assets/title/bg1.png" id="3_qs3tf"]
+[ext_resource type="Texture2D" uid="uid://ddw3dh2erb3yj" path="res://assets/title/bg2.png" id="4_g0l0e"]
+[ext_resource type="Texture2D" uid="uid://cc0yjr551pgxx" path="res://assets/title/bg3.png" id="5_i6y5b"]
+[ext_resource type="Texture2D" uid="uid://drq6jrdahq8a6" path="res://assets/title/bg4.png" id="6_s0rnv"]
+[ext_resource type="Shader" uid="uid://cy8e5yqoo68kc" path="res://shaders/starry_sky.gdshader" id="7_j7t3y"]
+[ext_resource type="Script" uid="uid://svlunj5u68xy" path="res://scripts/title/drifting_elements.gd" id="7_ri2v4"]
+[ext_resource type="Texture2D" uid="uid://ex76bgpxt2i3" path="res://assets/sprites/stamps/stamp1.png" id="8_5mf3d"]
+[ext_resource type="Texture2D" uid="uid://bh3wawtgjaejn" path="res://assets/sprites/stamps/stamp2.png" id="9_cd5re"]
+[ext_resource type="Texture2D" uid="uid://fy3rghw8mw4j" path="res://assets/sprites/stamps/stamp3.png" id="10_r726a"]
+[ext_resource type="Texture2D" uid="uid://bay3lmh1abxb0" path="res://assets/sprites/stamps/stamp4.png" id="11_po4kf"]
+[ext_resource type="Texture2D" uid="uid://cggsyhmgi36i5" path="res://assets/sprites/stamps/stamp5.png" id="12_s1ojn"]
+[ext_resource type="Texture2D" uid="uid://yy0vai07m3di" path="res://assets/sprites/stamps/stamp6.png" id="13_2l8k7"]
+[ext_resource type="Texture2D" uid="uid://cjd1jyq5d22ec" path="res://assets/sprites/stamps/stamp7.png" id="14_mxygn"]
+[ext_resource type="Texture2D" uid="uid://mdfpf6uae1nx" path="res://assets/sprites/stamps/stamp8.png" id="15_vou5i"]
+[ext_resource type="Texture2D" uid="uid://r4bw8q8fire4" path="res://assets/sprites/stamps/stamp9.png" id="16_vrlk1"]
+[ext_resource type="Texture2D" uid="uid://vrmgj5lgy25c" path="res://assets/sprites/stamps/stamp10.png" id="17_6txs6"]
+[ext_resource type="Texture2D" uid="uid://blq8utwpcrili" path="res://assets/sprites/stamps/stamp_11.png" id="18_sitp0"]
+[ext_resource type="Texture2D" uid="uid://det4leh5p2ah0" path="res://assets/sprites/stamps/stamp_12.png" id="19_pe855"]
+[ext_resource type="Texture2D" uid="uid://c0w6hkdewi0lf" path="res://assets/sprites/stamps/stamp_13.png" id="20_sficb"]
+[ext_resource type="Texture2D" uid="uid://bqpto7824lhf1" path="res://assets/sprites/stamps/stamp_14.png" id="21_hvmaj"]
+[ext_resource type="Texture2D" uid="uid://chmnc2vbvm2td" path="res://assets/sprites/stamps/stamp_15.png" id="22_1yelv"]
+[ext_resource type="Texture2D" uid="uid://kxyvohx4e6n3" path="res://assets/sprites/stamps/stamp_16.png" id="23_omt4s"]
+[ext_resource type="Texture2D" uid="uid://dfy01ogpiowo0" path="res://assets/sprites/stamps/stamp_17.png" id="24_n7u44"]
+[ext_resource type="Texture2D" uid="uid://dochrmgx1j22m" path="res://assets/sprites/stamps/stamp_18.png" id="25_3eu1r"]
+[ext_resource type="Texture2D" uid="uid://dsh7v73l1ygaf" path="res://assets/sprites/stamps/stamp_19.png" id="26_8wdpj"]
+[ext_resource type="Texture2D" uid="uid://csp5pcg2jb58p" path="res://assets/sprites/stamps/stamp_20.png" id="27_lfkqu"]
+[ext_resource type="Texture2D" uid="uid://3km0enih3xr2" path="res://assets/sprites/stamps/stamp_21.png" id="28_g7ao1"]
+[ext_resource type="Texture2D" uid="uid://c8shnmw52xngg" path="res://assets/sprites/stamps/stamp_22.png" id="29_tovk6"]
+[ext_resource type="Texture2D" uid="uid://vjvor1gukj6e" path="res://assets/sprites/stamps/stamp_23.png" id="30_kjqng"]
+[ext_resource type="Texture2D" uid="uid://buu7ksa12l8h6" path="res://assets/sprites/stamps/stamp_24.png" id="31_d1stx"]
+[ext_resource type="Texture2D" uid="uid://b3n4e7ymoqlty" path="res://assets/sprites/stamps/stamp_25.png" id="32_fhsnw"]
+[ext_resource type="Texture2D" uid="uid://bqa1g5t3ixn8f" path="res://assets/sprites/stamps/stamp_26.png" id="33_d54op"]
+[ext_resource type="FontFile" uid="uid://vklaqlxxc5o7" path="res://assets/fonts/Whacky_Joe.ttf" id="34_ohabt"]
+[ext_resource type="PackedScene" uid="uid://cpqo1dt5u0l0h" path="res://scenes/postcard/marathon_level_select_postcard.tscn" id="36_pio75"]
+[ext_resource type="Resource" uid="uid://dnauec61r8nf" path="res://resources/marathon_data/01_marathon_peaceful_plains.tres" id="37_qs3tf"]
+[ext_resource type="Resource" uid="uid://nli7jt4xwhwt" path="res://resources/marathon_data/02_marathon_scorched_sands.tres" id="38_g0l0e"]
+[ext_resource type="Resource" uid="uid://chdk8s824pi8n" path="res://resources/marathon_data/03_marathon_frosted_frontier.tres" id="39_i6y5b"]
+[ext_resource type="Resource" uid="uid://bcno8v7tfu1gc" path="res://resources/marathon_data/04_marathon_galactic_gateway.tres" id="40_s0rnv"]
+[ext_resource type="Resource" uid="uid://dkaotj3i5an5r" path="res://resources/marathon_data/05_marathon_full_game.tres" id="41_ri2v4"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ypb0n"]
+shader = ExtResource("2_j7t3y")
+shader_parameter/scroll_speed = Vector2(-1, 0)
+shader_parameter/texture_scale = Vector2(1, 1)
+shader_parameter/tint_color = Color(0.63375676, 0.63375676, 0.63375705, 1)
+shader_parameter/fade_alpha = 1.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_nji2q"]
+shader = ExtResource("2_j7t3y")
+shader_parameter/scroll_speed = Vector2(-1, 0)
+shader_parameter/texture_scale = Vector2(1, 1)
+shader_parameter/tint_color = Color(0.63375676, 0.63375676, 0.63375705, 1)
+shader_parameter/fade_alpha = 0.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_b1r15"]
+shader = ExtResource("2_j7t3y")
+shader_parameter/scroll_speed = Vector2(-1, 0)
+shader_parameter/texture_scale = Vector2(1, 1)
+shader_parameter/tint_color = Color(0.63375676, 0.63375676, 0.63375705, 1)
+shader_parameter/fade_alpha = 0.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_bgwcu"]
+shader = ExtResource("2_j7t3y")
+shader_parameter/scroll_speed = Vector2(-1, 0)
+shader_parameter/texture_scale = Vector2(1, 1)
+shader_parameter/tint_color = Color(0.63375676, 0.63375676, 0.63375705, 1)
+shader_parameter/fade_alpha = 0.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_qs3tf"]
+shader = ExtResource("7_j7t3y")
+shader_parameter/fade_alpha = 1.0
+shader_parameter/background_color = Color(0.012298316, 0.024600385, 0.090413176, 1)
+shader_parameter/star_color = Color(0.85, 0.82, 1, 1)
+shader_parameter/aspect_ratio = 1.0
+shader_parameter/density = 0.79999997976
+shader_parameter/layer_parascale = 3
+shader_parameter/star_speed = Vector2(0.01, 0.01)
+shader_parameter/star_wave = Vector2(0, 0)
+shader_parameter/star_size = 1.999999955296
+shader_parameter/star_rotate_speed = 0.08300014644250009
+shader_parameter/twinkle_effect = 1.0
+shader_parameter/twinkle_speed = 0.249999994412
+shader_parameter/pixelate_enabled = true
+shader_parameter/pixelate_count = 1000.0
+
+[node name="MarathonWorldSelect" type="Control" unique_id=1970402749]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_j7t3y")
+
+[node name="BackgroundHolder" type="Control" parent="." unique_id=1479825667]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PeacefulPlainsBackground" type="TextureRect" parent="BackgroundHolder" unique_id=1691716971]
+modulate = Color(0.78431374, 0.78431374, 0.78431374, 1)
+material = SubResource("ShaderMaterial_ypb0n")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_bottom = 5.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_qs3tf")
+stretch_mode = 1
+
+[node name="ScorchedSandsBackground" type="TextureRect" parent="BackgroundHolder" unique_id=746444052]
+modulate = Color(0.78431374, 0.78431374, 0.78431374, 1)
+material = SubResource("ShaderMaterial_nji2q")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_bottom = 5.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("4_g0l0e")
+stretch_mode = 1
+
+[node name="FrostedFrontierBackground" type="TextureRect" parent="BackgroundHolder" unique_id=106304202]
+modulate = Color(0.78431374, 0.78431374, 0.78431374, 1)
+material = SubResource("ShaderMaterial_b1r15")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_bottom = 5.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("5_i6y5b")
+stretch_mode = 1
+
+[node name="GalacticGatewayBackground" type="TextureRect" parent="BackgroundHolder" unique_id=1621772299]
+modulate = Color(0.78431374, 0.78431374, 0.78431374, 1)
+material = SubResource("ShaderMaterial_bgwcu")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_bottom = 5.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("6_s0rnv")
+stretch_mode = 1
+
+[node name="AllWorldsBackground" type="ColorRect" parent="BackgroundHolder" unique_id=2065009692]
+material = SubResource("ShaderMaterial_qs3tf")
+layout_mode = 0
+offset_left = -84.0
+offset_top = -108.0
+offset_right = 396.0
+offset_bottom = 324.0
+metadata/_edit_use_anchors_ = true
+
+[node name="DriftingElements" type="Node2D" parent="." unique_id=1301687504]
+script = ExtResource("7_ri2v4")
+textures = Array[Texture2D]([ExtResource("8_5mf3d"), ExtResource("9_cd5re"), ExtResource("10_r726a"), ExtResource("11_po4kf"), ExtResource("12_s1ojn"), ExtResource("13_2l8k7"), ExtResource("14_mxygn"), ExtResource("15_vou5i"), ExtResource("16_vrlk1"), ExtResource("17_6txs6"), ExtResource("18_sitp0"), ExtResource("19_pe855"), ExtResource("20_sficb"), ExtResource("21_hvmaj"), ExtResource("22_1yelv"), ExtResource("23_omt4s"), ExtResource("24_n7u44"), ExtResource("25_3eu1r"), ExtResource("26_8wdpj"), ExtResource("27_lfkqu"), ExtResource("28_g7ao1"), ExtResource("29_tovk6"), ExtResource("30_kjqng"), ExtResource("31_d1stx"), ExtResource("32_fhsnw"), ExtResource("33_d54op")])
+spawn_interval = 0.4
+max_elements = 40
+initial_element_count = 12
+min_speed = 5.0
+max_speed = 12.0
+min_scale = 0.9
+max_scale = 1.5
+min_alpha = 0.08
+max_alpha = 0.15
+logo_safe_zone = Rect2(94, 0, 132.23, 500)
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=1485999039]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -76.0
+offset_right = 76.0
+offset_bottom = 22.0
+grow_horizontal = 2
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="SelectWorldLabel" type="Label" parent="MarginContainer" unique_id=2027851258]
+layout_mode = 2
+theme_override_constants/outline_size = 4
+theme_override_fonts/font = ExtResource("34_ohabt")
+theme_override_font_sizes/font_size = 16
+text = "SELECT WORLD"
+horizontal_alignment = 1
+
+[node name="PostcardHolder" type="Control" parent="." unique_id=851761849]
+layout_mode = 1
+anchor_left = 0.5
+anchor_top = 0.58
+anchor_right = 0.5
+anchor_bottom = 0.58
+offset_top = -20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PeacefulPlainsPostcard" parent="PostcardHolder" unique_id=258655972 instance=ExtResource("36_pio75")]
+layout_mode = 1
+marathon_data = ExtResource("37_qs3tf")
+
+[node name="ScorchedSandsPostcard" parent="PostcardHolder" unique_id=399218793 instance=ExtResource("36_pio75")]
+layout_mode = 1
+marathon_data = ExtResource("38_g0l0e")
+
+[node name="FrostedFrontierPostcard" parent="PostcardHolder" unique_id=2065124811 instance=ExtResource("36_pio75")]
+layout_mode = 1
+marathon_data = ExtResource("39_i6y5b")
+
+[node name="GalacticGatewayPostcard" parent="PostcardHolder" unique_id=808472488 instance=ExtResource("36_pio75")]
+layout_mode = 1
+marathon_data = ExtResource("40_s0rnv")
+
+[node name="AllWorldsPostcard" parent="PostcardHolder" unique_id=1165818655 instance=ExtResource("36_pio75")]
+layout_mode = 1
+marathon_data = ExtResource("41_ri2v4")
+
+[node name="LeftArrow" type="Control" parent="." unique_id=1597586396]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="LeftArrowLabel" type="Label" parent="LeftArrow" unique_id=615834356]
+layout_mode = 0
+offset_left = 29.0
+offset_top = 79.0
+offset_right = 69.0
+offset_bottom = 123.0
+theme_override_constants/outline_size = 4
+theme_override_fonts/font = ExtResource("34_ohabt")
+theme_override_font_sizes/font_size = 32
+text = "<"
+
+[node name="RightArrow" type="Control" parent="." unique_id=159066148]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="RightArrowLabel" type="Label" parent="RightArrow" unique_id=647238682]
+layout_mode = 0
+offset_left = 269.0
+offset_top = 79.0
+offset_right = 309.0
+offset_bottom = 123.0
+theme_override_constants/outline_size = 4
+theme_override_fonts/font = ExtResource("34_ohabt")
+theme_override_font_sizes/font_size = 32
+text = ">"

@@ -4,12 +4,14 @@ class_name PauseMenu
 signal resume_game
 signal retry_level
 signal go_to_main_menu
+signal restart_marathon
 
 @onready var paused_label: Label = $VBoxContainer/PausedLabel
 
 @onready var resume_button: CustomMenuButton = $VBoxContainer/HBoxContainer/ResumeButton
 @onready var retry_button: CustomMenuButton = $VBoxContainer/HBoxContainer/RetryButton
 @onready var main_menu_button: CustomMenuButton = $VBoxContainer/HBoxContainer/MainMenuButton
+@onready var restart_marathon_button: CustomMenuButton = $VBoxContainer/RestartMarathonButton
 
 const ROTATION_SPEED : float = 1.0
 const ROTATION_AMOUNT : float = 10.0
@@ -51,9 +53,21 @@ func _on_visibility_changed() -> void:
 func prepare_pause_menu() -> void:
 	await get_tree().process_frame
 	
+	var game_manager: GameManager = get_tree().get_first_node_in_group("game_manager")
+	
+	if game_manager and game_manager.game_mode == game_manager.GameMode.MARATHON:
+		restart_marathon_button.visible = true
+	else:
+		restart_marathon_button.visible = false
+	
 	update_pivot()
 	resume_button.grab_silent_focus()
 
 
 func _on_paused_label_resized() -> void:
 	update_pivot()
+
+
+func _on_restart_marathon_button_pressed() -> void:
+	get_tree().paused = false
+	restart_marathon.emit()

@@ -48,18 +48,40 @@ alignment = 1
 
 [node name="ResumeButton" parent="VBoxContainer/HBoxContainer" unique_id=1166705071 instance=ExtResource("2_x1dc2")]
 layout_mode = 2
+focus_neighbor_left = NodePath("../../..")
+focus_neighbor_top = NodePath("../../..")
+focus_neighbor_right = NodePath("../RetryButton")
+focus_neighbor_bottom = NodePath("../../RestartMarathonButton")
 button_label_text = "resume"
 
 [node name="RetryButton" parent="VBoxContainer/HBoxContainer" unique_id=1163554985 instance=ExtResource("2_x1dc2")]
 layout_mode = 2
+focus_neighbor_left = NodePath("../ResumeButton")
+focus_neighbor_top = NodePath("../../..")
+focus_neighbor_right = NodePath("../MainMenuButton")
+focus_neighbor_bottom = NodePath("../../RestartMarathonButton")
 button_label_text = "retry"
 
 [node name="MainMenuButton" parent="VBoxContainer/HBoxContainer" unique_id=1680646512 instance=ExtResource("2_x1dc2")]
 layout_mode = 2
+focus_neighbor_left = NodePath("../RetryButton")
+focus_neighbor_top = NodePath("../../..")
+focus_neighbor_right = NodePath("../../..")
+focus_neighbor_bottom = NodePath("../../RestartMarathonButton")
 button_label_text = "main menu"
+
+[node name="RestartMarathonButton" parent="VBoxContainer" unique_id=1805021884 instance=ExtResource("2_x1dc2")]
+visible = false
+layout_mode = 2
+focus_neighbor_left = NodePath("../..")
+focus_neighbor_top = NodePath("../HBoxContainer/RetryButton")
+focus_neighbor_right = NodePath("../..")
+focus_neighbor_bottom = NodePath("../..")
+button_label_text = "restart marathon"
 
 [connection signal="visibility_changed" from="." to="." method="_on_visibility_changed"]
 [connection signal="resized" from="VBoxContainer/PausedLabel" to="." method="_on_paused_label_resized"]
 [connection signal="pressed" from="VBoxContainer/HBoxContainer/ResumeButton" to="." method="_on_resume_button_pressed"]
 [connection signal="pressed" from="VBoxContainer/HBoxContainer/RetryButton" to="." method="_on_retry_button_pressed"]
 [connection signal="pressed" from="VBoxContainer/HBoxContainer/MainMenuButton" to="." method="_on_main_menu_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/RestartMarathonButton" to="." method="_on_restart_marathon_button_pressed"]

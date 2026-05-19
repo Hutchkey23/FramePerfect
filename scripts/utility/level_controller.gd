@@ -27,6 +27,7 @@ const STAMP = preload("uid://dpvbyd8v5auob")
 @export var hazards_path: NodePath
 @export var toggle_blocks_path: NodePath
 
+var game_manager: GameManager = null
 
 var level_id : String = ""
 
@@ -53,15 +54,17 @@ const ANALOG_START_THRESHOLD: float = 0.55
 var analog_start_was_pressed: bool = false
 
 func _ready() -> void:
-	 #DEBUG
-	enter_intro_state()
-	 #END DEBUG
+	 ##DEBUG
+	#enter_intro_state()
+	 ##END DEBUG
 	
 	connect_signals()
 	player.position = player_spawn.position
 	player.set_control_enabled(false)
 	if camera.mode == camera.CameraMode.FIXED:
 		fixed_camera_level = true
+	
+	game_manager = get_tree().get_first_node_in_group("game_manager")
 	
 	spawn_stamps()
 
@@ -106,6 +109,10 @@ func start_level() -> void:
 	current_state = LevelState.PLAYING
 	timer_running = true
 	
+	if game_manager and game_manager.game_mode == game_manager.GameMode.MARATHON:
+		game_manager.register_marathon_attempt_started()
+		game_manager.start_marathon_timer()
+	
 	if player.has_method("set_control_enabled"):
 		player.set_control_enabled(true)
 
@@ -119,10 +126,16 @@ func complete_level() -> void:
 	current_state = LevelState.COMPLETED
 	timer_running = false
 	
+	if game_manager and game_manager.game_mode == game_manager.GameMode.MARATHON:
+		game_manager.pause_marathon_timer()
+	
 	if player.has_method("set_control_enabled"):
 		player.set_control_enabled(false)
 	
-	level_ui.show_level_complete_prompts()
+	if game_manager and game_manager.game_mode == game_manager.GameMode.MARATHON:
+		level_ui.show_marathon_level_complete_prompts()
+	else:
+		level_ui.show_level_complete_prompts()
 	
 	var result : Dictionary = SaveManager.record_level_completion(level_id, level_time)
 	goal.show_level_complete_result(result)
@@ -140,13 +153,15 @@ func fail_level() -> void:
 	current_state = LevelState.DEAD
 	timer_running = false
 	
+	if game_manager:
+		game_manager.register_marathon_death()
+	
 	if player.has_method("set_control_enabled"):
 		player.set_control_enabled(false)
 	
 	level_ui.show_level_fail_prompts()
 	cinematic_bars.show_bars()
 	camera.zoom_to_target(player, Vector2.ONE * 2.5, 0.2)
-
 
 func update_timer(delta: float) -> void:
 	if timer_running:
@@ -185,7 +200,7 @@ func check_for_level_completed_input() -> void:
 			return
 		loading_next_level = true
 		load_next_level.emit()
-	elif Input.is_action_just_pressed("retry"):
+	elif Input.is_action_just_pressed("retry") and game_manager.game_mode != game_manager.GameMode.MARATHON:
 		retry_level()
 	
 func check_for_dead_input() -> void:

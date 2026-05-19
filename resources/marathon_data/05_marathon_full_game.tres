@@ -1,0 +1,22 @@
+[gd_resource type="Resource" script_class="MarathonData" format=3 uid="uid://dkaotj3i5an5r"]
+
+[ext_resource type="Script" uid="uid://b78coe6eanw3t" path="res://resources/marathon_data/marathon_data.gd" id="1_gf2qc"]
+[ext_resource type="Texture2D" uid="uid://c3aj3ftm4kt52" path="res://assets/sprites/postcards/peaceful_plains_back.png" id="1_l6wre"]
+[ext_resource type="Texture2D" uid="uid://ty1xumis28un" path="res://assets/ui/glyphs/playstation/cross.png" id="2_5nt4y"]
+[ext_resource type="Texture2D" uid="uid://d16ygen0pvr3s" path="res://assets/sprites/postcards/all_worlds.png" id="2_7p0rb"]
+[ext_resource type="Script" uid="uid://gba83foepn6x" path="res://resources/world_data/world_data.gd" id="2_e6we2"]
+[ext_resource type="Resource" uid="uid://ec3th64jjhhr" path="res://resources/world_data/galactic_gateways.tres" id="3_ocdi7"]
+[ext_resource type="Resource" uid="uid://uotkih62v0dd" path="res://resources/world_data/peaceful_plains.tres" id="3_xbp05"]
+[ext_resource type="Resource" uid="uid://dv7uy4up300c1" path="res://resources/world_data/scorched_sands.tres" id="4_xha7d"]
+[ext_resource type="Resource" uid="uid://ct5yadc3b6fc6" path="res://resources/world_data/frosted_frontier.tres" id="5_l6wre"]
+
+[resource]
+script = ExtResource("1_gf2qc")
+marathon_id = "world_99"
+display_name = "All Worlds"
+worlds = Array[ExtResource("2_e6we2")]([ExtResource("3_xbp05"), ExtResource("4_xha7d"), ExtResource("5_l6wre"), ExtResource("3_ocdi7")])
+front_image = ExtResource("2_7p0rb")
+back_image = ExtResource("1_l6wre")
+font_color = Color(0.67058825, 0.21176471, 0.21176471, 1)
+background_texture = ExtResource("2_5nt4y")
+metadata/_custom_type_script = "uid://b78coe6eanw3t"

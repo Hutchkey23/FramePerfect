@@ -409,7 +409,7 @@ _data = {
 &"transition_out": SubResource("Animation_r76ct")
 }
 
-[node name="GameManager" type="Node2D" unique_id=99875122]
+[node name="GameManager" type="Node2D" unique_id=99875122 groups=["game_manager"]]
 script = ExtResource("1_cax2t")
 worlds = Array[ExtResource("16_mcnga")]([ExtResource("17_f7c0x"), ExtResource("4_psj4q"), ExtResource("5_ssqxr"), ExtResource("6_s6d7f")])
 
@@ -477,6 +477,7 @@ layer = 3
 visible = false
 
 [connection signal="go_to_main_menu" from="PauseLayer/PauseScreen" to="." method="_on_pause_screen_go_to_main_menu"]
+[connection signal="restart_marathon" from="PauseLayer/PauseScreen" to="." method="_on_pause_screen_restart_marathon"]
 [connection signal="resume_game" from="PauseLayer/PauseScreen" to="." method="_on_pause_screen_resume_game"]
 [connection signal="retry_level" from="PauseLayer/PauseScreen" to="." method="_on_pause_screen_retry_level"]
 [connection signal="transition_in" from="WorldTransition" to="." method="_on_world_transition_transition_in"]

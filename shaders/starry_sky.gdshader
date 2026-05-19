@@ -1,5 +1,6 @@
 shader_type canvas_item;
 
+uniform float fade_alpha : hint_range(0.0, 1.0, 0.01) = 1.0;
 uniform vec3 background_color : source_color = vec3(0.02, 0.04, 0.12);
 uniform vec3 star_color : source_color = vec3(0.85, 0.82, 1.0);
 uniform float aspect_ratio = 1.0;
@@ -100,5 +101,5 @@ void fragment() {
         color = max(color + (snowflake * brightness) * star_color, color);
     }
 
-    COLOR = vec4(color, 1.0);
+    COLOR = vec4(color, fade_alpha);
 }

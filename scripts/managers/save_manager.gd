@@ -90,6 +90,18 @@ func player_has_medal(level_id: String) -> bool:
 	var medal_time := LevelDatabase.get_medal_time(level_id)
 	return best_time <= medal_time
 
+func get_best_marathon_time(marathon_id: String) -> float:
+	var marathon_data := get_or_create_marathon_data(marathon_id)
+	return marathon_data["best_time"]
+
+
+func player_has_marathon_medal(marathon_id: String, medal_time: float) -> bool:
+	var best_time := get_best_marathon_time(marathon_id)
+
+	if best_time >= NO_TIME:
+		return false
+
+	return best_time <= medal_time
 
 func reset_save_data() -> void:
 	save_data = get_default_save_data()
@@ -144,6 +156,7 @@ func load_game() -> void:
 		
 		ensure_cosmetics_data()
 		ensure_options_data()
+		ensure_marathon_data()
 		load_input_map()
 	else:
 		push_error("Save data was not a Dictionary. Resetting save data.")
@@ -154,6 +167,7 @@ func load_game() -> void:
 func get_default_save_data() -> Dictionary:
 	return {
 		"levels": {},
+		"marathons": {},
 		"cosmetics": {
 			"selected_player_skin": "player_default",
 			"selected_goal_skin": "goal_default",
@@ -165,6 +179,10 @@ func get_default_save_data() -> Dictionary:
 			"screen_shake": true,
 		}
 	}
+
+func ensure_marathon_data() -> void:
+	if not save_data.has("marathons"):
+		save_data["marathons"] = {}
 
 func ensure_options_data() -> void:
 	if not save_data.has("options"):
@@ -203,6 +221,53 @@ func load_input_map() -> void:
 		return
 
 	InputHelper.deserialize_inputs_for_actions(serialized_inputs)
+
+func get_default_marathon_data() -> Dictionary:
+	return {
+		"completed": false,
+		"best_time": NO_TIME,
+		"best_deaths": 0,
+	}
+
+func get_or_create_marathon_data(marathon_id: String) -> Dictionary:
+	ensure_marathon_data()
+
+	if not save_data["marathons"].has(marathon_id):
+		save_data["marathons"][marathon_id] = get_default_marathon_data()
+
+	return save_data["marathons"][marathon_id]
+
+func record_marathon_completion(
+	marathon_id: String,
+	clear_time: float,
+	deaths: int,
+	level_attempts: Dictionary
+) -> Dictionary:
+	var marathon_data := get_or_create_marathon_data(marathon_id)
+
+	var previous_best_time: float = marathon_data["best_time"]
+	var first_completion := previous_best_time == NO_TIME
+	var new_best := clear_time < previous_best_time
+
+	marathon_data["completed"] = true
+
+	if new_best:
+		marathon_data["best_time"] = clear_time
+		marathon_data["best_deaths"] = deaths
+		marathon_data["best_level_attempts"] = level_attempts.duplicate(true)
+
+	save_game()
+
+	return {
+		"marathon_id": marathon_id,
+		"clear_time": clear_time,
+		"previous_best_time": previous_best_time,
+		"best_time": marathon_data["best_time"],
+		"new_best": new_best,
+		"first_completion": first_completion,
+		"deaths": deaths,
+		"level_attempts": level_attempts,
+	}
 
 func get_option(option_name: String, fallback = null):
 	ensure_options_data()

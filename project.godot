@@ -62,6 +62,7 @@ goal=""
 safe_platforms=""
 player=""
 ice_surfaces=""
+game_manager=""
 
 [input]
 

@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="MarathonData" format=3 uid="uid://chdk8s824pi8n"]
+
+[ext_resource type="Texture2D" uid="uid://c3aj3ftm4kt52" path="res://assets/sprites/postcards/peaceful_plains_back.png" id="1_hpgvf"]
+[ext_resource type="Script" uid="uid://b78coe6eanw3t" path="res://resources/marathon_data/marathon_data.gd" id="1_ovak5"]
+[ext_resource type="Script" uid="uid://gba83foepn6x" path="res://resources/world_data/world_data.gd" id="2_i7too"]
+[ext_resource type="Texture2D" uid="uid://cc0yjr551pgxx" path="res://assets/title/bg3.png" id="2_uoo64"]
+[ext_resource type="Texture2D" uid="uid://donmn42nyajoq" path="res://assets/sprites/postcards/frosted_frontier.png" id="3_m18gy"]
+[ext_resource type="Resource" uid="uid://ct5yadc3b6fc6" path="res://resources/world_data/frosted_frontier.tres" id="3_ovak5"]
+
+[resource]
+script = ExtResource("1_ovak5")
+marathon_id = "world_03"
+display_name = "Frosted Frontier"
+world_number = 3
+worlds = Array[ExtResource("2_i7too")]([ExtResource("3_ovak5")])
+front_image = ExtResource("3_m18gy")
+back_image = ExtResource("1_hpgvf")
+font_color = Color(0.09803922, 0.29803923, 0.53333336, 1)
+background_texture = ExtResource("2_uoo64")
+metadata/_custom_type_script = "uid://b78coe6eanw3t"

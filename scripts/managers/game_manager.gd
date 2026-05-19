@@ -1,4 +1,10 @@
 extends Node2D
+class_name GameManager
+
+enum GameMode {
+	NORMAL,
+	MARATHON,
+}
 
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var level_container: Node2D = $LevelContainer
@@ -10,6 +16,21 @@ extends Node2D
 const TRANSITION_LENGTH: float = 1.25
 
 @export var worlds: Array[WorldData]
+
+var game_mode: GameMode = GameMode.NORMAL
+
+###### MARATHON MODE ######
+var current_marathon_data: MarathonData = null
+
+var marathon_id: String = ""
+var marathon_level_ids: Array[String] = []
+var marathon_current_index: int = 0
+
+var marathon_time: float = 0.0
+var marathon_timer_running: bool = false
+var marathon_deaths: int = 0
+var marathon_level_attempts: Dictionary = {}
+###########################
 
 var current_world_index: int = 0
 var current_level_index: int = 0
@@ -23,6 +44,16 @@ var game_pausable: bool = false
 var is_paused: bool = false
 
 func _ready() -> void:
+	if RunState.has_pending_marathon:
+		setup_marathon_from_run_state()
+	else:
+		setup_normal_from_run_state()
+
+	await start_run()
+
+func setup_normal_from_run_state() -> void:
+	game_mode = GameMode.NORMAL
+
 	LevelDatabase.setup(worlds)
 
 	if RunState.has_pending_level_select:
@@ -38,8 +69,26 @@ func _ready() -> void:
 	current_world_level_names = get_world_level_names(current_world_index)
 	set_level_title_label_text(current_level_index)
 
-	await start_run()
+func setup_marathon_from_run_state() -> void:
+	var data := RunState.pending_marathon_data
+	RunState.clear_pending_marathon()
 
+	if data == null:
+		push_error("Missing MarathonData.")
+		setup_normal_from_run_state()
+		return
+
+	setup_marathon_from_data(data)
+
+func pause_marathon_timer() -> void:
+	if game_mode != GameMode.MARATHON:
+		return
+	
+	marathon_timer_running = false
+
+func _process(delta: float) -> void:
+	if game_mode == GameMode.MARATHON and marathon_timer_running:
+		marathon_time += delta
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("pause"):
@@ -47,6 +96,11 @@ func _input(event: InputEvent) -> void:
 			return
 		pause_game()
 
+func start_marathon_timer() -> void:
+	if game_mode != GameMode.MARATHON:
+		return
+	
+	marathon_timer_running = true
 
 func pause_game() -> void:
 	is_paused = true
@@ -96,6 +150,7 @@ func set_level_title_label_text(level_index: int) -> void:
 
 func start_run() -> void:
 	var bg_music_array = worlds[current_world_index].background_music
+	print(bg_music_array)
 	if bg_music_array.size() > 0:
 		BGMManager.play_world_playlist(bg_music_array, false)
 	
@@ -194,6 +249,69 @@ func get_level_controller_reference(loaded_level: Node = null) -> void:
 	if not level_controller_reference.retry_level_requested.is_connected(retry_level):
 		level_controller_reference.retry_level_requested.connect(retry_level)
 
+func register_marathon_attempt_started() -> void:
+	if game_mode != GameMode.MARATHON:
+		return
+
+	var level_id := marathon_level_ids[marathon_current_index]
+	marathon_level_attempts[level_id] = marathon_level_attempts.get(level_id, 0) + 1
+
+func complete_marathon_level() -> void:
+	marathon_timer_running = false
+
+	marathon_current_index += 1
+
+	if marathon_current_index >= marathon_level_ids.size():
+		await unload_current_level()
+		finish_marathon()
+		return
+	
+	else:
+		set_level_title_label_text(marathon_current_index)
+
+	await transition_out()
+	await unload_current_level()
+
+	current_level_id = marathon_level_ids[marathon_current_index]
+
+	# If your marathon uses worlds/current_level_index, advance that too.
+	current_level_index += 1
+
+	load_level()
+
+	await get_tree().create_timer(TRANSITION_LENGTH).timeout
+	await transition_in()
+
+	if level_controller_reference:
+		level_controller_reference.enter_intro_state()
+
+func register_marathon_death() -> void:
+	if game_mode != GameMode.MARATHON:
+		return
+
+	marathon_timer_running = false
+	marathon_deaths += 1
+
+	var level_id := marathon_level_ids[marathon_current_index]
+	marathon_level_attempts[level_id] = marathon_level_attempts.get(level_id, 0) + 1
+
+func finish_marathon() -> void:
+	marathon_timer_running = false
+
+	var result = SaveManager.record_marathon_completion(
+		marathon_id,
+		marathon_time,
+		marathon_deaths,
+		marathon_level_attempts
+	)
+
+	game_mode = GameMode.NORMAL
+
+	show_marathon_results(result)
+
+func show_marathon_results(result: Dictionary) -> void:
+	print("MARATHON COMPLETE")
+	print(result)
 
 func retry_level() -> void:
 	game_pausable = false
@@ -223,6 +341,10 @@ func retry_level() -> void:
 
 
 func load_next_level() -> void:
+	if game_mode == GameMode.MARATHON:
+		await complete_marathon_level()
+		return
+
 	var world_data := get_current_world_data()
 	if world_data == null:
 		return
@@ -320,3 +442,50 @@ func get_current_level_data() -> LevelData:
 		return null
 
 	return world_data.levels[current_level_index]
+
+func setup_marathon_from_data(data: MarathonData) -> void:
+	game_mode = GameMode.MARATHON
+	current_marathon_data = data
+
+	worlds = data.worlds
+	LevelDatabase.setup(worlds)
+
+	marathon_id = data.marathon_id
+	marathon_level_ids = data.get_level_ids()
+	marathon_current_index = 0
+
+	marathon_time = 0.0
+	marathon_timer_running = false
+	marathon_deaths = 0
+	marathon_level_attempts = {}
+
+	for level_id in marathon_level_ids:
+		marathon_level_attempts[level_id] = 0
+
+	current_world_index = 0
+	current_level_index = 0
+	current_world_level_names = get_world_level_names(current_world_index)
+
+	should_show_initial_world_transition = false
+
+
+func _on_pause_screen_restart_marathon() -> void:
+	if game_mode != GameMode.MARATHON or current_marathon_data == null:
+		return
+
+	get_tree().paused = false
+	is_paused = false
+	pause_screen.visible = false
+
+	await transition_out()
+	await unload_current_level()
+
+	setup_marathon_from_data(current_marathon_data)
+
+	load_level()
+
+	await get_tree().create_timer(TRANSITION_LENGTH).timeout
+	await transition_in()
+
+	if level_controller_reference:
+		level_controller_reference.enter_intro_state()
