@@ -1,0 +1,146 @@
+[gd_scene format=4 uid="uid://41v0qhg5e2v6"]
+
+[ext_resource type="Script" uid="uid://bxdqsivvhelq2" path="res://scripts/results/results.gd" id="1_naufy"]
+[ext_resource type="PackedScene" uid="uid://drnundi171cmh" path="res://scenes/player/player.tscn" id="3_dndiy"]
+[ext_resource type="TileSet" uid="uid://7q8eymh2ksuh" path="res://scenes/tilesets/main_floor_and_walls.tres" id="4_18fg6"]
+[ext_resource type="Shader" uid="uid://cyftftn8qvqe5" path="res://shaders/hazard_shader.gdshader" id="5_judhk"]
+[ext_resource type="PackedScene" uid="uid://ca2uxdoweqwc1" path="res://scenes/utility/game_camera.tscn" id="6_ompd6"]
+[ext_resource type="FontFile" uid="uid://ihq4mv204mj5" path="res://assets/fonts/Whacky_Joe_Monospaced.ttf" id="7_xr6id"]
+[ext_resource type="FontFile" uid="uid://vklaqlxxc5o7" path="res://assets/fonts/Whacky_Joe.ttf" id="8_40qr6"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_wwkcr"]
+shader = ExtResource("5_judhk")
+shader_parameter/pulse_color = Color(0.40390328, 8.4228816e-07, 9.62615e-08, 1)
+shader_parameter/pulse_strength = 1.0
+shader_parameter/pulse_speed = 5.00000023424012
+shader_parameter/center_glow_strength = 0.0
+
+[sub_resource type="FontVariation" id="FontVariation_uyr8t"]
+base_font = ExtResource("8_40qr6")
+spacing_glyph = 2
+
+[node name="Results_Peaceful" type="Node2D" unique_id=1381461103]
+script = ExtResource("1_naufy")
+
+[node name="Player" parent="." unique_id=1458309070 instance=ExtResource("3_dndiy")]
+position = Vector2(159, 91)
+game_camera_path = NodePath("../GameCamera")
+
+[node name="PlayerSpawn" type="Node2D" parent="." unique_id=535208430]
+position = Vector2(159, 91)
+
+[node name="MapBottomLayer" type="Node2D" parent="." unique_id=1665801705]
+position = Vector2(159, 91)
+
+[node name="Floors" type="TileMapLayer" parent="MapBottomLayer" unique_id=1507503636 groups=["floors"]]
+tile_map_data = PackedByteArray("AAD8//3/AAAAAAcAAAD7//7/AAAAAAcAAAD7////AAAAAAcAAAD7/wAAAAAAAAcAAAD8/wEAAAAAAAcAAAD9/wIAAAAAAAcAAAAAAAIAAAAAAAcAAAABAAEAAAAAAAcAAAACAAAAAAAAAAcAAAACAP//AAAAAAcAAAACAP7/AAAAAAcAAAABAP3/AAAAAAcAAAD+////AAAAAAcAAAD+//7/AAAAAAcAAAD+//3/AAAAAAcAAAD///3/AAAAAAcAAAD///7/AAAAAAcAAAD/////AAAAAAcAAAD//wAAAAAAAAcAAAD+/wAAAAAAAAcAAAD9/wAAAAAAAAcAAAD9////AAAAAAcAAAD9//7/AAAAAAcAAAD9//3/AAAAAAcAAAD8//7/AAAAAAcAAAD8////AAAAAAcAAAD8/wAAAAAAAAcAAAD9/wEAAAAAAAcAAAD+/wEAAAAAAAcAAAD+/wIAAAAAAAcAAAD//wIAAAAAAAcAAAD//wEAAAAAAAcAAAAAAAEAAAAAAAcAAAAAAAAAAAAAAAcAAAAAAP//AAAAAAcAAAAAAP7/AAAAAAcAAAAAAP3/AAAAAAcAAAABAP7/AAAAAAcAAAABAP//AAAAAAcAAAABAAAAAAAAAAcAAAD7//3/AAAAAAcAAAD6//7/AAAAAAcAAAD6////AAAAAAcAAAD6/wAAAAAAAAcAAAD7/wEAAAAAAAcAAAD8/wIAAAAAAAcAAAD6//3/AAAAAAcAAAD6/wEAAAAAAAcAAAD7/wIAAAAAAAcAAAABAAIAAAAAAAcAAAACAAEAAAAAAAcAAAACAP3/AAAAAAcAAAD6/wIAAAAAAAcAAAACAAIAAAAAAAcAAAADAP3/AAAAAAcAAAADAP7/AAAAAAcAAAADAP//AAAAAAcAAAADAAAAAAAAAAcAAAADAAEAAAAAAAcAAAADAAIAAAAAAAcAAAAEAP3/AAAAAAcAAAAEAP7/AAAAAAcAAAAEAP//AAAAAAcAAAAEAAAAAAAAAAcAAAAEAAEAAAAAAAcAAAAEAAIAAAAAAAcAAAAFAP3/AAAAAAcAAAAFAP7/AAAAAAcAAAAFAP//AAAAAAcAAAAFAAAAAAAAAAcAAAAFAAEAAAAAAAcAAAAFAAIAAAAAAAcAAAA=")
+tile_set = ExtResource("4_18fg6")
+
+[node name="Hazards" type="TileMapLayer" parent="MapBottomLayer" unique_id=876696869 groups=["floor_hazards"]]
+modulate = Color(0.5092862, 0.5092861, 0.5092864, 1)
+material = SubResource("ShaderMaterial_wwkcr")
+tile_set = ExtResource("4_18fg6")
+
+[node name="Platforms" type="Node2D" parent="." unique_id=1928273324]
+
+[node name="Portals" type="Node2D" parent="." unique_id=304918047]
+
+[node name="Hazards" type="Node2D" parent="." unique_id=798262580]
+position = Vector2(168, 79)
+
+[node name="Toggles" type="Node2D" parent="." unique_id=1769863331]
+
+[node name="Stamps" type="Node2D" parent="." unique_id=123113769]
+position = Vector2(168, 79)
+
+[node name="GameCamera" parent="." unique_id=13152400 node_paths=PackedStringArray("target") instance=ExtResource("6_ompd6")]
+position = Vector2(160, 90)
+mode = 1
+target = NodePath("../Player")
+fixed_position = Vector2(160, 90)
+
+[node name="MapTopLayer" type="Node2D" parent="." unique_id=1059944217]
+
+[node name="Shadows" type="TileMapLayer" parent="MapTopLayer" unique_id=255637794]
+position = Vector2(159, 91)
+tile_map_data = PackedByteArray("AAD6/wIAAAABAAMAAAD6/wEAAAABAAMAAAD6/wAAAAABAAMAAAD6////AAABAAMAAAD6//7/AAABAAMAAAD6//3/AAAFAAMAAAD7//3/AAAAAAMAAAD8//3/AAAAAAMAAAD9//3/AAAAAAMAAAD+//3/AAAAAAMAAAD///3/AAAAAAMAAAAAAP3/AAAAAAMAAAABAP3/AAAAAAMAAAACAP3/AAAAAAMAAAADAP3/AAAAAAMAAAAEAP3/AAAAAAMAAAAFAP3/AAAAAAMAAAA=")
+tile_set = ExtResource("4_18fg6")
+
+[node name="Walls" type="TileMapLayer" parent="MapTopLayer" unique_id=766012576]
+position = Vector2(159, 91)
+tile_map_data = PackedByteArray("AAD5//z/AAAAAAgAAAD6//z/AAAAAAgAAAD7//z/AAAAAAgAAAD8//z/AAAAAAgAAAD9//z/AAAAAAgAAAD+//z/AAAAAAgAAAD///z/AAAAAAgAAAAAAPz/AAAAAAgAAAABAPz/AAAAAAgAAAACAPz/AAAAAAgAAAADAPz/AAAAAAgAAAAEAPz/AAAAAAgAAAAFAPz/AAAAAAgAAAAGAPz/AAAAAAgAAAAGAP3/AAAAAAgAAAAGAP7/AAAAAAgAAAAGAP//AAAAAAgAAAAGAAAAAAAAAAgAAAAGAAEAAAAAAAgAAAAGAAIAAAAAAAgAAAAGAAMAAAAAAAgAAAAGAAQAAAAAAAgAAAAHAPz/AAAAAAgAAAAHAP3/AAAAAAgAAAAHAP7/AAAAAAgAAAAHAP//AAAAAAgAAAAHAAAAAAAAAAgAAAAHAAEAAAAAAAgAAAAHAAIAAAAAAAgAAAAHAAMAAAAAAAgAAAAHAAQAAAAAAAgAAAAIAPz/AAAAAAgAAAAIAP3/AAAAAAgAAAAIAP7/AAAAAAgAAAAIAP//AAAAAAgAAAAIAAAAAAAAAAgAAAAIAAEAAAAAAAgAAAAIAAIAAAAAAAgAAAAIAAMAAAAAAAgAAAAIAAQAAAAAAAgAAAAJAPz/AAAAAAgAAAAJAP3/AAAAAAgAAAAJAP7/AAAAAAgAAAAJAP//AAAAAAgAAAAJAAAAAAAAAAgAAAAJAAEAAAAAAAgAAAAJAAIAAAAAAAgAAAAJAAMAAAAAAAgAAAAJAAQAAAAAAAgAAAD2//z/AAAAAAgAAAD2//3/AAAAAAgAAAD2//7/AAAAAAgAAAD2////AAAAAAgAAAD2/wAAAAAAAAgAAAD2/wEAAAAAAAgAAAD2/wIAAAAAAAgAAAD2/wMAAAAAAAgAAAD2/wQAAAAAAAgAAAD3//z/AAAAAAgAAAD3//3/AAAAAAgAAAD3//7/AAAAAAgAAAD3////AAAAAAgAAAD3/wAAAAAAAAgAAAD3/wEAAAAAAAgAAAD3/wIAAAAAAAgAAAD3/wMAAAAAAAgAAAD3/wQAAAAAAAgAAAD4//z/AAAAAAgAAAD4//3/AAAAAAgAAAD4//7/AAAAAAgAAAD4////AAAAAAgAAAD4/wAAAAAAAAgAAAD4/wEAAAAAAAgAAAD4/wIAAAAAAAgAAAD4/wMAAAAAAAgAAAD4/wQAAAAAAAgAAAD5//3/AAAAAAgAAAD5//7/AAAAAAgAAAD5////AAAAAAgAAAD5/wAAAAAAAAgAAAD5/wEAAAAAAAgAAAD5/wIAAAAAAAgAAAD5/wMAAAAAAAgAAAD2/wUAAAAAAAgAAAD3/wUAAAAAAAgAAAD4/wUAAAAAAAgAAAD5/wQAAAAAAAgAAAD5/wUAAAAAAAgAAAD6/wMAAAAAAAgAAAD6/wQAAAAAAAgAAAD6/wUAAAAAAAgAAAD7/wMAAAAAAAgAAAD7/wQAAAAAAAgAAAD7/wUAAAAAAAgAAAD8/wMAAAAAAAgAAAD8/wQAAAAAAAgAAAD8/wUAAAAAAAgAAAD9/wMAAAAAAAgAAAD9/wQAAAAAAAgAAAD9/wUAAAAAAAgAAAD+/wMAAAAAAAgAAAD+/wQAAAAAAAgAAAD+/wUAAAAAAAgAAAD//wMAAAAAAAgAAAD//wQAAAAAAAgAAAD//wUAAAAAAAgAAAAAAAMAAAAAAAgAAAAAAAQAAAAAAAgAAAAAAAUAAAAAAAgAAAABAAMAAAAAAAgAAAABAAQAAAAAAAgAAAABAAUAAAAAAAgAAAACAAMAAAAAAAgAAAACAAQAAAAAAAgAAAACAAUAAAAAAAgAAAADAAMAAAAAAAgAAAADAAQAAAAAAAgAAAADAAUAAAAAAAgAAAAEAAMAAAAAAAgAAAAEAAQAAAAAAAgAAAAEAAUAAAAAAAgAAAAFAAMAAAAAAAgAAAAFAAQAAAAAAAgAAAAFAAUAAAAAAAgAAAAGAAUAAAAAAAgAAAAHAAUAAAAAAAgAAAAIAAUAAAAAAAgAAAAJAAUAAAAAAAgAAAD2//n/AAAAAAgAAAD2//r/AAAAAAgAAAD2//v/AAAAAAgAAAD3//n/AAAAAAgAAAD3//r/AAAAAAgAAAD3//v/AAAAAAgAAAD4//n/AAAAAAgAAAD4//r/AAAAAAgAAAD4//v/AAAAAAgAAAD5//n/AAAAAAgAAAD5//r/AAAAAAgAAAD5//v/AAAAAAgAAAD6//n/AAAAAAgAAAD6//r/AAAAAAgAAAD6//v/AAAAAAgAAAD7//n/AAAAAAgAAAD7//r/AAAAAAgAAAD7//v/AAAAAAgAAAD8//n/AAAAAAgAAAD8//r/AAAAAAgAAAD8//v/AAAAAAgAAAD9//n/AAAAAAgAAAD9//r/AAAAAAgAAAD9//v/AAAAAAgAAAD+//n/AAAAAAgAAAD+//r/AAAAAAgAAAD+//v/AAAAAAgAAAD///n/AAAAAAgAAAD///r/AAAAAAgAAAD///v/AAAAAAgAAAAAAPn/AAAAAAgAAAAAAPr/AAAAAAgAAAAAAPv/AAAAAAgAAAABAPn/AAAAAAgAAAABAPr/AAAAAAgAAAABAPv/AAAAAAgAAAACAPn/AAAAAAgAAAACAPr/AAAAAAgAAAACAPv/AAAAAAgAAAADAPn/AAAAAAgAAAADAPr/AAAAAAgAAAADAPv/AAAAAAgAAAAEAPn/AAAAAAgAAAAEAPr/AAAAAAgAAAAEAPv/AAAAAAgAAAAFAPn/AAAAAAgAAAAFAPr/AAAAAAgAAAAFAPv/AAAAAAgAAAAGAPn/AAAAAAgAAAAGAPr/AAAAAAgAAAAGAPv/AAAAAAgAAAAHAPn/AAAAAAgAAAAHAPr/AAAAAAgAAAAHAPv/AAAAAAgAAAAIAPn/AAAAAAgAAAAIAPr/AAAAAAgAAAAIAPv/AAAAAAgAAAAJAPn/AAAAAAgAAAAJAPr/AAAAAAgAAAAJAPv/AAAAAAgAAAD6/wIAAAADAAgAAAAFAAIAAAAEAAgAAAD6//3/AAACAAgAAAAFAP3/AAABAAgAAAA=")
+tile_set = ExtResource("4_18fg6")
+
+[node name="Results" type="CanvasLayer" parent="." unique_id=2111530410]
+
+[node name="Control" type="Control" parent="Results" unique_id=452375353]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TimeLabel" type="RichTextLabel" parent="Results/Control" unique_id=982449941]
+custom_minimum_size = Vector2(120, 0)
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 18.0
+grow_horizontal = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_outline_size = 0
+theme_override_constants/shadow_offset_x = 1
+theme_override_constants/shadow_offset_y = 1
+theme_override_fonts/normal_font = ExtResource("7_xr6id")
+theme_override_font_sizes/normal_font_size = 12
+bbcode_enabled = true
+text = "00.00"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CompletionMessage" type="RichTextLabel" parent="Results/Control" unique_id=1898921032]
+custom_minimum_size = Vector2(0, 34)
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+grow_horizontal = 2
+theme_override_constants/outline_size = 3
+theme_override_fonts/normal_font = SubResource("FontVariation_uyr8t")
+theme_override_font_sizes/normal_font_size = 12
+bbcode_enabled = true
+text = "[rainbow]MEDAL EARNED![/rainbow]"
+horizontal_alignment = 1
+vertical_alignment = 2
+
+[node name="ThankYouMessage" type="RichTextLabel" parent="Results/Control" unique_id=218940119]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_constants/outline_size = 3
+theme_override_fonts/normal_font = ExtResource("7_xr6id")
+bbcode_enabled = true
+text = "[wave]THANKS FOR PLAYING![/wave]"
+horizontal_alignment = 1
+
+[node name="SFXPool" type="Node2D" parent="." unique_id=1179306386]
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="SFXPool" unique_id=1316830088]
+bus = &"SFX"
+
+[node name="AudioStreamPlayer2D2" type="AudioStreamPlayer2D" parent="SFXPool" unique_id=1728188522]
+bus = &"SFX"
+
+[node name="AudioStreamPlayer2D3" type="AudioStreamPlayer2D" parent="SFXPool" unique_id=487521444]
+bus = &"SFX"
+
+[node name="AudioStreamPlayer2D4" type="AudioStreamPlayer2D" parent="SFXPool" unique_id=1157126655]
+bus = &"SFX"
+
+[node name="AudioStreamPlayer2D5" type="AudioStreamPlayer2D" parent="SFXPool" unique_id=1306284367]
+bus = &"SFX"

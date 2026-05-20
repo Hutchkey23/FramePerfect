@@ -6,12 +6,20 @@ enum GameMode {
 	MARATHON,
 }
 
+const MARATHON_RESULTS : Dictionary = {
+	"world_01": preload("uid://cqt1tw0cqi6jv"),
+	"world_02": preload("uid://cd6nplujadiq"),
+	"world_03": preload("uid://41v0qhg5e2v6"),
+	"world_04": preload("uid://3wi43o16qj4m"),
+}
+
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var level_container: Node2D = $LevelContainer
 @onready var transition: CanvasLayer = $Transition
 @onready var level_title_label: RichTextLabel = $Transition/LevelTitleLabel
 @onready var pause_screen: PauseMenu = $PauseLayer/PauseScreen
 @onready var world_transition: WorldTransition = $WorldTransition
+@onready var sfx_pool: Node2D = $SFXPool
 
 const TRANSITION_LENGTH: float = 1.25
 
@@ -30,6 +38,8 @@ var marathon_time: float = 0.0
 var marathon_timer_running: bool = false
 var marathon_deaths: int = 0
 var marathon_level_attempts: Dictionary = {}
+
+var marathon_finished: bool = false
 ###########################
 
 var current_world_index: int = 0
@@ -42,6 +52,14 @@ var should_show_initial_world_transition: bool = false
 
 var game_pausable: bool = false
 var is_paused: bool = false
+
+var first_level_loaded_title: String = ""
+
+############## AUDIO HANDLING ##############
+const DELIVERED_SFX = preload("uid://cag0lu35jttel")
+const DELIVERED_VOLUME: float = -6.0
+const DELIVERED_PITCH_RANGE: Vector2 = Vector2(1.0, 1.0)
+############################################
 
 func _ready() -> void:
 	if RunState.has_pending_marathon:
@@ -145,6 +163,10 @@ func get_world_level_names(world_index: int) -> Array:
 
 func set_level_title_label_text(level_index: int) -> void:
 	var level_title = current_world_level_names[level_index]
+	
+	if first_level_loaded_title == "":
+		first_level_loaded_title = level_title
+	
 	level_title_label.text = level_title
 
 
@@ -262,7 +284,14 @@ func complete_marathon_level() -> void:
 	marathon_current_index += 1
 
 	if marathon_current_index >= marathon_level_ids.size():
+		level_title_label.text = ""
+		await transition_out()
 		await unload_current_level()
+		
+		await get_tree().create_timer(1.5).timeout
+		level_title_label.text = "[rainbow]DELIVERED![/rainbow]"
+		pop_level_title_label()
+		await get_tree().create_timer(2.5).timeout
 		finish_marathon()
 		return
 	
@@ -297,21 +326,34 @@ func register_marathon_death() -> void:
 
 func finish_marathon() -> void:
 	marathon_timer_running = false
-
+	marathon_finished = true
+	
 	var result = SaveManager.record_marathon_completion(
-		marathon_id,
+		current_marathon_data,
 		marathon_time,
 		marathon_deaths,
 		marathon_level_attempts
 	)
-
-	game_mode = GameMode.NORMAL
-
+	
 	show_marathon_results(result)
 
 func show_marathon_results(result: Dictionary) -> void:
-	print("MARATHON COMPLETE")
-	print(result)
+	var results_scene: PackedScene = null
+	match result.marathon_id:
+		"world_01":
+			pass
+		"world_02":
+			pass
+		"world_03":
+			pass
+		_:
+			results_scene = MARATHON_RESULTS["world_04"]
+	
+	var results_scene_instance = results_scene.instantiate()
+	level_container.add_child(results_scene_instance)
+	results_scene_instance.setup(result)
+	await transition_in()
+	results_scene_instance.show_results()
 
 func retry_level() -> void:
 	game_pausable = false
@@ -476,7 +518,9 @@ func _on_pause_screen_restart_marathon() -> void:
 	get_tree().paused = false
 	is_paused = false
 	pause_screen.visible = false
-
+	marathon_finished = false
+	level_title_label.text = first_level_loaded_title
+	
 	await transition_out()
 	await unload_current_level()
 
@@ -489,3 +533,35 @@ func _on_pause_screen_restart_marathon() -> void:
 
 	if level_controller_reference:
 		level_controller_reference.enter_intro_state()
+
+func pop_level_title_label() -> void:
+	level_title_label.visible = true
+	level_title_label.modulate.a = 0.0
+	level_title_label.scale = Vector2(0.55, 0.55)
+	level_title_label.pivot_offset = level_title_label.size / 2.0
+	
+	play_sfx(DELIVERED_SFX, DELIVERED_VOLUME, DELIVERED_PITCH_RANGE)
+	
+	var tween := create_tween()
+	tween.set_parallel(true)
+
+	tween.tween_property(level_title_label, "modulate:a", 1.0, 0.10)
+
+	tween.tween_property(level_title_label, "scale", Vector2(1.25, 1.25), 0.16)\
+		.set_trans(Tween.TRANS_BACK)\
+		.set_ease(Tween.EASE_OUT)
+	
+	tween.chain().tween_property(level_title_label, "scale", Vector2.ONE, 0.10)\
+		.set_trans(Tween.TRANS_QUAD)\
+		.set_ease(Tween.EASE_OUT)
+
+####### AUDIO HANDLING ########
+func play_sfx(sfx: AudioStream, volume_db: float = 0.0, pitch_range: Vector2 = Vector2(0.95, 1.05)):
+	for audio_player: AudioStreamPlayer2D in sfx_pool.get_children():
+		if not audio_player.playing:
+			audio_player.volume_db = volume_db
+			audio_player.stream = sfx
+			audio_player.pitch_scale = randf_range(pitch_range.x, pitch_range.y)
+			audio_player.play()
+			return
+###############################

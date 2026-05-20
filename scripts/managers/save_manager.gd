@@ -243,35 +243,60 @@ func get_or_create_marathon_data(marathon_id: String) -> Dictionary:
 	return save_data["marathons"][marathon_id]
 
 func record_marathon_completion(
-	marathon_id: String,
+	marathon: MarathonData,
 	clear_time: float,
 	deaths: int,
 	level_attempts: Dictionary
 ) -> Dictionary:
-	var marathon_data := get_or_create_marathon_data(marathon_id)
+	var save_marathon_data := get_or_create_marathon_data(marathon.marathon_id)
 
-	var previous_best_time: float = marathon_data["best_time"]
+	var previous_best_time: float = save_marathon_data["best_time"]
 	var first_completion := previous_best_time == NO_TIME
 	var new_best := clear_time < previous_best_time
 
-	marathon_data["completed"] = true
+	var medal_time := marathon.medal_time
+	var had_medal_before := (
+		previous_best_time != NO_TIME
+		and previous_best_time <= medal_time
+	)
+
+	var earned_medal := clear_time <= medal_time
+	var first_medal := earned_medal and not had_medal_before
+
+	save_marathon_data["completed"] = true
 
 	if new_best:
-		marathon_data["best_time"] = clear_time
-		marathon_data["best_deaths"] = deaths
-		marathon_data["best_level_attempts"] = level_attempts.duplicate(true)
+		save_marathon_data["best_time"] = clear_time
+		save_marathon_data["best_deaths"] = deaths
+		save_marathon_data["best_level_attempts"] = level_attempts.duplicate(true)
+	
+	var missed_medal_by := 0.0
+	if not earned_medal:
+		missed_medal_by = clear_time - medal_time
 
+	var missed_new_best_by := 0.0
+	if not new_best and previous_best_time != NO_TIME:
+		missed_new_best_by = clear_time - previous_best_time
+	
 	save_game()
 
 	return {
-		"marathon_id": marathon_id,
+		"marathon_id": marathon.marathon_id,
+		"display_name": marathon.display_name,
 		"clear_time": clear_time,
 		"previous_best_time": previous_best_time,
-		"best_time": marathon_data["best_time"],
+		"best_time": save_marathon_data["best_time"],
 		"new_best": new_best,
 		"first_completion": first_completion,
 		"deaths": deaths,
 		"level_attempts": level_attempts,
+
+		"medal_time": medal_time,
+		"earned_medal": earned_medal,
+		"first_medal": first_medal,
+
+		"missed_medal_by": missed_medal_by,
+		"missed_new_best_by": missed_new_best_by,
 	}
 
 func get_option(option_name: String, fallback = null):

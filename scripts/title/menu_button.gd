@@ -12,6 +12,7 @@ const FOCUSED_SIZE: Vector2 = Vector2(1.4, 1.4)
 const ROTATION_OPTIONS: Array[float] = [-2.0, 2.0]
 const INDICATOR_ROTATION_SPEED : float = 350.0
 const LABEL_FOCUSED_COLOR : Color = "#ffec27"
+const DISABLED_MODULATE: Color = Color(0.55, 0.55, 0.55, 0.9)
 const PRESSED_SCALE : Vector2 = Vector2(0.9, 0.9)
 
 var ignore_focus_sfx: bool = false
@@ -108,3 +109,36 @@ func _on_visibility_changed() -> void:
 	if visible:
 		await get_tree().process_frame
 		update_pivot()
+
+func disable_button() -> void:
+	disabled = true
+	focus_mode = Control.FOCUS_NONE
+
+	if button_tween:
+		button_tween.kill()
+
+	if press_tween:
+		press_tween.kill()
+
+	scale = Vector2.ONE
+	rotation_degrees = 0.0
+
+	modulate = DISABLED_MODULATE
+	indicator.modulate.a = 0.0
+
+	button_text.add_theme_color_override(
+		"font_color",
+		Color(0.7, 0.7, 0.7)
+	)
+
+
+func enable_button() -> void:
+	disabled = false
+	focus_mode = Control.FOCUS_ALL
+
+	modulate = Color.WHITE
+
+	button_text.add_theme_color_override(
+		"font_color",
+		Color.WHITE
+	)

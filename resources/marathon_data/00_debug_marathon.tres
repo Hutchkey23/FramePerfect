@@ -1,0 +1,34 @@
+[gd_resource type="Resource" script_class="MarathonData" format=3 uid="uid://cy6sbni6jxqw2"]
+
+[ext_resource type="Texture2D" uid="uid://c3aj3ftm4kt52" path="res://assets/sprites/postcards/peaceful_plains_back.png" id="1_fttfe"]
+[ext_resource type="Texture2D" uid="uid://ddksbycmsdtui" path="res://assets/title/bg1.png" id="2_uuu4t"]
+[ext_resource type="Texture2D" uid="uid://bjg3cv8wdoj1o" path="res://assets/sprites/postcards/peaceful_plains.png" id="3_wt8p8"]
+[ext_resource type="Script" uid="uid://b78coe6eanw3t" path="res://resources/marathon_data/marathon_data.gd" id="4_vnett"]
+[ext_resource type="Script" uid="uid://gba83foepn6x" path="res://resources/world_data/world_data.gd" id="5_hq2w2"]
+[ext_resource type="Script" uid="uid://bhxby642rllaj" path="res://resources/music_data/music_data.gd" id="6_nwhbr"]
+[ext_resource type="Script" uid="uid://do5fdotl7d638" path="res://resources/level_data/level_data.gd" id="7_ra32s"]
+[ext_resource type="Resource" uid="uid://2tr6xgduo5id" path="res://resources/level_data/01-25_peaceful_plains/level_001.tres" id="8_cxk36"]
+
+[sub_resource type="Resource" id="Resource_byrtm"]
+script = ExtResource("5_hq2w2")
+world_id = "debug"
+world_title = "debug"
+world_intro_text = "debug"
+levels = Array[ExtResource("7_ra32s")]([ExtResource("8_cxk36")])
+front_image = ExtResource("1_fttfe")
+back_image = ExtResource("1_fttfe")
+background_texture = ExtResource("2_uuu4t")
+metadata/_custom_type_script = "uid://gba83foepn6x"
+
+[resource]
+script = ExtResource("4_vnett")
+marathon_id = "world_debug"
+display_name = "Debug"
+world_number = 15
+worlds = Array[ExtResource("5_hq2w2")]([SubResource("Resource_byrtm")])
+medal_time = 130.0
+front_image = ExtResource("3_wt8p8")
+back_image = ExtResource("1_fttfe")
+font_color = Color(0, 0.5294118, 0.31764707, 1)
+background_texture = ExtResource("2_uuu4t")
+metadata/_custom_type_script = "uid://b78coe6eanw3t"

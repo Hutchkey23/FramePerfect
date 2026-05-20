@@ -36,7 +36,7 @@
 [ext_resource type="Texture2D" uid="uid://bqa1g5t3ixn8f" path="res://assets/sprites/stamps/stamp_26.png" id="33_d54op"]
 [ext_resource type="FontFile" uid="uid://vklaqlxxc5o7" path="res://assets/fonts/Whacky_Joe.ttf" id="34_ohabt"]
 [ext_resource type="PackedScene" uid="uid://cpqo1dt5u0l0h" path="res://scenes/postcard/marathon_level_select_postcard.tscn" id="36_pio75"]
-[ext_resource type="Resource" uid="uid://dnauec61r8nf" path="res://resources/marathon_data/01_marathon_peaceful_plains.tres" id="37_qs3tf"]
+[ext_resource type="Resource" uid="uid://cy6sbni6jxqw2" path="res://resources/marathon_data/00_debug_marathon.tres" id="37_qs3tf"]
 [ext_resource type="Resource" uid="uid://nli7jt4xwhwt" path="res://resources/marathon_data/02_marathon_scorched_sands.tres" id="38_g0l0e"]
 [ext_resource type="Resource" uid="uid://chdk8s824pi8n" path="res://resources/marathon_data/03_marathon_frosted_frontier.tres" id="39_i6y5b"]
 [ext_resource type="Resource" uid="uid://bcno8v7tfu1gc" path="res://resources/marathon_data/04_marathon_galactic_gateway.tres" id="40_s0rnv"]

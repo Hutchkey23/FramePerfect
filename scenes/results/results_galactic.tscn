@@ -1,0 +1,171 @@
+[gd_scene format=4 uid="uid://3wi43o16qj4m"]
+
+[ext_resource type="Script" uid="uid://bxdqsivvhelq2" path="res://scripts/results/results.gd" id="1_n8h47"]
+[ext_resource type="Shader" uid="uid://cy8e5yqoo68kc" path="res://shaders/starry_sky.gdshader" id="2_hj2jk"]
+[ext_resource type="PackedScene" uid="uid://drnundi171cmh" path="res://scenes/player/player.tscn" id="3_m4c7n"]
+[ext_resource type="TileSet" uid="uid://7q8eymh2ksuh" path="res://scenes/tilesets/main_floor_and_walls.tres" id="4_dgh01"]
+[ext_resource type="Shader" uid="uid://cyftftn8qvqe5" path="res://shaders/hazard_shader.gdshader" id="5_mk2l8"]
+[ext_resource type="PackedScene" uid="uid://ca2uxdoweqwc1" path="res://scenes/utility/game_camera.tscn" id="6_gqood"]
+[ext_resource type="FontFile" uid="uid://ihq4mv204mj5" path="res://assets/fonts/Whacky_Joe_Monospaced.ttf" id="7_gvyj8"]
+[ext_resource type="FontFile" uid="uid://vklaqlxxc5o7" path="res://assets/fonts/Whacky_Joe.ttf" id="8_d1g3x"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_jur53"]
+shader = ExtResource("2_hj2jk")
+shader_parameter/fade_alpha = 1.0
+shader_parameter/background_color = Color(0.012298316, 0.024600385, 0.090413176, 1)
+shader_parameter/star_color = Color(0.85, 0.82, 1, 1)
+shader_parameter/aspect_ratio = 1.0
+shader_parameter/density = 0.79999997976
+shader_parameter/layer_parascale = 3
+shader_parameter/star_speed = Vector2(0.01, 0.01)
+shader_parameter/star_wave = Vector2(0, 0)
+shader_parameter/star_size = 1.999999955296
+shader_parameter/star_rotate_speed = 0.08300014644250009
+shader_parameter/twinkle_effect = 1.0
+shader_parameter/twinkle_speed = 0.249999994412
+shader_parameter/pixelate_enabled = true
+shader_parameter/pixelate_count = 1000.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_wwkcr"]
+shader = ExtResource("5_mk2l8")
+shader_parameter/pulse_color = Color(0.40390328, 8.4228816e-07, 9.62615e-08, 1)
+shader_parameter/pulse_strength = 1.0
+shader_parameter/pulse_speed = 5.00000023424012
+shader_parameter/center_glow_strength = 0.0
+
+[sub_resource type="FontVariation" id="FontVariation_uyr8t"]
+base_font = ExtResource("8_d1g3x")
+spacing_glyph = 2
+
+[node name="Results_Galactic" type="Node2D" unique_id=1381461103]
+script = ExtResource("1_n8h47")
+
+[node name="Background" type="ColorRect" parent="." unique_id=882240186]
+material = SubResource("ShaderMaterial_jur53")
+offset_left = -84.0
+offset_top = -108.0
+offset_right = 396.0
+offset_bottom = 324.0
+
+[node name="Player" parent="." unique_id=1458309070 instance=ExtResource("3_m4c7n")]
+position = Vector2(159, 91)
+game_camera_path = NodePath("../GameCamera")
+
+[node name="PlayerSpawn" type="Node2D" parent="." unique_id=535208430]
+position = Vector2(159, 91)
+
+[node name="MapBottomLayer" type="Node2D" parent="." unique_id=1665801705]
+position = Vector2(159, 91)
+
+[node name="Floors" type="TileMapLayer" parent="MapBottomLayer" unique_id=1507503636 groups=["floors"]]
+tile_map_data = PackedByteArray("AAD8//3/AAAAAAkAAAD7//7/AAAAAAkAAAD7////AAAAAAkAAAD7/wAAAAAAAAkAAAD8/wEAAAAAAAkAAAD9/wIAAAAAAAkAAAAAAAIAAAAAAAkAAAABAAEAAAAAAAkAAAACAAAAAAAAAAkAAAACAP//AAAAAAkAAAACAP7/AAAAAAkAAAABAP3/AAAAAAkAAAD+////AAAAAAkAAAD+//7/AAAAAAkAAAD+//3/AAAAAAkAAAD///3/AAAAAAkAAAD///7/AAAAAAkAAAD/////AAAAAAkAAAD//wAAAAAAAAkAAAD+/wAAAAAAAAkAAAD9/wAAAAAAAAkAAAD9////AAAAAAkAAAD9//7/AAAAAAkAAAD9//3/AAAAAAkAAAD8//7/AAAAAAkAAAD8////AAAAAAkAAAD8/wAAAAAAAAkAAAD9/wEAAAAAAAkAAAD+/wEAAAAAAAkAAAD+/wIAAAAAAAkAAAD//wIAAAAAAAkAAAD//wEAAAAAAAkAAAAAAAEAAAAAAAkAAAAAAAAAAAAAAAkAAAAAAP//AAAAAAkAAAAAAP7/AAAAAAkAAAAAAP3/AAAAAAkAAAABAP7/AAAAAAkAAAABAP//AAAAAAkAAAABAAAAAAAAAAkAAAD7//3/AAAAAAkAAAD6//7/AAAAAAkAAAD6////AAAAAAkAAAD6/wAAAAAAAAkAAAD7/wEAAAAAAAkAAAD8/wIAAAAAAAkAAAD6//3/AAAAAAkAAAD6/wEAAAAAAAkAAAD7/wIAAAAAAAkAAAABAAIAAAAAAAkAAAACAAEAAAAAAAkAAAACAP3/AAAAAAkAAAD6/wIAAAAAAAkAAAACAAIAAAAAAAkAAAADAP3/AAAAAAkAAAADAP7/AAAAAAkAAAADAP//AAAAAAkAAAADAAAAAAAAAAkAAAADAAEAAAAAAAkAAAADAAIAAAAAAAkAAAAEAP3/AAAAAAkAAAAEAP7/AAAAAAkAAAAEAP//AAAAAAkAAAAEAAAAAAAAAAkAAAAEAAEAAAAAAAkAAAAEAAIAAAAAAAkAAAAFAP3/AAAAAAkAAAAFAP7/AAAAAAkAAAAFAP//AAAAAAkAAAAFAAAAAAAAAAkAAAAFAAEAAAAAAAkAAAAFAAIAAAAAAAkAAAA=")
+tile_set = ExtResource("4_dgh01")
+
+[node name="Hazards" type="TileMapLayer" parent="MapBottomLayer" unique_id=876696869 groups=["floor_hazards"]]
+modulate = Color(0.5092862, 0.5092861, 0.5092864, 1)
+material = SubResource("ShaderMaterial_wwkcr")
+tile_set = ExtResource("4_dgh01")
+
+[node name="Platforms" type="Node2D" parent="." unique_id=1928273324]
+
+[node name="Portals" type="Node2D" parent="." unique_id=304918047]
+
+[node name="Hazards" type="Node2D" parent="." unique_id=798262580]
+position = Vector2(168, 79)
+
+[node name="Toggles" type="Node2D" parent="." unique_id=1769863331]
+
+[node name="Stamps" type="Node2D" parent="." unique_id=123113769]
+position = Vector2(168, 79)
+
+[node name="GameCamera" parent="." unique_id=13152400 node_paths=PackedStringArray("target") instance=ExtResource("6_gqood")]
+position = Vector2(160, 90)
+mode = 1
+target = NodePath("../Player")
+fixed_position = Vector2(160, 90)
+
+[node name="MapTopLayer" type="Node2D" parent="." unique_id=1059944217]
+
+[node name="Shadows" type="TileMapLayer" parent="MapTopLayer" unique_id=255637794]
+position = Vector2(159, 91)
+tile_map_data = PackedByteArray("AAD6/wIAAAABAAMAAAD6/wEAAAABAAMAAAD6/wAAAAABAAMAAAD6////AAABAAMAAAD6//7/AAABAAMAAAD6//3/AAAFAAQAAAD7//3/AAAAAAMAAAD8//3/AAAAAAMAAAD9//3/AAAAAAMAAAD+//3/AAAAAAMAAAD///3/AAAAAAMAAAAAAP3/AAAAAAMAAAABAP3/AAAAAAMAAAACAP3/AAAAAAMAAAADAP3/AAAAAAMAAAAEAP3/AAAAAAMAAAAFAP3/AAAAAAMAAAA=")
+tile_set = ExtResource("4_dgh01")
+
+[node name="Walls" type="TileMapLayer" parent="MapTopLayer" unique_id=766012576]
+position = Vector2(159, 91)
+tile_map_data = PackedByteArray("AAD5//7/AAADAAsAAAD5////AAADAAsAAAD5/wAAAAADAAsAAAD5/wEAAAADAAsAAAD5/wIAAAADAAsAAAD5/wMAAAAGAAoAAAAGAPz/AAAFAAsAAAAGAP3/AAACAAsAAAAGAP7/AAACAAsAAAAGAP//AAACAAsAAAAGAAAAAAACAAsAAAAGAAEAAAACAAsAAAAGAAIAAAACAAsAAAAGAAMAAAAFAAoAAAD5//z/AAAGAAsAAAD5//3/AAADAAsAAAD6/wMAAAAAAAsAAAD7/wMAAAAAAAsAAAD8/wMAAAAAAAsAAAD9/wMAAAAAAAsAAAD+/wMAAAAAAAsAAAD//wMAAAAAAAsAAAAAAAMAAAAAAAsAAAABAAMAAAAAAAsAAAACAAMAAAAAAAsAAAADAAMAAAAAAAsAAAAEAAMAAAAAAAsAAAAFAAMAAAAAAAsAAAD6//z/AAABAAsAAAD7//z/AAABAAsAAAD8//z/AAABAAsAAAD9//z/AAABAAsAAAD+//z/AAABAAsAAAD///z/AAABAAsAAAAAAPz/AAABAAsAAAABAPz/AAABAAsAAAACAPz/AAABAAsAAAADAPz/AAABAAsAAAAEAPz/AAABAAsAAAAFAPz/AAABAAsAAAD6//3/AAAFAAoAAAAFAP3/AAAGAAoAAAD6/wIAAAAFAAsAAAAFAAIAAAAGAAsAAAA=")
+tile_set = ExtResource("4_dgh01")
+
+[node name="Results" type="CanvasLayer" parent="." unique_id=2111530410]
+
+[node name="Control" type="Control" parent="Results" unique_id=452375353]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TimeLabel" type="RichTextLabel" parent="Results/Control" unique_id=982449941]
+custom_minimum_size = Vector2(120, 0)
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 18.0
+grow_horizontal = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_outline_size = 0
+theme_override_constants/shadow_offset_x = 1
+theme_override_constants/shadow_offset_y = 1
+theme_override_fonts/normal_font = ExtResource("7_gvyj8")
+theme_override_font_sizes/normal_font_size = 12
+bbcode_enabled = true
+text = "00.00"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CompletionMessage" type="RichTextLabel" parent="Results/Control" unique_id=1898921032]
+custom_minimum_size = Vector2(0, 34)
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+grow_horizontal = 2
+theme_override_constants/outline_size = 3
+theme_override_fonts/normal_font = SubResource("FontVariation_uyr8t")
+theme_override_font_sizes/normal_font_size = 12
+bbcode_enabled = true
+text = "[rainbow]MEDAL EARNED![/rainbow]"
+horizontal_alignment = 1
+vertical_alignment = 2
+
+[node name="ThankYouMessage" type="RichTextLabel" parent="Results/Control" unique_id=218940119]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_constants/outline_size = 3
+theme_override_fonts/normal_font = ExtResource("7_gvyj8")
+bbcode_enabled = true
+text = "[wave]THANKS FOR PLAYING![/wave]"
+horizontal_alignment = 1
+
+[node name="SFXPool" type="Node2D" parent="." unique_id=1179306386]
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="SFXPool" unique_id=1316830088]
+bus = &"SFX"
+
+[node name="AudioStreamPlayer2D2" type="AudioStreamPlayer2D" parent="SFXPool" unique_id=1728188522]
+bus = &"SFX"
+
+[node name="AudioStreamPlayer2D3" type="AudioStreamPlayer2D" parent="SFXPool" unique_id=487521444]
+bus = &"SFX"
+
+[node name="AudioStreamPlayer2D4" type="AudioStreamPlayer2D" parent="SFXPool" unique_id=1157126655]
+bus = &"SFX"
+
+[node name="AudioStreamPlayer2D5" type="AudioStreamPlayer2D" parent="SFXPool" unique_id=1306284367]
+bus = &"SFX"

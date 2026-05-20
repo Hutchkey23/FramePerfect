@@ -5,12 +5,18 @@ class_name CinematicBars
 @export var bar_height: float = 25.0
 @export var tween_time: float = 0.35
 
+@export var top_bar_visible: bool = true
+@export var bottom_bar_visible: bool = true
+
 @onready var top_bar: ColorRect = $CinematicBarsControl/TopBar
 @onready var bottom_bar: ColorRect = $CinematicBarsControl/BottomBar
 
 var bars_tween: Tween
 
 func _ready() -> void:
+	top_bar.visible = top_bar_visible
+	bottom_bar.visible = bottom_bar_visible
+	
 	top_bar.custom_minimum_size.y = 0.0
 	bottom_bar.custom_minimum_size.y = 0.0
 	bottom_bar.pivot_offset.y = bottom_bar.size.y

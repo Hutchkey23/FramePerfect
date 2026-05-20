@@ -57,8 +57,15 @@ func prepare_pause_menu() -> void:
 	
 	if game_manager and game_manager.game_mode == game_manager.GameMode.MARATHON:
 		restart_marathon_button.visible = true
+		if game_manager.marathon_finished:
+			retry_button.disable_button()
+			restart_marathon_button.focus_neighbor_top = restart_marathon_button.get_path_to(resume_button)
+		else:
+			retry_button.enable_button()
+			restart_marathon_button.focus_neighbor_top = restart_marathon_button.get_path_to(retry_button)
 	else:
 		restart_marathon_button.visible = false
+	
 	
 	update_pivot()
 	resume_button.grab_silent_focus()

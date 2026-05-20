@@ -476,6 +476,23 @@ visible = false
 layer = 3
 visible = false
 
+[node name="SFXPool" type="Node2D" parent="." unique_id=1803285666]
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="SFXPool" unique_id=1659893198]
+bus = &"SFX"
+
+[node name="AudioStreamPlayer2D2" type="AudioStreamPlayer2D" parent="SFXPool" unique_id=1876366503]
+bus = &"SFX"
+
+[node name="AudioStreamPlayer2D3" type="AudioStreamPlayer2D" parent="SFXPool" unique_id=232075731]
+bus = &"SFX"
+
+[node name="AudioStreamPlayer2D4" type="AudioStreamPlayer2D" parent="SFXPool" unique_id=250019099]
+bus = &"SFX"
+
+[node name="AudioStreamPlayer2D5" type="AudioStreamPlayer2D" parent="SFXPool" unique_id=237419824]
+bus = &"SFX"
+
 [connection signal="go_to_main_menu" from="PauseLayer/PauseScreen" to="." method="_on_pause_screen_go_to_main_menu"]
 [connection signal="restart_marathon" from="PauseLayer/PauseScreen" to="." method="_on_pause_screen_restart_marathon"]
 [connection signal="resume_game" from="PauseLayer/PauseScreen" to="." method="_on_pause_screen_resume_game"]
