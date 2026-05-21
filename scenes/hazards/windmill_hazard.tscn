@@ -6,6 +6,9 @@
 
 [node name="WindmillHazard" type="Node2D" unique_id=42799490]
 script = ExtResource("1_5soyo")
+length = 20
+preview_rotation = false
+reset_rotation_when_preview_off = true
 
 [node name="Center" parent="." unique_id=736354374 instance=ExtResource("1_d3gqx")]
 position = Vector2(-53, 0)
@@ -73,6 +76,26 @@ curve = ExtResource("3_fx713")
 position = Vector2(82, 0)
 curve = ExtResource("3_fx713")
 
+[node name="SquareHazard16" parent="RightBlade" unique_id=1788061578 instance=ExtResource("1_d3gqx")]
+position = Vector2(91, 0)
+curve = ExtResource("3_fx713")
+
+[node name="SquareHazard17" parent="RightBlade" unique_id=1025532518 instance=ExtResource("1_d3gqx")]
+position = Vector2(100, 0)
+curve = ExtResource("3_fx713")
+
+[node name="SquareHazard18" parent="RightBlade" unique_id=2107829965 instance=ExtResource("1_d3gqx")]
+position = Vector2(109, 0)
+curve = ExtResource("3_fx713")
+
+[node name="SquareHazard19" parent="RightBlade" unique_id=1464584278 instance=ExtResource("1_d3gqx")]
+position = Vector2(118, 0)
+curve = ExtResource("3_fx713")
+
+[node name="SquareHazard20" parent="RightBlade" unique_id=1153472940 instance=ExtResource("1_d3gqx")]
+position = Vector2(127, 0)
+curve = ExtResource("3_fx713")
+
 [node name="LeftBlade" type="Node2D" parent="." unique_id=1543305284]
 rotation = 3.1415927
 
@@ -136,6 +159,26 @@ curve = ExtResource("3_fx713")
 position = Vector2(82, -3.934025e-06)
 curve = ExtResource("3_fx713")
 
+[node name="SquareHazard16" parent="LeftBlade" unique_id=2063417238 instance=ExtResource("1_d3gqx")]
+position = Vector2(91, -7.86805e-06)
+curve = ExtResource("3_fx713")
+
+[node name="SquareHazard17" parent="LeftBlade" unique_id=1729452103 instance=ExtResource("1_d3gqx")]
+position = Vector2(100, -7.86805e-06)
+curve = ExtResource("3_fx713")
+
+[node name="SquareHazard18" parent="LeftBlade" unique_id=1105413536 instance=ExtResource("1_d3gqx")]
+position = Vector2(109, -7.86805e-06)
+curve = ExtResource("3_fx713")
+
+[node name="SquareHazard19" parent="LeftBlade" unique_id=397941780 instance=ExtResource("1_d3gqx")]
+position = Vector2(118, -7.86805e-06)
+curve = ExtResource("3_fx713")
+
+[node name="SquareHazard20" parent="LeftBlade" unique_id=182795569 instance=ExtResource("1_d3gqx")]
+position = Vector2(127, -7.86805e-06)
+curve = ExtResource("3_fx713")
+
 [node name="TopBlade" type="Node2D" parent="." unique_id=628957337]
 rotation = -1.5707964
 
@@ -197,6 +240,26 @@ curve = ExtResource("3_fx713")
 
 [node name="SquareHazard15" parent="TopBlade" unique_id=84965596 instance=ExtResource("1_d3gqx")]
 position = Vector2(82, 1.9670124e-06)
+curve = ExtResource("3_fx713")
+
+[node name="SquareHazard16" parent="TopBlade" unique_id=1266292709 instance=ExtResource("1_d3gqx")]
+position = Vector2(91, 3.934025e-06)
+curve = ExtResource("3_fx713")
+
+[node name="SquareHazard17" parent="TopBlade" unique_id=1709258300 instance=ExtResource("1_d3gqx")]
+position = Vector2(100, 3.934025e-06)
+curve = ExtResource("3_fx713")
+
+[node name="SquareHazard18" parent="TopBlade" unique_id=1930789535 instance=ExtResource("1_d3gqx")]
+position = Vector2(109, 3.934025e-06)
+curve = ExtResource("3_fx713")
+
+[node name="SquareHazard19" parent="TopBlade" unique_id=1013436639 instance=ExtResource("1_d3gqx")]
+position = Vector2(118, 3.934025e-06)
+curve = ExtResource("3_fx713")
+
+[node name="SquareHazard20" parent="TopBlade" unique_id=794903528 instance=ExtResource("1_d3gqx")]
+position = Vector2(127, 3.934025e-06)
 curve = ExtResource("3_fx713")
 
 [node name="BottomBlade" type="Node2D" parent="." unique_id=345496558]
@@ -263,21 +326,21 @@ position = Vector2(82, -1.9670124e-06)
 curve = ExtResource("3_fx713")
 
 [node name="SquareHazard16" parent="BottomBlade" unique_id=1910247703 instance=ExtResource("1_d3gqx")]
-position = Vector2(46, -1.9670124e-06)
+position = Vector2(91, -3.934025e-06)
 curve = ExtResource("3_fx713")
 
 [node name="SquareHazard17" parent="BottomBlade" unique_id=47653330 instance=ExtResource("1_d3gqx")]
-position = Vector2(55, -1.9670124e-06)
+position = Vector2(100, -3.934025e-06)
 curve = ExtResource("3_fx713")
 
 [node name="SquareHazard18" parent="BottomBlade" unique_id=1223683581 instance=ExtResource("1_d3gqx")]
-position = Vector2(64, -1.9670124e-06)
+position = Vector2(109, -3.934025e-06)
 curve = ExtResource("3_fx713")
 
 [node name="SquareHazard19" parent="BottomBlade" unique_id=1432018310 instance=ExtResource("1_d3gqx")]
-position = Vector2(73, -1.9670124e-06)
+position = Vector2(118, -3.934025e-06)
 curve = ExtResource("3_fx713")
 
 [node name="SquareHazard20" parent="BottomBlade" unique_id=879043840 instance=ExtResource("1_d3gqx")]
-position = Vector2(82, -1.9670124e-06)
+position = Vector2(127, -3.934025e-06)
 curve = ExtResource("3_fx713")

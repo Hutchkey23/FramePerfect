@@ -66,6 +66,12 @@ func _ready() -> void:
 	
 	game_manager = get_tree().get_first_node_in_group("game_manager")
 	
+	if level_ui:
+		level_ui.visible = true
+	
+	if cinematic_bars:
+		cinematic_bars.visible = true
+	
 	spawn_stamps()
 
 func _process(delta: float) -> void:

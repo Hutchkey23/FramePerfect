@@ -161,11 +161,19 @@ theme_override_fonts/font = ExtResource("4_h7sqx")
 theme_override_font_sizes/font_size = 8
 text = ">"
 
-[node name="MarginContainer2" type="MarginContainer" parent="Back/VBoxContainer" unique_id=2070743297]
+[node name="BestTimeAndMedalTime" type="HBoxContainer" parent="Back/VBoxContainer" unique_id=1826243827]
 layout_mode = 2
-theme_override_constants/margin_top = 4
+theme_override_constants/separation = 16
+alignment = 1
 
-[node name="BestTimeTextLabel" type="Label" parent="Back/VBoxContainer/MarginContainer2" unique_id=988807267]
+[node name="BestTimeContainer" type="VBoxContainer" parent="Back/VBoxContainer/BestTimeAndMedalTime" unique_id=1369938401]
+layout_mode = 2
+
+[node name="MarginContainer2" type="MarginContainer" parent="Back/VBoxContainer/BestTimeAndMedalTime/BestTimeContainer" unique_id=2070743297]
+layout_mode = 2
+theme_override_constants/margin_top = 2
+
+[node name="BestTimeTextLabel" type="Label" parent="Back/VBoxContainer/BestTimeAndMedalTime/BestTimeContainer/MarginContainer2" unique_id=988807267]
 layout_mode = 2
 size_flags_horizontal = 4
 theme_override_colors/font_color = Color(0, 0.5294118, 0.31764707, 1)
@@ -174,12 +182,42 @@ theme_override_font_sizes/font_size = 6
 text = "best time"
 horizontal_alignment = 1
 
-[node name="BestTimeAndMedalContainer" type="HBoxContainer" parent="Back/VBoxContainer" unique_id=1265182818]
+[node name="BestTimeAndMedalContainer" type="HBoxContainer" parent="Back/VBoxContainer/BestTimeAndMedalTime/BestTimeContainer" unique_id=1265182818]
 layout_mode = 2
 theme_override_constants/separation = 2
 alignment = 1
 
-[node name="BestTimeLabel" type="Label" parent="Back/VBoxContainer/BestTimeAndMedalContainer" unique_id=217336236]
+[node name="BestTimeLabel" type="Label" parent="Back/VBoxContainer/BestTimeAndMedalTime/BestTimeContainer/BestTimeAndMedalContainer" unique_id=217336236]
+custom_minimum_size = Vector2(24, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0.5294118, 0.31764707, 1)
+theme_override_fonts/font = ExtResource("4_h7sqx")
+theme_override_font_sizes/font_size = 6
+text = "06.85"
+horizontal_alignment = 1
+
+[node name="MedalTimeContainer" type="VBoxContainer" parent="Back/VBoxContainer/BestTimeAndMedalTime" unique_id=838709111]
+layout_mode = 2
+
+[node name="MarginContainer2" type="MarginContainer" parent="Back/VBoxContainer/BestTimeAndMedalTime/MedalTimeContainer" unique_id=2115652966]
+layout_mode = 2
+theme_override_constants/margin_top = 2
+
+[node name="MedalTimeTextLabel" type="Label" parent="Back/VBoxContainer/BestTimeAndMedalTime/MedalTimeContainer/MarginContainer2" unique_id=872729680]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(0, 0.5294118, 0.31764707, 1)
+theme_override_fonts/font = ExtResource("4_h7sqx")
+theme_override_font_sizes/font_size = 6
+text = "medal time"
+horizontal_alignment = 1
+
+[node name="MedalTimeConta" type="HBoxContainer" parent="Back/VBoxContainer/BestTimeAndMedalTime/MedalTimeContainer" unique_id=1228277014]
+layout_mode = 2
+theme_override_constants/separation = 2
+alignment = 1
+
+[node name="MedalTimeLabel" type="Label" parent="Back/VBoxContainer/BestTimeAndMedalTime/MedalTimeContainer/MedalTimeConta" unique_id=1836566870]
 custom_minimum_size = Vector2(24, 0)
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0.5294118, 0.31764707, 1)

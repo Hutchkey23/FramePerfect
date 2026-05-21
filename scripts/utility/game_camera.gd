@@ -9,6 +9,7 @@ enum CameraMode {
 
 @export var mode: CameraMode = CameraMode.FOLLOW
 @export var target: Node2D
+@export var default_zoom: Vector2 = Vector2.ONE
 @export var follow_smoothing: float = 8.0
 @export var fixed_position: Vector2 = Vector2.ZERO
 @export var shake_decay: float = 18.0
@@ -35,6 +36,7 @@ var zoom_tween: Tween
 var fixed_camera_level: bool = false
 
 func _ready() -> void:
+	camera.zoom = default_zoom
 	global_position = get_base_position()
 	
 	if mode == CameraMode.FIXED:

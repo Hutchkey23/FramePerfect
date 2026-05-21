@@ -26,7 +26,7 @@ point_count = 2
 
 [sub_resource type="Curve2D" id="Curve2D_ih4sc"]
 _data = {
-"points": PackedVector2Array(0, 0, 0, 0, 848, 120, 0, 0, 0, 0, 968, 120)
+"points": PackedVector2Array(0, 0, 0, 0, 848, 120, 0, 0, 0, 0, 944, 120)
 }
 point_count = 2
 
@@ -142,20 +142,21 @@ loop = false
 [node name="Hazards" type="Node2D" parent="." unique_id=2062310091]
 
 [node name="SquareHazard" parent="Hazards" unique_id=736354374 instance=ExtResource("8_0nyh3")]
+position = Vector2(15, 0)
 curve = SubResource("Curve2D_ih4sc")
 moving = true
 loop = false
 speed_scale = 1.5
 
 [node name="SquareHazard2" parent="Hazards" unique_id=1696349951 instance=ExtResource("8_0nyh3")]
-position = Vector2(0, 9)
+position = Vector2(15, 9)
 curve = SubResource("Curve2D_ih4sc")
 moving = true
 loop = false
 speed_scale = 1.5
 
 [node name="SquareHazard3" parent="Hazards" unique_id=152881437 instance=ExtResource("8_0nyh3")]
-position = Vector2(0, 18)
+position = Vector2(15, 18)
 curve = SubResource("Curve2D_ih4sc")
 moving = true
 loop = false

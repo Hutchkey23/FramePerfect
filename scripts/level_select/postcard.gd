@@ -23,9 +23,20 @@ signal level_selected(world_index, level_index)
 @onready var left_arrow: Label = $Back/VBoxContainer/HBoxContainer/LeftArrow
 @onready var level_number_label: Label = $Back/VBoxContainer/HBoxContainer/LevelNumberLabel
 @onready var right_arrow: Label = $Back/VBoxContainer/HBoxContainer/RightArrow
-@onready var best_time_text_label: Label = $Back/VBoxContainer/MarginContainer2/BestTimeTextLabel
-@onready var best_time_label: Label = $Back/VBoxContainer/BestTimeAndMedalContainer/BestTimeLabel
+@onready var best_time_text_label: Label = $Back/VBoxContainer/BestTimeAndMedalTime/BestTimeContainer/MarginContainer2/BestTimeTextLabel
+@onready var best_time_label: Label = $Back/VBoxContainer/BestTimeAndMedalTime/BestTimeContainer/BestTimeAndMedalContainer/BestTimeLabel
+@onready var medal_time_text_label: Label = $Back/VBoxContainer/BestTimeAndMedalTime/MedalTimeContainer/MarginContainer2/MedalTimeTextLabel
+@onready var medal_time_label: Label = $Back/VBoxContainer/BestTimeAndMedalTime/MedalTimeContainer/MedalTimeConta/MedalTimeLabel
 @onready var medal_slot: TextureRect = $Back/MedalContainer/MedalSlot
+
+var left_arrow_base_pos: Vector2 = Vector2(30.0, 5.0)
+var right_arrow_base_pos: Vector2 = Vector2(83.0, 5.0)
+
+@export var first_repeat_delay: float = 0.28
+@export var repeat_move_delay: float = 0.07
+
+var held_direction: int = 0
+var repeat_timer: float = 0.0
 
 const MEDAL_FILLED_TEXTURE: Texture = preload("uid://bwwkja68c8teb")
 const MEDAL_EMPTY_TEXTURE: Texture = preload("uid://y2p73lbkpyg2")
@@ -63,7 +74,9 @@ func _ready() -> void:
 		level_number_label,
 		right_arrow,
 		best_time_text_label,
-		best_time_label
+		best_time_label,
+		medal_time_text_label,
+		medal_time_label
 	]
 
 	front.visible = true
@@ -78,10 +91,46 @@ func _ready() -> void:
 
 func _process(delta: float) -> void:
 	time += delta
+
+	handle_level_select_hold_input(delta)
+
 	level_title_label.rotation_degrees = sin(time * ROTATION_SPEED) * ROTATION_AMOUNT
 	level_number_label.rotation_degrees = sin(time * ROTATION_SPEED) * ROTATION_AMOUNT
 	best_time_text_label.rotation_degrees = sin(time * ROTATION_SPEED) * ROTATION_AMOUNT
 	best_time_label.rotation_degrees = sin(time * ROTATION_SPEED) * ROTATION_AMOUNT
+	medal_time_text_label.rotation_degrees = -sin(time * ROTATION_SPEED) * ROTATION_AMOUNT
+	medal_time_label.rotation_degrees = -sin(time * ROTATION_SPEED) * ROTATION_AMOUNT
+
+func handle_level_select_hold_input(delta: float) -> void:
+	if not is_flipped:
+		held_direction = 0
+		repeat_timer = 0.0
+		return
+
+	var direction := 0
+
+	if Input.is_action_pressed("ui_left"):
+		direction = -1
+	elif Input.is_action_pressed("ui_right"):
+		direction = 1
+
+	if direction == 0:
+		held_direction = 0
+		repeat_timer = 0.0
+		return
+
+	if direction != held_direction:
+		held_direction = direction
+		repeat_timer = first_repeat_delay
+		_move_selection(direction)
+		return
+
+	repeat_timer -= delta
+
+	if repeat_timer <= 0.0:
+		_move_selection(direction)
+		repeat_timer = repeat_move_delay
+
 
 func setup(data: WorldData) -> void:
 	world_data = data
@@ -98,16 +147,17 @@ func setup(data: WorldData) -> void:
 func _unhandled_input(event: InputEvent) -> void:
 	if not is_flipped:
 		return
-	if event.is_action_pressed("ui_left"):
-		_move_selection(-1)
-	elif event.is_action_pressed("ui_right"):
-		_move_selection(1)
-	elif event.is_action_pressed("ui_cancel"):
+
+	if event.is_action_pressed("ui_cancel"):
 		exit_world.emit(self)
 		get_viewport().set_input_as_handled()
-	elif event.is_action_pressed("ui_accept"):
+		return
+
+	if event.is_action_pressed("ui_accept"):
 		UIAudioManager.play_ui_confirm_sfx()
 		level_selected.emit(current_world_index, current_level_index)
+		get_viewport().set_input_as_handled()
+		return
 
 #region Back of Postcard
 func _move_selection(direction: int) -> void:
@@ -121,8 +171,9 @@ func _move_selection(direction: int) -> void:
 	current_level_index = new_index
 	
 	play_arrow_animation(direction)
-	
 	update_level_display()
+	play_level_number_pop_animation()
+	
 
 func update_level_display() -> void:
 	if levels_array.size() <= 0:
@@ -144,6 +195,11 @@ func update_level_display() -> void:
 		best_time_label.text = "%.2f" % best_time
 	else:
 		best_time_label.text = "--.--"
+	
+	var medal_time: float = LevelDatabase.get_medal_time(level_id)
+	
+	medal_time_label.text = "%.2f" % medal_time
+	
 #endregion
 
 #region Helpers
@@ -218,31 +274,39 @@ func play_arrow_animation(arrow_direction: int) -> void:
 	if right_arrow_tween:
 		right_arrow_tween.kill()
 
+	left_arrow.position = left_arrow_base_pos
+	right_arrow.position = right_arrow_base_pos
+
 	var offset := 8.0
 	var duration := 0.06
 
 	match arrow_direction:
 		-1:
-			var start_pos := left_arrow.position
-			var target_pos := start_pos + Vector2(-offset, 0)
-
 			left_arrow_tween = create_tween()
 			left_arrow_tween.set_trans(Tween.TRANS_QUAD)
 			left_arrow_tween.set_ease(Tween.EASE_OUT)
-
-			left_arrow_tween.tween_property(left_arrow, "position", target_pos, duration)
-			left_arrow_tween.tween_property(left_arrow, "position", start_pos, duration)
+			left_arrow_tween.tween_property(left_arrow, "position", left_arrow_base_pos + Vector2(-offset, 0), duration)
+			left_arrow_tween.tween_property(left_arrow, "position", left_arrow_base_pos, duration)
 
 		1:
-			var start_pos := right_arrow.position
-			var target_pos := start_pos + Vector2(offset, 0)
-
 			right_arrow_tween = create_tween()
 			right_arrow_tween.set_trans(Tween.TRANS_QUAD)
 			right_arrow_tween.set_ease(Tween.EASE_OUT)
+			right_arrow_tween.tween_property(right_arrow, "position", right_arrow_base_pos + Vector2(offset, 0), duration)
+			right_arrow_tween.tween_property(right_arrow, "position", right_arrow_base_pos, duration)
 
-			right_arrow_tween.tween_property(right_arrow, "position", target_pos, duration)
-			right_arrow_tween.tween_property(right_arrow, "position", start_pos, duration)
+func play_level_number_pop_animation() -> void:
+	if level_number_jump_tween:
+		level_number_jump_tween.kill()
+
+	level_number_label.scale = Vector2.ONE
+
+	level_number_jump_tween = create_tween()
+	level_number_jump_tween.set_trans(Tween.TRANS_BACK)
+	level_number_jump_tween.set_ease(Tween.EASE_OUT)
+
+	level_number_jump_tween.tween_property(level_number_label, "scale", Vector2(1.25, 1.25), 0.08)
+	level_number_jump_tween.tween_property(level_number_label, "scale", Vector2.ONE, 0.10)
 
 func _setup_label_pivots() -> void:
 	level_title_label.pivot_offset = level_title_label.size / 2
