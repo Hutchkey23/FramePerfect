@@ -15,7 +15,7 @@ shader_parameter/pulse_strength = 1.0
 shader_parameter/pulse_speed = 5.00000023424012
 shader_parameter/center_glow_strength = 0.0
 
-[sub_resource type="FontVariation" id="FontVariation_uyr8t"]
+[sub_resource type="FontVariation" id="FontVariation_do2sa"]
 base_font = ExtResource("8_ny2yu")
 spacing_glyph = 2
 
@@ -81,7 +81,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="TimeLabel" type="RichTextLabel" parent="Results/Control" unique_id=982449941]
+[node name="TimeLabel" type="RichTextLabel" parent="Results/Control" unique_id=2079191756]
 custom_minimum_size = Vector2(120, 0)
 layout_mode = 1
 anchors_preset = 10
@@ -99,21 +99,25 @@ text = "00.00"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="CompletionMessage" type="RichTextLabel" parent="Results/Control" unique_id=1898921032]
+[node name="CompletionMessage" type="RichTextLabel" parent="Results/Control" unique_id=1680698460]
 custom_minimum_size = Vector2(0, 34)
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
 grow_horizontal = 2
-theme_override_constants/outline_size = 3
-theme_override_fonts/normal_font = SubResource("FontVariation_uyr8t")
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_outline_size = 0
+theme_override_constants/shadow_offset_x = 1
+theme_override_constants/shadow_offset_y = 1
+theme_override_constants/outline_size = 0
+theme_override_fonts/normal_font = SubResource("FontVariation_do2sa")
 theme_override_font_sizes/normal_font_size = 12
 bbcode_enabled = true
 text = "[rainbow]MEDAL EARNED![/rainbow]"
 horizontal_alignment = 1
 vertical_alignment = 2
 
-[node name="ThankYouMessage" type="RichTextLabel" parent="Results/Control" unique_id=218940119]
+[node name="FinalMessage" type="RichTextLabel" parent="Results/Control" unique_id=169976983]
 custom_minimum_size = Vector2(0, 30)
 layout_mode = 1
 anchors_preset = 12
@@ -122,7 +126,10 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 0
-theme_override_constants/outline_size = 3
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_outline_size = 0
+theme_override_constants/shadow_offset_x = 1
+theme_override_constants/shadow_offset_y = 1
 theme_override_fonts/normal_font = ExtResource("7_1w6vo")
 bbcode_enabled = true
 text = "[wave]THANKS FOR PLAYING![/wave]"

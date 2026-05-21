@@ -3,7 +3,7 @@ class_name Results
 
 @onready var time_label: RichTextLabel = $Results/Control/TimeLabel
 @onready var completion_message: RichTextLabel = $Results/Control/CompletionMessage
-@onready var thank_you_message: RichTextLabel = $Results/Control/ThankYouMessage
+@onready var final_message: RichTextLabel = $Results/Control/FinalMessage
 @onready var sfx_pool: Node2D = $SFXPool
 
 var game_manager_reference: GameManager
@@ -11,6 +11,58 @@ var game_manager_reference: GameManager
 var results_tween: Tween
 
 var new_best_or_medal: bool = false
+
+const final_message_new_best_or_medal_choices: Array[String] = [
+	"HOLY SMOKES!",
+	"GREAT JOB!",
+	"YOU ARE SPEEDY!",
+	"NEW RECORD!",
+	"LIGHTNING FAST!",
+	"MAIL MASTER!",
+	"DELIVERY COMPLETE!",
+	"THAT WAS CLEAN!",
+	"INCREDIBLE RUN!",
+	"TOO FAST!",
+	"UNSTOPPABLE!",
+	"SPEED DEMON!",
+	"PERFECT ROUTING!",
+	"YOU NAILED IT!",
+	"WHAT A RUN!",
+	"FULL SPEED AHEAD!",
+	"LOOK AT YOU GO!",
+	"THAT WAS HOT!",
+	"MARATHON MACHINE!",
+	"YOU ARE COOKING!",
+	"ABSOLUTE CINEMA!",
+	"MAIL DELIVERED!",
+	"NOW THAT'S FAST!",
+	"TOP TIER DELIVERY!",
+]
+
+const final_message_other_choices: Array[String] = [
+	"YOU GOT THIS!",
+	"KEEP AT IT!",
+	"TRY AGAIN?",
+	"ANOTHER ATTEMPT?",
+	"SO CLOSE!",
+	"ONE MORE RUN!",
+	"YOU CAN DO IT!",
+	"KEEP DELIVERING!",
+	"DON'T GIVE UP!",
+	"ALMOST THERE!",
+	"BACK IN THE MAIL!",
+	"RUN IT BACK!",
+	"SHAKE IT OFF!",
+	"YOU'LL GET IT!",
+	"KEEP THE MAIL MOVING!",
+	"JUST A LITTLE FASTER!",
+	"THE MAILBOX AWAITS!",
+	"KEEP PUSHING!",
+	"YOU'RE IMPROVING!",
+	"STAY SPEEDY!",
+	"KEEP THE MOMENTUM!",
+	"YOU'RE GETTING THERE!",
+]
 
 ############ AUDIO HANDLING ############
 const NEW_BEST_SFX = preload("uid://bbxn1phuna1rs")
@@ -29,30 +81,41 @@ const POP_PITCH_RANGE: Vector2 = Vector2(0.8, 0.8)
 func _ready() -> void:
 	time_label.visible = false
 	completion_message.visible = false
-	thank_you_message.visible = false
+	final_message.visible = false
 	
 	game_manager_reference = get_tree().get_first_node_in_group("game_manager")
 
-func setup(results_data: Dictionary) -> void:
+func setup_marathon_results(results_data: Dictionary) -> void:
 	print(results_data)
 	setup_completion_message(results_data)
+	await get_tree().process_frame
 	
+	setup_final_message()
 	time_label.text = format_time(results_data.clear_time)
 	game_manager_reference.enable_pause()
 
 func setup_completion_message(results_data: Dictionary) -> void:
 	if results_data.earned_medal and results_data.first_medal:
-		completion_message.text = "[rainbow]MEDAL EARNED![/rainbow]"
+		completion_message.text = "[wave][rainbow]MEDAL EARNED![/rainbow][/wave]"
 		new_best_or_medal = true
 	elif results_data.new_best and not results_data.first_medal:
-		completion_message.text = "[rainbow]NEW BEST![/rainbow]"
-		new_best_or_medal = false
+		completion_message.text = "[wave][rainbow]NEW BEST![/rainbow][/wave]"
+		new_best_or_medal = true
 	elif not results_data.earned_medal:
 		var time_needed = results_data.missed_medal_by
-		completion_message.text = "[wave][color=00ff00]%.2fs[/color] FROM MEDAL![/wave]" % time_needed
+		completion_message.text = "[color=00ff00]%.2fs[/color] FROM MEDAL!" % time_needed
 	elif results_data.earned_medal and not results_data.new_best:
 		var time_needed = results_data.missed_new_best_by
-		completion_message.text = "[wave][color=00ff00]%.2fs[/color] FROM NEW BEST![/wave]" % time_needed
+		completion_message.text = "[color=00ff00]%.2fs[/color] FROM NEW BEST!" % time_needed
+
+func setup_final_message() -> void:
+	var phrase: String
+	if new_best_or_medal:
+		phrase = final_message_new_best_or_medal_choices.pick_random()
+	else:
+		phrase = final_message_other_choices.pick_random()
+	
+	final_message.text = "[wave]" + phrase + "[/wave]"
 
 func show_results() -> void:
 	await get_tree().create_timer(1.5).timeout
@@ -80,7 +143,7 @@ func show_results() -> void:
 	results_tween.tween_interval(1.5)
 	await results_tween.finished
 	play_sfx(POP_SFX, POP_VOLUME, POP_PITCH_RANGE)
-	thank_you_message.visible = true
+	final_message.visible = true
 
 
 func pop_in_label(label: Control) -> void:

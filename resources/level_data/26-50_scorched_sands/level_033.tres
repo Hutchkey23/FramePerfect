@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="LevelData" format=3 uid="uid://736wfafwbos7"]
+
+[ext_resource type="PackedScene" uid="uid://cbyuuqoplpqth" path="res://scenes/levels/26-50_scorched_sands/level_033.tscn" id="1_vl4xg"]
+[ext_resource type="Script" uid="uid://do5fdotl7d638" path="res://resources/level_data/level_data.gd" id="2_16rvy"]
+
+[resource]
+script = ExtResource("2_16rvy")
+level_id = "level_033"
+level_title = "bunny"
+medal_time = 6.25
+level_scene = ExtResource("1_vl4xg")
+metadata/_custom_type_script = "uid://do5fdotl7d638"

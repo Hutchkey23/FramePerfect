@@ -285,6 +285,7 @@ func complete_marathon_level() -> void:
 
 	if marathon_current_index >= marathon_level_ids.size():
 		level_title_label.text = ""
+		BGMManager.fade_out(2.0)
 		await transition_out()
 		await unload_current_level()
 		
@@ -340,18 +341,14 @@ func finish_marathon() -> void:
 func show_marathon_results(result: Dictionary) -> void:
 	var results_scene: PackedScene = null
 	match result.marathon_id:
-		"world_01":
-			pass
-		"world_02":
-			pass
-		"world_03":
-			pass
+		"world_01", "world_02", "world_03":
+			results_scene = MARATHON_RESULTS[result.marathon_id]
 		_:
 			results_scene = MARATHON_RESULTS["world_04"]
 	
 	var results_scene_instance = results_scene.instantiate()
 	level_container.add_child(results_scene_instance)
-	results_scene_instance.setup(result)
+	results_scene_instance.setup_marathon_results(result)
 	await transition_in()
 	results_scene_instance.show_results()
 

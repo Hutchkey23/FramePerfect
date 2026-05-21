@@ -102,6 +102,9 @@ func setup(data: MarathonData) -> void:
 	var medal_time: float = data.medal_time
 	
 	best_time_label.text = SaveManager.format_time(best_time)
+	if best_time > 9999:
+		best_time_label.text = "--:--.--"
+	
 	medal_time_label.text = SaveManager.format_time(medal_time)
 	
 	postcard_front_texture.texture = data.front_image

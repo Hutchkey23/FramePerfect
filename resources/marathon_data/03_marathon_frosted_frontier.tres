@@ -13,6 +13,7 @@ marathon_id = "world_03"
 display_name = "Frosted Frontier"
 world_number = 3
 worlds = Array[ExtResource("2_i7too")]([ExtResource("3_ovak5")])
+medal_time = 140.0
 front_image = ExtResource("3_m18gy")
 back_image = ExtResource("1_hpgvf")
 font_color = Color(0.09803922, 0.29803923, 0.53333336, 1)
