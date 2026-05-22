@@ -86,7 +86,7 @@ z_index = 2
 position = Vector2(40, 43)
 mode = 1
 target = NodePath("../Player")
-default_zoom = Vector2(0.75, 0.75)
+default_zoom = Vector2(1, 1)
 fixed_position = Vector2(160, 90)
 bounds = Rect2(100, -65, 500, 470)
 

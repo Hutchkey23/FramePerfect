@@ -13,7 +13,7 @@ shader_parameter/pulse_speed = 2.0
 shader_parameter/pulse_amount = 0.25
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0fjx7"]
-size = Vector2(36, 24)
+size = Vector2(18, 10)
 
 [sub_resource type="Animation" id="Animation_hdp3h"]
 length = 0.001
@@ -63,7 +63,6 @@ texture = ExtResource("1_y77p2")
 hframes = 9
 
 [node name="BoostPadArea" type="CollisionShape2D" parent="." unique_id=1819864850]
-visible = false
 shape = SubResource("RectangleShape2D_0fjx7")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=456245893]
