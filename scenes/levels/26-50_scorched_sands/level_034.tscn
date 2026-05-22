@@ -31,9 +31,11 @@ hazards_path = NodePath("../Hazards")
 
 [node name="LevelUI" parent="." unique_id=687480857 instance=ExtResource("2_ysukn")]
 layer = 2
+visible = false
 level_controller_path = NodePath("../LevelController")
 
 [node name="CinematicBars" parent="." unique_id=3966864 instance=ExtResource("3_6860r")]
+visible = false
 
 [node name="Player" parent="." unique_id=1458309070 instance=ExtResource("4_jg56w")]
 z_index = 2
@@ -235,7 +237,7 @@ position = Vector2(352, 372)
 
 [node name="WindmillHazard" parent="Hazards" unique_id=42799490 instance=ExtResource("8_bdw0k")]
 position = Vector2(352, 196)
-rotation = 1116.421
+rotation = 1243.6561
 length = 15
 rotation_speed = 100.0
 preview_rotation = true
@@ -365,6 +367,7 @@ bounds = Rect2(100, -65, 500, 470)
 
 [node name="Shadows" type="TileMapLayer" parent="MapTopLayer" unique_id=255637794]
 position = Vector2(8, 12)
+tile_map_data = PackedByteArray("AAAIAAEAAAABAAMAAAAIAAIAAAABAAMAAAAIAAMAAAABAAMAAAAIAAQAAAABAAMAAAAIAAUAAAABAAMAAAAIAAYAAAABAAMAAAAIAAcAAAABAAMAAAAIAAgAAAABAAMAAAAIAAkAAAABAAMAAAAIAAoAAAABAAMAAAAIAAsAAAABAAMAAAAIAAwAAAABAAMAAAAIAA0AAAABAAMAAAAIAA4AAAABAAMAAAAIAA8AAAABAAMAAAAIABAAAAABAAMAAAAIABEAAAABAAMAAAAIABIAAAABAAMAAAAIABMAAAABAAMAAAAIABQAAAABAAMAAAAIABUAAAABAAMAAAAIABYAAAABAAMAAAAIAAAAAAAFAAMAAAAJAAAAAAAAAAMAAAAKAAAAAAAAAAMAAAALAAAAAAAAAAMAAAAMAAAAAAAAAAMAAAANAAAAAAAAAAMAAAAOAAAAAAAAAAMAAAAPAAAAAAAAAAMAAAAQAAAAAAAAAAMAAAARAAAAAAAAAAMAAAASAAAAAAAAAAMAAAATAAAAAAAEAAQAAAATAP//AAAFAAMAAAAUAP//AAAEAAQAAAAUAP7/AAABAAMAAAAUAP3/AAAFAAMAAAAVAP3/AAAAAAMAAAAWAP3/AAAAAAMAAAA=")
 tile_set = ExtResource("6_mo61k")
 
 [node name="Walls" type="TileMapLayer" parent="MapTopLayer" unique_id=766012576]

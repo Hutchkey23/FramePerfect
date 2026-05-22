@@ -75,6 +75,7 @@ enum PlayerState {
 	DASH,
 	JUMP,
 	BONK,
+	BOOST,
 	GOAL_REACHED,
 }
 
@@ -140,6 +141,11 @@ const JUMP_BRAKING: float = 200.0
 var jump_timer: float = 0.0
 var jump_cooldown_timer: float = 0.0
 var sprite_ground_y: float = 0.0
+
+# Boost
+var boost_direction: Vector2 = Vector2.ZERO
+var boost_timer: float = 0.0
+var boost_speed: float = 0.0
 
 # Bonk
 const BONK_REBOUND_SPEED : float = 140.0
@@ -246,12 +252,16 @@ func _physics_process(delta: float) -> void:
 		
 		PlayerState.BONK:
 			handle_bonk(delta)
-	
+		
+		PlayerState.BOOST:
+			handle_boost(delta)
+			try_start_jump()
+		
 	move_and_slide()
 	apply_platform_movement()
 	check_if_should_die()
 	
-	if current_state == PlayerState.DASH or (current_state == PlayerState.JUMP and jumped_from_dash):
+	if current_state == PlayerState.DASH or current_state == PlayerState.BOOST or (current_state == PlayerState.JUMP and jumped_from_dash):
 		check_for_bonk()
 	
 func get_move_input() -> Vector2:
@@ -579,6 +589,25 @@ func play_bonk_squash(wall_normal: Vector2) -> void:
 	player_sprite_bonk_tween = create_tween()
 	player_sprite_bonk_tween.tween_property(player_sprite, "scale", squash_scale, 0.04)
 	player_sprite_bonk_tween.chain().tween_property(player_sprite, "scale", sprite_normal_scale, 0.12).set_trans(Tween.TRANS_ELASTIC).set_ease(Tween.EASE_OUT)
+
+func start_boost(direction: Vector2, speed: float, duration: float) -> void:
+	current_state = PlayerState.BOOST
+	boost_direction = direction.normalized()
+	boost_speed = speed
+	boost_timer = duration
+	
+	dash_direction = boost_direction # lets your existing bonk logic reuse direction
+	velocity = boost_direction * boost_speed
+	
+	camera_reference.add_shake(2.5)
+	spawn_dash_clouds(boost_direction)
+
+func handle_boost(delta: float) -> void:
+	boost_timer -= delta
+	velocity = boost_direction * boost_speed
+	
+	if boost_timer <= 0.0:
+		current_state = PlayerState.NORMAL
 
 func try_start_jump() -> void:
 	if not Input.is_action_just_pressed("jump"):

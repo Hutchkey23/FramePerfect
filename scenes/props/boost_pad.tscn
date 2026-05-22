@@ -1,0 +1,89 @@
+[gd_scene format=3 uid="uid://dq2k03846pui7"]
+
+[ext_resource type="Shader" uid="uid://bqcvivnfny2f4" path="res://shaders/boost_pad.gdshader" id="1_0fjx7"]
+[ext_resource type="Script" uid="uid://dlxwv65mp65x8" path="res://scripts/props/boost_pad.gd" id="1_hdp3h"]
+[ext_resource type="Texture2D" uid="uid://bsk4lobcfb7fa" path="res://assets/sprites/props/boost_pad.png" id="1_y77p2"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_hdp3h"]
+shader = ExtResource("1_0fjx7")
+shader_parameter/target_color = Color(0, 1, 0.2784314, 1)
+shader_parameter/tolerance = 0.25
+shader_parameter/glow_strength = 1.4
+shader_parameter/pulse_speed = 2.0
+shader_parameter/pulse_amount = 0.25
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0fjx7"]
+size = Vector2(36, 24)
+
+[sub_resource type="Animation" id="Animation_hdp3h"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("BoostPadSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_vfbju"]
+resource_name = "idle"
+length = 1.35
+loop_mode = 1
+step = 0.15
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("BoostPadSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.15, 0.3, 0.45000002, 0.6, 0.75, 0.90000004, 1.0500001, 1.2),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6, 7, 8]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_8te27"]
+_data = {
+&"RESET": SubResource("Animation_hdp3h"),
+&"idle": SubResource("Animation_vfbju")
+}
+
+[node name="BoostPad" type="Area2D" unique_id=1115631699]
+script = ExtResource("1_hdp3h")
+
+[node name="BoostPadSprite" type="Sprite2D" parent="." unique_id=1671461336]
+material = SubResource("ShaderMaterial_hdp3h")
+texture = ExtResource("1_y77p2")
+hframes = 9
+
+[node name="BoostPadArea" type="CollisionShape2D" parent="." unique_id=1819864850]
+visible = false
+shape = SubResource("RectangleShape2D_0fjx7")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=456245893]
+libraries/ = SubResource("AnimationLibrary_8te27")
+autoplay = &"idle"
+speed_scale = 3.0
+
+[node name="SFXPool" type="Node2D" parent="." unique_id=2033062160]
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="SFXPool" unique_id=373295563]
+bus = &"SFX"
+
+[node name="AudioStreamPlayer2D2" type="AudioStreamPlayer2D" parent="SFXPool" unique_id=195393795]
+bus = &"SFX"
+
+[node name="AudioStreamPlayer2D3" type="AudioStreamPlayer2D" parent="SFXPool" unique_id=1521757000]
+bus = &"SFX"
+
+[node name="LaunchDirection" type="Marker2D" parent="." unique_id=1267526096]
+position = Vector2(29, 0)
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]
