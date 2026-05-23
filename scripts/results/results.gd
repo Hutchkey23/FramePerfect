@@ -84,7 +84,6 @@ func _ready() -> void:
 	game_manager_reference = get_tree().get_first_node_in_group("game_manager")
 
 func setup_marathon_results(results_data: Dictionary) -> void:
-	print(results_data)
 	setup_completion_message(results_data)
 	await get_tree().process_frame
 	
