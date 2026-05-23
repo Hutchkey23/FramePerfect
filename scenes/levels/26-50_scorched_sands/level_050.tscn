@@ -161,15 +161,31 @@ position = Vector2(356, -72)
 position = Vector2(380, -72)
 
 [node name="TogglePlatform2" parent="ToggleItems" unique_id=2045432716 instance=ExtResource("11_3llhl")]
-position = Vector2(225, 72)
+position = Vector2(214, 72)
 start_toggled = false
 
 [node name="TogglePlatform3" parent="ToggleItems" unique_id=2109936002 instance=ExtResource("11_3llhl")]
-position = Vector2(225, 96)
+position = Vector2(214, 96)
 start_toggled = false
 
 [node name="TogglePlatform4" parent="ToggleItems" unique_id=1793338270 instance=ExtResource("11_3llhl")]
-position = Vector2(225, 48)
+position = Vector2(214, 48)
+start_toggled = false
+
+[node name="TogglePlatform24" parent="ToggleItems" unique_id=101591306 instance=ExtResource("11_3llhl")]
+position = Vector2(238, 72)
+start_toggled = false
+
+[node name="TogglePlatform25" parent="ToggleItems" unique_id=512849410 instance=ExtResource("11_3llhl")]
+position = Vector2(238, 96)
+start_toggled = false
+
+[node name="TogglePlatform26" parent="ToggleItems" unique_id=520713218 instance=ExtResource("11_3llhl")]
+position = Vector2(238, 48)
+start_toggled = false
+
+[node name="TogglePlatform27" parent="ToggleItems" unique_id=936974239 instance=ExtResource("11_3llhl")]
+position = Vector2(238, 24)
 start_toggled = false
 
 [node name="ToggleBlock" parent="ToggleItems" unique_id=384204412 instance=ExtResource("12_8bart")]
@@ -227,13 +243,23 @@ position = Vector2(249, -421)
 rotation = 0.7853982
 start_toggled = false
 
+[node name="TogglePlatform22" parent="ToggleItems" unique_id=432618053 instance=ExtResource("11_3llhl")]
+position = Vector2(215, -421)
+rotation = 0.7853982
+start_toggled = false
+
+[node name="TogglePlatform23" parent="ToggleItems" unique_id=256255908 instance=ExtResource("11_3llhl")]
+position = Vector2(232.00002, -404.00006)
+rotation = 0.7853982
+start_toggled = false
+
 [node name="TogglePlatform16" parent="ToggleItems" unique_id=744586391 instance=ExtResource("11_3llhl")]
-position = Vector2(249, -454)
+position = Vector2(249, -455)
 rotation = 0.7853982
 start_toggled = false
 
 [node name="TogglePlatform17" parent="ToggleItems" unique_id=447323365 instance=ExtResource("11_3llhl")]
-position = Vector2(266, -437)
+position = Vector2(266, -438)
 rotation = 0.7853982
 start_toggled = false
 
@@ -246,11 +272,11 @@ position = Vector2(313, -483)
 rotation = 0.7853982
 
 [node name="TogglePlatform20" parent="ToggleItems" unique_id=2042474677 instance=ExtResource("11_3llhl")]
-position = Vector2(313, -516)
+position = Vector2(313, -517)
 rotation = 0.7853982
 
 [node name="TogglePlatform21" parent="ToggleItems" unique_id=379968327 instance=ExtResource("11_3llhl")]
-position = Vector2(330, -499)
+position = Vector2(330, -500)
 rotation = 0.7853982
 
 [node name="ToggleBlock10" parent="ToggleItems" unique_id=1224895383 instance=ExtResource("12_8bart")]
@@ -277,7 +303,7 @@ visible = false
 z_index = 2
 position = Vector2(160, 90)
 target = NodePath("../Player")
-default_zoom = Vector2(1, 1)
+default_zoom = Vector2(0.9, 0.9)
 fixed_position = Vector2(160, 90)
 bounds = Rect2(100, -65, 500, 470)
 

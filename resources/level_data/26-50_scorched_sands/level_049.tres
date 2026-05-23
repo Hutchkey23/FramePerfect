@@ -5,7 +5,7 @@
 
 [resource]
 script = ExtResource("2_l1t1y")
-level_id = "level_050"
+level_id = "level_049"
 level_title = "arch"
 medal_time = 5.5
 level_scene = ExtResource("1_5y8f2")

@@ -7,6 +7,6 @@
 script = ExtResource("2_1i0nq")
 level_id = "level_050"
 level_title = "stay determined"
-medal_time = 8.0
+medal_time = 6.0
 level_scene = ExtResource("1_5y8f2")
 metadata/_custom_type_script = "uid://do5fdotl7d638"

@@ -197,6 +197,9 @@ var overlapping_floor_hazard_count: int = 0
 var overlapping_hazard_count: int = 0
 var goal_overlapping: bool = false
 
+const SAFE_PLATFORM_GRACE_TIME: float = 0.05
+var safe_platform_grace_timer: float = 0.0
+
 func _ready() -> void:
 	sprite_ground_y = player_sprite.position.y
 	sprite_normal_scale = player_sprite.scale
@@ -220,6 +223,9 @@ func _physics_process(delta: float) -> void:
 	
 	if dash_buffer_timer > 0.0:
 		dash_buffer_timer -= delta
+	
+	if safe_platform_grace_timer > 0.0:
+		safe_platform_grace_timer -= delta
 	
 	move_input = get_move_input()
 	
@@ -366,6 +372,9 @@ func check_if_should_die() -> void:
 		die()
 	
 	if safe_platform_count > 0:
+		return
+	
+	if safe_platform_grace_timer > 0.0:
 		return
 	
 	if ice_surface_count > 0:
@@ -781,7 +790,7 @@ func _on_interaction_area_area_exited(area: Area2D) -> void:
 			safe_platforms.erase(area)
 		
 		safe_platform_count = max(0, safe_platform_count - 1)
-		check_if_should_die()
+		safe_platform_grace_timer = SAFE_PLATFORM_GRACE_TIME
 	
 	if area.is_in_group("ice_surfaces"):
 		ice_surface_count = max(0, ice_surface_count - 1)

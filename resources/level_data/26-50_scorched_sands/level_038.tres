@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="LevelData" format=3 uid="uid://dpjxkcun7x7mu"]
+
+[ext_resource type="PackedScene" uid="uid://bwis45xkn1d0j" path="res://scenes/levels/26-50_scorched_sands/level_038.tscn" id="1_ca2m1"]
+[ext_resource type="Script" uid="uid://do5fdotl7d638" path="res://resources/level_data/level_data.gd" id="2_1i0nq"]
+
+[resource]
+script = ExtResource("2_1i0nq")
+level_id = "level_038"
+level_title = "vroom vroom"
+medal_time = 11.0
+level_scene = ExtResource("1_ca2m1")
+metadata/_custom_type_script = "uid://do5fdotl7d638"
