@@ -8,6 +8,10 @@ class_name BoostPad
 @onready var boost_pad_sprite: Sprite2D = $BoostPadSprite
 @onready var sfx_pool: Node2D = $SFXPool
 
+@onready var boost_pad_material: ShaderMaterial = boost_pad_sprite.material
+
+var flash_tween: Tween
+
 var player_reference: Player = null
 var trying_to_start_boost: bool = false
 
@@ -55,6 +59,7 @@ func play_boost_animation(direction: Vector2) -> void:
 		boost_tween.kill()
 	
 	play_sfx(BOOST_SOUND_EFFECT, BOOST_VOLUME, BOOST_PITCH_RANGE)
+	play_flash()
 	
 	boost_pad_sprite.position = base_visual_position
 	boost_pad_sprite.scale = base_visual_scale
@@ -113,6 +118,21 @@ func play_boost_animation(direction: Vector2) -> void:
 		base_visual_scale,
 		0.08
 	).set_trans(Tween.TRANS_ELASTIC).set_ease(Tween.EASE_OUT)
+
+func play_flash() -> void:
+	if flash_tween:
+		flash_tween.kill()
+
+	boost_pad_material.set_shader_parameter("flash_amount", 1.0)
+
+	flash_tween = create_tween()
+	flash_tween.tween_method(
+		func(value: float):
+			boost_pad_material.set_shader_parameter("flash_amount", value),
+		1.0,
+		0.0,
+		0.40
+	).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
 
 ####### AUDIO HANDLING ########
 func play_sfx(sfx: AudioStream, volume_db: float = 0.0, pitch_range: Vector2 = Vector2(0.95, 1.05)):

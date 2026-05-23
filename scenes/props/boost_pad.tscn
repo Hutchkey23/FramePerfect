@@ -1,16 +1,31 @@
 [gd_scene format=3 uid="uid://dq2k03846pui7"]
 
-[ext_resource type="Shader" uid="uid://bqcvivnfny2f4" path="res://shaders/boost_pad.gdshader" id="1_0fjx7"]
 [ext_resource type="Script" uid="uid://dlxwv65mp65x8" path="res://scripts/props/boost_pad.gd" id="1_hdp3h"]
 [ext_resource type="Texture2D" uid="uid://bsk4lobcfb7fa" path="res://assets/sprites/props/boost_pad.png" id="1_y77p2"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_hdp3h"]
-shader = ExtResource("1_0fjx7")
-shader_parameter/target_color = Color(0, 1, 0.2784314, 1)
-shader_parameter/tolerance = 0.25
-shader_parameter/glow_strength = 1.4
-shader_parameter/pulse_speed = 2.0
-shader_parameter/pulse_amount = 0.25
+[sub_resource type="Shader" id="Shader_0fjx7"]
+code = "shader_type canvas_item;
+
+uniform float flash_amount : hint_range(0.0, 1.0) = 0.0;
+uniform vec4 flash_color : source_color = vec4(1.0, 1.0, 1.0, 1.0);
+
+void fragment() {
+	vec4 tex = texture(TEXTURE, UV);
+
+	if (tex.a <= 0.0) {
+		discard;
+	}
+
+	vec3 final_rgb = mix(tex.rgb, flash_color.rgb, flash_amount);
+
+	COLOR = vec4(final_rgb, tex.a);
+}"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_0fjx7"]
+resource_local_to_scene = true
+shader = SubResource("Shader_0fjx7")
+shader_parameter/flash_amount = 0.0
+shader_parameter/flash_color = Color(1, 1, 1, 1)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0fjx7"]
 size = Vector2(18, 10)
@@ -58,7 +73,7 @@ _data = {
 script = ExtResource("1_hdp3h")
 
 [node name="BoostPadSprite" type="Sprite2D" parent="." unique_id=1671461336]
-material = SubResource("ShaderMaterial_hdp3h")
+material = SubResource("ShaderMaterial_0fjx7")
 texture = ExtResource("1_y77p2")
 hframes = 9
 
