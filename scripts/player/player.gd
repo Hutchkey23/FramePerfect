@@ -200,6 +200,8 @@ var goal_overlapping: bool = false
 const SAFE_PLATFORM_GRACE_TIME: float = 0.05
 var safe_platform_grace_timer: float = 0.0
 
+var inherited_platform_velocity: Vector2 = Vector2.ZERO
+
 func _ready() -> void:
 	sprite_ground_y = player_sprite.position.y
 	sprite_normal_scale = player_sprite.scale
@@ -656,6 +658,19 @@ func start_jump() -> void:
 			jump_locked_direction = velocity.normalized()
 		else:
 			jump_locked_direction = last_move_input.normalized()
+	
+	if not safe_platforms.is_empty():
+		inherited_platform_velocity = safe_platforms[0].movement_delta / get_physics_process_delta_time()
+	else:
+		inherited_platform_velocity = Vector2.ZERO
+	
+	var platform_inherit_strength := 0.55
+	var jump_launch_velocity := velocity + inherited_platform_velocity * platform_inherit_strength
+	
+	if jump_launch_velocity.length() > 0.0:
+		jump_locked_direction = jump_launch_velocity.normalized()
+	
+	velocity = jump_launch_velocity
 	
 	play_sfx(JUMP_SFX, JUMP_VOLUME, JUMP_PITCH_RANGE)
 	

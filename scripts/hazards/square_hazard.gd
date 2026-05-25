@@ -2,6 +2,7 @@ extends Path2D
 
 @export var rotation_speed : float = 600.0
 @export var moving : bool = false
+@export var easing : bool = true
 @export var loop : bool = true
 @export var speed : float = 600.0
 @export var speed_scale : float = 1.0
@@ -31,13 +32,19 @@ func _ready() -> void:
 		
 		if wrapped_offset <= anim_length:
 			# Forward half
-			animation_player.play("move")
+			if easing:
+				animation_player.play("move")
+			else:
+				animation_player.play("move_no_ease")
 			animation_player.speed_scale = speed_scale
 			animation_player.seek(wrapped_offset, true)
 		else:
 			# Backward half
 			var backward_time := anim_length - (wrapped_offset - anim_length)
-			animation_player.play_backwards("move")
+			if easing:
+				animation_player.play_backwards("move")
+			else:
+				animation_player.play_backwards("move_no_ease")
 			animation_player.speed_scale = speed_scale
 			animation_player.seek(backward_time, true)
 	else:
