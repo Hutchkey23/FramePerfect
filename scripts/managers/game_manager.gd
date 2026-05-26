@@ -136,6 +136,8 @@ func _on_pause_screen_go_to_main_menu() -> void:
 	is_paused = false
 	get_tree().paused = false
 	
+	LevelDatabase.reset_worlds()
+	
 	animation_player.play("global_transition_out")
 	await animation_player.animation_finished
 	

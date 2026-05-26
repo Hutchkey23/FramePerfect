@@ -13,6 +13,14 @@ var worlds: Array[WorldData] = [
 	GALACTIC_GATEWAYS
 ]
 
+func reset_worlds() -> void:
+	worlds = [
+		PEACEFUL_PLAINS,
+		SCORCHED_SANDS,
+		FROSTED_FRONTIER,
+		GALACTIC_GATEWAYS
+	]
+
 func setup(new_worlds: Array[WorldData]) -> void:
 	worlds = new_worlds
 
