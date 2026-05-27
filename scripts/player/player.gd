@@ -261,7 +261,9 @@ func _physics_process(delta: float) -> void:
 		
 		PlayerState.BOOST:
 			handle_boost(delta)
+			try_start_dash()
 			try_start_jump()
+			
 		
 	move_and_slide()
 	apply_platform_movement()

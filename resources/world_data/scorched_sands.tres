@@ -27,6 +27,7 @@
 [ext_resource type="Resource" uid="uid://dan3i0kreu4av" path="res://resources/level_data/26-50_scorched_sands/level_040.tres" id="21_ovugn"]
 [ext_resource type="Resource" uid="uid://dwhlm8bt5ax3u" path="res://resources/level_data/26-50_scorched_sands/level_050.tres" id="22_813bw"]
 [ext_resource type="Resource" uid="uid://x2i1o12662gq" path="res://resources/level_data/26-50_scorched_sands/level_041.tres" id="22_in7mh"]
+[ext_resource type="Resource" uid="uid://c7tnqqbync3r5" path="res://resources/level_data/26-50_scorched_sands/level_043.tres" id="24_wmgky"]
 
 [resource]
 script = ExtResource("15_u417j")
@@ -35,7 +36,7 @@ world_title = "Scorched Sands"
 world_number = 2
 world_intro_text = "Scorched Sands"
 background_music = Array[ExtResource("2_glbb3")]([ExtResource("4_nmval")])
-levels = Array[ExtResource("1_7ykru")]([ExtResource("4_88p53"), ExtResource("5_gqwom"), ExtResource("2_6nu2j"), ExtResource("7_iiluf"), ExtResource("5_qlhq7"), ExtResource("9_rt4h4"), ExtResource("10_i08sg"), ExtResource("14_84lak"), ExtResource("15_nmval"), ExtResource("16_wx1lh"), ExtResource("17_0b768"), ExtResource("18_gca7m"), ExtResource("19_fgmfy"), ExtResource("20_sguqf"), ExtResource("21_ovugn"), ExtResource("22_in7mh"), ExtResource("9_c6hvv"), ExtResource("10_b0flh"), ExtResource("11_b0flh"), ExtResource("22_813bw")])
+levels = Array[ExtResource("1_7ykru")]([ExtResource("4_88p53"), ExtResource("5_gqwom"), ExtResource("2_6nu2j"), ExtResource("7_iiluf"), ExtResource("5_qlhq7"), ExtResource("9_rt4h4"), ExtResource("10_i08sg"), ExtResource("14_84lak"), ExtResource("15_nmval"), ExtResource("16_wx1lh"), ExtResource("17_0b768"), ExtResource("18_gca7m"), ExtResource("19_fgmfy"), ExtResource("20_sguqf"), ExtResource("21_ovugn"), ExtResource("22_in7mh"), ExtResource("9_c6hvv"), ExtResource("24_wmgky"), ExtResource("10_b0flh"), ExtResource("11_b0flh"), ExtResource("22_813bw")])
 front_image = ExtResource("2_qlhq7")
 back_image = ExtResource("1_jc37b")
 font_color = Color(0.972549, 0.627451, 0.09803922, 1)
