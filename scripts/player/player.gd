@@ -589,6 +589,10 @@ func handle_bonk(delta: float) -> void:
 		shadow_sprite.modulate.a = 1.0
 		set_jump_over_blockers_enabled(true)
 		current_state = PlayerState.NORMAL
+		
+		if goal_overlapping:
+			try_to_activate_goal()
+			return
 
 func play_bonk_squash(wall_normal: Vector2) -> void:
 	if player_sprite_bonk_tween:
@@ -836,6 +840,9 @@ func hide_fail_label() -> void:
 	fail_label.visible = false
 
 func try_to_activate_goal() -> void:
+	if current_state == PlayerState.GOAL_REACHED:
+		return
+	
 	var stamps_remaining = get_tree().get_node_count_in_group("stamps")
 	if stamps_remaining > 0:
 		return

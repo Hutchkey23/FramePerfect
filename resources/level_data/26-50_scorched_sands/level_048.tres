@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="LevelData" format=3 uid="uid://d0762wlnr2tyg"]
+
+[ext_resource type="PackedScene" uid="uid://cji1b6tr8oesg" path="res://scenes/levels/26-50_scorched_sands/level_048.tscn" id="1_l8xxl"]
+[ext_resource type="Script" uid="uid://do5fdotl7d638" path="res://resources/level_data/level_data.gd" id="2_ymkea"]
+
+[resource]
+script = ExtResource("2_ymkea")
+level_id = "level_048"
+level_title = "mind toggling"
+medal_time = 5.5
+level_scene = ExtResource("1_l8xxl")
+metadata/_custom_type_script = "uid://do5fdotl7d638"

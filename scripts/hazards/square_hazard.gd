@@ -8,6 +8,8 @@ extends Path2D
 @export var speed_scale : float = 1.0
 @export var offset : float = 0.0
 @export var starting_progress: float = 0.0
+@export var should_rotate: bool = false
+
 
 @onready var path: PathFollow2D = $PathFollow2D
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
@@ -52,7 +54,8 @@ func _ready() -> void:
 		path.progress += starting_progress
 
 func _process(delta: float) -> void:
-	hazard.rotation_degrees += rotation_speed * delta
+	if not should_rotate:
+		hazard.rotation_degrees += rotation_speed * delta
 	
 	if not moving:
 		return
