@@ -123,6 +123,9 @@ const JUMP_STEER_ACCELERATION: float = 180.0
 const JUMP_OVER_BLOCKER_LAYER : int = 7
 const JUMP_BUFFER_TIME: float = 0.08
 
+const PLAYER_GROUND_Z : int = 1
+const PLAYER_AIR_Z : int = 5
+
 var jump_buffer_timer: float = 0.0
 var jump_buffer_used_this_jump: bool = false
 var jumped_from_dash: bool = false
@@ -201,6 +204,7 @@ const SAFE_PLATFORM_GRACE_TIME: float = 0.05
 var safe_platform_grace_timer: float = 0.0
 
 func _ready() -> void:
+	z_index = PLAYER_GROUND_Z
 	sprite_ground_y = player_sprite.position.y
 	sprite_normal_scale = player_sprite.scale
 	fail_label.visible = false
@@ -241,6 +245,7 @@ func _physics_process(delta: float) -> void:
 	
 	match current_state:
 		PlayerState.NORMAL:
+			z_index = PLAYER_GROUND_Z
 			handle_normal_movement(delta)
 			try_start_dash()
 			try_consume_dash_buffer()
@@ -252,6 +257,7 @@ func _physics_process(delta: float) -> void:
 			try_start_jump()
 
 		PlayerState.JUMP:
+			z_index = PLAYER_AIR_Z
 			handle_jump(delta)
 			try_start_dash()
 			try_start_jump()
@@ -271,7 +277,7 @@ func _physics_process(delta: float) -> void:
 	
 	if current_state == PlayerState.DASH or current_state == PlayerState.BOOST or (current_state == PlayerState.JUMP and jumped_from_dash):
 		check_for_bonk()
-	
+
 func get_move_input() -> Vector2:
 	var digital_input := Vector2.ZERO
 	
@@ -349,6 +355,8 @@ func _process(delta: float) -> void:
 func die() -> void:
 	if not player_sprite.visible:
 		return
+	
+	z_index = PLAYER_GROUND_Z
 	
 	player_sprite.visible = false
 	shadow_sprite.visible = false

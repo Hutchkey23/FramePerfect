@@ -287,34 +287,65 @@ func complete_marathon_level() -> void:
 	if marathon_current_index >= marathon_level_ids.size():
 		level_title_label.text = ""
 		BGMManager.fade_out(2.0)
+
 		await transition_out()
 		await unload_current_level()
-		
+
 		await get_tree().create_timer(1.5).timeout
 		level_title_label.text = "[rainbow]DELIVERED![/rainbow]"
 		pop_level_title_label()
+
 		await get_tree().create_timer(2.5).timeout
 		finish_marathon()
 		return
-	
-	else:
-		set_level_title_label_text(marathon_current_index)
+
+	var previous_world_index := current_world_index
+
+	current_level_id = marathon_level_ids[marathon_current_index]
+	sync_world_and_level_indices_to_level_id(current_level_id)
+	set_level_title_label_text(current_level_index)
 
 	await transition_out()
 	await unload_current_level()
 
-	current_level_id = marathon_level_ids[marathon_current_index]
-
-	# If your marathon uses worlds/current_level_index, advance that too.
-	current_level_index += 1
+	if current_world_index != previous_world_index:
+		BGMManager.fade_out(0.5)
+		play_current_world_bgm()
 
 	load_level()
 
 	await get_tree().create_timer(TRANSITION_LENGTH).timeout
+	
+	
 	await transition_in()
 
 	if level_controller_reference:
 		level_controller_reference.enter_intro_state()
+
+func play_current_world_bgm() -> void:
+	await get_tree().create_timer(0.5).timeout
+	var world_data := get_current_world_data()
+	if world_data == null:
+		return
+
+	var bg_music_array = world_data.background_music
+	if bg_music_array.size() > 0:
+		BGMManager.play_world_playlist(bg_music_array, false)
+
+func sync_world_and_level_indices_to_level_id(level_id: String) -> void:
+	for world_i in worlds.size():
+		var world := worlds[world_i]
+
+		for level_i in world.levels.size():
+			var level: LevelData = world.levels[level_i]
+
+			if level.level_id == level_id:
+				current_world_index = world_i
+				current_level_index = level_i
+				current_world_level_names = get_world_level_names(current_world_index)
+				return
+
+	push_error("Could not find marathon level_id: " + level_id)
 
 func register_marathon_death() -> void:
 	if game_mode != GameMode.MARATHON:

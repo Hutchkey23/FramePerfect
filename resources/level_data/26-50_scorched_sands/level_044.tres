@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="LevelData" format=3 uid="uid://bippr5hljyasm"]
+
+[ext_resource type="PackedScene" uid="uid://m24daacjqbho" path="res://scenes/levels/26-50_scorched_sands/level_044.tscn" id="1_o82d8"]
+[ext_resource type="Script" uid="uid://do5fdotl7d638" path="res://resources/level_data/level_data.gd" id="2_mcxm0"]
+
+[resource]
+script = ExtResource("2_mcxm0")
+level_id = "level_044"
+level_title = "spiral"
+medal_time = 9.0
+level_scene = ExtResource("1_o82d8")
+metadata/_custom_type_script = "uid://do5fdotl7d638"
