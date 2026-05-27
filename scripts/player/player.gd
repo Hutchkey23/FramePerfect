@@ -131,6 +131,9 @@ var jump_buffer_used_this_jump: bool = false
 var jumped_from_dash: bool = false
 var jump_locked_direction: Vector2 = Vector2.ZERO
 
+var active_jump_height: float = JUMP_HEIGHT
+var active_jump_duration: float = JUMP_DURATION
+
 const DASH_BUFFER_TIME: float = 0.08
 
 var dash_buffer_timer: float = 0.0
@@ -662,6 +665,9 @@ func start_jump() -> void:
 	
 	set_jump_over_blockers_enabled(false)
 	
+	active_jump_height = JUMP_HEIGHT
+	active_jump_duration = JUMP_DURATION
+	
 	if jumped_from_dash:
 		jump_locked_direction = dash_direction
 		velocity = jump_locked_direction * DASH_SPEED
@@ -675,6 +681,47 @@ func start_jump() -> void:
 	
 	player_jumped.emit()
 	
+	var jump_cloud_instance = JUMP_CLOUD.instantiate()
+	get_parent().add_child(jump_cloud_instance)
+	jump_cloud_instance.global_position = global_position
+
+func start_jump_pad_jump(
+	pad_jump_height: float,
+	pad_jump_duration: float,
+	min_forward_speed: float
+) -> void:
+	if current_state == PlayerState.GOAL_REACHED:
+		return
+
+	current_state = PlayerState.JUMP
+	jump_timer = pad_jump_duration
+	jump_cooldown_timer = JUMP_COOLDOWN
+
+	jump_buffer_timer = 0.0
+	jump_buffer_used_this_jump = false
+
+	dash_buffer_timer = 0.0
+	dash_buffer_used_this_jump = false
+
+	jumped_from_dash = false
+	set_jump_over_blockers_enabled(false)
+	
+	active_jump_height = pad_jump_height
+	active_jump_duration = pad_jump_duration
+	
+	if velocity.length() > 0.0:
+		jump_locked_direction = velocity.normalized()
+	else:
+		jump_locked_direction = last_move_input.normalized()
+
+	var current_speed := velocity.length()
+	var launch_speed = max(current_speed, min_forward_speed)
+
+	velocity = jump_locked_direction * launch_speed
+
+	play_sfx(JUMP_SFX, JUMP_VOLUME, JUMP_PITCH_RANGE)
+	player_jumped.emit()
+
 	var jump_cloud_instance = JUMP_CLOUD.instantiate()
 	get_parent().add_child(jump_cloud_instance)
 	jump_cloud_instance.global_position = global_position
@@ -698,13 +745,14 @@ func handle_jump(delta: float) -> void:
 	velocity = forward_velocity + steer_velocity
 
 	# Visual jump arc
-	var progress := 1.0 - (jump_timer / JUMP_DURATION)
+	var progress := 1.0 - (jump_timer / active_jump_duration)
 	progress = clamp(progress, 0.0, 1.0)
-
-	var height := JUMP_HEIGHT * progress * (1.0 - progress)
+	
+	var height := active_jump_height * progress * (1.0 - progress)
+	var height_ratio := height / active_jump_height
+	
 	player_sprite.position.y = sprite_ground_y - height
 
-	var height_ratio := height / JUMP_HEIGHT
 	var shadow_scale = lerp(1.0, SHADOW_MIN_SCALE, height_ratio)
 	shadow_sprite.scale = Vector2(shadow_scale, shadow_scale * 0.9)
 	shadow_sprite.modulate.a = lerp(1.0, 0.6, height_ratio)
