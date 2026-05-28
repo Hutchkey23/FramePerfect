@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="LevelData" format=3 uid="uid://c4gg5sk2cam52"]
+
+[ext_resource type="PackedScene" uid="uid://0e6irmo7ygdg" path="res://scenes/levels/51-75_frosted_frontier/level_057.tscn" id="1_7epvj"]
+[ext_resource type="Script" uid="uid://do5fdotl7d638" path="res://resources/level_data/level_data.gd" id="2_6d5va"]
+
+[resource]
+script = ExtResource("2_6d5va")
+level_id = "level_057"
+level_title = "coming together"
+medal_time = 4.5
+level_scene = ExtResource("1_7epvj")
+metadata/_custom_type_script = "uid://do5fdotl7d638"

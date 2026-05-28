@@ -19,6 +19,7 @@ func _process(_delta: float) -> void:
 	
 	if player_reference:
 		if player_reference.player_sprite.position.y == player_reference.sprite_ground_y:
+			player_reference.current_state = player_reference.PlayerState.NORMAL
 			player_reference.velocity = Vector2.ZERO
 			checking_for_player_landing = false
 			triggered = true
