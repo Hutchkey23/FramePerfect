@@ -2,7 +2,7 @@ extends Control
 class_name LevelSelect
 
 signal exit_level_select
-signal level_selected(world_index: int, level_index: int)
+signal level_selected(world_data: WorldData, level_data: LevelData)
 
 @export var postcard_spacing: float = 260.0
 @export var tween_time: float = 0.36
@@ -18,9 +18,10 @@ const POSTCARD_NOT_SELECTED_SCALE: Vector2 = Vector2(1.2, 1.2)
 	$PostcardHolder/PeacefulPlainsPostcard,
 	$PostcardHolder/ScorchedSandsPostcard,
 	$PostcardHolder/FrostedFrontierPostcard,
-	$PostcardHolder/GalacticGatewayPostcard
+	$PostcardHolder/GalacticGatewayPostcard,
 ]
 
+@onready var demo_world_background: TextureRect = $BackgroundHolder/DemoWorldBackground
 @onready var peaceful_plains_background: TextureRect = $BackgroundHolder/PeacefulPlainsBackground
 @onready var scorched_sands_background: TextureRect = $BackgroundHolder/ScorchedSandsBackground
 @onready var frosted_frontier_background: TextureRect = $BackgroundHolder/FrostedFrontierBackground
@@ -54,6 +55,20 @@ func _ready() -> void:
 		frosted_frontier_background,
 		galactic_gateway_background
 	]
+	
+	if BuildConfig.IS_DEMO:
+		for postcard in postcards:
+			postcard.visible = false
+		
+		for background in backgrounds:
+			background.visible = false
+		
+		postcards = [$PostcardHolder/DemoWorldPostcard]
+		backgrounds = [demo_world_background]
+	
+	else:
+		demo_world_background.visible = false
+		$PostcardHolder/DemoWorldPostcard.visible = false
 	
 	for i in backgrounds.size():
 		var bg := backgrounds[i]
@@ -107,28 +122,27 @@ func _position_postcards() -> void:
 		postcards[i].position = Vector2(i * postcard_spacing, 0.0)
 
 func update_arrows() -> void:
-	if current_world_index == 0:
+	if postcards.size() <= 1:
 		left_arrow.visible = false
-	else:
-		left_arrow.visible = true
-	
-	if current_world_index == postcards.size() - 1:
 		right_arrow.visible = false
-	else:
-		right_arrow.visible = true
+		return
+
+	left_arrow.visible = current_world_index > 0
+	right_arrow.visible = current_world_index < postcards.size() - 1
 
 func _move_selection(direction: int) -> void:
+	if postcards.size() <= 1:
+		return
+
 	var new_index := clampi(current_world_index + direction, 0, postcards.size() - 1)
 
 	if new_index == current_world_index:
 		return
-	
+
 	UIAudioManager.play_ui_slide_sfx()
 	current_world_index = new_index
-	
-	
+
 	play_arrow_animation(direction)
-	
 	update_arrows()
 	update_background()
 	_update_selection(true)
@@ -211,8 +225,8 @@ func _confirm_world() -> void:
 	UIAudioManager.play_postcard_flip_to_back_sfx()
 	toggle_navigation_arrows(false)
 
-func on_level_selected(world_index: int, level_index: int) -> void:
-	level_selected.emit(world_index, level_index)
+func on_level_selected(world_data: WorldData, level_data: LevelData) -> void:
+	level_selected.emit(world_data, level_data)
 
 func play_arrow_animation(arrow_direction: int) -> void:
 	var offset := 10.0

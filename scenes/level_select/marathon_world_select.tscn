@@ -36,6 +36,7 @@
 [ext_resource type="Texture2D" uid="uid://bqa1g5t3ixn8f" path="res://assets/sprites/stamps/stamp_26.png" id="33_d54op"]
 [ext_resource type="FontFile" uid="uid://vklaqlxxc5o7" path="res://assets/fonts/Whacky_Joe.ttf" id="34_ohabt"]
 [ext_resource type="PackedScene" uid="uid://cpqo1dt5u0l0h" path="res://scenes/postcard/marathon_level_select_postcard.tscn" id="36_pio75"]
+[ext_resource type="Resource" uid="uid://b7nf44tx7oe0a" path="res://resources/marathon_data/99_marathon_demo_world.tres" id="37_g0l0e"]
 [ext_resource type="Resource" uid="uid://dnauec61r8nf" path="res://resources/marathon_data/01_marathon_peaceful_plains.tres" id="37_qs3tf"]
 [ext_resource type="Resource" uid="uid://nli7jt4xwhwt" path="res://resources/marathon_data/02_marathon_scorched_sands.tres" id="38_g0l0e"]
 [ext_resource type="Resource" uid="uid://chdk8s824pi8n" path="res://resources/marathon_data/03_marathon_frosted_frontier.tres" id="39_i6y5b"]
@@ -103,6 +104,19 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="DemoWorldBackground" type="TextureRect" parent="BackgroundHolder" unique_id=2067607392]
+modulate = Color(0.78431374, 0.78431374, 0.78431374, 1)
+material = SubResource("ShaderMaterial_ypb0n")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_bottom = 5.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_qs3tf")
+stretch_mode = 1
 
 [node name="PeacefulPlainsBackground" type="TextureRect" parent="BackgroundHolder" unique_id=1691716971]
 modulate = Color(0.78431374, 0.78431374, 0.78431374, 1)
@@ -210,7 +224,15 @@ offset_bottom = 20.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="PeacefulPlainsPostcard" parent="PostcardHolder" unique_id=258655972 instance=ExtResource("36_pio75")]
+[node name="DemoWorldPostcard" parent="PostcardHolder" unique_id=258655972 instance=ExtResource("36_pio75")]
+layout_mode = 1
+offset_left = -160.0
+offset_top = -84.399994
+offset_right = -160.0
+offset_bottom = -84.399994
+marathon_data = ExtResource("37_g0l0e")
+
+[node name="PeacefulPlainsPostcard" parent="PostcardHolder" unique_id=472267226 instance=ExtResource("36_pio75")]
 layout_mode = 1
 marathon_data = ExtResource("37_qs3tf")
 

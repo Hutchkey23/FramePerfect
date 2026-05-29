@@ -1,0 +1,36 @@
+[gd_resource type="Resource" script_class="WorldData" format=3 uid="uid://cmnjn1ucarslc"]
+
+[ext_resource type="Texture2D" uid="uid://c3aj3ftm4kt52" path="res://assets/sprites/postcards/peaceful_plains_back.png" id="1_clhkv"]
+[ext_resource type="Script" uid="uid://bhxby642rllaj" path="res://resources/music_data/music_data.gd" id="1_epfqm"]
+[ext_resource type="Resource" uid="uid://c725xt1moqblj" path="res://resources/music_data/02_So Green.tres" id="2_0e1py"]
+[ext_resource type="Resource" uid="uid://coavw6kmk0ic" path="res://resources/music_data/08_Starlight Express.tres" id="3_oeqlp"]
+[ext_resource type="Script" uid="uid://do5fdotl7d638" path="res://resources/level_data/level_data.gd" id="4_bmsuo"]
+[ext_resource type="Resource" uid="uid://2tr6xgduo5id" path="res://resources/level_data/01-25_peaceful_plains/level_001.tres" id="5_0ktvd"]
+[ext_resource type="Texture2D" uid="uid://ddksbycmsdtui" path="res://assets/title/bg1.png" id="5_sbvo0"]
+[ext_resource type="Texture2D" uid="uid://bjg3cv8wdoj1o" path="res://assets/sprites/postcards/peaceful_plains.png" id="5_vctts"]
+[ext_resource type="Resource" uid="uid://dhrfu1r1ue2do" path="res://resources/level_data/01-25_peaceful_plains/level_002.tres" id="6_1abdt"]
+[ext_resource type="Script" uid="uid://gba83foepn6x" path="res://resources/world_data/world_data.gd" id="6_y17nd"]
+[ext_resource type="Resource" uid="uid://brjbmrdbcuc7v" path="res://resources/level_data/01-25_peaceful_plains/level_004.tres" id="7_rx3ae"]
+[ext_resource type="Resource" uid="uid://brqk3icpji3bv" path="res://resources/level_data/01-25_peaceful_plains/level_006.tres" id="8_clhkv"]
+[ext_resource type="Resource" uid="uid://db34ou22hspt0" path="res://resources/level_data/01-25_peaceful_plains/level_009.tres" id="9_vctts"]
+[ext_resource type="Resource" uid="uid://dy26lehxoctol" path="res://resources/level_data/01-25_peaceful_plains/level_013.tres" id="10_sbvo0"]
+[ext_resource type="Resource" uid="uid://dxwqupjg5xoh3" path="res://resources/level_data/01-25_peaceful_plains/level_014.tres" id="11_jafw0"]
+[ext_resource type="Resource" uid="uid://0di38jtexyf1" path="res://resources/level_data/01-25_peaceful_plains/level_017.tres" id="12_kpmsf"]
+[ext_resource type="Resource" uid="uid://b6gs23itcnv2o" path="res://resources/level_data/01-25_peaceful_plains/level_018.tres" id="13_5x675"]
+[ext_resource type="Resource" uid="uid://gia06jvackle" path="res://resources/level_data/01-25_peaceful_plains/level_019.tres" id="14_30qk3"]
+[ext_resource type="Resource" uid="uid://wsj02jqhdi0x" path="res://resources/level_data/26-50_scorched_sands/level_026.tres" id="15_e73bn"]
+[ext_resource type="Resource" uid="uid://bc3kk8rb6ukbw" path="res://resources/level_data/26-50_scorched_sands/level_027.tres" id="16_j4ui1"]
+[ext_resource type="Resource" uid="uid://chmweckt6q4js" path="res://resources/level_data/26-50_scorched_sands/level_035.tres" id="17_x8hio"]
+[ext_resource type="Resource" uid="uid://dpjxkcun7x7mu" path="res://resources/level_data/26-50_scorched_sands/level_038.tres" id="18_rvhyd"]
+
+[resource]
+script = ExtResource("6_y17nd")
+world_id = "demo_world"
+world_title = "Send It! Demo"
+background_music = Array[ExtResource("1_epfqm")]([ExtResource("2_0e1py"), ExtResource("3_oeqlp")])
+levels = Array[ExtResource("4_bmsuo")]([ExtResource("5_0ktvd"), ExtResource("6_1abdt"), ExtResource("7_rx3ae"), ExtResource("8_clhkv"), ExtResource("9_vctts"), ExtResource("10_sbvo0"), ExtResource("11_jafw0"), ExtResource("12_kpmsf"), ExtResource("13_5x675"), ExtResource("14_30qk3"), ExtResource("15_e73bn"), ExtResource("16_j4ui1"), ExtResource("17_x8hio"), ExtResource("18_rvhyd")])
+front_image = ExtResource("5_vctts")
+back_image = ExtResource("1_clhkv")
+font_color = Color(0, 0.5294118, 0.31764707, 1)
+background_texture = ExtResource("5_sbvo0")
+metadata/_custom_type_script = "uid://gba83foepn6x"

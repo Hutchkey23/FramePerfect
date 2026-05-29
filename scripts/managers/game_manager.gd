@@ -6,6 +6,10 @@ enum GameMode {
 	MARATHON,
 }
 
+const DEMO_RESULTS_SCENE: PackedScene = preload("uid://cqt1tw0cqi6jv")
+
+const NORMAL_RESULTS_SCENE: PackedScene = preload("uid://3wi43o16qj4m")
+
 const MARATHON_RESULTS : Dictionary = {
 	"world_01": preload("uid://cqt1tw0cqi6jv"),
 	"world_02": preload("uid://cd6nplujadiq"),
@@ -72,11 +76,16 @@ func _ready() -> void:
 func setup_normal_from_run_state() -> void:
 	game_mode = GameMode.NORMAL
 
+	if BuildConfig.IS_DEMO:
+		worlds = BuildConfig.get_demo_worlds()
+
 	LevelDatabase.setup(worlds)
 
 	if RunState.has_pending_level_select:
-		current_world_index = RunState.start_world_index
-		current_level_index = RunState.start_level_index
+		sync_world_and_level_indices_to_level_data(
+			RunState.start_world_data,
+			RunState.start_level_data
+		)
 		should_show_initial_world_transition = false
 		RunState.clear_pending_selection()
 	else:
@@ -86,6 +95,23 @@ func setup_normal_from_run_state() -> void:
 
 	current_world_level_names = get_world_level_names(current_world_index)
 	set_level_title_label_text(current_level_index)
+
+func sync_world_and_level_indices_to_level_data(world_data: WorldData, level_data: LevelData) -> void:
+	for world_i in worlds.size():
+		if worlds[world_i] != world_data:
+			continue
+
+		for level_i in worlds[world_i].levels.size():
+			if worlds[world_i].levels[level_i] == level_data:
+				current_world_index = world_i
+				current_level_index = level_i
+				current_world_level_names = get_world_level_names(current_world_index)
+				return
+
+	push_error("Could not find selected world/level data. Falling back to first level.")
+	current_world_index = 0
+	current_level_index = 0
+	current_world_level_names = get_world_level_names(current_world_index)
 
 func setup_marathon_from_run_state() -> void:
 	var data := RunState.pending_marathon_data
@@ -419,7 +445,8 @@ func load_next_level() -> void:
 	var world_data := get_current_world_data()
 	if world_data == null:
 		return
-
+	
+	unlock_next_level_in_current_world()
 	current_level_index += 1
 
 	if current_level_index < world_data.levels.size():
@@ -432,13 +459,13 @@ func load_next_level() -> void:
 
 	if current_level_index >= world_data.levels.size():
 		var completed_world := world_data
+		var marathon_unlocked_now := SaveManager.unlock_marathon(completed_world.world_id)
 		
 		current_world_index += 1
 		current_level_index = 0
 
 		if current_world_index >= worlds.size():
-			print("Game complete.")
-			get_tree().change_scene_to_file("res://scenes/title/title_screen.tscn")
+			await show_game_clear_results(completed_world, marathon_unlocked_now)
 			return
 
 		var next_world := get_current_world_data()
@@ -459,6 +486,26 @@ func load_next_level() -> void:
 	if level_controller_reference:
 		level_controller_reference.enter_intro_state()
 
+func show_game_clear_results(completed_world: WorldData, marathon_unlocked_now: bool) -> void:
+	level_title_label.text = ""
+
+	BGMManager.fade_out(2.0)
+
+	var results_scene_instance: Results = NORMAL_RESULTS_SCENE.instantiate()
+	level_container.add_child(results_scene_instance)
+
+	var result_type := Results.ResultType.GAME_CLEAR
+	if BuildConfig.IS_DEMO:
+		result_type = Results.ResultType.DEMO_CLEAR
+
+	results_scene_instance.setup_results(
+		result_type,
+		{},
+		marathon_unlocked_now
+	)
+
+	await transition_in()
+	results_scene_instance.show_results()
 
 func show_world_transition(completed_world: WorldData, next_world: WorldData) -> void:
 	var world_data := get_current_world_data()
@@ -583,6 +630,19 @@ func pop_level_title_label() -> void:
 	tween.chain().tween_property(level_title_label, "scale", Vector2.ONE, 0.10)\
 		.set_trans(Tween.TRANS_QUAD)\
 		.set_ease(Tween.EASE_OUT)
+
+func unlock_next_level_in_current_world() -> void:
+	var world_data := get_current_world_data()
+	if world_data == null:
+		return
+
+	var next_level_index := current_level_index + 1
+
+	if next_level_index >= world_data.levels.size():
+		return
+
+	var next_level: LevelData = world_data.levels[next_level_index]
+	SaveManager.unlock_level(next_level.level_id)
 
 ####### AUDIO HANDLING ########
 func play_sfx(sfx: AudioStream, volume_db: float = 0.0, pitch_range: Vector2 = Vector2(0.95, 1.05)):

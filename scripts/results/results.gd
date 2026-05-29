@@ -6,6 +6,12 @@ class_name Results
 @onready var final_message: RichTextLabel = $Results/Control/FinalMessage
 @onready var sfx_pool: Node2D = $SFXPool
 
+enum ResultType {
+	MARATHON,
+	GAME_CLEAR,
+	DEMO_CLEAR,
+}
+
 var game_manager_reference: GameManager
 
 var results_tween: Tween
@@ -78,6 +84,7 @@ const POP_PITCH_RANGE: Vector2 = Vector2(0.8, 0.8)
 
 func _ready() -> void:
 	time_label.visible = false
+	time_label.text = ""
 	completion_message.visible = false
 	final_message.visible = false
 	
@@ -122,14 +129,11 @@ func show_results() -> void:
 
 	results_tween = create_tween()
 	
-	pop_in_label(time_label)
-	results_tween.tween_callback(play_sfx.bind(GOAL_UNLOCK_SFX, GOAL_UNLOCK_VOLUME - 4.0, Vector2(0.6, 0.6)))
-	
-	results_tween.tween_interval(1.0)
-	if new_best_or_medal:
-		pass
-	else:
-		pass
+	if time_label.text != "":
+		pop_in_label(time_label)
+		results_tween.tween_callback(play_sfx.bind(GOAL_UNLOCK_SFX, GOAL_UNLOCK_VOLUME - 4.0, Vector2(0.6, 0.6)))
+		results_tween.tween_interval(1.0)
+
 	results_tween.tween_callback(pop_in_label.bind(completion_message))
 	
 	if new_best_or_medal:
@@ -139,8 +143,9 @@ func show_results() -> void:
 	
 	results_tween.tween_interval(1.5)
 	await results_tween.finished
+
 	play_sfx(POP_SFX, POP_VOLUME, POP_PITCH_RANGE)
-	final_message.visible = true
+	pop_in_label(final_message)
 
 
 func pop_in_label(label: Control) -> void:
@@ -170,6 +175,29 @@ func format_time(time: float) -> String:
 		var seconds := fmod(time, 60.0)
 
 		return "%d:%05.2f" % [minutes, seconds]
+
+func setup_results(result_type: ResultType, results_data: Dictionary = {}, unlocked_marathon: bool = false) -> void:
+	match result_type:
+		ResultType.MARATHON:
+			setup_marathon_results(results_data)
+
+		ResultType.GAME_CLEAR:
+			time_label.visible = false
+			completion_message.text = "[wave][rainbow]GAME CLEARED![/rainbow][/wave]"
+
+			if unlocked_marathon:
+				final_message.text = "[wave]MARATHON MODE UNLOCKED![/wave]"
+			else:
+				final_message.text = "[wave]MAIL DELIVERED![/wave]"
+
+		ResultType.DEMO_CLEAR:
+			time_label.visible = false
+			completion_message.text = "[wave][rainbow]DEMO CLEARED![/rainbow][/wave]"
+
+			if unlocked_marathon:
+				final_message.text = "[wave]DEMO MARATHON UNLOCKED![/wave]"
+			else:
+				final_message.text = "[wave]WISHLIST SEND IT! ON STEAM![/wave]"
 
 ####### AUDIO HANDLING ########
 func play_sfx(sfx: AudioStream, volume_db: float = 0.0, pitch_range: Vector2 = Vector2(0.95, 1.05)):

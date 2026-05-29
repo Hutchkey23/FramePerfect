@@ -162,6 +162,7 @@ func load_game() -> void:
 		ensure_cosmetics_data()
 		ensure_options_data()
 		ensure_marathon_data()
+		ensure_unlocks_data()
 		load_input_map()
 	else:
 		push_error("Save data was not a Dictionary. Resetting save data.")
@@ -173,6 +174,11 @@ func get_default_save_data() -> Dictionary:
 	return {
 		"levels": {},
 		"marathons": {},
+		"unlocks": {
+			"levels": {},
+			"marathons": {},
+			"cosmetics": {},
+		},
 		"cosmetics": {
 			"selected_player_skin": "player_default",
 			"selected_goal_skin": "goal_default",
@@ -188,6 +194,19 @@ func get_default_save_data() -> Dictionary:
 func ensure_marathon_data() -> void:
 	if not save_data.has("marathons"):
 		save_data["marathons"] = {}
+
+func ensure_unlocks_data() -> void:
+	if not save_data.has("unlocks"):
+		save_data["unlocks"] = {}
+
+	if not save_data["unlocks"].has("levels"):
+		save_data["unlocks"]["levels"] = {}
+
+	if not save_data["unlocks"].has("marathons"):
+		save_data["unlocks"]["marathons"] = {}
+
+	if not save_data["unlocks"].has("cosmetics"):
+		save_data["unlocks"]["cosmetics"] = {}
 
 func ensure_options_data() -> void:
 	if not save_data.has("options"):
@@ -341,3 +360,49 @@ func ensure_cosmetics_data() -> void:
 	
 	if not save_data["cosmetics"].has("selected_goal_skin"):
 		save_data["cosmetics"]["selected_goal_skin"] = "goal_default"
+
+func is_level_unlocked(level_id: String) -> bool:
+	ensure_unlocks_data()
+	return save_data["unlocks"]["levels"].get(level_id, false)
+
+
+func unlock_level(level_id: String) -> bool:
+	ensure_unlocks_data()
+
+	if is_level_unlocked(level_id):
+		return false
+
+	save_data["unlocks"]["levels"][level_id] = true
+	save_game()
+	return true
+	
+
+func is_marathon_unlocked(marathon_id: String) -> bool:
+	ensure_unlocks_data()
+	return save_data["unlocks"]["marathons"].get(marathon_id, false)
+
+
+func unlock_marathon(marathon_id: String) -> bool:
+	ensure_unlocks_data()
+
+	if is_marathon_unlocked(marathon_id):
+		return false
+
+	save_data["unlocks"]["marathons"][marathon_id] = true
+	save_game()
+	return true
+
+func is_cosmetic_unlocked(cosmetic_id: String) -> bool:
+	ensure_unlocks_data()
+	return save_data["unlocks"]["cosmetics"].get(cosmetic_id, false)
+
+
+func unlock_cosmetic(cosmetic_id: String) -> bool:
+	ensure_unlocks_data()
+
+	if is_cosmetic_unlocked(cosmetic_id):
+		return false
+
+	save_data["unlocks"]["cosmetics"][cosmetic_id] = true
+	save_game()
+	return true

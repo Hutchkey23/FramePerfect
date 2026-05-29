@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="MarathonData" format=3 uid="uid://b7nf44tx7oe0a"]
+
+[ext_resource type="Texture2D" uid="uid://c3aj3ftm4kt52" path="res://assets/sprites/postcards/peaceful_plains_back.png" id="1_uati7"]
+[ext_resource type="Texture2D" uid="uid://ddksbycmsdtui" path="res://assets/title/bg1.png" id="2_81w8v"]
+[ext_resource type="Texture2D" uid="uid://bjg3cv8wdoj1o" path="res://assets/sprites/postcards/peaceful_plains.png" id="3_m1u07"]
+[ext_resource type="Script" uid="uid://b78coe6eanw3t" path="res://resources/marathon_data/marathon_data.gd" id="4_yl28f"]
+[ext_resource type="Script" uid="uid://gba83foepn6x" path="res://resources/world_data/world_data.gd" id="5_ik7hb"]
+[ext_resource type="Resource" uid="uid://cmnjn1ucarslc" path="res://resources/world_data/demo_world.tres" id="6_81w8v"]
+
+[resource]
+script = ExtResource("4_yl28f")
+marathon_id = "marathon_demo_world"
+display_name = "Send It! Demo"
+worlds = Array[ExtResource("5_ik7hb")]([ExtResource("6_81w8v")])
+medal_time = 65.0
+front_image = ExtResource("3_m1u07")
+back_image = ExtResource("1_uati7")
+font_color = Color(0, 0.5294118, 0.31764707, 1)
+background_texture = ExtResource("2_81w8v")
+metadata/_custom_type_script = "uid://b78coe6eanw3t"

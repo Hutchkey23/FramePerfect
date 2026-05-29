@@ -6,7 +6,7 @@ class_name JumpPad
 
 @export var jump_height: float = 120.0
 @export var jump_duration: float = 0.48
-@export var min_forward_speed: float = 120.0
+@export var min_forward_speed: float = 0.0
 @export var cooldown_time: float = 0.12
 
 var can_launch: bool = true
@@ -45,6 +45,8 @@ func _process(_delta: float) -> void:
 		if abs(player_reference.player_sprite.position.y - player_reference.sprite_ground_y) < 0.2 and can_launch:
 			checking_for_player_landing = false
 			launch_player(player_reference)
+	else:
+		checking_for_player_landing = false
 
 func launch_player(player: Player) -> void:
 	can_launch = false
@@ -60,6 +62,9 @@ func launch_player(player: Player) -> void:
 
 	await get_tree().create_timer(cooldown_time).timeout
 	can_launch = true
+	
+	if player_reference:
+		checking_for_player_landing = true
 
 
 func play_launch_animation() -> void:

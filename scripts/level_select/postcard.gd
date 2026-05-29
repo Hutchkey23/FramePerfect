@@ -2,7 +2,7 @@ extends Control
 class_name Postcard
 
 signal exit_world
-signal level_selected(world_index, level_index)
+signal level_selected(world_data: WorldData, level_data: LevelData)
 
 @export var flip_time: float = 0.16
 @export var world_data: WorldData
@@ -134,7 +134,11 @@ func handle_level_select_hold_input(delta: float) -> void:
 
 func setup(data: WorldData) -> void:
 	world_data = data
-
+	
+	if data.world_number == 0:
+		world_number_label.visible = false
+		world_title_label.custom_minimum_size.y = 16.0
+	
 	world_number_label.text = "WORLD " + str(data.world_number)
 	world_title_label.text = data.world_title
 	postcard_front_texture.texture = data.front_image
@@ -154,10 +158,27 @@ func _unhandled_input(event: InputEvent) -> void:
 		return
 
 	if event.is_action_pressed("ui_accept"):
+		if not is_current_level_unlocked():
+			UIAudioManager.play_ui_error_sfx()
+			get_viewport().set_input_as_handled()
+			return
+
 		UIAudioManager.play_ui_confirm_sfx()
-		level_selected.emit(current_world_index, current_level_index)
+		
+		var level_data: LevelData = levels_array[current_level_index]
+		level_selected.emit(world_data, level_data)
+		
 		get_viewport().set_input_as_handled()
 		return
+
+func is_current_level_unlocked() -> bool:
+	var level_data: LevelData = levels_array[current_level_index]
+
+	# First level in a world is always available.
+	if current_level_index == 0:
+		return true
+
+	return SaveManager.is_level_unlocked(level_data.level_id)
 
 #region Back of Postcard
 func _move_selection(direction: int) -> void:
@@ -181,10 +202,34 @@ func update_level_display() -> void:
 
 	var level_data: LevelData = levels_array[current_level_index]
 	var level_id = level_data.level_id
+	var unlocked := is_current_level_unlocked()
+
+	level_number_label.text = str(current_level_index + 1).pad_zeros(2)
+
+	if not unlocked:
+		level_title_label.text = "?????"
+		best_time_label.text = "--.--"
+		medal_time_label.text = "--.--"
+		set_medal_slot(false)
+
+		level_title_label.modulate.a = 0.55
+		level_number_label.modulate.a = 0.55
+		best_time_text_label.modulate.a = 0.55
+		best_time_label.modulate.a = 0.55
+		medal_time_text_label.modulate.a = 0.55
+		medal_time_label.modulate.a = 0.55
+		medal_slot.modulate.a = 0.35
+		return
+
+	level_title_label.modulate.a = 1.0
+	level_number_label.modulate.a = 1.0
+	best_time_text_label.modulate.a = 1.0
+	best_time_label.modulate.a = 1.0
+	medal_time_text_label.modulate.a = 1.0
+	medal_time_label.modulate.a = 1.0
+	medal_slot.modulate.a = 1.0
+
 	level_title_label.text = level_data.level_title
-	
-	var level_number = get_display_number(level_id)
-	level_number_label.text = level_number
 	
 	var medal_earned: bool = SaveManager.player_has_medal(level_id)
 	set_medal_slot(medal_earned)
@@ -197,7 +242,6 @@ func update_level_display() -> void:
 		best_time_label.text = "--.--"
 	
 	var medal_time: float = LevelDatabase.get_medal_time(level_id)
-	
 	medal_time_label.text = "%.2f" % medal_time
 	
 #endregion
@@ -218,9 +262,6 @@ func set_medal_slot(medal_filled: bool) -> void:
 		false:
 			medal_slot.texture = MEDAL_EMPTY_TEXTURE
 
-func get_display_number(level_id: String) -> String:
-	var num := int(level_id.split("_")[1])
-	return str(num).pad_zeros(2)
 #endregion
 
 #region Animation

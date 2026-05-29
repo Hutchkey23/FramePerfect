@@ -39,6 +39,7 @@
 [ext_resource type="Texture2D" uid="uid://buu7ksa12l8h6" path="res://assets/sprites/stamps/stamp_24.png" id="31_hvxjf"]
 [ext_resource type="Texture2D" uid="uid://b3n4e7ymoqlty" path="res://assets/sprites/stamps/stamp_25.png" id="32_o8i2j"]
 [ext_resource type="Texture2D" uid="uid://bqa1g5t3ixn8f" path="res://assets/sprites/stamps/stamp_26.png" id="33_ikgps"]
+[ext_resource type="Resource" uid="uid://cmnjn1ucarslc" path="res://resources/world_data/demo_world.tres" id="40_angsd"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ypb0n"]
 shader = ExtResource("2_7vvew")
@@ -84,6 +85,19 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="DemoWorldBackground" type="TextureRect" parent="BackgroundHolder" unique_id=154514162]
+modulate = Color(0.78431374, 0.78431374, 0.78431374, 1)
+material = SubResource("ShaderMaterial_ypb0n")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_bottom = 5.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_aigqt")
+stretch_mode = 1
 
 [node name="PeacefulPlainsBackground" type="TextureRect" parent="BackgroundHolder" unique_id=1691716971]
 modulate = Color(0.78431374, 0.78431374, 0.78431374, 1)
@@ -197,6 +211,10 @@ world_data = ExtResource("6_vwvko")
 [node name="GalacticGatewayPostcard" parent="PostcardHolder" unique_id=1073607619 instance=ExtResource("1_xf5wa")]
 layout_mode = 1
 world_data = ExtResource("7_c7dkd")
+
+[node name="DemoWorldPostcard" parent="PostcardHolder" unique_id=260292772 instance=ExtResource("1_xf5wa")]
+layout_mode = 1
+world_data = ExtResource("40_angsd")
 
 [node name="LeftArrow" type="Control" parent="." unique_id=1597586396]
 anchors_preset = 0

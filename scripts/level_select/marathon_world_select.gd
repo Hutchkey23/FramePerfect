@@ -22,6 +22,7 @@ const POSTCARD_NOT_SELECTED_SCALE: Vector2 = Vector2(1.2, 1.2)
 	$PostcardHolder/AllWorldsPostcard
 ]
 
+@onready var demo_world_background: TextureRect = $BackgroundHolder/DemoWorldBackground
 @onready var peaceful_plains_background: TextureRect = $BackgroundHolder/PeacefulPlainsBackground
 @onready var scorched_sands_background: TextureRect = $BackgroundHolder/ScorchedSandsBackground
 @onready var frosted_frontier_background: TextureRect = $BackgroundHolder/FrostedFrontierBackground
@@ -57,6 +58,16 @@ func _ready() -> void:
 		galactic_gateway_background,
 		all_worlds_background
 	]
+	
+	if BuildConfig.IS_DEMO:
+		for postcard in postcards:
+			postcard.visible = false
+		
+		for background in backgrounds:
+			background.visible = false
+		
+		postcards = [$PostcardHolder/DemoWorldPostcard]
+		backgrounds = [demo_world_background]
 	
 	for i in backgrounds.size():
 		var bg = backgrounds[i]

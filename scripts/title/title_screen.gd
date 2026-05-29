@@ -34,6 +34,9 @@ var time: float = 0.0
 func _ready() -> void:
 	call_deferred("setup_pivots")
 	
+	if BuildConfig.IS_DEMO:
+		customize_button.visible = false
+	
 	animation_player.play("transition_in")
 	
 	play_button.grab_silent_focus()
@@ -141,8 +144,8 @@ func _on_quit_button_pressed() -> void:
 	get_tree().quit()
 
 
-func _on_level_select_level_selected(world_index: int, level_index: int) -> void:
-	RunState.select_level(world_index, level_index)
+func _on_level_select_level_selected(world_data: WorldData, level_data: LevelData) -> void:
+	RunState.select_level(world_data, level_data)
 	_on_play_button_pressed()
 
 
