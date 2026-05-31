@@ -1,6 +1,10 @@
 extends Node
 
-const SAVE_PATH := "user://save_data.json"
+const FULL_SAVE_PATH := "user://save_data.json"
+const DEMO_SAVE_PATH := "user://demo_save_data.json"
+
+var SAVE_PATH := DEMO_SAVE_PATH if BuildConfig.IS_DEMO else FULL_SAVE_PATH
+
 const NO_TIME := 999999.0
 
 const REMAPPABLE_ACTIONS: PackedStringArray = [
@@ -186,7 +190,7 @@ func get_default_save_data() -> Dictionary:
 		"options": {
 			"sfx_volume": 3,
 			"music_volume": 3,
-			"fullscreen": false,
+			"fullscreen": true,
 			"screen_shake": true,
 		}
 	}

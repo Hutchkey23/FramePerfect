@@ -197,7 +197,7 @@ func setup_results(result_type: ResultType, results_data: Dictionary = {}, unloc
 			if unlocked_marathon:
 				final_message.text = "[wave]DEMO MARATHON UNLOCKED![/wave]"
 			else:
-				final_message.text = "[wave]WISHLIST SEND IT! ON STEAM![/wave]"
+				final_message.text = "[wave]WISHLIST ON STEAM![/wave]"
 
 ####### AUDIO HANDLING ########
 func play_sfx(sfx: AudioStream, volume_db: float = 0.0, pitch_range: Vector2 = Vector2(0.95, 1.05)):

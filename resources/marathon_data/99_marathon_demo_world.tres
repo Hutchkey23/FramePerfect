@@ -9,7 +9,7 @@
 
 [resource]
 script = ExtResource("4_yl28f")
-marathon_id = "marathon_demo_world"
+marathon_id = "demo_world"
 display_name = "Send It! Demo"
 worlds = Array[ExtResource("5_ik7hb")]([ExtResource("6_81w8v")])
 medal_time = 65.0

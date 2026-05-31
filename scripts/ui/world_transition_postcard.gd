@@ -18,6 +18,11 @@ func _ready() -> void:
 
 func setup(data: WorldData) -> void:
 	world_data = data
+	
+	if data.world_number == 0:
+		world_number_label.visible = false
+		world_title_label.custom_minimum_size.y = 16.0
+	
 	world_number_label.text = "WORLD " + str(data.world_number)
 	world_title_label.add_theme_constant_override("outline_size", 0)
 	world_title_label.text = data.world_title

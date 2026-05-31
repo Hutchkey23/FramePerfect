@@ -1,0 +1,49 @@
+[gd_scene format=3 uid="uid://csr608namxbrm"]
+
+[ext_resource type="Script" uid="uid://dtsdvtys223jw" path="res://scripts/splash/splash_screen.gd" id="1_pxl2w"]
+[ext_resource type="Texture2D" uid="uid://dfbjpgpjhierg" path="res://assets/splash/HutchkeyGamesLogoWhite.png" id="2_oj7jr"]
+
+[node name="SplashScreen" type="Control" unique_id=1841435170]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_pxl2w")
+
+[node name="MainTransitionLayer" type="CanvasLayer" parent="." unique_id=187002589]
+layer = 10
+
+[node name="MainTransition" type="ColorRect" parent="MainTransitionLayer" unique_id=294828445]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1818216680]
+
+[node name="CenterContainer" type="CenterContainer" parent="CanvasLayer" unique_id=1630529032]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="SplashLogo" type="TextureRect" parent="CanvasLayer/CenterContainer" unique_id=613375136]
+custom_minimum_size = Vector2(200, 200)
+layout_mode = 2
+texture = ExtResource("2_oj7jr")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=1435687689]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)

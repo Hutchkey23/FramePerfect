@@ -10,10 +10,12 @@ config_version=5
 
 [application]
 
-config/name="Frame Perfect"
-run/main_scene="uid://bt1dvkrmmjtgl"
+config/name="Send It"
+run/main_scene="uid://csr608namxbrm"
 config/features=PackedStringArray("4.6", "GL Compatibility")
-config/icon="res://icon.svg"
+boot_splash/bg_color=Color(0, 0, 0, 1)
+boot_splash/show_image=false
+config/icon="uid://c8tajapsoeuve"
 
 [audio]
 
@@ -24,6 +26,7 @@ buses/default_bus_layout="uid://e3w3xp2vgyau"
 UIAudioManager="*uid://bmfxy8q6m8glb"
 InputHelper="*uid://cholww48njaeh"
 SaveManager="*uid://b5ifq4a5txl6a"
+SettingsManager="*uid://bgpke2vpsin2u"
 LevelDatabase="*uid://kjoca7iumvos"
 SkinDatabase="*uid://kalj3n3hq30u"
 RunState="*uid://epodyc4mls2n"

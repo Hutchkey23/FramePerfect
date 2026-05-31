@@ -486,12 +486,17 @@ func load_next_level() -> void:
 	if level_controller_reference:
 		level_controller_reference.enter_intro_state()
 
-func show_game_clear_results(completed_world: WorldData, marathon_unlocked_now: bool) -> void:
+
+func show_game_clear_results(_completed_world: WorldData, marathon_unlocked_now: bool) -> void:
 	level_title_label.text = ""
 
 	BGMManager.fade_out(2.0)
 
-	var results_scene_instance: Results = NORMAL_RESULTS_SCENE.instantiate()
+	var results_scene: PackedScene = NORMAL_RESULTS_SCENE
+	if BuildConfig.IS_DEMO:
+		results_scene = DEMO_RESULTS_SCENE
+
+	var results_scene_instance: Results = results_scene.instantiate()
 	level_container.add_child(results_scene_instance)
 
 	var result_type := Results.ResultType.GAME_CLEAR
@@ -503,9 +508,12 @@ func show_game_clear_results(completed_world: WorldData, marathon_unlocked_now: 
 		{},
 		marathon_unlocked_now
 	)
-
+	
+	await get_tree().create_timer(1.0).timeout
 	await transition_in()
 	results_scene_instance.show_results()
+	pause_screen.retry_button.disable_button()
+	enable_pause()
 
 func show_world_transition(completed_world: WorldData, next_world: WorldData) -> void:
 	var world_data := get_current_world_data()

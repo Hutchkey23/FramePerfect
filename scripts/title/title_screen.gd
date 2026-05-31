@@ -8,6 +8,7 @@ extends Control
 @onready var customize_button: CustomMenuButton = $MainTitleVbox/CustomizeButton
 @onready var options_button: CustomMenuButton = $MainTitleVbox/OptionsButton
 @onready var quit_button: CustomMenuButton = $MainTitleVbox/QuitButton
+@onready var wishlist_button: CustomMenuButton = $MainTitleVbox/WishlistButton
 
 @onready var main_title_vbox: VBoxContainer = $MainTitleVbox
 @onready var customize_menu: CustomizeMenu = $CustomizeMenu
@@ -34,8 +35,14 @@ var time: float = 0.0
 func _ready() -> void:
 	call_deferred("setup_pivots")
 	
+	options_menu.data_cleared.connect(setup_unlock_states)
+	
 	if BuildConfig.IS_DEMO:
 		customize_button.visible = false
+		main_menu_buttons.append(wishlist_button)
+		wishlist_button.visible = true
+	
+	setup_unlock_states()
 	
 	animation_player.play("transition_in")
 	
@@ -43,6 +50,13 @@ func _ready() -> void:
 	
 	BGMManager.play(BGMManager.SEND_IT)
 
+func setup_unlock_states() -> void:
+	var marathon_id := BuildConfig.get_main_marathon_id()
+
+	if SaveManager.is_marathon_unlocked(marathon_id):
+		marathon_button.enable_button()
+	else:
+		marathon_button.disable_button()
 
 func setup_pivots() -> void:
 	logo_container.pivot_offset = logo_container.size / 2.0
@@ -152,3 +166,7 @@ func _on_level_select_level_selected(world_data: WorldData, level_data: LevelDat
 func _on_marathon_level_select_marathon_selected(data: MarathonData) -> void:
 	RunState.set_pending_marathon(data)
 	_on_play_button_pressed()
+
+
+func _on_wishlist_button_pressed() -> void:
+	OS.shell_open("https://store.steampowered.com/app/4743330/Send_It/")

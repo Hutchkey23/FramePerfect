@@ -258,6 +258,13 @@ size_flags_horizontal = 4
 size_flags_vertical = 4
 button_label_text = "OPTIONS"
 
+[node name="WishlistButton" parent="MainTitleVbox" unique_id=1787987159 instance=ExtResource("3_iowo3")]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+button_label_text = "WISHLIST"
+
 [node name="QuitButton" parent="MainTitleVbox" unique_id=573003843 instance=ExtResource("3_iowo3")]
 layout_mode = 2
 size_flags_horizontal = 4
@@ -300,6 +307,7 @@ layout_mode = 1
 [connection signal="pressed" from="MainTitleVbox/LevelSelectButton" to="." method="_on_level_select_button_pressed"]
 [connection signal="pressed" from="MainTitleVbox/CustomizeButton" to="." method="_on_customize_button_pressed"]
 [connection signal="pressed" from="MainTitleVbox/OptionsButton" to="." method="_on_options_button_pressed"]
+[connection signal="pressed" from="MainTitleVbox/WishlistButton" to="." method="_on_wishlist_button_pressed"]
 [connection signal="pressed" from="MainTitleVbox/QuitButton" to="." method="_on_quit_button_pressed"]
 [connection signal="exit_customize_menu" from="CustomizeMenu" to="." method="_on_customize_menu_exit_customize_menu"]
 [connection signal="visibility_changed" from="CustomizeMenu" to="CustomizeMenu" method="_on_visibility_changed"]
