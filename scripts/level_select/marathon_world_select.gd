@@ -68,6 +68,10 @@ func _ready() -> void:
 		
 		postcards = [$PostcardHolder/DemoWorldPostcard]
 		backgrounds = [demo_world_background]
+	else:
+		demo_world_background.visible = false
+		$PostcardHolder/DemoWorldPostcard.visible = false
+	
 	
 	for i in backgrounds.size():
 		var bg = backgrounds[i]

@@ -6,7 +6,7 @@
 [resource]
 script = ExtResource("2_vrejb")
 level_id = "level_070"
-level_title = "speed sk8"
+level_title = "i am speed"
 medal_time = 6.5
 level_scene = ExtResource("1_w6ytb")
 metadata/_custom_type_script = "uid://do5fdotl7d638"

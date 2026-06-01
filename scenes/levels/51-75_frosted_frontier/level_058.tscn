@@ -66,10 +66,8 @@ position = Vector2(168, 70)
 [node name="WindmillHazard" parent="Hazards" unique_id=42799490 instance=ExtResource("7_0r6d2")]
 z_index = 2
 position = Vector2(-16, 20)
-rotation = 2759.36
 length = 10
 rotation_speed = 120.0
-preview_rotation = true
 
 [node name="ToggleItems" type="Node2D" parent="." unique_id=136713694]
 position = Vector2(0, -9)
@@ -90,7 +88,7 @@ position = Vector2(256, 89)
 
 [node name="GameCamera" parent="." unique_id=13152400 node_paths=PackedStringArray("target") instance=ExtResource("13_tqtjq")]
 visible = false
-position = Vector2(-16, 171)
+position = Vector2(160, 90)
 mode = 1
 target = NodePath("../Player")
 default_zoom = Vector2(0.8, 0.8)
@@ -101,6 +99,7 @@ position = Vector2(0, -9)
 
 [node name="Shadows" type="TileMapLayer" parent="MapTopLayer" unique_id=255637794]
 position = Vector2(176, 91)
+tile_map_data = PackedByteArray("AAD3/wAAAAABAAMAAAD3/wEAAAABAAMAAAD3////AAAFAAMAAAD4////AAAAAAMAAAD5////AAAEAAQAAAD6//7/AAAEAAQAAAD7//3/AAAEAAQAAAD8//z/AAAEAAQAAAD9//v/AAAEAAQAAAD6//3/AAAFAAMAAAD7//z/AAAFAAMAAAD5//7/AAAFAAMAAAD8//v/AAAFAAMAAAD9//r/AAAFAAMAAAD+//r/AAAAAAMAAAD///r/AAAAAAMAAAAEAP//AAAAAAMAAAAFAP//AAAAAAMAAAADAAAAAAABAAMAAAACAAEAAAAFAAMAAAABAAIAAAAFAAMAAAAAAAMAAAAFAAMAAAD//wQAAAAFAAMAAAADAAEAAAAEAAQAAAACAAIAAAAEAAQAAAABAAMAAAAEAAQAAAAAAAQAAAAEAAQAAAD//wUAAAAEAAQAAAD+/wUAAAAAAAMAAAA=")
 tile_set = ExtResource("5_bj2dp")
 
 [node name="Walls" type="TileMapLayer" parent="MapTopLayer" unique_id=766012576]

@@ -9,7 +9,7 @@
 
 [resource]
 script = ExtResource("1_ovak5")
-marathon_id = "world_03"
+marathon_id = "frosted_frontier"
 display_name = "Frosted Frontier"
 world_number = 3
 worlds = Array[ExtResource("2_i7too")]([ExtResource("3_ovak5")])

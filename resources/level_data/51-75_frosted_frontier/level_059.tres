@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="LevelData" format=3 uid="uid://s6sjh1b3a8y7"]
+
+[ext_resource type="PackedScene" uid="uid://dgowtpdyb5yos" path="res://scenes/levels/51-75_frosted_frontier/level_059.tscn" id="1_jwc6p"]
+[ext_resource type="Script" uid="uid://do5fdotl7d638" path="res://resources/level_data/level_data.gd" id="2_sdfs8"]
+
+[resource]
+script = ExtResource("2_sdfs8")
+level_id = "level_059"
+level_title = "13th fantasy"
+medal_time = 8.0
+level_scene = ExtResource("1_jwc6p")
+metadata/_custom_type_script = "uid://do5fdotl7d638"

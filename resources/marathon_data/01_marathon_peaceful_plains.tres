@@ -9,7 +9,7 @@
 
 [resource]
 script = ExtResource("1_wot0y")
-marathon_id = "world_01"
+marathon_id = "peaceful_plains"
 display_name = "Peaceful Plains"
 world_number = 1
 worlds = Array[ExtResource("2_2xqiu")]([ExtResource("3_2xqiu")])

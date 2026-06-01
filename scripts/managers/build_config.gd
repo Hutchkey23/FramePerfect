@@ -11,4 +11,4 @@ func get_main_marathon_id() -> String:
 	if IS_DEMO:
 		return "demo_world"
 
-	return "world_01"
+	return "galactic_gateways"

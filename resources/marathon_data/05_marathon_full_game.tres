@@ -12,7 +12,7 @@
 
 [resource]
 script = ExtResource("1_gf2qc")
-marathon_id = "world_99"
+marathon_id = "all_worlds"
 display_name = "All Worlds"
 worlds = Array[ExtResource("2_e6we2")]([ExtResource("3_xbp05"), ExtResource("4_xha7d"), ExtResource("5_l6wre"), ExtResource("3_ocdi7")])
 medal_time = 600.0
