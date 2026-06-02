@@ -1,4 +1,5 @@
 extends Path2D
+class_name SquareHazard
 
 @export var rotation_speed : float = 600.0
 @export var moving : bool = false
@@ -8,7 +9,7 @@ extends Path2D
 @export var speed_scale : float = 1.0
 @export var offset : float = 0.0
 @export var starting_progress: float = 0.0
-@export var should_rotate: bool = false
+@export var should_not_rotate: bool = false
 
 
 @onready var path: PathFollow2D = $PathFollow2D
@@ -54,7 +55,7 @@ func _ready() -> void:
 		path.progress += starting_progress
 
 func _process(delta: float) -> void:
-	if not should_rotate:
+	if not should_not_rotate:
 		hazard.rotation_degrees += rotation_speed * delta
 	
 	if not moving:

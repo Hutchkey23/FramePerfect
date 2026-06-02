@@ -8,10 +8,12 @@ extends Node2D
 			call_deferred("setup_blade_lengths")
 
 @export var rotation_speed: float = 600.0
-
+@export var rotate_squares: bool = true
 @export_category("Editor Preview")
 @export var preview_rotation: bool = true
 @export var reset_rotation_when_preview_off: bool = false
+
+@onready var center: SquareHazard = $Center
 
 @onready var right_blade: Node2D = $RightBlade
 @onready var left_blade: Node2D = $LeftBlade
@@ -30,7 +32,9 @@ func _ready() -> void:
 	cache_blades()
 	setup_blade_lengths()
 	set_process(true)
-
+	
+	center.should_not_rotate = not rotate_squares
+	
 	if not Engine.is_editor_hint():
 		rotation_degrees = 0.0
 
@@ -65,12 +69,14 @@ func setup_blade_lengths() -> void:
 			set_square_enabled(square, enabled)
 
 
-func set_square_enabled(square: Node, enabled: bool) -> void:
+func set_square_enabled(square, enabled: bool) -> void:
 	if square == null:
 		return
 
 	square.visible = enabled
-
+	
+	square.should_not_rotate = not rotate_squares
+	
 	if square is Area2D:
 		square.monitoring = enabled
 		square.monitorable = enabled

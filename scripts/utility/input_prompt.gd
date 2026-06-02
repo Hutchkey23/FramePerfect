@@ -76,16 +76,21 @@ func _get_gamepad_icon(event: InputEventJoypadButton) -> Texture2D:
 
 
 func _normalize_device_name(device: String) -> String:
+	if device.is_empty():
+		return "generic"
+
 	var d := device.to_lower()
 
-	match d:
-		"steam deck", "steam_deck", "steamdeck":
-			return "steam_deck"
-		"xbox", "xbox_controller", "xinput":
-			return "xbox"
-		"playstation", "ps", "ps4", "ps5", "dualshock", "dualsense":
-			return "playstation"
-		"switch", "nintendo":
-			return "switch"
+	if d.contains("steam"):
+		return "steam_deck"
 
-	return d
+	if d.contains("xbox") or d.contains("xinput") or d.contains("standard gamepad"):
+		return "xbox"
+
+	if d.contains("playstation") or d.contains("dualshock") or d.contains("dualsense") or d.contains("ps4") or d.contains("ps5"):
+		return "playstation"
+
+	if d.contains("switch") or d.contains("nintendo") or d.contains("joy-con") or d.contains("pro controller"):
+		return "switch"
+
+	return "generic"

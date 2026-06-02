@@ -249,7 +249,7 @@ func get_label_for_input(input: InputEvent) -> String:
 			DEVICE_STEAMDECK_CONTROLLER:
 				labels = STEAMDECK_BUTTON_LABELS
 		if input.button_index < labels.size():
-			return "%s Button" % labels[input.button_index]
+			return labels[input.button_index]
 		else:
 			return "Button %d" % input.button_index
 

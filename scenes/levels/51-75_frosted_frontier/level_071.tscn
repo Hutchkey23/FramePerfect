@@ -1,0 +1,795 @@
+[gd_scene format=4 uid="uid://b0imgc6cfrpqi"]
+
+[ext_resource type="PackedScene" uid="uid://cvsktm1iw46q4" path="res://scenes/utility/level_controller.tscn" id="1_mv1xe"]
+[ext_resource type="PackedScene" uid="uid://ecmje7pp4gyy" path="res://scenes/utility/level_ui.tscn" id="2_8tv1o"]
+[ext_resource type="PackedScene" uid="uid://bxry211ole85r" path="res://scenes/utility/cinematic_bars.tscn" id="3_5ft31"]
+[ext_resource type="PackedScene" uid="uid://drnundi171cmh" path="res://scenes/player/player.tscn" id="4_710on"]
+[ext_resource type="TileSet" uid="uid://7q8eymh2ksuh" path="res://scenes/tilesets/main_floor_and_walls.tres" id="5_wyybc"]
+[ext_resource type="Shader" uid="uid://cyftftn8qvqe5" path="res://shaders/hazard_shader.gdshader" id="6_gpfhi"]
+[ext_resource type="PackedScene" uid="uid://s1u03rhom1d4" path="res://scenes/hazards/windmill_hazard.tscn" id="7_vcgnd"]
+[ext_resource type="PackedScene" uid="uid://dsmg6rsp35s6l" path="res://scenes/hazards/laser_hazard.tscn" id="8_ab1us"]
+[ext_resource type="PackedScene" uid="uid://b3b7a1qdd5k5g" path="res://scenes/hazards/square_hazard.tscn" id="9_apekr"]
+[ext_resource type="Script" uid="uid://cyfx3hv4kfs08" path="res://scripts/props/toggle_items_manager.gd" id="10_nmxna"]
+[ext_resource type="PackedScene" uid="uid://cwv3wpwmybmey" path="res://scenes/props/goal.tscn" id="11_l7s3w"]
+[ext_resource type="PackedScene" uid="uid://ca2uxdoweqwc1" path="res://scenes/utility/game_camera.tscn" id="12_w8ndd"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_wwkcr"]
+shader = ExtResource("6_gpfhi")
+shader_parameter/pulse_color = Color(0.40390328, 8.4228816e-07, 9.62615e-08, 1)
+shader_parameter/pulse_strength = 1.0
+shader_parameter/pulse_speed = 5.00000023424012
+shader_parameter/center_glow_strength = 0.0
+
+[sub_resource type="Curve2D" id="Curve2D_7lwyg"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, -72, 54, 0, 0, 0, 0, -72, 88)
+}
+point_count = 2
+
+[node name="Level_071" type="Node2D" unique_id=1381461103]
+
+[node name="LevelController" parent="." unique_id=1058685242 groups=["level_controller"] instance=ExtResource("1_mv1xe")]
+player_spawn_path = NodePath("../PlayerSpawn")
+camera_path = NodePath("../GameCamera")
+cinematic_bars_path = NodePath("../CinematicBars")
+level_ui_path = NodePath("../LevelUI")
+platforms_path = NodePath("../Platforms")
+hazards_path = NodePath("../Hazards")
+
+[node name="LevelUI" parent="." unique_id=687480857 instance=ExtResource("2_8tv1o")]
+layer = 2
+visible = false
+level_controller_path = NodePath("../LevelController")
+
+[node name="CinematicBars" parent="." unique_id=3966864 instance=ExtResource("3_5ft31")]
+visible = false
+
+[node name="Player" parent="." unique_id=1458309070 instance=ExtResource("4_710on")]
+z_index = 1
+position = Vector2(40, 35)
+game_camera_path = NodePath("../GameCamera")
+
+[node name="PlayerSpawn" type="Node2D" parent="." unique_id=535208430]
+position = Vector2(40, 35)
+
+[node name="MapBottomLayer" type="Node2D" parent="." unique_id=1665801705]
+position = Vector2(176, 91)
+
+[node name="Floors" type="TileMapLayer" parent="MapBottomLayer" unique_id=1507503636 groups=["floors"]]
+tile_map_data = PackedByteArray("AAD2//v/AAAAAAcAAAD2//z/AAAAAAcAAAD2//3/AAAAAAcAAAD2//7/AAAAAAcAAAD2////AAAAAAcAAAD2/wAAAAAAAAcAAAD2/wEAAAAAAAcAAAD2/wIAAAAAAAcAAAD2/wMAAAAAAAcAAAD2/wQAAAAAAAcAAAD3//v/AAAAAAcAAAD3//z/AAAAAAcAAAD3//3/AAAAAAcAAAD3//7/AAAAAAcAAAD3////AAAAAAcAAAD3/wAAAAAAAAcAAAD3/wEAAAAAAAcAAAD3/wIAAAAAAAcAAAD3/wMAAAAAAAcAAAD3/wQAAAAAAAcAAAD4//v/AAAAAAcAAAD4//z/AAAAAAcAAAD4//3/AAAAAAcAAAD4//7/AAAAAAcAAAD4////AAAAAAcAAAD4/wAAAAAAAAcAAAD4/wEAAAAAAAcAAAD4/wIAAAAAAAcAAAD4/wMAAAAAAAcAAAD4/wQAAAAAAAcAAAD5//v/AAAAAAcAAAD5//z/AAAAAAcAAAD5//3/AAAAAAcAAAD5//7/AAAAAAcAAAD5////AAAAAAcAAAD5/wAAAAAAAAcAAAD5/wEAAAAAAAcAAAD5/wIAAAAAAAcAAAD5/wMAAAAAAAcAAAD5/wQAAAAAAAcAAAD6//v/AAAAAAcAAAD6//z/AAAAAAcAAAD6//3/AAAAAAcAAAD6//7/AAAAAAcAAAD6////AAAAAAcAAAD6/wAAAAAAAAcAAAD6/wEAAAAAAAcAAAD6/wIAAAAAAAcAAAD6/wMAAAAAAAcAAAD6/wQAAAAAAAcAAAD7//v/AAAAAAcAAAD7//z/AAAAAAcAAAD7//3/AAAAAAcAAAD7//7/AAAAAAcAAAD7////AAAAAAcAAAD7/wAAAAAAAAcAAAD7/wEAAAAAAAcAAAD7/wIAAAAAAAcAAAD7/wMAAAAAAAcAAAD7/wQAAAAAAAcAAAD8//v/AAAAAAcAAAD8//z/AAAAAAcAAAD8//3/AAAAAAcAAAD8//7/AAAAAAcAAAD8////AAAAAAcAAAD8/wAAAAAAAAcAAAD8/wEAAAAAAAcAAAD8/wIAAAAAAAcAAAD8/wMAAAAAAAcAAAD8/wQAAAAAAAcAAAD9//v/AAAAAAcAAAD9//z/AAAAAAcAAAD9//3/AAAAAAcAAAD9//7/AAAAAAcAAAD9////AAAAAAcAAAD9/wAAAAAAAAcAAAD9/wEAAAAAAAcAAAD9/wIAAAAAAAcAAAD9/wMAAAAAAAcAAAD9/wQAAAAAAAcAAAD+//v/AAAAAAcAAAD+//z/AAAAAAcAAAD+//3/AAAAAAcAAAD+//7/AAAAAAcAAAD+////AAAAAAcAAAD+/wAAAAAAAAcAAAD+/wEAAAAAAAcAAAD+/wIAAAAAAAcAAAD+/wMAAAAAAAcAAAD+/wQAAAAAAAcAAAD///v/AAAAAAcAAAD///z/AAAAAAcAAAD///3/AAAAAAcAAAD///7/AAAAAAcAAAD/////AAAAAAcAAAD//wAAAAAAAAcAAAD//wEAAAAAAAcAAAD//wIAAAAAAAcAAAD//wMAAAAAAAcAAAD//wQAAAAAAAcAAAAAAPv/AAAAAAcAAAAAAPz/AAAAAAcAAAAAAP3/AAAAAAcAAAAAAP7/AAAAAAcAAAAAAP//AAAAAAcAAAAAAAAAAAAAAAcAAAAAAAEAAAAAAAcAAAAAAAIAAAAAAAcAAAAAAAMAAAAAAAcAAAAAAAQAAAAAAAcAAAABAPv/AAAAAAcAAAABAPz/AAAAAAcAAAABAP3/AAAAAAcAAAABAP7/AAAAAAcAAAABAP//AAAAAAcAAAABAAAAAAAAAAcAAAABAAEAAAAAAAcAAAABAAIAAAAAAAcAAAABAAMAAAAAAAcAAAABAAQAAAAAAAcAAAACAPv/AAAAAAcAAAACAPz/AAAAAAcAAAACAP3/AAAAAAcAAAACAP7/AAAAAAcAAAACAP//AAAAAAcAAAACAAAAAAAAAAcAAAACAAEAAAAAAAcAAAACAAIAAAAAAAcAAAACAAMAAAAAAAcAAAACAAQAAAAAAAcAAAADAPv/AAAAAAcAAAADAPz/AAAAAAcAAAADAP3/AAAAAAcAAAADAP7/AAAAAAcAAAADAP//AAAAAAcAAAADAAAAAAAAAAcAAAADAAEAAAAAAAcAAAADAAIAAAAAAAcAAAADAAMAAAAAAAcAAAADAAQAAAAAAAcAAAAEAPv/AAAAAAcAAAAEAPz/AAAAAAcAAAAEAP3/AAAAAAcAAAAEAP7/AAAAAAcAAAAEAP//AAAAAAcAAAAEAAAAAAAAAAcAAAAEAAEAAAAAAAcAAAAEAAIAAAAAAAcAAAAEAAMAAAAAAAcAAAAEAAQAAAAAAAcAAAAFAPv/AAAAAAcAAAAFAPz/AAAAAAcAAAAFAP3/AAAAAAcAAAAFAP7/AAAAAAcAAAAFAP//AAAAAAcAAAAFAAAAAAAAAAcAAAAFAAEAAAAAAAcAAAAFAAIAAAAAAAcAAAAFAAMAAAAAAAcAAAAFAAQAAAAAAAcAAAAGAPv/AAAAAAcAAAAGAPz/AAAAAAcAAAAGAP3/AAAAAAcAAAAGAP7/AAAAAAcAAAAGAP//AAAAAAcAAAAGAAAAAAAAAAcAAAAGAAEAAAAAAAcAAAAGAAIAAAAAAAcAAAAGAAMAAAAAAAcAAAAGAAQAAAAAAAcAAAAHAPv/AAAAAAcAAAAHAPz/AAAAAAcAAAAHAP3/AAAAAAcAAAAHAP7/AAAAAAcAAAAHAP//AAAAAAcAAAAHAAAAAAAAAAcAAAAHAAEAAAAAAAcAAAAHAAIAAAAAAAcAAAAHAAMAAAAAAAcAAAAHAAQAAAAAAAcAAAA=")
+tile_set = ExtResource("5_wyybc")
+
+[node name="Hazards" type="TileMapLayer" parent="MapBottomLayer" unique_id=876696869 groups=["floor_hazards"]]
+modulate = Color(0.5092862, 0.5092861, 0.5092864, 1)
+material = SubResource("ShaderMaterial_wwkcr")
+tile_set = ExtResource("5_wyybc")
+
+[node name="Ice" type="TileMapLayer" parent="MapBottomLayer" unique_id=940288474 groups=["ice_surfaces"]]
+tile_set = ExtResource("5_wyybc")
+
+[node name="Platforms" type="Node2D" parent="." unique_id=1867374685]
+
+[node name="Hazards" type="Node2D" parent="." unique_id=798262580]
+position = Vector2(168, 79)
+
+[node name="WindmillHazard" parent="Hazards" unique_id=42799490 instance=ExtResource("7_vcgnd")]
+z_index = 1
+position = Vector2(-49, 16)
+length = 2
+rotation_speed = 100.0
+rotate_squares = false
+
+[node name="WindmillHazard2" parent="Hazards" unique_id=1608409628 instance=ExtResource("7_vcgnd")]
+z_index = 1
+position = Vector2(33, 16)
+length = 2
+rotation_speed = -100.0
+rotate_squares = false
+
+[node name="LaserHazard" parent="Hazards" unique_id=2109695187 instance=ExtResource("8_ab1us")]
+position = Vector2(92, -64)
+active_time = 0.5
+off_time = 0.5
+
+[node name="RightCap" parent="Hazards/LaserHazard/Caps" parent_id_path=PackedInt32Array(2109695187, 1936609040) index="0" unique_id=713689459]
+position = Vector2(-26, 40)
+
+[node name="Beam" parent="Hazards/LaserHazard" index="1" unique_id=1755055180]
+points = PackedVector2Array(0, 0, 0, 40)
+
+[node name="WarningBeam" parent="Hazards/LaserHazard" index="2" unique_id=1833803067]
+points = PackedVector2Array(0, 0, 0, 40)
+
+[node name="RCapParticles" parent="Hazards/LaserHazard" index="4" unique_id=1655741551]
+position = Vector2(0, 40)
+
+[node name="BeamCollision" parent="Hazards/LaserHazard" index="5" unique_id=1900670564]
+position = Vector2(0, 20)
+rotation = 1.5707964
+
+[node name="LaserHazard5" parent="Hazards" unique_id=107330989 instance=ExtResource("8_ab1us")]
+position = Vector2(84, -64)
+active_time = 0.5
+off_time = 0.5
+
+[node name="RightCap" parent="Hazards/LaserHazard5/Caps" parent_id_path=PackedInt32Array(107330989, 1936609040) index="0" unique_id=713689459]
+position = Vector2(-26, 40)
+
+[node name="Beam" parent="Hazards/LaserHazard5" index="1" unique_id=1755055180]
+points = PackedVector2Array(0, 0, 0, 40)
+
+[node name="WarningBeam" parent="Hazards/LaserHazard5" index="2" unique_id=1833803067]
+points = PackedVector2Array(0, 0, 0, 40)
+
+[node name="RCapParticles" parent="Hazards/LaserHazard5" index="4" unique_id=1655741551]
+position = Vector2(0, 40)
+
+[node name="BeamCollision" parent="Hazards/LaserHazard5" index="5" unique_id=1900670564]
+position = Vector2(0, 20)
+rotation = 1.5707964
+
+[node name="LaserHazard6" parent="Hazards" unique_id=1692069541 instance=ExtResource("8_ab1us")]
+position = Vector2(76, -64)
+active_time = 0.5
+off_time = 0.5
+
+[node name="RightCap" parent="Hazards/LaserHazard6/Caps" parent_id_path=PackedInt32Array(1692069541, 1936609040) index="0" unique_id=713689459]
+position = Vector2(-26, 40)
+
+[node name="Beam" parent="Hazards/LaserHazard6" index="1" unique_id=1755055180]
+points = PackedVector2Array(0, 0, 0, 40)
+
+[node name="WarningBeam" parent="Hazards/LaserHazard6" index="2" unique_id=1833803067]
+points = PackedVector2Array(0, 0, 0, 40)
+
+[node name="RCapParticles" parent="Hazards/LaserHazard6" index="4" unique_id=1655741551]
+position = Vector2(0, 40)
+
+[node name="BeamCollision" parent="Hazards/LaserHazard6" index="5" unique_id=1900670564]
+position = Vector2(0, 20)
+rotation = 1.5707964
+
+[node name="LaserHazard7" parent="Hazards" unique_id=1457762084 instance=ExtResource("8_ab1us")]
+position = Vector2(68, -64)
+active_time = 0.5
+off_time = 0.5
+
+[node name="RightCap" parent="Hazards/LaserHazard7/Caps" parent_id_path=PackedInt32Array(1457762084, 1936609040) index="0" unique_id=713689459]
+position = Vector2(-26, 40)
+
+[node name="Beam" parent="Hazards/LaserHazard7" index="1" unique_id=1755055180]
+points = PackedVector2Array(0, 0, 0, 40)
+
+[node name="WarningBeam" parent="Hazards/LaserHazard7" index="2" unique_id=1833803067]
+points = PackedVector2Array(0, 0, 0, 40)
+
+[node name="RCapParticles" parent="Hazards/LaserHazard7" index="4" unique_id=1655741551]
+position = Vector2(0, 40)
+
+[node name="BeamCollision" parent="Hazards/LaserHazard7" index="5" unique_id=1900670564]
+position = Vector2(0, 20)
+rotation = 1.5707964
+
+[node name="LaserHazard8" parent="Hazards" unique_id=1611589238 instance=ExtResource("8_ab1us")]
+position = Vector2(60, -64)
+active_time = 0.5
+off_time = 0.5
+
+[node name="RightCap" parent="Hazards/LaserHazard8/Caps" parent_id_path=PackedInt32Array(1611589238, 1936609040) index="0" unique_id=713689459]
+position = Vector2(-26, 40)
+
+[node name="Beam" parent="Hazards/LaserHazard8" index="1" unique_id=1755055180]
+points = PackedVector2Array(0, 0, 0, 40)
+
+[node name="WarningBeam" parent="Hazards/LaserHazard8" index="2" unique_id=1833803067]
+points = PackedVector2Array(0, 0, 0, 40)
+
+[node name="RCapParticles" parent="Hazards/LaserHazard8" index="4" unique_id=1655741551]
+position = Vector2(0, 40)
+
+[node name="BeamCollision" parent="Hazards/LaserHazard8" index="5" unique_id=1900670564]
+position = Vector2(0, 20)
+rotation = 1.5707964
+
+[node name="LaserHazard9" parent="Hazards" unique_id=1348905017 instance=ExtResource("8_ab1us")]
+position = Vector2(52, -64)
+active_time = 0.5
+off_time = 0.5
+
+[node name="RightCap" parent="Hazards/LaserHazard9/Caps" parent_id_path=PackedInt32Array(1348905017, 1936609040) index="0" unique_id=713689459]
+position = Vector2(-26, 40)
+
+[node name="Beam" parent="Hazards/LaserHazard9" index="1" unique_id=1755055180]
+points = PackedVector2Array(0, 0, 0, 40)
+
+[node name="WarningBeam" parent="Hazards/LaserHazard9" index="2" unique_id=1833803067]
+points = PackedVector2Array(0, 0, 0, 40)
+
+[node name="RCapParticles" parent="Hazards/LaserHazard9" index="4" unique_id=1655741551]
+position = Vector2(0, 40)
+
+[node name="BeamCollision" parent="Hazards/LaserHazard9" index="5" unique_id=1900670564]
+position = Vector2(0, 20)
+rotation = 1.5707964
+
+[node name="LaserHazard10" parent="Hazards" unique_id=752385310 instance=ExtResource("8_ab1us")]
+position = Vector2(44, -64)
+active_time = 0.5
+off_time = 0.5
+
+[node name="RightCap" parent="Hazards/LaserHazard10/Caps" parent_id_path=PackedInt32Array(752385310, 1936609040) index="0" unique_id=713689459]
+position = Vector2(-26, 40)
+
+[node name="Beam" parent="Hazards/LaserHazard10" index="1" unique_id=1755055180]
+points = PackedVector2Array(0, 0, 0, 40)
+
+[node name="WarningBeam" parent="Hazards/LaserHazard10" index="2" unique_id=1833803067]
+points = PackedVector2Array(0, 0, 0, 40)
+
+[node name="RCapParticles" parent="Hazards/LaserHazard10" index="4" unique_id=1655741551]
+position = Vector2(0, 40)
+
+[node name="BeamCollision" parent="Hazards/LaserHazard10" index="5" unique_id=1900670564]
+position = Vector2(0, 20)
+rotation = 1.5707964
+
+[node name="LaserHazard11" parent="Hazards" unique_id=1118908544 instance=ExtResource("8_ab1us")]
+position = Vector2(36, -64)
+active_time = 0.5
+off_time = 0.5
+
+[node name="RightCap" parent="Hazards/LaserHazard11/Caps" parent_id_path=PackedInt32Array(1118908544, 1936609040) index="0" unique_id=713689459]
+position = Vector2(-26, 40)
+
+[node name="Beam" parent="Hazards/LaserHazard11" index="1" unique_id=1755055180]
+points = PackedVector2Array(0, 0, 0, 40)
+
+[node name="WarningBeam" parent="Hazards/LaserHazard11" index="2" unique_id=1833803067]
+points = PackedVector2Array(0, 0, 0, 40)
+
+[node name="RCapParticles" parent="Hazards/LaserHazard11" index="4" unique_id=1655741551]
+position = Vector2(0, 40)
+
+[node name="BeamCollision" parent="Hazards/LaserHazard11" index="5" unique_id=1900670564]
+position = Vector2(0, 20)
+rotation = 1.5707964
+
+[node name="LaserHazard12" parent="Hazards" unique_id=279214285 instance=ExtResource("8_ab1us")]
+position = Vector2(28, -64)
+active_time = 0.5
+off_time = 0.5
+
+[node name="RightCap" parent="Hazards/LaserHazard12/Caps" parent_id_path=PackedInt32Array(279214285, 1936609040) index="0" unique_id=713689459]
+position = Vector2(-26, 40)
+
+[node name="Beam" parent="Hazards/LaserHazard12" index="1" unique_id=1755055180]
+points = PackedVector2Array(0, 0, 0, 40)
+
+[node name="WarningBeam" parent="Hazards/LaserHazard12" index="2" unique_id=1833803067]
+points = PackedVector2Array(0, 0, 0, 40)
+
+[node name="RCapParticles" parent="Hazards/LaserHazard12" index="4" unique_id=1655741551]
+position = Vector2(0, 40)
+
+[node name="BeamCollision" parent="Hazards/LaserHazard12" index="5" unique_id=1900670564]
+position = Vector2(0, 20)
+rotation = 1.5707964
+
+[node name="LaserHazard13" parent="Hazards" unique_id=1121500848 instance=ExtResource("8_ab1us")]
+position = Vector2(20, -64)
+active_time = 0.5
+off_time = 0.5
+
+[node name="RightCap" parent="Hazards/LaserHazard13/Caps" parent_id_path=PackedInt32Array(1121500848, 1936609040) index="0" unique_id=713689459]
+position = Vector2(-26, 40)
+
+[node name="Beam" parent="Hazards/LaserHazard13" index="1" unique_id=1755055180]
+points = PackedVector2Array(0, 0, 0, 40)
+
+[node name="WarningBeam" parent="Hazards/LaserHazard13" index="2" unique_id=1833803067]
+points = PackedVector2Array(0, 0, 0, 40)
+
+[node name="RCapParticles" parent="Hazards/LaserHazard13" index="4" unique_id=1655741551]
+position = Vector2(0, 40)
+
+[node name="BeamCollision" parent="Hazards/LaserHazard13" index="5" unique_id=1900670564]
+position = Vector2(0, 20)
+rotation = 1.5707964
+
+[node name="LaserHazard14" parent="Hazards" unique_id=1845686814 instance=ExtResource("8_ab1us")]
+position = Vector2(12, -64)
+active_time = 0.5
+off_time = 0.5
+
+[node name="RightCap" parent="Hazards/LaserHazard14/Caps" parent_id_path=PackedInt32Array(1845686814, 1936609040) index="0" unique_id=713689459]
+position = Vector2(-26, 40)
+
+[node name="Beam" parent="Hazards/LaserHazard14" index="1" unique_id=1755055180]
+points = PackedVector2Array(0, 0, 0, 40)
+
+[node name="WarningBeam" parent="Hazards/LaserHazard14" index="2" unique_id=1833803067]
+points = PackedVector2Array(0, 0, 0, 40)
+
+[node name="RCapParticles" parent="Hazards/LaserHazard14" index="4" unique_id=1655741551]
+position = Vector2(0, 40)
+
+[node name="BeamCollision" parent="Hazards/LaserHazard14" index="5" unique_id=1900670564]
+position = Vector2(0, 20)
+rotation = 1.5707964
+
+[node name="LaserHazard15" parent="Hazards" unique_id=147720018 instance=ExtResource("8_ab1us")]
+position = Vector2(-28, -64)
+active_time = 0.5
+off_time = 0.5
+
+[node name="RightCap" parent="Hazards/LaserHazard15/Caps" parent_id_path=PackedInt32Array(147720018, 1936609040) index="0" unique_id=713689459]
+position = Vector2(-26, 40)
+
+[node name="Beam" parent="Hazards/LaserHazard15" index="1" unique_id=1755055180]
+points = PackedVector2Array(0, 0, 0, 40)
+
+[node name="WarningBeam" parent="Hazards/LaserHazard15" index="2" unique_id=1833803067]
+points = PackedVector2Array(0, 0, 0, 40)
+
+[node name="RCapParticles" parent="Hazards/LaserHazard15" index="4" unique_id=1655741551]
+position = Vector2(0, 40)
+
+[node name="BeamCollision" parent="Hazards/LaserHazard15" index="5" unique_id=1900670564]
+position = Vector2(0, 20)
+rotation = 1.5707964
+
+[node name="LaserHazard16" parent="Hazards" unique_id=941125090 instance=ExtResource("8_ab1us")]
+position = Vector2(-36, -64)
+active_time = 0.5
+off_time = 0.5
+
+[node name="RightCap" parent="Hazards/LaserHazard16/Caps" parent_id_path=PackedInt32Array(941125090, 1936609040) index="0" unique_id=713689459]
+position = Vector2(-26, 40)
+
+[node name="Beam" parent="Hazards/LaserHazard16" index="1" unique_id=1755055180]
+points = PackedVector2Array(0, 0, 0, 40)
+
+[node name="WarningBeam" parent="Hazards/LaserHazard16" index="2" unique_id=1833803067]
+points = PackedVector2Array(0, 0, 0, 40)
+
+[node name="RCapParticles" parent="Hazards/LaserHazard16" index="4" unique_id=1655741551]
+position = Vector2(0, 40)
+
+[node name="BeamCollision" parent="Hazards/LaserHazard16" index="5" unique_id=1900670564]
+position = Vector2(0, 20)
+rotation = 1.5707964
+
+[node name="LaserHazard17" parent="Hazards" unique_id=1292625125 instance=ExtResource("8_ab1us")]
+position = Vector2(-44, -64)
+active_time = 0.5
+off_time = 0.5
+
+[node name="RightCap" parent="Hazards/LaserHazard17/Caps" parent_id_path=PackedInt32Array(1292625125, 1936609040) index="0" unique_id=713689459]
+position = Vector2(-26, 40)
+
+[node name="Beam" parent="Hazards/LaserHazard17" index="1" unique_id=1755055180]
+points = PackedVector2Array(0, 0, 0, 40)
+
+[node name="WarningBeam" parent="Hazards/LaserHazard17" index="2" unique_id=1833803067]
+points = PackedVector2Array(0, 0, 0, 40)
+
+[node name="RCapParticles" parent="Hazards/LaserHazard17" index="4" unique_id=1655741551]
+position = Vector2(0, 40)
+
+[node name="BeamCollision" parent="Hazards/LaserHazard17" index="5" unique_id=1900670564]
+position = Vector2(0, 20)
+rotation = 1.5707964
+
+[node name="LaserHazard18" parent="Hazards" unique_id=111983822 instance=ExtResource("8_ab1us")]
+position = Vector2(-52, -64)
+active_time = 0.5
+off_time = 0.5
+
+[node name="RightCap" parent="Hazards/LaserHazard18/Caps" parent_id_path=PackedInt32Array(111983822, 1936609040) index="0" unique_id=713689459]
+position = Vector2(-26, 40)
+
+[node name="Beam" parent="Hazards/LaserHazard18" index="1" unique_id=1755055180]
+points = PackedVector2Array(0, 0, 0, 40)
+
+[node name="WarningBeam" parent="Hazards/LaserHazard18" index="2" unique_id=1833803067]
+points = PackedVector2Array(0, 0, 0, 40)
+
+[node name="RCapParticles" parent="Hazards/LaserHazard18" index="4" unique_id=1655741551]
+position = Vector2(0, 40)
+
+[node name="BeamCollision" parent="Hazards/LaserHazard18" index="5" unique_id=1900670564]
+position = Vector2(0, 20)
+rotation = 1.5707964
+
+[node name="LaserHazard19" parent="Hazards" unique_id=445678384 instance=ExtResource("8_ab1us")]
+position = Vector2(-60, -64)
+active_time = 0.5
+off_time = 0.5
+
+[node name="RightCap" parent="Hazards/LaserHazard19/Caps" parent_id_path=PackedInt32Array(445678384, 1936609040) index="0" unique_id=713689459]
+position = Vector2(-26, 40)
+
+[node name="Beam" parent="Hazards/LaserHazard19" index="1" unique_id=1755055180]
+points = PackedVector2Array(0, 0, 0, 40)
+
+[node name="WarningBeam" parent="Hazards/LaserHazard19" index="2" unique_id=1833803067]
+points = PackedVector2Array(0, 0, 0, 40)
+
+[node name="RCapParticles" parent="Hazards/LaserHazard19" index="4" unique_id=1655741551]
+position = Vector2(0, 40)
+
+[node name="BeamCollision" parent="Hazards/LaserHazard19" index="5" unique_id=1900670564]
+position = Vector2(0, 20)
+rotation = 1.5707964
+
+[node name="LaserHazard20" parent="Hazards" unique_id=1721391816 instance=ExtResource("8_ab1us")]
+position = Vector2(-68, -64)
+active_time = 0.5
+off_time = 0.5
+
+[node name="RightCap" parent="Hazards/LaserHazard20/Caps" parent_id_path=PackedInt32Array(1721391816, 1936609040) index="0" unique_id=713689459]
+position = Vector2(-26, 40)
+
+[node name="Beam" parent="Hazards/LaserHazard20" index="1" unique_id=1755055180]
+points = PackedVector2Array(0, 0, 0, 40)
+
+[node name="WarningBeam" parent="Hazards/LaserHazard20" index="2" unique_id=1833803067]
+points = PackedVector2Array(0, 0, 0, 40)
+
+[node name="RCapParticles" parent="Hazards/LaserHazard20" index="4" unique_id=1655741551]
+position = Vector2(0, 40)
+
+[node name="BeamCollision" parent="Hazards/LaserHazard20" index="5" unique_id=1900670564]
+position = Vector2(0, 20)
+rotation = 1.5707964
+
+[node name="LaserHazard21" parent="Hazards" unique_id=1290100573 instance=ExtResource("8_ab1us")]
+position = Vector2(-76, -64)
+active_time = 0.5
+off_time = 0.5
+
+[node name="RightCap" parent="Hazards/LaserHazard21/Caps" parent_id_path=PackedInt32Array(1290100573, 1936609040) index="0" unique_id=713689459]
+position = Vector2(-26, 40)
+
+[node name="Beam" parent="Hazards/LaserHazard21" index="1" unique_id=1755055180]
+points = PackedVector2Array(0, 0, 0, 40)
+
+[node name="WarningBeam" parent="Hazards/LaserHazard21" index="2" unique_id=1833803067]
+points = PackedVector2Array(0, 0, 0, 40)
+
+[node name="RCapParticles" parent="Hazards/LaserHazard21" index="4" unique_id=1655741551]
+position = Vector2(0, 40)
+
+[node name="BeamCollision" parent="Hazards/LaserHazard21" index="5" unique_id=1900670564]
+position = Vector2(0, 20)
+rotation = 1.5707964
+
+[node name="LaserHazard22" parent="Hazards" unique_id=737449998 instance=ExtResource("8_ab1us")]
+position = Vector2(-84, -64)
+active_time = 0.5
+off_time = 0.5
+
+[node name="RightCap" parent="Hazards/LaserHazard22/Caps" parent_id_path=PackedInt32Array(737449998, 1936609040) index="0" unique_id=713689459]
+position = Vector2(-26, 40)
+
+[node name="Beam" parent="Hazards/LaserHazard22" index="1" unique_id=1755055180]
+points = PackedVector2Array(0, 0, 0, 40)
+
+[node name="WarningBeam" parent="Hazards/LaserHazard22" index="2" unique_id=1833803067]
+points = PackedVector2Array(0, 0, 0, 40)
+
+[node name="RCapParticles" parent="Hazards/LaserHazard22" index="4" unique_id=1655741551]
+position = Vector2(0, 40)
+
+[node name="BeamCollision" parent="Hazards/LaserHazard22" index="5" unique_id=1900670564]
+position = Vector2(0, 20)
+rotation = 1.5707964
+
+[node name="LaserHazard23" parent="Hazards" unique_id=1644462921 instance=ExtResource("8_ab1us")]
+position = Vector2(-92, -64)
+active_time = 0.5
+off_time = 0.5
+
+[node name="RightCap" parent="Hazards/LaserHazard23/Caps" parent_id_path=PackedInt32Array(1644462921, 1936609040) index="0" unique_id=713689459]
+position = Vector2(-26, 40)
+
+[node name="Beam" parent="Hazards/LaserHazard23" index="1" unique_id=1755055180]
+points = PackedVector2Array(0, 0, 0, 40)
+
+[node name="WarningBeam" parent="Hazards/LaserHazard23" index="2" unique_id=1833803067]
+points = PackedVector2Array(0, 0, 0, 40)
+
+[node name="RCapParticles" parent="Hazards/LaserHazard23" index="4" unique_id=1655741551]
+position = Vector2(0, 40)
+
+[node name="BeamCollision" parent="Hazards/LaserHazard23" index="5" unique_id=1900670564]
+position = Vector2(0, 20)
+rotation = 1.5707964
+
+[node name="LaserHazard24" parent="Hazards" unique_id=264987840 instance=ExtResource("8_ab1us")]
+position = Vector2(-100, -64)
+active_time = 0.5
+off_time = 0.5
+
+[node name="RightCap" parent="Hazards/LaserHazard24/Caps" parent_id_path=PackedInt32Array(264987840, 1936609040) index="0" unique_id=713689459]
+position = Vector2(-26, 40)
+
+[node name="Beam" parent="Hazards/LaserHazard24" index="1" unique_id=1755055180]
+points = PackedVector2Array(0, 0, 0, 40)
+
+[node name="WarningBeam" parent="Hazards/LaserHazard24" index="2" unique_id=1833803067]
+points = PackedVector2Array(0, 0, 0, 40)
+
+[node name="RCapParticles" parent="Hazards/LaserHazard24" index="4" unique_id=1655741551]
+position = Vector2(0, 40)
+
+[node name="BeamCollision" parent="Hazards/LaserHazard24" index="5" unique_id=1900670564]
+position = Vector2(0, 20)
+rotation = 1.5707964
+
+[node name="LaserHazard2" parent="Hazards" unique_id=821759285 instance=ExtResource("8_ab1us")]
+position = Vector2(92, 48)
+active_time = 0.5
+off_time = 0.5
+
+[node name="RightCap" parent="Hazards/LaserHazard2/Caps" parent_id_path=PackedInt32Array(821759285, 1936609040) index="0" unique_id=713689459]
+position = Vector2(-26, 40)
+
+[node name="Beam" parent="Hazards/LaserHazard2" index="1" unique_id=1755055180]
+points = PackedVector2Array(0, 0, 0, 40)
+
+[node name="WarningBeam" parent="Hazards/LaserHazard2" index="2" unique_id=1833803067]
+points = PackedVector2Array(0, 0, 0, 40)
+
+[node name="RCapParticles" parent="Hazards/LaserHazard2" index="4" unique_id=1655741551]
+position = Vector2(0, 40)
+
+[node name="BeamCollision" parent="Hazards/LaserHazard2" index="5" unique_id=1900670564]
+position = Vector2(0, 20)
+rotation = 1.5707964
+
+[node name="LaserHazard3" parent="Hazards" unique_id=368531863 instance=ExtResource("8_ab1us")]
+position = Vector2(-108, 48)
+active_time = 0.5
+off_time = 0.5
+
+[node name="RightCap" parent="Hazards/LaserHazard3/Caps" parent_id_path=PackedInt32Array(368531863, 1936609040) index="0" unique_id=713689459]
+position = Vector2(-26, 40)
+
+[node name="Beam" parent="Hazards/LaserHazard3" index="1" unique_id=1755055180]
+points = PackedVector2Array(0, 0, 0, 40)
+
+[node name="WarningBeam" parent="Hazards/LaserHazard3" index="2" unique_id=1833803067]
+points = PackedVector2Array(0, 0, 0, 40)
+
+[node name="RCapParticles" parent="Hazards/LaserHazard3" index="4" unique_id=1655741551]
+position = Vector2(0, 40)
+
+[node name="BeamCollision" parent="Hazards/LaserHazard3" index="5" unique_id=1900670564]
+position = Vector2(0, 20)
+rotation = 1.5707964
+
+[node name="LaserHazard4" parent="Hazards" unique_id=1081186829 instance=ExtResource("8_ab1us")]
+position = Vector2(-108, -64)
+active_time = 0.5
+off_time = 0.5
+
+[node name="RightCap" parent="Hazards/LaserHazard4/Caps" parent_id_path=PackedInt32Array(1081186829, 1936609040) index="0" unique_id=713689459]
+position = Vector2(-26, 40)
+
+[node name="Beam" parent="Hazards/LaserHazard4" index="1" unique_id=1755055180]
+points = PackedVector2Array(0, 0, 0, 40)
+
+[node name="WarningBeam" parent="Hazards/LaserHazard4" index="2" unique_id=1833803067]
+points = PackedVector2Array(0, 0, 0, 40)
+
+[node name="RCapParticles" parent="Hazards/LaserHazard4" index="4" unique_id=1655741551]
+position = Vector2(0, 40)
+
+[node name="BeamCollision" parent="Hazards/LaserHazard4" index="5" unique_id=1900670564]
+position = Vector2(0, 20)
+rotation = 1.5707964
+
+[node name="SquareHazard" parent="Hazards" unique_id=736354374 instance=ExtResource("9_apekr")]
+curve = SubResource("Curve2D_7lwyg")
+moving = true
+loop = false
+speed_scale = 2.0
+
+[node name="SquareHazard2" parent="Hazards" unique_id=1872281994 instance=ExtResource("9_apekr")]
+position = Vector2(8, 0)
+curve = SubResource("Curve2D_7lwyg")
+moving = true
+loop = false
+speed_scale = 2.0
+offset = 0.1
+
+[node name="SquareHazard3" parent="Hazards" unique_id=1854887010 instance=ExtResource("9_apekr")]
+position = Vector2(16, 0)
+curve = SubResource("Curve2D_7lwyg")
+moving = true
+loop = false
+speed_scale = 2.0
+offset = 0.2
+
+[node name="SquareHazard4" parent="Hazards" unique_id=1662661652 instance=ExtResource("9_apekr")]
+position = Vector2(24, 0)
+curve = SubResource("Curve2D_7lwyg")
+moving = true
+loop = false
+speed_scale = 2.0
+offset = 0.3
+
+[node name="SquareHazard5" parent="Hazards" unique_id=68582548 instance=ExtResource("9_apekr")]
+position = Vector2(32, 0)
+curve = SubResource("Curve2D_7lwyg")
+moving = true
+loop = false
+speed_scale = 2.0
+offset = 0.4
+
+[node name="SquareHazard6" parent="Hazards" unique_id=141473480 instance=ExtResource("9_apekr")]
+position = Vector2(40, 0)
+curve = SubResource("Curve2D_7lwyg")
+moving = true
+loop = false
+speed_scale = 2.0
+offset = 0.5
+
+[node name="SquareHazard7" parent="Hazards" unique_id=1764808768 instance=ExtResource("9_apekr")]
+position = Vector2(48, 0)
+curve = SubResource("Curve2D_7lwyg")
+moving = true
+loop = false
+speed_scale = 2.0
+offset = 0.6
+
+[node name="SquareHazard8" parent="Hazards" unique_id=1549241345 instance=ExtResource("9_apekr")]
+position = Vector2(56, 0)
+curve = SubResource("Curve2D_7lwyg")
+moving = true
+loop = false
+speed_scale = 2.0
+offset = 0.7
+
+[node name="SquareHazard9" parent="Hazards" unique_id=836521144 instance=ExtResource("9_apekr")]
+position = Vector2(64, 0)
+curve = SubResource("Curve2D_7lwyg")
+moving = true
+loop = false
+speed_scale = 2.0
+offset = 0.8
+
+[node name="SquareHazard10" parent="Hazards" unique_id=1111911857 instance=ExtResource("9_apekr")]
+position = Vector2(72, 0)
+curve = SubResource("Curve2D_7lwyg")
+moving = true
+loop = false
+speed_scale = 2.0
+offset = 0.9
+
+[node name="SquareHazard11" parent="Hazards" unique_id=503701598 instance=ExtResource("9_apekr")]
+position = Vector2(80, 0)
+curve = SubResource("Curve2D_7lwyg")
+moving = true
+loop = false
+speed_scale = 2.0
+offset = 1.0
+
+[node name="SquareHazard12" parent="Hazards" unique_id=958569445 instance=ExtResource("9_apekr")]
+position = Vector2(88, 0)
+curve = SubResource("Curve2D_7lwyg")
+moving = true
+loop = false
+speed_scale = 2.0
+offset = 1.1
+
+[node name="SquareHazard13" parent="Hazards" unique_id=1559386368 instance=ExtResource("9_apekr")]
+position = Vector2(96, 0)
+curve = SubResource("Curve2D_7lwyg")
+moving = true
+loop = false
+speed_scale = 2.0
+offset = 1.2
+
+[node name="SquareHazard14" parent="Hazards" unique_id=2076752358 instance=ExtResource("9_apekr")]
+position = Vector2(104, 0)
+curve = SubResource("Curve2D_7lwyg")
+moving = true
+loop = false
+speed_scale = 2.0
+offset = 1.3
+
+[node name="SquareHazard15" parent="Hazards" unique_id=36286232 instance=ExtResource("9_apekr")]
+position = Vector2(112, 0)
+curve = SubResource("Curve2D_7lwyg")
+moving = true
+loop = false
+speed_scale = 2.0
+offset = 1.4
+
+[node name="SquareHazard16" parent="Hazards" unique_id=1327532773 instance=ExtResource("9_apekr")]
+position = Vector2(120, 0)
+curve = SubResource("Curve2D_7lwyg")
+moving = true
+loop = false
+speed_scale = 2.0
+offset = 1.5
+
+[node name="SquareHazard17" parent="Hazards" unique_id=153111207 instance=ExtResource("9_apekr")]
+position = Vector2(128, 0)
+curve = SubResource("Curve2D_7lwyg")
+moving = true
+loop = false
+speed_scale = 2.0
+offset = 1.6
+
+[node name="ToggleItems" type="Node2D" parent="." unique_id=932950340]
+script = ExtResource("10_nmxna")
+player_path = NodePath("../Player")
+
+[node name="Stamps" type="Node2D" parent="." unique_id=123113769]
+position = Vector2(168, 79)
+
+[node name="StampLocation1" type="Node2D" parent="Stamps" unique_id=730841547]
+position = Vector2(112, -44)
+
+[node name="StampLocation2" type="Node2D" parent="Stamps" unique_id=1642025221]
+position = Vector2(-128, 68)
+
+[node name="StampLocation3" type="Node2D" parent="Stamps" unique_id=1847383249]
+position = Vector2(-8, 16)
+
+[node name="StampLocation4" type="Node2D" parent="Stamps" unique_id=294337862]
+position = Vector2(-76, 16)
+
+[node name="StampLocation5" type="Node2D" parent="Stamps" unique_id=760584164]
+position = Vector2(60, 16)
+
+[node name="Goal" parent="." unique_id=652280647 instance=ExtResource("11_l7s3w")]
+position = Vector2(281, 147)
+
+[node name="GameCamera" parent="." unique_id=13152400 node_paths=PackedStringArray("target") instance=ExtResource("12_w8ndd")]
+position = Vector2(160, -133)
+mode = 1
+target = NodePath("../Player")
+default_zoom = Vector2(0.8, 0.8)
+fixed_position = Vector2(160, 90)
+
+[node name="MapTopLayer" type="Node2D" parent="." unique_id=860982189]
+
+[node name="Shadows" type="TileMapLayer" parent="MapTopLayer" unique_id=255637794]
+position = Vector2(176, 91)
+tile_map_data = PackedByteArray("AAD2/wQAAAABAAMAAAD2/wMAAAABAAMAAAD2//z/AAABAAMAAAD2//3/AAABAAMAAAD2/wIAAAAFAAMAAAD5/wEAAAAFAAMAAAD2//v/AAAFAAMAAAD3/wIAAAAAAAMAAAD4/wIAAAAAAAMAAAD3//v/AAAAAAMAAAD4//v/AAAAAAMAAAD5//v/AAAAAAMAAAD6//v/AAAAAAMAAAD7//v/AAAAAAMAAAD8//v/AAAAAAMAAAD9//v/AAAAAAMAAAD+//v/AAAAAAMAAAD///v/AAAAAAMAAAAAAPv/AAAAAAMAAAABAPv/AAAAAAMAAAACAPv/AAAAAAMAAAADAPv/AAAAAAMAAAAEAPv/AAAAAAMAAAAFAPv/AAAAAAMAAAAGAPv/AAAAAAMAAAAHAPv/AAAAAAMAAAAFAAIAAAAAAAMAAAAGAAIAAAAAAAMAAAAHAAIAAAAAAAMAAAD5/wIAAAAEAAQAAAD6/wEAAAAEAAQAAAD6////AAABAAMAAAD6/wAAAAABAAMAAAA=")
+tile_set = ExtResource("5_wyybc")
+
+[node name="Walls" type="TileMapLayer" parent="MapTopLayer" unique_id=766012576]
+z_index = 1
+position = Vector2(176, 91)
+tile_map_data = PackedByteArray("AADn/+n/AAAAAAgAAADn/+r/AAAAAAgAAADn/+v/AAAAAAgAAADn/+z/AAAAAAgAAADn/+3/AAAAAAgAAADn/+7/AAAAAAgAAADn/+//AAAAAAgAAADn//D/AAAAAAgAAADn//H/AAAAAAgAAADn//L/AAAAAAgAAADn//P/AAAAAAgAAADn//T/AAAAAAgAAADn//X/AAAAAAgAAADn//b/AAAAAAgAAADn//f/AAAAAAgAAADn//j/AAAAAAgAAADn//n/AAAAAAgAAADn//r/AAAAAAgAAADn//v/AAAAAAgAAADn//z/AAAAAAgAAADn//3/AAAAAAgAAADn//7/AAAAAAgAAADn////AAAAAAgAAADn/wAAAAAAAAgAAADn/wEAAAAAAAgAAADn/wIAAAAAAAgAAADn/wMAAAAAAAgAAADn/wQAAAAAAAgAAADn/wUAAAAAAAgAAADn/wYAAAAAAAgAAADn/wcAAAAAAAgAAADn/wgAAAAAAAgAAADn/wkAAAAAAAgAAADn/woAAAAAAAgAAADn/wsAAAAAAAgAAADn/wwAAAAAAAgAAADn/w0AAAAAAAgAAADn/w4AAAAAAAgAAADn/w8AAAAAAAgAAADn/xAAAAAAAAgAAADn/xEAAAAAAAgAAADn/xIAAAAAAAgAAADn/xMAAAAAAAgAAADn/xQAAAAAAAgAAADn/xUAAAAAAAgAAADo/+n/AAAAAAgAAADo/+r/AAAAAAgAAADo/+v/AAAAAAgAAADo/+z/AAAAAAgAAADo/+3/AAAAAAgAAADo/+7/AAAAAAgAAADo/+//AAAAAAgAAADo//D/AAAAAAgAAADo//H/AAAAAAgAAADo//L/AAAAAAgAAADo//P/AAAAAAgAAADo//T/AAAAAAgAAADo//X/AAAAAAgAAADo//b/AAAAAAgAAADo//f/AAAAAAgAAADo//j/AAAAAAgAAADo//n/AAAAAAgAAADo//r/AAAAAAgAAADo//v/AAAAAAgAAADo//z/AAAAAAgAAADo//3/AAAAAAgAAADo//7/AAAAAAgAAADo////AAAAAAgAAADo/wAAAAAAAAgAAADo/wEAAAAAAAgAAADo/wIAAAAAAAgAAADo/wMAAAAAAAgAAADo/wQAAAAAAAgAAADo/wUAAAAAAAgAAADo/wYAAAAAAAgAAADo/wcAAAAAAAgAAADo/wgAAAAAAAgAAADo/wkAAAAAAAgAAADo/woAAAAAAAgAAADo/wsAAAAAAAgAAADo/wwAAAAAAAgAAADo/w0AAAAAAAgAAADo/w4AAAAAAAgAAADo/w8AAAAAAAgAAADo/xAAAAAAAAgAAADo/xEAAAAAAAgAAADo/xIAAAAAAAgAAADo/xMAAAAAAAgAAADo/xQAAAAAAAgAAADo/xUAAAAAAAgAAADp/+n/AAAAAAgAAADp/+r/AAAAAAgAAADp/+v/AAAAAAgAAADp/+z/AAAAAAgAAADp/+3/AAAAAAgAAADp/+7/AAAAAAgAAADp/+//AAAAAAgAAADp//D/AAAAAAgAAADp//H/AAAAAAgAAADp//L/AAAAAAgAAADp//P/AAAAAAgAAADp//T/AAAAAAgAAADp//X/AAAAAAgAAADp//b/AAAAAAgAAADp//f/AAAAAAgAAADp//j/AAAAAAgAAADp//n/AAAAAAgAAADp//r/AAAAAAgAAADp//v/AAAAAAgAAADp//z/AAAAAAgAAADp//3/AAAAAAgAAADp//7/AAAAAAgAAADp////AAAAAAgAAADp/wAAAAAAAAgAAADp/wEAAAAAAAgAAADp/wIAAAAAAAgAAADp/wMAAAAAAAgAAADp/wQAAAAAAAgAAADp/wUAAAAAAAgAAADp/wYAAAAAAAgAAADp/wcAAAAAAAgAAADp/wgAAAAAAAgAAADp/wkAAAAAAAgAAADp/woAAAAAAAgAAADp/wsAAAAAAAgAAADp/wwAAAAAAAgAAADp/w0AAAAAAAgAAADp/w4AAAAAAAgAAADp/w8AAAAAAAgAAADp/xAAAAAAAAgAAADp/xEAAAAAAAgAAADp/xIAAAAAAAgAAADp/xMAAAAAAAgAAADp/xQAAAAAAAgAAADp/xUAAAAAAAgAAADq/+n/AAAAAAgAAADq/+r/AAAAAAgAAADq/+v/AAAAAAgAAADq/+z/AAAAAAgAAADq/+3/AAAAAAgAAADq/+7/AAAAAAgAAADq/+//AAAAAAgAAADq//D/AAAAAAgAAADq//H/AAAAAAgAAADq//L/AAAAAAgAAADq//P/AAAAAAgAAADq//T/AAAAAAgAAADq//X/AAAAAAgAAADq//b/AAAAAAgAAADq//f/AAAAAAgAAADq//j/AAAAAAgAAADq//n/AAAAAAgAAADq//r/AAAAAAgAAADq//v/AAAAAAgAAADq//z/AAAAAAgAAADq//3/AAAAAAgAAADq//7/AAAAAAgAAADq////AAAAAAgAAADq/wAAAAAAAAgAAADq/wEAAAAAAAgAAADq/wIAAAAAAAgAAADq/wMAAAAAAAgAAADq/wQAAAAAAAgAAADq/wUAAAAAAAgAAADq/wYAAAAAAAgAAADq/wcAAAAAAAgAAADq/wgAAAAAAAgAAADq/wkAAAAAAAgAAADq/woAAAAAAAgAAADq/wsAAAAAAAgAAADq/wwAAAAAAAgAAADq/w0AAAAAAAgAAADq/w4AAAAAAAgAAADq/w8AAAAAAAgAAADq/xAAAAAAAAgAAADq/xEAAAAAAAgAAADq/xIAAAAAAAgAAADq/xMAAAAAAAgAAADq/xQAAAAAAAgAAADq/xUAAAAAAAgAAADr/+n/AAAAAAgAAADr/+r/AAAAAAgAAADr/+v/AAAAAAgAAADr/+z/AAAAAAgAAADr/+3/AAAAAAgAAADr/+7/AAAAAAgAAADr/+//AAAAAAgAAADr//D/AAAAAAgAAADr//H/AAAAAAgAAADr//L/AAAAAAgAAADr//P/AAAAAAgAAADr//T/AAAAAAgAAADr//X/AAAAAAgAAADr//b/AAAAAAgAAADr//f/AAAAAAgAAADr//j/AAAAAAgAAADr//n/AAAAAAgAAADr//r/AAAAAAgAAADr//v/AAAAAAgAAADr//z/AAAAAAgAAADr//3/AAAAAAgAAADr//7/AAAAAAgAAADr////AAAAAAgAAADr/wAAAAAAAAgAAADr/wEAAAAAAAgAAADr/wIAAAAAAAgAAADr/wMAAAAAAAgAAADr/wQAAAAAAAgAAADr/wUAAAAAAAgAAADr/wYAAAAAAAgAAADr/wcAAAAAAAgAAADr/wgAAAAAAAgAAADr/wkAAAAAAAgAAADr/woAAAAAAAgAAADr/wsAAAAAAAgAAADr/wwAAAAAAAgAAADr/w0AAAAAAAgAAADr/w4AAAAAAAgAAADr/w8AAAAAAAgAAADr/xAAAAAAAAgAAADr/xEAAAAAAAgAAADr/xIAAAAAAAgAAADr/xMAAAAAAAgAAADr/xQAAAAAAAgAAADr/xUAAAAAAAgAAADs/+n/AAAAAAgAAADs/+r/AAAAAAgAAADs/+v/AAAAAAgAAADs/+z/AAAAAAgAAADs/+3/AAAAAAgAAADs/+7/AAAAAAgAAADs/+//AAAAAAgAAADs//D/AAAAAAgAAADs//H/AAAAAAgAAADs//L/AAAAAAgAAADs//P/AAAAAAgAAADs//T/AAAAAAgAAADs//X/AAAAAAgAAADs//b/AAAAAAgAAADs//f/AAAAAAgAAADs//j/AAAAAAgAAADs//n/AAAAAAgAAADs//r/AAAAAAgAAADs//v/AAAAAAgAAADs//z/AAAAAAgAAADs//3/AAAAAAgAAADs//7/AAAAAAgAAADs////AAAAAAgAAADs/wAAAAAAAAgAAADs/wEAAAAAAAgAAADs/wIAAAAAAAgAAADs/wMAAAAAAAgAAADs/wQAAAAAAAgAAADs/wUAAAAAAAgAAADs/wYAAAAAAAgAAADs/wcAAAAAAAgAAADs/wgAAAAAAAgAAADs/wkAAAAAAAgAAADs/woAAAAAAAgAAADs/wsAAAAAAAgAAADs/wwAAAAAAAgAAADs/w0AAAAAAAgAAADs/w4AAAAAAAgAAADs/w8AAAAAAAgAAADs/xAAAAAAAAgAAADs/xEAAAAAAAgAAADs/xIAAAAAAAgAAADs/xMAAAAAAAgAAADs/xQAAAAAAAgAAADs/xUAAAAAAAgAAADt/+n/AAAAAAgAAADt/+r/AAAAAAgAAADt/+v/AAAAAAgAAADt/+z/AAAAAAgAAADt/+3/AAAAAAgAAADt/+7/AAAAAAgAAADt/+//AAAAAAgAAADt//D/AAAAAAgAAADt//H/AAAAAAgAAADt//L/AAAAAAgAAADt//P/AAAAAAgAAADt//T/AAAAAAgAAADt//X/AAAAAAgAAADt//b/AAAAAAgAAADt//f/AAAAAAgAAADt//j/AAAAAAgAAADt//n/AAAAAAgAAADt//r/AAAAAAgAAADt//v/AAAAAAgAAADt//z/AAAAAAgAAADt//3/AAAAAAgAAADt//7/AAAAAAgAAADt////AAAAAAgAAADt/wAAAAAAAAgAAADt/wEAAAAAAAgAAADt/wIAAAAAAAgAAADt/wMAAAAAAAgAAADt/wQAAAAAAAgAAADt/wUAAAAAAAgAAADt/wYAAAAAAAgAAADt/wcAAAAAAAgAAADt/wgAAAAAAAgAAADt/wkAAAAAAAgAAADt/woAAAAAAAgAAADt/wsAAAAAAAgAAADt/wwAAAAAAAgAAADt/w0AAAAAAAgAAADt/w4AAAAAAAgAAADt/w8AAAAAAAgAAADt/xAAAAAAAAgAAADt/xEAAAAAAAgAAADt/xIAAAAAAAgAAADt/xMAAAAAAAgAAADt/xQAAAAAAAgAAADt/xUAAAAAAAgAAADu/+n/AAAAAAgAAADu/+r/AAAAAAgAAADu/+v/AAAAAAgAAADu/+z/AAAAAAgAAADu/+3/AAAAAAgAAADu/+7/AAAAAAgAAADu/+//AAAAAAgAAADu//D/AAAAAAgAAADu//H/AAAAAAgAAADu//L/AAAAAAgAAADu//P/AAAAAAgAAADu//T/AAAAAAgAAADu//X/AAAAAAgAAADu//b/AAAAAAgAAADu//f/AAAAAAgAAADu//j/AAAAAAgAAADu//n/AAAAAAgAAADu//r/AAAAAAgAAADu//v/AAAAAAgAAADu//z/AAAAAAgAAADu//3/AAAAAAgAAADu//7/AAAAAAgAAADu////AAAAAAgAAADu/wAAAAAAAAgAAADu/wEAAAAAAAgAAADu/wIAAAAAAAgAAADu/wMAAAAAAAgAAADu/wQAAAAAAAgAAADu/wUAAAAAAAgAAADu/wYAAAAAAAgAAADu/wcAAAAAAAgAAADu/wgAAAAAAAgAAADu/wkAAAAAAAgAAADu/woAAAAAAAgAAADu/wsAAAAAAAgAAADu/wwAAAAAAAgAAADu/w0AAAAAAAgAAADu/w4AAAAAAAgAAADu/w8AAAAAAAgAAADu/xAAAAAAAAgAAADu/xEAAAAAAAgAAADu/xIAAAAAAAgAAADu/xMAAAAAAAgAAADu/xQAAAAAAAgAAADu/xUAAAAAAAgAAADv/+n/AAAAAAgAAADv/+r/AAAAAAgAAADv/+v/AAAAAAgAAADv/+z/AAAAAAgAAADv/+3/AAAAAAgAAADv/+7/AAAAAAgAAADv/+//AAAAAAgAAADv//D/AAAAAAgAAADv//H/AAAAAAgAAADv//L/AAAAAAgAAADv//P/AAAAAAgAAADv//T/AAAAAAgAAADv//X/AAAAAAgAAADv//b/AAAAAAgAAADv//f/AAAAAAgAAADv//j/AAAAAAgAAADv//n/AAAAAAgAAADv//r/AAAAAAgAAADv//v/AAAAAAgAAADv//z/AAAAAAgAAADv//3/AAAAAAgAAADv//7/AAAAAAgAAADv////AAAAAAgAAADv/wAAAAAAAAgAAADv/wEAAAAAAAgAAADv/wIAAAAAAAgAAADv/wMAAAAAAAgAAADv/wQAAAAAAAgAAADv/wUAAAAAAAgAAADv/wYAAAAAAAgAAADv/wcAAAAAAAgAAADv/wgAAAAAAAgAAADv/wkAAAAAAAgAAADv/woAAAAAAAgAAADv/wsAAAAAAAgAAADv/wwAAAAAAAgAAADv/w0AAAAAAAgAAADv/w4AAAAAAAgAAADv/w8AAAAAAAgAAADv/xAAAAAAAAgAAADv/xEAAAAAAAgAAADv/xIAAAAAAAgAAADv/xMAAAAAAAgAAADv/xQAAAAAAAgAAADv/xUAAAAAAAgAAADw/+n/AAAAAAgAAADw/+r/AAAAAAgAAADw/+v/AAAAAAgAAADw/+z/AAAAAAgAAADw/+3/AAAAAAgAAADw/+7/AAAAAAgAAADw/+//AAAAAAgAAADw//D/AAAAAAgAAADw//H/AAAAAAgAAADw//L/AAAAAAgAAADw//P/AAAAAAgAAADw//T/AAAAAAgAAADw//X/AAAAAAgAAADw//b/AAAAAAgAAADw//f/AAAAAAgAAADw//j/AAAAAAgAAADw//n/AAAAAAgAAADw//r/AAAAAAgAAADw//v/AAAAAAgAAADw//z/AAAAAAgAAADw//3/AAAAAAgAAADw//7/AAAAAAgAAADw////AAAAAAgAAADw/wAAAAAAAAgAAADw/wEAAAAAAAgAAADw/wIAAAAAAAgAAADw/wMAAAAAAAgAAADw/wQAAAAAAAgAAADw/wUAAAAAAAgAAADw/wYAAAAAAAgAAADw/wcAAAAAAAgAAADw/wgAAAAAAAgAAADw/wkAAAAAAAgAAADw/woAAAAAAAgAAADw/wsAAAAAAAgAAADw/wwAAAAAAAgAAADw/w0AAAAAAAgAAADw/w4AAAAAAAgAAADw/w8AAAAAAAgAAADw/xAAAAAAAAgAAADw/xEAAAAAAAgAAADw/xIAAAAAAAgAAADw/xMAAAAAAAgAAADw/xQAAAAAAAgAAADw/xUAAAAAAAgAAADx/+n/AAAAAAgAAADx/+r/AAAAAAgAAADx/+v/AAAAAAgAAADx/+z/AAAAAAgAAADx/+3/AAAAAAgAAADx/+7/AAAAAAgAAADx/+//AAAAAAgAAADx//D/AAAAAAgAAADx//H/AAAAAAgAAADx//L/AAAAAAgAAADx//P/AAAAAAgAAADx//T/AAAAAAgAAADx//X/AAAAAAgAAADx//b/AAAAAAgAAADx//f/AAAAAAgAAADx//j/AAAAAAgAAADx//n/AAAAAAgAAADx//r/AAAAAAgAAADx//v/AAAAAAgAAADx//z/AAAAAAgAAADx//3/AAAAAAgAAADx//7/AAAAAAgAAADx////AAAAAAgAAADx/wAAAAAAAAgAAADx/wEAAAAAAAgAAADx/wIAAAAAAAgAAADx/wMAAAAAAAgAAADx/wQAAAAAAAgAAADx/wUAAAAAAAgAAADx/wYAAAAAAAgAAADx/wcAAAAAAAgAAADx/wgAAAAAAAgAAADx/wkAAAAAAAgAAADx/woAAAAAAAgAAADx/wsAAAAAAAgAAADx/wwAAAAAAAgAAADx/w0AAAAAAAgAAADx/w4AAAAAAAgAAADx/w8AAAAAAAgAAADx/xAAAAAAAAgAAADx/xEAAAAAAAgAAADx/xIAAAAAAAgAAADx/xMAAAAAAAgAAADx/xQAAAAAAAgAAADx/xUAAAAAAAgAAADy/+n/AAAAAAgAAADy/+r/AAAAAAgAAADy/+v/AAAAAAgAAADy/+z/AAAAAAgAAADy/+3/AAAAAAgAAADy/+7/AAAAAAgAAADy/+//AAAAAAgAAADy//D/AAAAAAgAAADy//H/AAAAAAgAAADy//L/AAAAAAgAAADy//P/AAAAAAgAAADy//T/AAAAAAgAAADy//X/AAAAAAgAAADy//b/AAAAAAgAAADy//f/AAAAAAgAAADy//j/AAAAAAgAAADy//n/AAAAAAgAAADy//r/AAAAAAgAAADy//v/AAAAAAgAAADy//z/AAAAAAgAAADy//3/AAAAAAgAAADy//7/AAAAAAgAAADy////AAAAAAgAAADy/wAAAAAAAAgAAADy/wEAAAAAAAgAAADy/wIAAAAAAAgAAADy/wMAAAAAAAgAAADy/wQAAAAAAAgAAADy/wUAAAAAAAgAAADy/wYAAAAAAAgAAADy/wcAAAAAAAgAAADy/wgAAAAAAAgAAADy/wkAAAAAAAgAAADy/woAAAAAAAgAAADy/wsAAAAAAAgAAADy/wwAAAAAAAgAAADy/w0AAAAAAAgAAADy/w4AAAAAAAgAAADy/w8AAAAAAAgAAADy/xAAAAAAAAgAAADy/xEAAAAAAAgAAADy/xIAAAAAAAgAAADy/xMAAAAAAAgAAADy/xQAAAAAAAgAAADy/xUAAAAAAAgAAADz/+n/AAAAAAgAAADz/+r/AAAAAAgAAADz/+v/AAAAAAgAAADz/+z/AAAAAAgAAADz/+3/AAAAAAgAAADz/+7/AAAAAAgAAADz/+//AAAAAAgAAADz//D/AAAAAAgAAADz//H/AAAAAAgAAADz//L/AAAAAAgAAADz//P/AAAAAAgAAADz//T/AAAAAAgAAADz//X/AAAAAAgAAADz//b/AAAAAAgAAADz//f/AAAAAAgAAADz//j/AAAAAAgAAADz//n/AAAAAAgAAADz//r/AAAAAAgAAADz//v/AAAAAAgAAADz//z/AAAAAAgAAADz//3/AAAAAAgAAADz//7/AAAAAAgAAADz////AAAAAAgAAADz/wAAAAAAAAgAAADz/wEAAAAAAAgAAADz/wIAAAAAAAgAAADz/wMAAAAAAAgAAADz/wQAAAAAAAgAAADz/wUAAAAAAAgAAADz/wYAAAAAAAgAAADz/wcAAAAAAAgAAADz/wgAAAAAAAgAAADz/wkAAAAAAAgAAADz/woAAAAAAAgAAADz/wsAAAAAAAgAAADz/wwAAAAAAAgAAADz/w0AAAAAAAgAAADz/w4AAAAAAAgAAADz/w8AAAAAAAgAAADz/xAAAAAAAAgAAADz/xEAAAAAAAgAAADz/xIAAAAAAAgAAADz/xMAAAAAAAgAAADz/xQAAAAAAAgAAADz/xUAAAAAAAgAAAD0/+n/AAAAAAgAAAD0/+r/AAAAAAgAAAD0/+v/AAAAAAgAAAD0/+z/AAAAAAgAAAD0/+3/AAAAAAgAAAD0/+7/AAAAAAgAAAD0/+//AAAAAAgAAAD0//D/AAAAAAgAAAD0//H/AAAAAAgAAAD0//L/AAAAAAgAAAD0//P/AAAAAAgAAAD0//T/AAAAAAgAAAD0//X/AAAAAAgAAAD0//b/AAAAAAgAAAD0//f/AAAAAAgAAAD0/w4AAAAAAAgAAAD0/w8AAAAAAAgAAAD0/xAAAAAAAAgAAAD0/xEAAAAAAAgAAAD0/xIAAAAAAAgAAAD0/xMAAAAAAAgAAAD0/xQAAAAAAAgAAAD0/xUAAAAAAAgAAAD1/+n/AAAAAAgAAAD1/+r/AAAAAAgAAAD1/+v/AAAAAAgAAAD1/+z/AAAAAAgAAAD1/+3/AAAAAAgAAAD1/+7/AAAAAAgAAAD1/+//AAAAAAgAAAD1//D/AAAAAAgAAAD1//H/AAAAAAgAAAD1//L/AAAAAAgAAAD1//P/AAAAAAgAAAD1//T/AAAAAAgAAAD1//X/AAAAAAgAAAD1//b/AAAAAAgAAAD1//f/AAAAAAgAAAD1/w4AAAAAAAgAAAD1/w8AAAAAAAgAAAD1/xAAAAAAAAgAAAD1/xEAAAAAAAgAAAD1/xIAAAAAAAgAAAD1/xMAAAAAAAgAAAD1/xQAAAAAAAgAAAD1/xUAAAAAAAgAAAD2/+n/AAAAAAgAAAD2/+r/AAAAAAgAAAD2/+v/AAAAAAgAAAD2/+z/AAAAAAgAAAD2/+3/AAAAAAgAAAD2/+7/AAAAAAgAAAD2/+//AAAAAAgAAAD2//D/AAAAAAgAAAD2//H/AAAAAAgAAAD2//L/AAAAAAgAAAD2//P/AAAAAAgAAAD2//T/AAAAAAgAAAD2//X/AAAAAAgAAAD2//b/AAAAAAgAAAD2//f/AAAAAAgAAAD2/w4AAAAAAAgAAAD2/w8AAAAAAAgAAAD2/xAAAAAAAAgAAAD2/xEAAAAAAAgAAAD2/xIAAAAAAAgAAAD2/xMAAAAAAAgAAAD2/xQAAAAAAAgAAAD2/xUAAAAAAAgAAAD3/+n/AAAAAAgAAAD3/+r/AAAAAAgAAAD3/+v/AAAAAAgAAAD3/+z/AAAAAAgAAAD3/+3/AAAAAAgAAAD3/+7/AAAAAAgAAAD3/+//AAAAAAgAAAD3//D/AAAAAAgAAAD3//H/AAAAAAgAAAD3//L/AAAAAAgAAAD3//P/AAAAAAgAAAD3//T/AAAAAAgAAAD3//X/AAAAAAgAAAD3//b/AAAAAAgAAAD3//f/AAAAAAgAAAD3/w4AAAAAAAgAAAD3/w8AAAAAAAgAAAD3/xAAAAAAAAgAAAD3/xEAAAAAAAgAAAD3/xIAAAAAAAgAAAD3/xMAAAAAAAgAAAD3/xQAAAAAAAgAAAD3/xUAAAAAAAgAAAD4/+n/AAAAAAgAAAD4/+r/AAAAAAgAAAD4/+v/AAAAAAgAAAD4/+z/AAAAAAgAAAD4/+3/AAAAAAgAAAD4/+7/AAAAAAgAAAD4/+//AAAAAAgAAAD4//D/AAAAAAgAAAD4//H/AAAAAAgAAAD4//L/AAAAAAgAAAD4//P/AAAAAAgAAAD4//T/AAAAAAgAAAD4//X/AAAAAAgAAAD4//b/AAAAAAgAAAD4//f/AAAAAAgAAAD4/w4AAAAAAAgAAAD4/w8AAAAAAAgAAAD4/xAAAAAAAAgAAAD4/xEAAAAAAAgAAAD4/xIAAAAAAAgAAAD4/xMAAAAAAAgAAAD4/xQAAAAAAAgAAAD4/xUAAAAAAAgAAAD5/+n/AAAAAAgAAAD5/+r/AAAAAAgAAAD5/+v/AAAAAAgAAAD5/+z/AAAAAAgAAAD5/+3/AAAAAAgAAAD5/+7/AAAAAAgAAAD5/+//AAAAAAgAAAD5//D/AAAAAAgAAAD5//H/AAAAAAgAAAD5//L/AAAAAAgAAAD5//P/AAAAAAgAAAD5//T/AAAAAAgAAAD5//X/AAAAAAgAAAD5//b/AAAAAAgAAAD5//f/AAAAAAgAAAD5/w4AAAAAAAgAAAD5/w8AAAAAAAgAAAD5/xAAAAAAAAgAAAD5/xEAAAAAAAgAAAD5/xIAAAAAAAgAAAD5/xMAAAAAAAgAAAD5/xQAAAAAAAgAAAD5/xUAAAAAAAgAAAD6/+n/AAAAAAgAAAD6/+r/AAAAAAgAAAD6/+v/AAAAAAgAAAD6/+z/AAAAAAgAAAD6/+3/AAAAAAgAAAD6/+7/AAAAAAgAAAD6/+//AAAAAAgAAAD6//D/AAAAAAgAAAD6//H/AAAAAAgAAAD6//L/AAAAAAgAAAD6//P/AAAAAAgAAAD6//T/AAAAAAgAAAD6//X/AAAAAAgAAAD6//b/AAAAAAgAAAD6//f/AAAAAAgAAAD6/w4AAAAAAAgAAAD6/w8AAAAAAAgAAAD6/xAAAAAAAAgAAAD6/xEAAAAAAAgAAAD6/xIAAAAAAAgAAAD6/xMAAAAAAAgAAAD6/xQAAAAAAAgAAAD6/xUAAAAAAAgAAAD7/+n/AAAAAAgAAAD7/+r/AAAAAAgAAAD7/+v/AAAAAAgAAAD7/+z/AAAAAAgAAAD7/+3/AAAAAAgAAAD7/+7/AAAAAAgAAAD7/+//AAAAAAgAAAD7//D/AAAAAAgAAAD7//H/AAAAAAgAAAD7//L/AAAAAAgAAAD7//P/AAAAAAgAAAD7//T/AAAAAAgAAAD7//X/AAAAAAgAAAD7//b/AAAAAAgAAAD7//f/AAAAAAgAAAD7/w4AAAAAAAgAAAD7/w8AAAAAAAgAAAD7/xAAAAAAAAgAAAD7/xEAAAAAAAgAAAD7/xIAAAAAAAgAAAD7/xMAAAAAAAgAAAD7/xQAAAAAAAgAAAD7/xUAAAAAAAgAAAD8/+n/AAAAAAgAAAD8/+r/AAAAAAgAAAD8/+v/AAAAAAgAAAD8/+z/AAAAAAgAAAD8/+3/AAAAAAgAAAD8/+7/AAAAAAgAAAD8/+//AAAAAAgAAAD8//D/AAAAAAgAAAD8//H/AAAAAAgAAAD8//L/AAAAAAgAAAD8//P/AAAAAAgAAAD8//T/AAAAAAgAAAD8//X/AAAAAAgAAAD8//b/AAAAAAgAAAD8//f/AAAAAAgAAAD8/w4AAAAAAAgAAAD8/w8AAAAAAAgAAAD8/xAAAAAAAAgAAAD8/xEAAAAAAAgAAAD8/xIAAAAAAAgAAAD8/xMAAAAAAAgAAAD8/xQAAAAAAAgAAAD8/xUAAAAAAAgAAAD9/+n/AAAAAAgAAAD9/+r/AAAAAAgAAAD9/+v/AAAAAAgAAAD9/+z/AAAAAAgAAAD9/+3/AAAAAAgAAAD9/+7/AAAAAAgAAAD9/+//AAAAAAgAAAD9//T/AAAAAAgAAAD9//X/AAAAAAgAAAD9//b/AAAAAAgAAAD9//f/AAAAAAgAAAD9/w4AAAAAAAgAAAD9/w8AAAAAAAgAAAD9/xAAAAAAAAgAAAD9/xEAAAAAAAgAAAD+/+n/AAAAAAgAAAD+/+r/AAAAAAgAAAD+/+v/AAAAAAgAAAD+/+z/AAAAAAgAAAD+/+3/AAAAAAgAAAD+/+7/AAAAAAgAAAD+/+//AAAAAAgAAAD//+n/AAAAAAgAAAD//+r/AAAAAAgAAAD//+v/AAAAAAgAAAD//+z/AAAAAAgAAAD//+3/AAAAAAgAAAD//+7/AAAAAAgAAAD//+//AAAAAAgAAAAAAOn/AAAAAAgAAAAAAOr/AAAAAAgAAAAAAOv/AAAAAAgAAAAAAOz/AAAAAAgAAAAAAO3/AAAAAAgAAAAAAO7/AAAAAAgAAAAAAO//AAAAAAgAAAAAAPT/AAAAAAgAAAAAAPX/AAAAAAgAAAAAAPb/AAAAAAgAAAAAAPf/AAAAAAgAAAAAAA4AAAAAAAgAAAAAAA8AAAAAAAgAAAAAABAAAAAAAAgAAAAAABEAAAAAAAgAAAABAOn/AAAAAAgAAAABAOr/AAAAAAgAAAABAOv/AAAAAAgAAAABAOz/AAAAAAgAAAABAO3/AAAAAAgAAAABAO7/AAAAAAgAAAABAO//AAAAAAgAAAABAPD/AAAAAAgAAAABAPH/AAAAAAgAAAABAPL/AAAAAAgAAAABAPP/AAAAAAgAAAABAPT/AAAAAAgAAAABAPX/AAAAAAgAAAABAPb/AAAAAAgAAAABAPf/AAAAAAgAAAABAA4AAAAAAAgAAAABAA8AAAAAAAgAAAABABAAAAAAAAgAAAABABEAAAAAAAgAAAABABIAAAAAAAgAAAABABMAAAAAAAgAAAABABQAAAAAAAgAAAABABUAAAAAAAgAAAACAOn/AAAAAAgAAAACAOr/AAAAAAgAAAACAOv/AAAAAAgAAAACAOz/AAAAAAgAAAACAO3/AAAAAAgAAAACAO7/AAAAAAgAAAACAO//AAAAAAgAAAACAPD/AAAAAAgAAAACAPH/AAAAAAgAAAACAPL/AAAAAAgAAAACAPP/AAAAAAgAAAACAPT/AAAAAAgAAAACAPX/AAAAAAgAAAACAPb/AAAAAAgAAAACAPf/AAAAAAgAAAACAA4AAAAAAAgAAAACAA8AAAAAAAgAAAACABAAAAAAAAgAAAACABEAAAAAAAgAAAACABIAAAAAAAgAAAACABMAAAAAAAgAAAACABQAAAAAAAgAAAACABUAAAAAAAgAAAADAOn/AAAAAAgAAAADAOr/AAAAAAgAAAADAOv/AAAAAAgAAAADAOz/AAAAAAgAAAADAO3/AAAAAAgAAAADAO7/AAAAAAgAAAADAO//AAAAAAgAAAADAPD/AAAAAAgAAAADAPH/AAAAAAgAAAADAPL/AAAAAAgAAAADAPP/AAAAAAgAAAADAPT/AAAAAAgAAAADAPX/AAAAAAgAAAADAPb/AAAAAAgAAAADAPf/AAAAAAgAAAADAA4AAAAAAAgAAAADAA8AAAAAAAgAAAADABAAAAAAAAgAAAADABEAAAAAAAgAAAADABIAAAAAAAgAAAADABMAAAAAAAgAAAADABQAAAAAAAgAAAADABUAAAAAAAgAAAAEAOn/AAAAAAgAAAAEAOr/AAAAAAgAAAAEAOv/AAAAAAgAAAAEAOz/AAAAAAgAAAAEAO3/AAAAAAgAAAAEAO7/AAAAAAgAAAAEAO//AAAAAAgAAAAEAPD/AAAAAAgAAAAEAPH/AAAAAAgAAAAEAPL/AAAAAAgAAAAEAPP/AAAAAAgAAAAEAPT/AAAAAAgAAAAEAPX/AAAAAAgAAAAEAPb/AAAAAAgAAAAEAPf/AAAAAAgAAAAEAA4AAAAAAAgAAAAEAA8AAAAAAAgAAAAEABAAAAAAAAgAAAAEABEAAAAAAAgAAAAEABIAAAAAAAgAAAAEABMAAAAAAAgAAAAEABQAAAAAAAgAAAAEABUAAAAAAAgAAAAFAOn/AAAAAAgAAAAFAOr/AAAAAAgAAAAFAOv/AAAAAAgAAAAFAOz/AAAAAAgAAAAFAO3/AAAAAAgAAAAFAO7/AAAAAAgAAAAFAO//AAAAAAgAAAAFAPD/AAAAAAgAAAAFAPH/AAAAAAgAAAAFAPL/AAAAAAgAAAAFAPP/AAAAAAgAAAAFAPT/AAAAAAgAAAAFAPX/AAAAAAgAAAAFAPb/AAAAAAgAAAAFAPf/AAAAAAgAAAAFAA4AAAAAAAgAAAAFAA8AAAAAAAgAAAAFABAAAAAAAAgAAAAFABEAAAAAAAgAAAAFABIAAAAAAAgAAAAFABMAAAAAAAgAAAAFABQAAAAAAAgAAAAFABUAAAAAAAgAAAAGAOn/AAAAAAgAAAAGAOr/AAAAAAgAAAAGAOv/AAAAAAgAAAAGAOz/AAAAAAgAAAAGAO3/AAAAAAgAAAAGAO7/AAAAAAgAAAAGAO//AAAAAAgAAAAGAPD/AAAAAAgAAAAGAPH/AAAAAAgAAAAGAPL/AAAAAAgAAAAGAPP/AAAAAAgAAAAGAPT/AAAAAAgAAAAGAPX/AAAAAAgAAAAGAPb/AAAAAAgAAAAGAPf/AAAAAAgAAAAGAA4AAAAAAAgAAAAGAA8AAAAAAAgAAAAGABAAAAAAAAgAAAAGABEAAAAAAAgAAAAGABIAAAAAAAgAAAAGABMAAAAAAAgAAAAGABQAAAAAAAgAAAAGABUAAAAAAAgAAAAHAOn/AAAAAAgAAAAHAOr/AAAAAAgAAAAHAOv/AAAAAAgAAAAHAOz/AAAAAAgAAAAHAO3/AAAAAAgAAAAHAO7/AAAAAAgAAAAHAO//AAAAAAgAAAAHAPD/AAAAAAgAAAAHAPH/AAAAAAgAAAAHAPL/AAAAAAgAAAAHAPP/AAAAAAgAAAAHAPT/AAAAAAgAAAAHAPX/AAAAAAgAAAAHAPb/AAAAAAgAAAAHAPf/AAAAAAgAAAAHAA4AAAAAAAgAAAAHAA8AAAAAAAgAAAAHABAAAAAAAAgAAAAHABEAAAAAAAgAAAAHABIAAAAAAAgAAAAHABMAAAAAAAgAAAAHABQAAAAAAAgAAAAHABUAAAAAAAgAAAAIAOn/AAAAAAgAAAAIAOr/AAAAAAgAAAAIAOv/AAAAAAgAAAAIAOz/AAAAAAgAAAAIAO3/AAAAAAgAAAAIAO7/AAAAAAgAAAAIAO//AAAAAAgAAAAIAPD/AAAAAAgAAAAIAPH/AAAAAAgAAAAIAPL/AAAAAAgAAAAIAPP/AAAAAAgAAAAIAPT/AAAAAAgAAAAIAPX/AAAAAAgAAAAIAPb/AAAAAAgAAAAIAPf/AAAAAAgAAAAIAA4AAAAAAAgAAAAIAA8AAAAAAAgAAAAIABAAAAAAAAgAAAAIABEAAAAAAAgAAAAIABIAAAAAAAgAAAAIABMAAAAAAAgAAAAIABQAAAAAAAgAAAAIABUAAAAAAAgAAAAJAOn/AAAAAAgAAAAJAOr/AAAAAAgAAAAJAOv/AAAAAAgAAAAJAOz/AAAAAAgAAAAJAO3/AAAAAAgAAAAJAO7/AAAAAAgAAAAJAO//AAAAAAgAAAAJAPD/AAAAAAgAAAAJAPH/AAAAAAgAAAAJAPL/AAAAAAgAAAAJAPP/AAAAAAgAAAAJAPT/AAAAAAgAAAAJAPX/AAAAAAgAAAAJAPb/AAAAAAgAAAAJAPf/AAAAAAgAAAAJAA4AAAAAAAgAAAAJAA8AAAAAAAgAAAAJABAAAAAAAAgAAAAJABEAAAAAAAgAAAAJABIAAAAAAAgAAAAJABMAAAAAAAgAAAAJABQAAAAAAAgAAAAJABUAAAAAAAgAAAAKAOn/AAAAAAgAAAAKAOr/AAAAAAgAAAAKAOv/AAAAAAgAAAAKAOz/AAAAAAgAAAAKAO3/AAAAAAgAAAAKAO7/AAAAAAgAAAAKAO//AAAAAAgAAAAKAPD/AAAAAAgAAAAKAPH/AAAAAAgAAAAKAPL/AAAAAAgAAAAKAPP/AAAAAAgAAAAKAPT/AAAAAAgAAAAKAPX/AAAAAAgAAAAKAPb/AAAAAAgAAAAKAPf/AAAAAAgAAAAKAPj/AAAAAAgAAAAKAAcAAAAAAAgAAAAKAAgAAAAAAAgAAAAKAAkAAAAAAAgAAAAKAAoAAAAAAAgAAAAKAAsAAAAAAAgAAAAKAAwAAAAAAAgAAAAKAA0AAAAAAAgAAAAKAA4AAAAAAAgAAAAKAA8AAAAAAAgAAAAKABAAAAAAAAgAAAAKABEAAAAAAAgAAAAKABIAAAAAAAgAAAAKABMAAAAAAAgAAAAKABQAAAAAAAgAAAAKABUAAAAAAAgAAAALAOn/AAAAAAgAAAALAOr/AAAAAAgAAAALAOv/AAAAAAgAAAALAOz/AAAAAAgAAAALAO3/AAAAAAgAAAALAO7/AAAAAAgAAAALAO//AAAAAAgAAAALAPD/AAAAAAgAAAALAPH/AAAAAAgAAAALAPL/AAAAAAgAAAALAPP/AAAAAAgAAAALAPT/AAAAAAgAAAALAPX/AAAAAAgAAAALAPb/AAAAAAgAAAALAPf/AAAAAAgAAAALAPj/AAAAAAgAAAALAAcAAAAAAAgAAAALAAgAAAAAAAgAAAALAAkAAAAAAAgAAAALAAoAAAAAAAgAAAALAAsAAAAAAAgAAAALAAwAAAAAAAgAAAALAA0AAAAAAAgAAAALAA4AAAAAAAgAAAALAA8AAAAAAAgAAAALABAAAAAAAAgAAAALABEAAAAAAAgAAAALABIAAAAAAAgAAAALABMAAAAAAAgAAAALABQAAAAAAAgAAAALABUAAAAAAAgAAAAMAOn/AAAAAAgAAAAMAOr/AAAAAAgAAAAMAOv/AAAAAAgAAAAMAOz/AAAAAAgAAAAMAO3/AAAAAAgAAAAMAO7/AAAAAAgAAAAMAO//AAAAAAgAAAAMAPD/AAAAAAgAAAAMAPH/AAAAAAgAAAAMAPL/AAAAAAgAAAAMAPP/AAAAAAgAAAAMAPT/AAAAAAgAAAAMAPX/AAAAAAgAAAAMAPb/AAAAAAgAAAAMAPf/AAAAAAgAAAAMAPj/AAAAAAgAAAAMAAcAAAAAAAgAAAAMAAgAAAAAAAgAAAAMAAkAAAAAAAgAAAAMAAoAAAAAAAgAAAAMAAsAAAAAAAgAAAAMAAwAAAAAAAgAAAAMAA0AAAAAAAgAAAAMAA4AAAAAAAgAAAAMAA8AAAAAAAgAAAAMABAAAAAAAAgAAAAMABEAAAAAAAgAAAAMABIAAAAAAAgAAAAMABMAAAAAAAgAAAAMABQAAAAAAAgAAAAMABUAAAAAAAgAAAANAOn/AAAAAAgAAAANAOr/AAAAAAgAAAANAOv/AAAAAAgAAAANAOz/AAAAAAgAAAANAO3/AAAAAAgAAAANAO7/AAAAAAgAAAANAO//AAAAAAgAAAANAPD/AAAAAAgAAAANAPH/AAAAAAgAAAANAPL/AAAAAAgAAAANAPP/AAAAAAgAAAANAPT/AAAAAAgAAAANAPX/AAAAAAgAAAANAPb/AAAAAAgAAAANAPf/AAAAAAgAAAANAPj/AAAAAAgAAAANAAcAAAAAAAgAAAANAAgAAAAAAAgAAAANAAkAAAAAAAgAAAANAAoAAAAAAAgAAAANAAsAAAAAAAgAAAANAAwAAAAAAAgAAAANAA0AAAAAAAgAAAANAA4AAAAAAAgAAAANAA8AAAAAAAgAAAANABAAAAAAAAgAAAANABEAAAAAAAgAAAANABIAAAAAAAgAAAANABMAAAAAAAgAAAANABQAAAAAAAgAAAANABUAAAAAAAgAAAAOAOn/AAAAAAgAAAAOAOr/AAAAAAgAAAAOAOv/AAAAAAgAAAAOAOz/AAAAAAgAAAAOAO3/AAAAAAgAAAAOAO7/AAAAAAgAAAAOAO//AAAAAAgAAAAOAPD/AAAAAAgAAAAOAPH/AAAAAAgAAAAOAPL/AAAAAAgAAAAOAPP/AAAAAAgAAAAOAPT/AAAAAAgAAAAOAPX/AAAAAAgAAAAOAPb/AAAAAAgAAAAOAPf/AAAAAAgAAAAOAPj/AAAAAAgAAAAOAAcAAAAAAAgAAAAOAAgAAAAAAAgAAAAOAAkAAAAAAAgAAAAOAAoAAAAAAAgAAAAOAAsAAAAAAAgAAAAOAAwAAAAAAAgAAAAOAA0AAAAAAAgAAAAOAA4AAAAAAAgAAAAOAA8AAAAAAAgAAAAOABAAAAAAAAgAAAAOABEAAAAAAAgAAAAOABIAAAAAAAgAAAAOABMAAAAAAAgAAAAOABQAAAAAAAgAAAAOABUAAAAAAAgAAAAPAOn/AAAAAAgAAAAPAOr/AAAAAAgAAAAPAOv/AAAAAAgAAAAPAOz/AAAAAAgAAAAPAO3/AAAAAAgAAAAPAO7/AAAAAAgAAAAPAO//AAAAAAgAAAAPAPD/AAAAAAgAAAAPAPH/AAAAAAgAAAAPAPL/AAAAAAgAAAAPAPP/AAAAAAgAAAAPAPT/AAAAAAgAAAAPAPX/AAAAAAgAAAAPAPb/AAAAAAgAAAAPAPf/AAAAAAgAAAAPAPj/AAAAAAgAAAAPAAcAAAAAAAgAAAAPAAgAAAAAAAgAAAAPAAkAAAAAAAgAAAAPAAoAAAAAAAgAAAAPAAsAAAAAAAgAAAAPAAwAAAAAAAgAAAAPAA0AAAAAAAgAAAAPAA4AAAAAAAgAAAAPAA8AAAAAAAgAAAAPABAAAAAAAAgAAAAPABEAAAAAAAgAAAAPABIAAAAAAAgAAAAPABMAAAAAAAgAAAAPABQAAAAAAAgAAAAPABUAAAAAAAgAAAAQAOn/AAAAAAgAAAAQAOr/AAAAAAgAAAAQAOv/AAAAAAgAAAAQAOz/AAAAAAgAAAAQAO3/AAAAAAgAAAAQAO7/AAAAAAgAAAAQAO//AAAAAAgAAAAQAPD/AAAAAAgAAAAQAPH/AAAAAAgAAAAQAPL/AAAAAAgAAAAQAPP/AAAAAAgAAAAQAPT/AAAAAAgAAAAQAPX/AAAAAAgAAAAQAPb/AAAAAAgAAAAQAPf/AAAAAAgAAAAQAPj/AAAAAAgAAAAQAAcAAAAAAAgAAAAQAAgAAAAAAAgAAAAQAAkAAAAAAAgAAAAQAAoAAAAAAAgAAAAQAAsAAAAAAAgAAAAQAAwAAAAAAAgAAAAQAA0AAAAAAAgAAAAQAA4AAAAAAAgAAAAQAA8AAAAAAAgAAAAQABAAAAAAAAgAAAAQABEAAAAAAAgAAAAQABIAAAAAAAgAAAAQABMAAAAAAAgAAAAQABQAAAAAAAgAAAAQABUAAAAAAAgAAAARAOn/AAAAAAgAAAARAOr/AAAAAAgAAAARAOv/AAAAAAgAAAARAOz/AAAAAAgAAAARAO3/AAAAAAgAAAARAO7/AAAAAAgAAAARAO//AAAAAAgAAAARAPD/AAAAAAgAAAARAPH/AAAAAAgAAAARAPL/AAAAAAgAAAARAPP/AAAAAAgAAAARAPT/AAAAAAgAAAARAPX/AAAAAAgAAAARAPb/AAAAAAgAAAARAPf/AAAAAAgAAAARAPj/AAAAAAgAAAARAAcAAAAAAAgAAAARAAgAAAAAAAgAAAARAAkAAAAAAAgAAAARAAoAAAAAAAgAAAARAAsAAAAAAAgAAAARAAwAAAAAAAgAAAARAA0AAAAAAAgAAAARAA4AAAAAAAgAAAARAA8AAAAAAAgAAAARABAAAAAAAAgAAAARABEAAAAAAAgAAAARABIAAAAAAAgAAAARABMAAAAAAAgAAAARABQAAAAAAAgAAAARABUAAAAAAAgAAAASAOn/AAAAAAgAAAASAOr/AAAAAAgAAAASAOv/AAAAAAgAAAASAOz/AAAAAAgAAAASAO3/AAAAAAgAAAASAO7/AAAAAAgAAAASAO//AAAAAAgAAAASAPD/AAAAAAgAAAASAPH/AAAAAAgAAAASAPL/AAAAAAgAAAASAPP/AAAAAAgAAAASAPT/AAAAAAgAAAASAPX/AAAAAAgAAAASAPb/AAAAAAgAAAASAPf/AAAAAAgAAAASAPj/AAAAAAgAAAASAAcAAAAAAAgAAAASAAgAAAAAAAgAAAASAAkAAAAAAAgAAAASAAoAAAAAAAgAAAASAAsAAAAAAAgAAAASAAwAAAAAAAgAAAASAA0AAAAAAAgAAAASAA4AAAAAAAgAAAASAA8AAAAAAAgAAAASABAAAAAAAAgAAAASABEAAAAAAAgAAAASABIAAAAAAAgAAAASABMAAAAAAAgAAAASABQAAAAAAAgAAAASABUAAAAAAAgAAAATAOn/AAAAAAgAAAATAOr/AAAAAAgAAAATAOv/AAAAAAgAAAATAOz/AAAAAAgAAAATAO3/AAAAAAgAAAATAO7/AAAAAAgAAAATAO//AAAAAAgAAAATAPD/AAAAAAgAAAATAPH/AAAAAAgAAAATAPL/AAAAAAgAAAATAPP/AAAAAAgAAAATAPT/AAAAAAgAAAATAPX/AAAAAAgAAAATAPb/AAAAAAgAAAATAPf/AAAAAAgAAAATAPj/AAAAAAgAAAATAAcAAAAAAAgAAAATAAgAAAAAAAgAAAATAAkAAAAAAAgAAAATAAoAAAAAAAgAAAATAAsAAAAAAAgAAAATAAwAAAAAAAgAAAATAA0AAAAAAAgAAAATAA4AAAAAAAgAAAATAA8AAAAAAAgAAAATABAAAAAAAAgAAAATABEAAAAAAAgAAAATABIAAAAAAAgAAAATABMAAAAAAAgAAAATABQAAAAAAAgAAAATABUAAAAAAAgAAAAUAOn/AAAAAAgAAAAUAOr/AAAAAAgAAAAUAOv/AAAAAAgAAAAUAOz/AAAAAAgAAAAUAO3/AAAAAAgAAAAUAO7/AAAAAAgAAAAUAO//AAAAAAgAAAAUAPD/AAAAAAgAAAAUAPH/AAAAAAgAAAAUAPL/AAAAAAgAAAAUAPP/AAAAAAgAAAAUAPT/AAAAAAgAAAAUAPX/AAAAAAgAAAAUAPb/AAAAAAgAAAAUAPf/AAAAAAgAAAAUAPj/AAAAAAgAAAAUAAcAAAAAAAgAAAAUAAgAAAAAAAgAAAAUAAkAAAAAAAgAAAAUAAoAAAAAAAgAAAAUAAsAAAAAAAgAAAAUAAwAAAAAAAgAAAAUAA0AAAAAAAgAAAAUAA4AAAAAAAgAAAAUAA8AAAAAAAgAAAAUABAAAAAAAAgAAAAUABEAAAAAAAgAAAAUABIAAAAAAAgAAAAUABMAAAAAAAgAAAAUABQAAAAAAAgAAAAUABUAAAAAAAgAAAAVAOn/AAAAAAgAAAAVAOr/AAAAAAgAAAAVAOv/AAAAAAgAAAAVAOz/AAAAAAgAAAAVAO3/AAAAAAgAAAAVAO7/AAAAAAgAAAAVAO//AAAAAAgAAAAVAPD/AAAAAAgAAAAVAPH/AAAAAAgAAAAVAPL/AAAAAAgAAAAVAPP/AAAAAAgAAAAVAPT/AAAAAAgAAAAVAPX/AAAAAAgAAAAVAPb/AAAAAAgAAAAVAPf/AAAAAAgAAAAVAPj/AAAAAAgAAAAVAPn/AAAAAAgAAAAVAPr/AAAAAAgAAAAVAPv/AAAAAAgAAAAVAPz/AAAAAAgAAAAVAP3/AAAAAAgAAAAVAP7/AAAAAAgAAAAVAP//AAAAAAgAAAAVAAAAAAAAAAgAAAAVAAEAAAAAAAgAAAAVAAIAAAAAAAgAAAAVAAMAAAAAAAgAAAAVAAQAAAAAAAgAAAAVAAUAAAAAAAgAAAAVAAYAAAAAAAgAAAAVAAcAAAAAAAgAAAAVAAgAAAAAAAgAAAAVAAkAAAAAAAgAAAAVAAoAAAAAAAgAAAAVAAsAAAAAAAgAAAAVAAwAAAAAAAgAAAAVAA0AAAAAAAgAAAAVAA4AAAAAAAgAAAAVAA8AAAAAAAgAAAAVABAAAAAAAAgAAAAVABEAAAAAAAgAAAAVABIAAAAAAAgAAAAVABMAAAAAAAgAAAAVABQAAAAAAAgAAAAVABUAAAAAAAgAAAAWAOn/AAAAAAgAAAAWAOr/AAAAAAgAAAAWAOv/AAAAAAgAAAAWAOz/AAAAAAgAAAAWAO3/AAAAAAgAAAAWAO7/AAAAAAgAAAAWAO//AAAAAAgAAAAWAPD/AAAAAAgAAAAWAPH/AAAAAAgAAAAWAPL/AAAAAAgAAAAWAPP/AAAAAAgAAAAWAPT/AAAAAAgAAAAWAPX/AAAAAAgAAAAWAPb/AAAAAAgAAAAWAPf/AAAAAAgAAAAWAPj/AAAAAAgAAAAWAPn/AAAAAAgAAAAWAPr/AAAAAAgAAAAWAPv/AAAAAAgAAAAWAPz/AAAAAAgAAAAWAP3/AAAAAAgAAAAWAP7/AAAAAAgAAAAWAP//AAAAAAgAAAAWAAAAAAAAAAgAAAAWAAEAAAAAAAgAAAAWAAIAAAAAAAgAAAAWAAMAAAAAAAgAAAAWAAQAAAAAAAgAAAAWAAUAAAAAAAgAAAAWAAYAAAAAAAgAAAAWAAcAAAAAAAgAAAAWAAgAAAAAAAgAAAAWAAkAAAAAAAgAAAAWAAoAAAAAAAgAAAAWAAsAAAAAAAgAAAAWAAwAAAAAAAgAAAAWAA0AAAAAAAgAAAAWAA4AAAAAAAgAAAAWAA8AAAAAAAgAAAAWABAAAAAAAAgAAAAWABEAAAAAAAgAAAAWABIAAAAAAAgAAAAWABMAAAAAAAgAAAAWABQAAAAAAAgAAAAWABUAAAAAAAgAAAAXAOn/AAAAAAgAAAAXAOr/AAAAAAgAAAAXAOv/AAAAAAgAAAAXAOz/AAAAAAgAAAAXAO3/AAAAAAgAAAAXAO7/AAAAAAgAAAAXAO//AAAAAAgAAAAXAPD/AAAAAAgAAAAXAPH/AAAAAAgAAAAXAPL/AAAAAAgAAAAXAPP/AAAAAAgAAAAXAPT/AAAAAAgAAAAXAPX/AAAAAAgAAAAXAPb/AAAAAAgAAAAXAPf/AAAAAAgAAAAXAPj/AAAAAAgAAAAXAPn/AAAAAAgAAAAXAPr/AAAAAAgAAAAXAPv/AAAAAAgAAAAXAPz/AAAAAAgAAAAXAP3/AAAAAAgAAAAXAP7/AAAAAAgAAAAXAP//AAAAAAgAAAAXAAAAAAAAAAgAAAAXAAEAAAAAAAgAAAAXAAIAAAAAAAgAAAAXAAMAAAAAAAgAAAAXAAQAAAAAAAgAAAAXAAUAAAAAAAgAAAAXAAYAAAAAAAgAAAAXAAcAAAAAAAgAAAAXAAgAAAAAAAgAAAAXAAkAAAAAAAgAAAAXAAoAAAAAAAgAAAAXAAsAAAAAAAgAAAAXAAwAAAAAAAgAAAAXAA0AAAAAAAgAAAAXAA4AAAAAAAgAAAAXAA8AAAAAAAgAAAAXABAAAAAAAAgAAAAXABEAAAAAAAgAAAAXABIAAAAAAAgAAAAXABMAAAAAAAgAAAAXABQAAAAAAAgAAAAXABUAAAAAAAgAAAAYAOn/AAAAAAgAAAAYAOr/AAAAAAgAAAAYAOv/AAAAAAgAAAAYAOz/AAAAAAgAAAAYAO3/AAAAAAgAAAAYAO7/AAAAAAgAAAAYAO//AAAAAAgAAAAYAPD/AAAAAAgAAAAYAPH/AAAAAAgAAAAYAPL/AAAAAAgAAAAYAPP/AAAAAAgAAAAYAPT/AAAAAAgAAAAYAPX/AAAAAAgAAAAYAPb/AAAAAAgAAAAYAPf/AAAAAAgAAAAYAPj/AAAAAAgAAAAYAPn/AAAAAAgAAAAYAPr/AAAAAAgAAAAYAPv/AAAAAAgAAAAYAPz/AAAAAAgAAAAYAP3/AAAAAAgAAAAYAP7/AAAAAAgAAAAYAP//AAAAAAgAAAAYAAAAAAAAAAgAAAAYAAEAAAAAAAgAAAAYAAIAAAAAAAgAAAAYAAMAAAAAAAgAAAAYAAQAAAAAAAgAAAAYAAUAAAAAAAgAAAAYAAYAAAAAAAgAAAAYAAcAAAAAAAgAAAAYAAgAAAAAAAgAAAAYAAkAAAAAAAgAAAAYAAoAAAAAAAgAAAAYAAsAAAAAAAgAAAAYAAwAAAAAAAgAAAAYAA0AAAAAAAgAAAAYAA4AAAAAAAgAAAAYAA8AAAAAAAgAAAAYABAAAAAAAAgAAAAYABEAAAAAAAgAAAAYABIAAAAAAAgAAAAYABMAAAAAAAgAAAAYABQAAAAAAAgAAAAYABUAAAAAAAgAAAAZAOn/AAAAAAgAAAAZAOr/AAAAAAgAAAAZAOv/AAAAAAgAAAAZAOz/AAAAAAgAAAAZAO3/AAAAAAgAAAAZAO7/AAAAAAgAAAAZAO//AAAAAAgAAAAZAPD/AAAAAAgAAAAZAPH/AAAAAAgAAAAZAPL/AAAAAAgAAAAZAPP/AAAAAAgAAAAZAPT/AAAAAAgAAAAZAPX/AAAAAAgAAAAZAPb/AAAAAAgAAAAZAPf/AAAAAAgAAAAZAPj/AAAAAAgAAAAZAPn/AAAAAAgAAAAZAPr/AAAAAAgAAAAZAPv/AAAAAAgAAAAZAPz/AAAAAAgAAAAZAP3/AAAAAAgAAAAZAP7/AAAAAAgAAAAZAP//AAAAAAgAAAAZAAAAAAAAAAgAAAAZAAEAAAAAAAgAAAAZAAIAAAAAAAgAAAAZAAMAAAAAAAgAAAAZAAQAAAAAAAgAAAAZAAUAAAAAAAgAAAAZAAYAAAAAAAgAAAAZAAcAAAAAAAgAAAAZAAgAAAAAAAgAAAAZAAkAAAAAAAgAAAAZAAoAAAAAAAgAAAAZAAsAAAAAAAgAAAAZAAwAAAAAAAgAAAAZAA0AAAAAAAgAAAAZAA4AAAAAAAgAAAAZAA8AAAAAAAgAAAAZABAAAAAAAAgAAAAZABEAAAAAAAgAAAAZABIAAAAAAAgAAAAZABMAAAAAAAgAAAAZABQAAAAAAAgAAAAZABUAAAAAAAgAAAAKAPn/AAAAAAgAAAAKAPr/AAAAAAgAAAAKAPv/AAAAAAgAAAAKAPz/AAAAAAgAAAAKAP3/AAAAAAgAAAAKAP7/AAAAAAgAAAAKAP//AAAAAAgAAAAKAAAAAAAAAAgAAAAKAAEAAAAAAAgAAAAKAAIAAAAAAAgAAAAKAAMAAAAAAAgAAAAKAAQAAAAAAAgAAAAKAAUAAAAAAAgAAAAKAAYAAAAAAAgAAAALAPn/AAAAAAgAAAALAPr/AAAAAAgAAAALAPv/AAAAAAgAAAALAPz/AAAAAAgAAAALAP3/AAAAAAgAAAALAP7/AAAAAAgAAAALAP//AAAAAAgAAAALAAAAAAAAAAgAAAALAAEAAAAAAAgAAAALAAIAAAAAAAgAAAALAAMAAAAAAAgAAAALAAQAAAAAAAgAAAALAAUAAAAAAAgAAAALAAYAAAAAAAgAAAAMAPn/AAAAAAgAAAAMAPr/AAAAAAgAAAAMAPv/AAAAAAgAAAAMAPz/AAAAAAgAAAAMAP3/AAAAAAgAAAAMAP7/AAAAAAgAAAAMAP//AAAAAAgAAAAMAAAAAAAAAAgAAAAMAAEAAAAAAAgAAAAMAAIAAAAAAAgAAAAMAAMAAAAAAAgAAAAMAAQAAAAAAAgAAAAMAAUAAAAAAAgAAAAMAAYAAAAAAAgAAAANAPn/AAAAAAgAAAANAPr/AAAAAAgAAAANAPv/AAAAAAgAAAANAPz/AAAAAAgAAAANAP3/AAAAAAgAAAANAP7/AAAAAAgAAAANAP//AAAAAAgAAAANAAAAAAAAAAgAAAANAAEAAAAAAAgAAAANAAIAAAAAAAgAAAANAAMAAAAAAAgAAAANAAQAAAAAAAgAAAANAAUAAAAAAAgAAAANAAYAAAAAAAgAAAAOAPn/AAAAAAgAAAAOAPr/AAAAAAgAAAAOAPv/AAAAAAgAAAAOAPz/AAAAAAgAAAAOAP3/AAAAAAgAAAAOAP7/AAAAAAgAAAAOAP//AAAAAAgAAAAOAAAAAAAAAAgAAAAOAAEAAAAAAAgAAAAOAAIAAAAAAAgAAAAOAAMAAAAAAAgAAAAOAAQAAAAAAAgAAAAOAAUAAAAAAAgAAAAOAAYAAAAAAAgAAAAPAPn/AAAAAAgAAAAPAPr/AAAAAAgAAAAPAPv/AAAAAAgAAAAPAPz/AAAAAAgAAAAPAP3/AAAAAAgAAAAPAP7/AAAAAAgAAAAPAP//AAAAAAgAAAAPAAAAAAAAAAgAAAAPAAEAAAAAAAgAAAAPAAIAAAAAAAgAAAAPAAMAAAAAAAgAAAAPAAQAAAAAAAgAAAAPAAUAAAAAAAgAAAAPAAYAAAAAAAgAAAAQAPn/AAAAAAgAAAAQAPr/AAAAAAgAAAAQAPv/AAAAAAgAAAAQAPz/AAAAAAgAAAAQAP3/AAAAAAgAAAAQAP7/AAAAAAgAAAAQAP//AAAAAAgAAAAQAAAAAAAAAAgAAAAQAAEAAAAAAAgAAAAQAAIAAAAAAAgAAAAQAAMAAAAAAAgAAAAQAAQAAAAAAAgAAAAQAAUAAAAAAAgAAAAQAAYAAAAAAAgAAAARAPn/AAAAAAgAAAARAPr/AAAAAAgAAAARAPv/AAAAAAgAAAARAPz/AAAAAAgAAAARAP3/AAAAAAgAAAARAP7/AAAAAAgAAAARAP//AAAAAAgAAAARAAAAAAAAAAgAAAARAAEAAAAAAAgAAAARAAIAAAAAAAgAAAARAAMAAAAAAAgAAAARAAQAAAAAAAgAAAARAAUAAAAAAAgAAAARAAYAAAAAAAgAAAASAPn/AAAAAAgAAAASAPr/AAAAAAgAAAASAPv/AAAAAAgAAAASAPz/AAAAAAgAAAASAP3/AAAAAAgAAAASAP7/AAAAAAgAAAASAP//AAAAAAgAAAASAAAAAAAAAAgAAAASAAEAAAAAAAgAAAASAAIAAAAAAAgAAAASAAMAAAAAAAgAAAASAAQAAAAAAAgAAAASAAUAAAAAAAgAAAASAAYAAAAAAAgAAAATAPn/AAAAAAgAAAATAPr/AAAAAAgAAAATAPv/AAAAAAgAAAATAPz/AAAAAAgAAAATAP3/AAAAAAgAAAATAP7/AAAAAAgAAAATAP//AAAAAAgAAAATAAAAAAAAAAgAAAATAAEAAAAAAAgAAAATAAIAAAAAAAgAAAATAAMAAAAAAAgAAAATAAQAAAAAAAgAAAATAAUAAAAAAAgAAAATAAYAAAAAAAgAAAAUAPn/AAAAAAgAAAAUAPr/AAAAAAgAAAAUAPv/AAAAAAgAAAAUAPz/AAAAAAgAAAAUAP3/AAAAAAgAAAAUAP7/AAAAAAgAAAAUAP//AAAAAAgAAAAUAAAAAAAAAAgAAAAUAAEAAAAAAAgAAAAUAAIAAAAAAAgAAAAUAAMAAAAAAAgAAAAUAAQAAAAAAAgAAAAUAAUAAAAAAAgAAAAUAAYAAAAAAAgAAADn/xYAAAAAAAgAAADn/xcAAAAAAAgAAADn/xgAAAAAAAgAAADn/xkAAAAAAAgAAADn/xoAAAAAAAgAAADn/xsAAAAAAAgAAADn/xwAAAAAAAgAAADn/x0AAAAAAAgAAADn/x4AAAAAAAgAAADn/x8AAAAAAAgAAADn/yAAAAAAAAgAAADn/yEAAAAAAAgAAADn/yIAAAAAAAgAAADn/yMAAAAAAAgAAADn/yQAAAAAAAgAAADn/yUAAAAAAAgAAADn/yYAAAAAAAgAAADn/ycAAAAAAAgAAADn/ygAAAAAAAgAAADo/xYAAAAAAAgAAADo/xcAAAAAAAgAAADo/xgAAAAAAAgAAADo/xkAAAAAAAgAAADo/xoAAAAAAAgAAADo/xsAAAAAAAgAAADo/xwAAAAAAAgAAADo/x0AAAAAAAgAAADo/x4AAAAAAAgAAADo/x8AAAAAAAgAAADo/yAAAAAAAAgAAADo/yEAAAAAAAgAAADo/yIAAAAAAAgAAADo/yMAAAAAAAgAAADo/yQAAAAAAAgAAADo/yUAAAAAAAgAAADo/yYAAAAAAAgAAADo/ycAAAAAAAgAAADo/ygAAAAAAAgAAADp/xYAAAAAAAgAAADp/xcAAAAAAAgAAADp/xgAAAAAAAgAAADp/xkAAAAAAAgAAADp/xoAAAAAAAgAAADp/xsAAAAAAAgAAADp/xwAAAAAAAgAAADp/x0AAAAAAAgAAADp/x4AAAAAAAgAAADp/x8AAAAAAAgAAADp/yAAAAAAAAgAAADp/yEAAAAAAAgAAADp/yIAAAAAAAgAAADp/yMAAAAAAAgAAADp/yQAAAAAAAgAAADp/yUAAAAAAAgAAADp/yYAAAAAAAgAAADp/ycAAAAAAAgAAADp/ygAAAAAAAgAAADq/xYAAAAAAAgAAADq/xcAAAAAAAgAAADq/xgAAAAAAAgAAADq/xkAAAAAAAgAAADq/xoAAAAAAAgAAADq/xsAAAAAAAgAAADq/xwAAAAAAAgAAADq/x0AAAAAAAgAAADq/x4AAAAAAAgAAADq/x8AAAAAAAgAAADq/yAAAAAAAAgAAADq/yEAAAAAAAgAAADq/yIAAAAAAAgAAADq/yMAAAAAAAgAAADq/yQAAAAAAAgAAADq/yUAAAAAAAgAAADq/yYAAAAAAAgAAADq/ycAAAAAAAgAAADq/ygAAAAAAAgAAADr/xYAAAAAAAgAAADr/xcAAAAAAAgAAADr/xgAAAAAAAgAAADr/xkAAAAAAAgAAADr/xoAAAAAAAgAAADr/xsAAAAAAAgAAADr/xwAAAAAAAgAAADr/x0AAAAAAAgAAADr/x4AAAAAAAgAAADr/x8AAAAAAAgAAADr/yAAAAAAAAgAAADr/yEAAAAAAAgAAADr/yIAAAAAAAgAAADr/yMAAAAAAAgAAADr/yQAAAAAAAgAAADr/yUAAAAAAAgAAADr/yYAAAAAAAgAAADr/ycAAAAAAAgAAADr/ygAAAAAAAgAAADs/xYAAAAAAAgAAADs/xcAAAAAAAgAAADs/xgAAAAAAAgAAADs/xkAAAAAAAgAAADs/xoAAAAAAAgAAADs/xsAAAAAAAgAAADs/xwAAAAAAAgAAADs/x0AAAAAAAgAAADs/x4AAAAAAAgAAADs/x8AAAAAAAgAAADs/yAAAAAAAAgAAADs/yEAAAAAAAgAAADs/yIAAAAAAAgAAADs/yMAAAAAAAgAAADs/yQAAAAAAAgAAADs/yUAAAAAAAgAAADs/yYAAAAAAAgAAADs/ycAAAAAAAgAAADs/ygAAAAAAAgAAADt/xYAAAAAAAgAAADt/xcAAAAAAAgAAADt/xgAAAAAAAgAAADt/xkAAAAAAAgAAADt/xoAAAAAAAgAAADt/xsAAAAAAAgAAADt/xwAAAAAAAgAAADt/x0AAAAAAAgAAADt/x4AAAAAAAgAAADt/x8AAAAAAAgAAADt/yAAAAAAAAgAAADt/yEAAAAAAAgAAADt/yIAAAAAAAgAAADt/yMAAAAAAAgAAADt/yQAAAAAAAgAAADt/yUAAAAAAAgAAADt/yYAAAAAAAgAAADt/ycAAAAAAAgAAADt/ygAAAAAAAgAAADu/xYAAAAAAAgAAADu/xcAAAAAAAgAAADu/xgAAAAAAAgAAADu/xkAAAAAAAgAAADu/xoAAAAAAAgAAADu/xsAAAAAAAgAAADu/xwAAAAAAAgAAADu/x0AAAAAAAgAAADu/x4AAAAAAAgAAADu/x8AAAAAAAgAAADu/yAAAAAAAAgAAADu/yEAAAAAAAgAAADu/yIAAAAAAAgAAADu/yMAAAAAAAgAAADu/yQAAAAAAAgAAADu/yUAAAAAAAgAAADu/yYAAAAAAAgAAADu/ycAAAAAAAgAAADu/ygAAAAAAAgAAADv/xYAAAAAAAgAAADv/xcAAAAAAAgAAADv/xgAAAAAAAgAAADv/xkAAAAAAAgAAADv/xoAAAAAAAgAAADv/xsAAAAAAAgAAADv/xwAAAAAAAgAAADv/x0AAAAAAAgAAADv/x4AAAAAAAgAAADv/x8AAAAAAAgAAADv/yAAAAAAAAgAAADv/yEAAAAAAAgAAADv/yIAAAAAAAgAAADv/yMAAAAAAAgAAADv/yQAAAAAAAgAAADv/yUAAAAAAAgAAADv/yYAAAAAAAgAAADv/ycAAAAAAAgAAADv/ygAAAAAAAgAAADw/xYAAAAAAAgAAADw/xcAAAAAAAgAAADw/xgAAAAAAAgAAADw/xkAAAAAAAgAAADw/xoAAAAAAAgAAADw/xsAAAAAAAgAAADw/xwAAAAAAAgAAADw/x0AAAAAAAgAAADw/x4AAAAAAAgAAADw/x8AAAAAAAgAAADw/yAAAAAAAAgAAADw/yEAAAAAAAgAAADw/yIAAAAAAAgAAADw/yMAAAAAAAgAAADw/yQAAAAAAAgAAADw/yUAAAAAAAgAAADw/yYAAAAAAAgAAADw/ycAAAAAAAgAAADw/ygAAAAAAAgAAADx/xYAAAAAAAgAAADx/xcAAAAAAAgAAADx/xgAAAAAAAgAAADx/xkAAAAAAAgAAADx/xoAAAAAAAgAAADx/xsAAAAAAAgAAADx/xwAAAAAAAgAAADx/x0AAAAAAAgAAADx/x4AAAAAAAgAAADx/x8AAAAAAAgAAADx/yAAAAAAAAgAAADx/yEAAAAAAAgAAADx/yIAAAAAAAgAAADx/yMAAAAAAAgAAADx/yQAAAAAAAgAAADx/yUAAAAAAAgAAADx/yYAAAAAAAgAAADx/ycAAAAAAAgAAADx/ygAAAAAAAgAAADy/xYAAAAAAAgAAADy/xcAAAAAAAgAAADy/xgAAAAAAAgAAADy/xkAAAAAAAgAAADy/xoAAAAAAAgAAADy/xsAAAAAAAgAAADy/xwAAAAAAAgAAADy/x0AAAAAAAgAAADy/x4AAAAAAAgAAADy/x8AAAAAAAgAAADy/yAAAAAAAAgAAADy/yEAAAAAAAgAAADy/yIAAAAAAAgAAADy/yMAAAAAAAgAAADy/yQAAAAAAAgAAADy/yUAAAAAAAgAAADy/yYAAAAAAAgAAADy/ycAAAAAAAgAAADy/ygAAAAAAAgAAADz/xYAAAAAAAgAAADz/xcAAAAAAAgAAADz/xgAAAAAAAgAAADz/xkAAAAAAAgAAADz/xoAAAAAAAgAAADz/xsAAAAAAAgAAADz/xwAAAAAAAgAAADz/x0AAAAAAAgAAADz/x4AAAAAAAgAAADz/x8AAAAAAAgAAADz/yAAAAAAAAgAAADz/yEAAAAAAAgAAADz/yIAAAAAAAgAAADz/yMAAAAAAAgAAADz/yQAAAAAAAgAAADz/yUAAAAAAAgAAADz/yYAAAAAAAgAAADz/ycAAAAAAAgAAADz/ygAAAAAAAgAAAD0/xYAAAAAAAgAAAD0/xcAAAAAAAgAAAD0/xgAAAAAAAgAAAD0/xkAAAAAAAgAAAD0/xoAAAAAAAgAAAD0/xsAAAAAAAgAAAD0/xwAAAAAAAgAAAD0/x0AAAAAAAgAAAD0/x4AAAAAAAgAAAD0/x8AAAAAAAgAAAD0/yAAAAAAAAgAAAD0/yEAAAAAAAgAAAD0/yIAAAAAAAgAAAD0/yMAAAAAAAgAAAD0/yQAAAAAAAgAAAD0/yUAAAAAAAgAAAD0/yYAAAAAAAgAAAD0/ycAAAAAAAgAAAD0/ygAAAAAAAgAAAD1/xYAAAAAAAgAAAD1/xcAAAAAAAgAAAD1/xgAAAAAAAgAAAD1/xkAAAAAAAgAAAD1/xoAAAAAAAgAAAD1/xsAAAAAAAgAAAD1/xwAAAAAAAgAAAD1/x0AAAAAAAgAAAD1/x4AAAAAAAgAAAD1/x8AAAAAAAgAAAD1/yAAAAAAAAgAAAD1/yEAAAAAAAgAAAD1/yIAAAAAAAgAAAD1/yMAAAAAAAgAAAD1/yQAAAAAAAgAAAD1/yUAAAAAAAgAAAD1/yYAAAAAAAgAAAD1/ycAAAAAAAgAAAD1/ygAAAAAAAgAAAD2/xYAAAAAAAgAAAD2/xcAAAAAAAgAAAD2/xgAAAAAAAgAAAD2/xkAAAAAAAgAAAD2/xoAAAAAAAgAAAD2/xsAAAAAAAgAAAD2/xwAAAAAAAgAAAD2/x0AAAAAAAgAAAD2/x4AAAAAAAgAAAD2/x8AAAAAAAgAAAD2/yAAAAAAAAgAAAD2/yEAAAAAAAgAAAD2/yIAAAAAAAgAAAD2/yMAAAAAAAgAAAD2/yQAAAAAAAgAAAD2/yUAAAAAAAgAAAD2/yYAAAAAAAgAAAD2/ycAAAAAAAgAAAD2/ygAAAAAAAgAAAD3/xYAAAAAAAgAAAD3/xcAAAAAAAgAAAD3/xgAAAAAAAgAAAD3/xkAAAAAAAgAAAD3/xoAAAAAAAgAAAD3/xsAAAAAAAgAAAD3/xwAAAAAAAgAAAD3/x0AAAAAAAgAAAD3/x4AAAAAAAgAAAD3/x8AAAAAAAgAAAD3/yAAAAAAAAgAAAD3/yEAAAAAAAgAAAD3/yIAAAAAAAgAAAD3/yMAAAAAAAgAAAD3/yQAAAAAAAgAAAD3/yUAAAAAAAgAAAD3/yYAAAAAAAgAAAD3/ycAAAAAAAgAAAD3/ygAAAAAAAgAAAD4/xYAAAAAAAgAAAD4/xcAAAAAAAgAAAD4/xgAAAAAAAgAAAD4/xkAAAAAAAgAAAD4/xoAAAAAAAgAAAD4/xsAAAAAAAgAAAD4/xwAAAAAAAgAAAD4/x0AAAAAAAgAAAD4/x4AAAAAAAgAAAD4/x8AAAAAAAgAAAD4/yAAAAAAAAgAAAD4/yEAAAAAAAgAAAD4/yIAAAAAAAgAAAD4/yMAAAAAAAgAAAD4/yQAAAAAAAgAAAD4/yUAAAAAAAgAAAD4/yYAAAAAAAgAAAD4/ycAAAAAAAgAAAD4/ygAAAAAAAgAAAD5/xYAAAAAAAgAAAD5/xcAAAAAAAgAAAD5/xgAAAAAAAgAAAD5/xkAAAAAAAgAAAD5/xoAAAAAAAgAAAD5/xsAAAAAAAgAAAD5/xwAAAAAAAgAAAD5/x0AAAAAAAgAAAD5/x4AAAAAAAgAAAD5/x8AAAAAAAgAAAD5/yAAAAAAAAgAAAD5/yEAAAAAAAgAAAD5/yIAAAAAAAgAAAD5/yMAAAAAAAgAAAD5/yQAAAAAAAgAAAD5/yUAAAAAAAgAAAD5/yYAAAAAAAgAAAD5/ycAAAAAAAgAAAD5/ygAAAAAAAgAAAD6/xYAAAAAAAgAAAD6/xcAAAAAAAgAAAD6/xgAAAAAAAgAAAD6/xkAAAAAAAgAAAD6/xoAAAAAAAgAAAD6/xsAAAAAAAgAAAD6/xwAAAAAAAgAAAD6/x0AAAAAAAgAAAD6/x4AAAAAAAgAAAD6/x8AAAAAAAgAAAD6/yAAAAAAAAgAAAD6/yEAAAAAAAgAAAD6/yIAAAAAAAgAAAD6/yMAAAAAAAgAAAD6/yQAAAAAAAgAAAD6/yUAAAAAAAgAAAD6/yYAAAAAAAgAAAD6/ycAAAAAAAgAAAD6/ygAAAAAAAgAAAD7/xYAAAAAAAgAAAD7/xcAAAAAAAgAAAD7/xgAAAAAAAgAAAD7/xkAAAAAAAgAAAD7/xoAAAAAAAgAAAD7/xsAAAAAAAgAAAD7/xwAAAAAAAgAAAD7/x0AAAAAAAgAAAD7/x4AAAAAAAgAAAD7/x8AAAAAAAgAAAD7/yAAAAAAAAgAAAD7/yEAAAAAAAgAAAD7/yIAAAAAAAgAAAD7/yMAAAAAAAgAAAD7/yQAAAAAAAgAAAD7/yUAAAAAAAgAAAD7/yYAAAAAAAgAAAD7/ycAAAAAAAgAAAD7/ygAAAAAAAgAAAD8/xYAAAAAAAgAAAD8/xcAAAAAAAgAAAD8/xgAAAAAAAgAAAD8/xkAAAAAAAgAAAD8/xoAAAAAAAgAAAD8/xsAAAAAAAgAAAD8/xwAAAAAAAgAAAD8/x0AAAAAAAgAAAD8/x4AAAAAAAgAAAD8/x8AAAAAAAgAAAD8/yAAAAAAAAgAAAD8/yEAAAAAAAgAAAD8/yIAAAAAAAgAAAD8/yMAAAAAAAgAAAD8/yQAAAAAAAgAAAD8/yUAAAAAAAgAAAD8/yYAAAAAAAgAAAD8/ycAAAAAAAgAAAD8/ygAAAAAAAgAAAD9/xYAAAAAAAgAAAD9/xcAAAAAAAgAAAD9/xgAAAAAAAgAAAD9/xkAAAAAAAgAAAD9/xoAAAAAAAgAAAD9/xsAAAAAAAgAAAD9/xwAAAAAAAgAAAD9/x0AAAAAAAgAAAD9/x4AAAAAAAgAAAD9/x8AAAAAAAgAAAD9/yAAAAAAAAgAAAD9/yEAAAAAAAgAAAD9/yIAAAAAAAgAAAD9/yMAAAAAAAgAAAD9/yQAAAAAAAgAAAD9/yUAAAAAAAgAAAD9/yYAAAAAAAgAAAD9/ycAAAAAAAgAAAD9/ygAAAAAAAgAAAD+/xYAAAAAAAgAAAD+/xcAAAAAAAgAAAD+/xgAAAAAAAgAAAD+/xkAAAAAAAgAAAD+/xoAAAAAAAgAAAD+/xsAAAAAAAgAAAD+/xwAAAAAAAgAAAD+/x0AAAAAAAgAAAD+/x4AAAAAAAgAAAD+/x8AAAAAAAgAAAD+/yAAAAAAAAgAAAD+/yEAAAAAAAgAAAD+/yIAAAAAAAgAAAD+/yMAAAAAAAgAAAD+/yQAAAAAAAgAAAD+/yUAAAAAAAgAAAD+/yYAAAAAAAgAAAD+/ycAAAAAAAgAAAD+/ygAAAAAAAgAAAD//xYAAAAAAAgAAAD//xcAAAAAAAgAAAD//xgAAAAAAAgAAAD//xkAAAAAAAgAAAD//xoAAAAAAAgAAAD//xsAAAAAAAgAAAD//xwAAAAAAAgAAAD//x0AAAAAAAgAAAD//x4AAAAAAAgAAAD//x8AAAAAAAgAAAD//yAAAAAAAAgAAAD//yEAAAAAAAgAAAD//yIAAAAAAAgAAAD//yMAAAAAAAgAAAD//yQAAAAAAAgAAAD//yUAAAAAAAgAAAD//yYAAAAAAAgAAAD//ycAAAAAAAgAAAD//ygAAAAAAAgAAAAAABYAAAAAAAgAAAAAABcAAAAAAAgAAAAAABgAAAAAAAgAAAAAABkAAAAAAAgAAAAAABoAAAAAAAgAAAAAABsAAAAAAAgAAAAAABwAAAAAAAgAAAAAAB0AAAAAAAgAAAAAAB4AAAAAAAgAAAAAAB8AAAAAAAgAAAAAACAAAAAAAAgAAAAAACEAAAAAAAgAAAAAACIAAAAAAAgAAAAAACMAAAAAAAgAAAAAACQAAAAAAAgAAAAAACUAAAAAAAgAAAAAACYAAAAAAAgAAAAAACcAAAAAAAgAAAAAACgAAAAAAAgAAAABABYAAAAAAAgAAAABABcAAAAAAAgAAAABABgAAAAAAAgAAAABABkAAAAAAAgAAAABABoAAAAAAAgAAAABABsAAAAAAAgAAAABABwAAAAAAAgAAAABAB0AAAAAAAgAAAABAB4AAAAAAAgAAAABAB8AAAAAAAgAAAABACAAAAAAAAgAAAABACEAAAAAAAgAAAABACIAAAAAAAgAAAABACMAAAAAAAgAAAABACQAAAAAAAgAAAABACUAAAAAAAgAAAABACYAAAAAAAgAAAABACcAAAAAAAgAAAABACgAAAAAAAgAAAACABYAAAAAAAgAAAACABcAAAAAAAgAAAACABgAAAAAAAgAAAACABkAAAAAAAgAAAACABoAAAAAAAgAAAACABsAAAAAAAgAAAACABwAAAAAAAgAAAACAB0AAAAAAAgAAAACAB4AAAAAAAgAAAACAB8AAAAAAAgAAAACACAAAAAAAAgAAAACACEAAAAAAAgAAAACACIAAAAAAAgAAAACACMAAAAAAAgAAAACACQAAAAAAAgAAAACACUAAAAAAAgAAAACACYAAAAAAAgAAAACACcAAAAAAAgAAAACACgAAAAAAAgAAAADABYAAAAAAAgAAAADABcAAAAAAAgAAAADABgAAAAAAAgAAAADABkAAAAAAAgAAAADABoAAAAAAAgAAAADABsAAAAAAAgAAAADABwAAAAAAAgAAAADAB0AAAAAAAgAAAADAB4AAAAAAAgAAAADAB8AAAAAAAgAAAADACAAAAAAAAgAAAADACEAAAAAAAgAAAADACIAAAAAAAgAAAADACMAAAAAAAgAAAADACQAAAAAAAgAAAADACUAAAAAAAgAAAADACYAAAAAAAgAAAADACcAAAAAAAgAAAADACgAAAAAAAgAAAAEABYAAAAAAAgAAAAEABcAAAAAAAgAAAAEABgAAAAAAAgAAAAEABkAAAAAAAgAAAAEABoAAAAAAAgAAAAEABsAAAAAAAgAAAAEABwAAAAAAAgAAAAEAB0AAAAAAAgAAAAEAB4AAAAAAAgAAAAEAB8AAAAAAAgAAAAEACAAAAAAAAgAAAAEACEAAAAAAAgAAAAEACIAAAAAAAgAAAAEACMAAAAAAAgAAAAEACQAAAAAAAgAAAAEACUAAAAAAAgAAAAEACYAAAAAAAgAAAAEACcAAAAAAAgAAAAEACgAAAAAAAgAAAAFABYAAAAAAAgAAAAFABcAAAAAAAgAAAAFABgAAAAAAAgAAAAFABkAAAAAAAgAAAAFABoAAAAAAAgAAAAFABsAAAAAAAgAAAAFABwAAAAAAAgAAAAFAB0AAAAAAAgAAAAFAB4AAAAAAAgAAAAFAB8AAAAAAAgAAAAFACAAAAAAAAgAAAAFACEAAAAAAAgAAAAFACIAAAAAAAgAAAAFACMAAAAAAAgAAAAFACQAAAAAAAgAAAAFACUAAAAAAAgAAAAFACYAAAAAAAgAAAAFACcAAAAAAAgAAAAFACgAAAAAAAgAAAAGABYAAAAAAAgAAAAGABcAAAAAAAgAAAAGABgAAAAAAAgAAAAGABkAAAAAAAgAAAAGABoAAAAAAAgAAAAGABsAAAAAAAgAAAAGABwAAAAAAAgAAAAGAB0AAAAAAAgAAAAGAB4AAAAAAAgAAAAGAB8AAAAAAAgAAAAGACAAAAAAAAgAAAAGACEAAAAAAAgAAAAGACIAAAAAAAgAAAAGACMAAAAAAAgAAAAGACQAAAAAAAgAAAAGACUAAAAAAAgAAAAGACYAAAAAAAgAAAAGACcAAAAAAAgAAAAGACgAAAAAAAgAAAAHABYAAAAAAAgAAAAHABcAAAAAAAgAAAAHABgAAAAAAAgAAAAHABkAAAAAAAgAAAAHABoAAAAAAAgAAAAHABsAAAAAAAgAAAAHABwAAAAAAAgAAAAHAB0AAAAAAAgAAAAHAB4AAAAAAAgAAAAHAB8AAAAAAAgAAAAHACAAAAAAAAgAAAAHACEAAAAAAAgAAAAHACIAAAAAAAgAAAAHACMAAAAAAAgAAAAHACQAAAAAAAgAAAAHACUAAAAAAAgAAAAHACYAAAAAAAgAAAAHACcAAAAAAAgAAAAHACgAAAAAAAgAAAAIABYAAAAAAAgAAAAIABcAAAAAAAgAAAAIABgAAAAAAAgAAAAIABkAAAAAAAgAAAAIABoAAAAAAAgAAAAIABsAAAAAAAgAAAAIABwAAAAAAAgAAAAIAB0AAAAAAAgAAAAIAB4AAAAAAAgAAAAIAB8AAAAAAAgAAAAIACAAAAAAAAgAAAAIACEAAAAAAAgAAAAIACIAAAAAAAgAAAAIACMAAAAAAAgAAAAIACQAAAAAAAgAAAAIACUAAAAAAAgAAAAIACYAAAAAAAgAAAAIACcAAAAAAAgAAAAIACgAAAAAAAgAAAAJABYAAAAAAAgAAAAJABcAAAAAAAgAAAAJABgAAAAAAAgAAAAJABkAAAAAAAgAAAAJABoAAAAAAAgAAAAJABsAAAAAAAgAAAAJABwAAAAAAAgAAAAJAB0AAAAAAAgAAAAJAB4AAAAAAAgAAAAJAB8AAAAAAAgAAAAJACAAAAAAAAgAAAAJACEAAAAAAAgAAAAJACIAAAAAAAgAAAAJACMAAAAAAAgAAAAJACQAAAAAAAgAAAAJACUAAAAAAAgAAAAJACYAAAAAAAgAAAAJACcAAAAAAAgAAAAJACgAAAAAAAgAAAAKABYAAAAAAAgAAAAKABcAAAAAAAgAAAAKABgAAAAAAAgAAAAKABkAAAAAAAgAAAAKABoAAAAAAAgAAAAKABsAAAAAAAgAAAAKABwAAAAAAAgAAAAKAB0AAAAAAAgAAAAKAB4AAAAAAAgAAAAKAB8AAAAAAAgAAAAKACAAAAAAAAgAAAAKACEAAAAAAAgAAAAKACIAAAAAAAgAAAAKACMAAAAAAAgAAAAKACQAAAAAAAgAAAAKACUAAAAAAAgAAAAKACYAAAAAAAgAAAAKACcAAAAAAAgAAAAKACgAAAAAAAgAAAALABYAAAAAAAgAAAALABcAAAAAAAgAAAALABgAAAAAAAgAAAALABkAAAAAAAgAAAALABoAAAAAAAgAAAALABsAAAAAAAgAAAALABwAAAAAAAgAAAALAB0AAAAAAAgAAAALAB4AAAAAAAgAAAALAB8AAAAAAAgAAAALACAAAAAAAAgAAAALACEAAAAAAAgAAAALACIAAAAAAAgAAAALACMAAAAAAAgAAAALACQAAAAAAAgAAAALACUAAAAAAAgAAAALACYAAAAAAAgAAAALACcAAAAAAAgAAAALACgAAAAAAAgAAAAMABYAAAAAAAgAAAAMABcAAAAAAAgAAAAMABgAAAAAAAgAAAAMABkAAAAAAAgAAAAMABoAAAAAAAgAAAAMABsAAAAAAAgAAAAMABwAAAAAAAgAAAAMAB0AAAAAAAgAAAAMAB4AAAAAAAgAAAAMAB8AAAAAAAgAAAAMACAAAAAAAAgAAAAMACEAAAAAAAgAAAAMACIAAAAAAAgAAAAMACMAAAAAAAgAAAAMACQAAAAAAAgAAAAMACUAAAAAAAgAAAAMACYAAAAAAAgAAAAMACcAAAAAAAgAAAAMACgAAAAAAAgAAAANABYAAAAAAAgAAAANABcAAAAAAAgAAAANABgAAAAAAAgAAAANABkAAAAAAAgAAAANABoAAAAAAAgAAAANABsAAAAAAAgAAAANABwAAAAAAAgAAAANAB0AAAAAAAgAAAANAB4AAAAAAAgAAAANAB8AAAAAAAgAAAANACAAAAAAAAgAAAANACEAAAAAAAgAAAANACIAAAAAAAgAAAANACMAAAAAAAgAAAANACQAAAAAAAgAAAANACUAAAAAAAgAAAANACYAAAAAAAgAAAANACcAAAAAAAgAAAANACgAAAAAAAgAAAAOABYAAAAAAAgAAAAOABcAAAAAAAgAAAAOABgAAAAAAAgAAAAOABkAAAAAAAgAAAAOABoAAAAAAAgAAAAOABsAAAAAAAgAAAAOABwAAAAAAAgAAAAOAB0AAAAAAAgAAAAOAB4AAAAAAAgAAAAOAB8AAAAAAAgAAAAOACAAAAAAAAgAAAAOACEAAAAAAAgAAAAOACIAAAAAAAgAAAAOACMAAAAAAAgAAAAOACQAAAAAAAgAAAAOACUAAAAAAAgAAAAOACYAAAAAAAgAAAAOACcAAAAAAAgAAAAOACgAAAAAAAgAAAAPABYAAAAAAAgAAAAPABcAAAAAAAgAAAAPABgAAAAAAAgAAAAPABkAAAAAAAgAAAAPABoAAAAAAAgAAAAPABsAAAAAAAgAAAAPABwAAAAAAAgAAAAPAB0AAAAAAAgAAAAPAB4AAAAAAAgAAAAPAB8AAAAAAAgAAAAPACAAAAAAAAgAAAAPACEAAAAAAAgAAAAPACIAAAAAAAgAAAAPACMAAAAAAAgAAAAPACQAAAAAAAgAAAAPACUAAAAAAAgAAAAPACYAAAAAAAgAAAAPACcAAAAAAAgAAAAPACgAAAAAAAgAAAAQABYAAAAAAAgAAAAQABcAAAAAAAgAAAAQABgAAAAAAAgAAAAQABkAAAAAAAgAAAAQABoAAAAAAAgAAAAQABsAAAAAAAgAAAAQABwAAAAAAAgAAAAQAB0AAAAAAAgAAAAQAB4AAAAAAAgAAAAQAB8AAAAAAAgAAAAQACAAAAAAAAgAAAAQACEAAAAAAAgAAAAQACIAAAAAAAgAAAAQACMAAAAAAAgAAAAQACQAAAAAAAgAAAAQACUAAAAAAAgAAAAQACYAAAAAAAgAAAAQACcAAAAAAAgAAAAQACgAAAAAAAgAAAARABYAAAAAAAgAAAARABcAAAAAAAgAAAARABgAAAAAAAgAAAARABkAAAAAAAgAAAARABoAAAAAAAgAAAARABsAAAAAAAgAAAARABwAAAAAAAgAAAARAB0AAAAAAAgAAAARAB4AAAAAAAgAAAARAB8AAAAAAAgAAAARACAAAAAAAAgAAAARACEAAAAAAAgAAAARACIAAAAAAAgAAAARACMAAAAAAAgAAAARACQAAAAAAAgAAAARACUAAAAAAAgAAAARACYAAAAAAAgAAAARACcAAAAAAAgAAAARACgAAAAAAAgAAAASABYAAAAAAAgAAAASABcAAAAAAAgAAAASABgAAAAAAAgAAAASABkAAAAAAAgAAAASABoAAAAAAAgAAAASABsAAAAAAAgAAAASABwAAAAAAAgAAAASAB0AAAAAAAgAAAASAB4AAAAAAAgAAAASAB8AAAAAAAgAAAASACAAAAAAAAgAAAASACEAAAAAAAgAAAASACIAAAAAAAgAAAASACMAAAAAAAgAAAASACQAAAAAAAgAAAASACUAAAAAAAgAAAASACYAAAAAAAgAAAASACcAAAAAAAgAAAASACgAAAAAAAgAAAATABYAAAAAAAgAAAATABcAAAAAAAgAAAATABgAAAAAAAgAAAATABkAAAAAAAgAAAATABoAAAAAAAgAAAATABsAAAAAAAgAAAATABwAAAAAAAgAAAATAB0AAAAAAAgAAAATAB4AAAAAAAgAAAATAB8AAAAAAAgAAAATACAAAAAAAAgAAAATACEAAAAAAAgAAAATACIAAAAAAAgAAAATACMAAAAAAAgAAAATACQAAAAAAAgAAAATACUAAAAAAAgAAAATACYAAAAAAAgAAAATACcAAAAAAAgAAAATACgAAAAAAAgAAAAUABYAAAAAAAgAAAAUABcAAAAAAAgAAAAUABgAAAAAAAgAAAAUABkAAAAAAAgAAAAUABoAAAAAAAgAAAAUABsAAAAAAAgAAAAUABwAAAAAAAgAAAAUAB0AAAAAAAgAAAAUAB4AAAAAAAgAAAAUAB8AAAAAAAgAAAAUACAAAAAAAAgAAAAUACEAAAAAAAgAAAAUACIAAAAAAAgAAAAUACMAAAAAAAgAAAAUACQAAAAAAAgAAAAUACUAAAAAAAgAAAAUACYAAAAAAAgAAAAUACcAAAAAAAgAAAAUACgAAAAAAAgAAAAVABYAAAAAAAgAAAAVABcAAAAAAAgAAAAVABgAAAAAAAgAAAAVABkAAAAAAAgAAAAVABoAAAAAAAgAAAAVABsAAAAAAAgAAAAVABwAAAAAAAgAAAAVAB0AAAAAAAgAAAAVAB4AAAAAAAgAAAAVAB8AAAAAAAgAAAAVACAAAAAAAAgAAAAVACEAAAAAAAgAAAAVACIAAAAAAAgAAAAVACMAAAAAAAgAAAAVACQAAAAAAAgAAAAVACUAAAAAAAgAAAAVACYAAAAAAAgAAAAVACcAAAAAAAgAAAAVACgAAAAAAAgAAAAWABYAAAAAAAgAAAAWABcAAAAAAAgAAAAWABgAAAAAAAgAAAAWABkAAAAAAAgAAAAWABoAAAAAAAgAAAAWABsAAAAAAAgAAAAWABwAAAAAAAgAAAAWAB0AAAAAAAgAAAAWAB4AAAAAAAgAAAAWAB8AAAAAAAgAAAAWACAAAAAAAAgAAAAWACEAAAAAAAgAAAAWACIAAAAAAAgAAAAWACMAAAAAAAgAAAAWACQAAAAAAAgAAAAWACUAAAAAAAgAAAAWACYAAAAAAAgAAAAWACcAAAAAAAgAAAAWACgAAAAAAAgAAAAXABYAAAAAAAgAAAAXABcAAAAAAAgAAAAXABgAAAAAAAgAAAAXABkAAAAAAAgAAAAXABoAAAAAAAgAAAAXABsAAAAAAAgAAAAXABwAAAAAAAgAAAAXAB0AAAAAAAgAAAAXAB4AAAAAAAgAAAAXAB8AAAAAAAgAAAAXACAAAAAAAAgAAAAXACEAAAAAAAgAAAAXACIAAAAAAAgAAAAXACMAAAAAAAgAAAAXACQAAAAAAAgAAAAXACUAAAAAAAgAAAAXACYAAAAAAAgAAAAXACcAAAAAAAgAAAAXACgAAAAAAAgAAAAYABYAAAAAAAgAAAAYABcAAAAAAAgAAAAYABgAAAAAAAgAAAAYABkAAAAAAAgAAAAYABoAAAAAAAgAAAAYABsAAAAAAAgAAAAYABwAAAAAAAgAAAAYAB0AAAAAAAgAAAAYAB4AAAAAAAgAAAAYAB8AAAAAAAgAAAAYACAAAAAAAAgAAAAYACEAAAAAAAgAAAAYACIAAAAAAAgAAAAYACMAAAAAAAgAAAAYACQAAAAAAAgAAAAYACUAAAAAAAgAAAAYACYAAAAAAAgAAAAYACcAAAAAAAgAAAAYACgAAAAAAAgAAAAZABYAAAAAAAgAAAAZABcAAAAAAAgAAAAZABgAAAAAAAgAAAAZABkAAAAAAAgAAAAZABoAAAAAAAgAAAAZABsAAAAAAAgAAAAZABwAAAAAAAgAAAAZAB0AAAAAAAgAAAAZAB4AAAAAAAgAAAAZAB8AAAAAAAgAAAAZACAAAAAAAAgAAAAZACEAAAAAAAgAAAAZACIAAAAAAAgAAAAZACMAAAAAAAgAAAAZACQAAAAAAAgAAAAZACUAAAAAAAgAAAAZACYAAAAAAAgAAAAZACcAAAAAAAgAAAAZACgAAAAAAAgAAAAAABIAAAAAAAgAAAAAAPD/AAAAAAgAAAD9/xUAAAAAAAgAAAD9//P/AAAAAAgAAAD9/xIAAAAAAAgAAAD9//D/AAAAAAgAAAAAABUAAAAAAAgAAAAAAPP/AAAAAAgAAAD0//j/AAAAAAgAAAD0/w0AAAAAAAgAAAAJAA0AAAAAAAgAAAAJAPj/AAAAAAgAAAD0//n/AAAAAAgAAAD0//r/AAAAAAgAAAD0//v/AAAAAAgAAAD0//z/AAAAAAgAAAD0//3/AAAAAAgAAAD0//7/AAAAAAgAAAD0////AAAAAAgAAAD0/wAAAAAAAAgAAAD0/wEAAAAAAAgAAAD0/wIAAAAAAAgAAAD0/wMAAAAAAAgAAAD0/wQAAAAAAAgAAAD0/wUAAAAAAAgAAAD0/wYAAAAAAAgAAAD0/wcAAAAAAAgAAAD0/wgAAAAAAAgAAAD0/wkAAAAAAAgAAAD0/woAAAAAAAgAAAD0/wsAAAAAAAgAAAD0/wwAAAAAAAgAAAD1//j/AAAAAAgAAAD1//n/AAAAAAgAAAD1//r/AAAAAAgAAAD1//v/AAAAAAgAAAD1//z/AAAAAAgAAAD1//3/AAAAAAgAAAD1//7/AAAAAAgAAAD1////AAAAAAgAAAD1/wAAAAAAAAgAAAD1/wEAAAAAAAgAAAD1/wIAAAAAAAgAAAD1/wMAAAAAAAgAAAD1/wQAAAAAAAgAAAD1/wUAAAAAAAgAAAD1/wYAAAAAAAgAAAD1/wcAAAAAAAgAAAD1/wgAAAAAAAgAAAD1/wkAAAAAAAgAAAD1/woAAAAAAAgAAAD1/wsAAAAAAAgAAAD1/wwAAAAAAAgAAAD1/w0AAAAAAAgAAAD2//j/AAAAAAgAAAD2//n/AAAAAAgAAAD2//r/AAAAAAgAAAD2//7/AAAAAAgAAAD2////AAAAAAgAAAD2/wAAAAAAAAgAAAD2/wEAAAAAAAgAAAD2/wUAAAAAAAgAAAD2/wYAAAAAAAgAAAD2/wcAAAAAAAgAAAD2/wgAAAAAAAgAAAD2/wkAAAAAAAgAAAD2/woAAAAAAAgAAAD2/wsAAAAAAAgAAAD2/wwAAAAAAAgAAAD2/w0AAAAAAAgAAAD3//j/AAAAAAgAAAD3//n/AAAAAAgAAAD3//r/AAAAAAgAAAD3//7/AAAAAAgAAAD3////AAAAAAgAAAD3/wAAAAAAAAgAAAD3/wEAAAAAAAgAAAD3/wUAAAAAAAgAAAD3/wYAAAAAAAgAAAD3/wcAAAAAAAgAAAD3/wgAAAAAAAgAAAD3/wkAAAAAAAgAAAD3/woAAAAAAAgAAAD3/wsAAAAAAAgAAAD3/wwAAAAAAAgAAAD3/w0AAAAAAAgAAAD4//j/AAAAAAgAAAD4//n/AAAAAAgAAAD4//r/AAAAAAgAAAD4//7/AAAAAAgAAAD4////AAAAAAgAAAD4/wAAAAAAAAgAAAD4/wEAAAAAAAgAAAD4/wUAAAAAAAgAAAD4/wYAAAAAAAgAAAD4/wcAAAAAAAgAAAD4/wgAAAAAAAgAAAD4/wkAAAAAAAgAAAD4/woAAAAAAAgAAAD4/wsAAAAAAAgAAAD4/wwAAAAAAAgAAAD4/w0AAAAAAAgAAAD5//j/AAAAAAgAAAD5//n/AAAAAAgAAAD5//r/AAAAAAgAAAD5//7/AAADAAgAAAD5////AAAAAAgAAAD5/wAAAAAAAAgAAAD5/wEAAAACAAgAAAD5/wUAAAAAAAgAAAD5/wYAAAAAAAgAAAD5/wcAAAAAAAgAAAD5/wgAAAAAAAgAAAD5/wkAAAAAAAgAAAD5/woAAAAAAAgAAAD5/wsAAAAAAAgAAAD5/wwAAAAAAAgAAAD5/w0AAAAAAAgAAAD6//j/AAAAAAgAAAD6//n/AAAAAAgAAAD6//r/AAAAAAgAAAD6/wUAAAAAAAgAAAD6/wYAAAAAAAgAAAD6/wcAAAAAAAgAAAD6/wgAAAAAAAgAAAD6/wkAAAAAAAgAAAD6/woAAAAAAAgAAAD6/wsAAAAAAAgAAAD6/wwAAAAAAAgAAAD6/w0AAAAAAAgAAAD7//j/AAAAAAgAAAD7//n/AAAAAAgAAAD7//r/AAAAAAgAAAD7/wUAAAAAAAgAAAD7/wYAAAAAAAgAAAD7/wcAAAAAAAgAAAD7/wgAAAAAAAgAAAD7/wkAAAAAAAgAAAD7/woAAAAAAAgAAAD7/wsAAAAAAAgAAAD7/wwAAAAAAAgAAAD7/w0AAAAAAAgAAAD8//j/AAAAAAgAAAD8//n/AAAAAAgAAAD8//r/AAAAAAgAAAD8/wUAAAAAAAgAAAD8/wYAAAAAAAgAAAD8/wcAAAAAAAgAAAD8/wgAAAAAAAgAAAD8/wkAAAAAAAgAAAD8/woAAAAAAAgAAAD8/wsAAAAAAAgAAAD8/wwAAAAAAAgAAAD8/w0AAAAAAAgAAAD9//H/AAAAAAgAAAD9//L/AAAAAAgAAAD9//j/AAAAAAgAAAD9//n/AAAAAAgAAAD9//r/AAAAAAgAAAD9/wUAAAAAAAgAAAD9/wYAAAAAAAgAAAD9/wcAAAAAAAgAAAD9/wgAAAAAAAgAAAD9/wkAAAAAAAgAAAD9/woAAAAAAAgAAAD9/wsAAAAAAAgAAAD9/wwAAAAAAAgAAAD9/w0AAAAAAAgAAAD9/xMAAAAAAAgAAAD9/xQAAAAAAAgAAAD+//D/AAAAAAgAAAD+//H/AAAAAAgAAAD+//L/AAAAAAgAAAD+//P/AAAAAAgAAAD+//T/AAAAAAgAAAD+//X/AAAAAAgAAAD+//b/AAAAAAgAAAD+//f/AAAAAAgAAAD+//j/AAAAAAgAAAD+//n/AAAAAAgAAAD+//r/AAAAAAgAAAD+/wUAAAAAAAgAAAD+/wYAAAAAAAgAAAD+/wcAAAAAAAgAAAD+/wgAAAAAAAgAAAD+/wkAAAAAAAgAAAD+/woAAAAAAAgAAAD+/wsAAAAAAAgAAAD+/wwAAAAAAAgAAAD+/w0AAAAAAAgAAAD+/w4AAAAAAAgAAAD+/w8AAAAAAAgAAAD+/xAAAAAAAAgAAAD+/xEAAAAAAAgAAAD+/xIAAAAAAAgAAAD+/xMAAAAAAAgAAAD+/xQAAAAAAAgAAAD+/xUAAAAAAAgAAAD///D/AAAAAAgAAAD///H/AAAAAAgAAAD///L/AAAAAAgAAAD///P/AAAAAAgAAAD///T/AAAAAAgAAAD///X/AAAAAAgAAAD///b/AAAAAAgAAAD///f/AAAAAAgAAAD///j/AAAAAAgAAAD///n/AAAAAAgAAAD///r/AAAAAAgAAAD//wUAAAAAAAgAAAD//wYAAAAAAAgAAAD//wcAAAAAAAgAAAD//wgAAAAAAAgAAAD//wkAAAAAAAgAAAD//woAAAAAAAgAAAD//wsAAAAAAAgAAAD//wwAAAAAAAgAAAD//w0AAAAAAAgAAAD//w4AAAAAAAgAAAD//w8AAAAAAAgAAAD//xAAAAAAAAgAAAD//xEAAAAAAAgAAAD//xIAAAAAAAgAAAD//xMAAAAAAAgAAAD//xQAAAAAAAgAAAD//xUAAAAAAAgAAAAAAPH/AAAAAAgAAAAAAPL/AAAAAAgAAAAAAPj/AAAAAAgAAAAAAPn/AAAAAAgAAAAAAPr/AAAAAAgAAAAAAAUAAAAAAAgAAAAAAAYAAAAAAAgAAAAAAAcAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAkAAAAAAAgAAAAAAAoAAAAAAAgAAAAAAAsAAAAAAAgAAAAAAAwAAAAAAAgAAAAAAA0AAAAAAAgAAAAAABMAAAAAAAgAAAAAABQAAAAAAAgAAAABAPj/AAAAAAgAAAABAPn/AAAAAAgAAAABAPr/AAAAAAgAAAABAAUAAAAAAAgAAAABAAYAAAAAAAgAAAABAAcAAAAAAAgAAAABAAgAAAAAAAgAAAABAAkAAAAAAAgAAAABAAoAAAAAAAgAAAABAAsAAAAAAAgAAAABAAwAAAAAAAgAAAABAA0AAAAAAAgAAAACAPj/AAAAAAgAAAACAPn/AAAAAAgAAAACAPr/AAAAAAgAAAACAAUAAAAAAAgAAAACAAYAAAAAAAgAAAACAAcAAAAAAAgAAAACAAgAAAAAAAgAAAACAAkAAAAAAAgAAAACAAoAAAAAAAgAAAACAAsAAAAAAAgAAAACAAwAAAAAAAgAAAACAA0AAAAAAAgAAAADAPj/AAAAAAgAAAADAPn/AAAAAAgAAAADAPr/AAAAAAgAAAADAAUAAAAAAAgAAAADAAYAAAAAAAgAAAADAAcAAAAAAAgAAAADAAgAAAAAAAgAAAADAAkAAAAAAAgAAAADAAoAAAAAAAgAAAADAAsAAAAAAAgAAAADAAwAAAAAAAgAAAADAA0AAAAAAAgAAAAEAPj/AAAAAAgAAAAEAPn/AAAAAAgAAAAEAPr/AAAAAAgAAAAEAP7/AAAEAAgAAAAEAP//AAAAAAgAAAAEAAAAAAAAAAgAAAAEAAEAAAABAAgAAAAEAAUAAAAAAAgAAAAEAAYAAAAAAAgAAAAEAAcAAAAAAAgAAAAEAAgAAAAAAAgAAAAEAAkAAAAAAAgAAAAEAAoAAAAAAAgAAAAEAAsAAAAAAAgAAAAEAAwAAAAAAAgAAAAEAA0AAAAAAAgAAAAFAPj/AAAAAAgAAAAFAPn/AAAAAAgAAAAFAPr/AAAAAAgAAAAFAP7/AAAAAAgAAAAFAP//AAAAAAgAAAAFAAAAAAAAAAgAAAAFAAEAAAAAAAgAAAAFAAUAAAAAAAgAAAAFAAYAAAAAAAgAAAAFAAcAAAAAAAgAAAAFAAgAAAAAAAgAAAAFAAkAAAAAAAgAAAAFAAoAAAAAAAgAAAAFAAsAAAAAAAgAAAAFAAwAAAAAAAgAAAAFAA0AAAAAAAgAAAAGAPj/AAAAAAgAAAAGAPn/AAAAAAgAAAAGAPr/AAAAAAgAAAAGAP7/AAAAAAgAAAAGAP//AAAAAAgAAAAGAAAAAAAAAAgAAAAGAAEAAAAAAAgAAAAGAAUAAAAAAAgAAAAGAAYAAAAAAAgAAAAGAAcAAAAAAAgAAAAGAAgAAAAAAAgAAAAGAAkAAAAAAAgAAAAGAAoAAAAAAAgAAAAGAAsAAAAAAAgAAAAGAAwAAAAAAAgAAAAGAA0AAAAAAAgAAAAHAPj/AAAAAAgAAAAHAPn/AAAAAAgAAAAHAPr/AAAAAAgAAAAHAP7/AAAAAAgAAAAHAP//AAAAAAgAAAAHAAAAAAAAAAgAAAAHAAEAAAAAAAgAAAAHAAUAAAAAAAgAAAAHAAYAAAAAAAgAAAAHAAcAAAAAAAgAAAAHAAgAAAAAAAgAAAAHAAkAAAAAAAgAAAAHAAoAAAAAAAgAAAAHAAsAAAAAAAgAAAAHAAwAAAAAAAgAAAAHAA0AAAAAAAgAAAAIAPj/AAAAAAgAAAAIAPn/AAAAAAgAAAAIAPr/AAAAAAgAAAAIAP7/AAAAAAgAAAAIAP//AAAAAAgAAAAIAAAAAAAAAAgAAAAIAAEAAAAAAAgAAAAIAAIAAAAAAAgAAAAIAAMAAAAAAAgAAAAIAAQAAAAAAAgAAAAIAAUAAAAAAAgAAAAIAAYAAAAAAAgAAAAIAAcAAAAAAAgAAAAIAAgAAAAAAAgAAAAIAAkAAAAAAAgAAAAIAAoAAAAAAAgAAAAIAAsAAAAAAAgAAAAIAAwAAAAAAAgAAAAIAA0AAAAAAAgAAAAJAPn/AAAAAAgAAAAJAPr/AAAAAAgAAAAJAPv/AAAAAAgAAAAJAPz/AAAAAAgAAAAJAP3/AAAAAAgAAAAJAP7/AAAAAAgAAAAJAP//AAAAAAgAAAAJAAAAAAAAAAgAAAAJAAEAAAAAAAgAAAAJAAIAAAAAAAgAAAAJAAMAAAAAAAgAAAAJAAQAAAAAAAgAAAAJAAUAAAAAAAgAAAAJAAYAAAAAAAgAAAAJAAcAAAAAAAgAAAAJAAgAAAAAAAgAAAAJAAkAAAAAAAgAAAAJAAoAAAAAAAgAAAAJAAsAAAAAAAgAAAAJAAwAAAAAAAgAAAAIAPv/AAAAAAgAAAAIAPz/AAAAAAgAAAAIAP3/AAAAAAgAAAD2//v/AAACAAgAAAD2/wIAAAACAAgAAAAHAPv/AAABAAgAAAAHAAIAAAABAAgAAAAHAAQAAAAEAAgAAAAHAP3/AAAEAAgAAAD2/wQAAAADAAgAAAD2//3/AAADAAgAAAA=")
+tile_set = ExtResource("5_wyybc")
+
+[editable path="Hazards/LaserHazard"]
+[editable path="Hazards/LaserHazard5"]
+[editable path="Hazards/LaserHazard6"]
+[editable path="Hazards/LaserHazard7"]
+[editable path="Hazards/LaserHazard8"]
+[editable path="Hazards/LaserHazard9"]
+[editable path="Hazards/LaserHazard10"]
+[editable path="Hazards/LaserHazard11"]
+[editable path="Hazards/LaserHazard12"]
+[editable path="Hazards/LaserHazard13"]
+[editable path="Hazards/LaserHazard14"]
+[editable path="Hazards/LaserHazard15"]
+[editable path="Hazards/LaserHazard16"]
+[editable path="Hazards/LaserHazard17"]
+[editable path="Hazards/LaserHazard18"]
+[editable path="Hazards/LaserHazard19"]
+[editable path="Hazards/LaserHazard20"]
+[editable path="Hazards/LaserHazard21"]
+[editable path="Hazards/LaserHazard22"]
+[editable path="Hazards/LaserHazard23"]
+[editable path="Hazards/LaserHazard24"]
+[editable path="Hazards/LaserHazard2"]
+[editable path="Hazards/LaserHazard3"]
+[editable path="Hazards/LaserHazard4"]
