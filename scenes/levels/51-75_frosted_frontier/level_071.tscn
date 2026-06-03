@@ -75,14 +75,14 @@ position = Vector2(168, 79)
 [node name="WindmillHazard" parent="Hazards" unique_id=42799490 instance=ExtResource("7_vcgnd")]
 z_index = 1
 position = Vector2(-49, 16)
-length = 2
+length = 1
 rotation_speed = 100.0
 rotate_squares = false
 
 [node name="WindmillHazard2" parent="Hazards" unique_id=1608409628 instance=ExtResource("7_vcgnd")]
 z_index = 1
 position = Vector2(33, 16)
-length = 2
+length = 1
 rotation_speed = -100.0
 rotate_squares = false
 
@@ -590,20 +590,6 @@ position = Vector2(0, 40)
 position = Vector2(0, 20)
 rotation = 1.5707964
 
-[node name="SquareHazard" parent="Hazards" unique_id=736354374 instance=ExtResource("9_apekr")]
-curve = SubResource("Curve2D_7lwyg")
-moving = true
-loop = false
-speed_scale = 2.0
-
-[node name="SquareHazard2" parent="Hazards" unique_id=1872281994 instance=ExtResource("9_apekr")]
-position = Vector2(8, 0)
-curve = SubResource("Curve2D_7lwyg")
-moving = true
-loop = false
-speed_scale = 2.0
-offset = 0.1
-
 [node name="SquareHazard3" parent="Hazards" unique_id=1854887010 instance=ExtResource("9_apekr")]
 position = Vector2(16, 0)
 curve = SubResource("Curve2D_7lwyg")
@@ -708,22 +694,6 @@ loop = false
 speed_scale = 2.0
 offset = 1.4
 
-[node name="SquareHazard16" parent="Hazards" unique_id=1327532773 instance=ExtResource("9_apekr")]
-position = Vector2(120, 0)
-curve = SubResource("Curve2D_7lwyg")
-moving = true
-loop = false
-speed_scale = 2.0
-offset = 1.5
-
-[node name="SquareHazard17" parent="Hazards" unique_id=153111207 instance=ExtResource("9_apekr")]
-position = Vector2(128, 0)
-curve = SubResource("Curve2D_7lwyg")
-moving = true
-loop = false
-speed_scale = 2.0
-offset = 1.6
-
 [node name="ToggleItems" type="Node2D" parent="." unique_id=932950340]
 script = ExtResource("10_nmxna")
 player_path = NodePath("../Player")
@@ -750,7 +720,7 @@ position = Vector2(60, 16)
 position = Vector2(281, 147)
 
 [node name="GameCamera" parent="." unique_id=13152400 node_paths=PackedStringArray("target") instance=ExtResource("12_w8ndd")]
-position = Vector2(160, -133)
+position = Vector2(160, 90)
 mode = 1
 target = NodePath("../Player")
 default_zoom = Vector2(0.8, 0.8)
