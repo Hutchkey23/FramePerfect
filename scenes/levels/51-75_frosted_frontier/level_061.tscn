@@ -366,7 +366,7 @@ position = Vector2(125, 128)
 position = Vector2(-8, 171)
 
 [node name="GameCamera" parent="." unique_id=13152400 node_paths=PackedStringArray("target") instance=ExtResource("9_sls7t")]
-position = Vector2(160, 90)
+position = Vector2(-8, 11)
 target = NodePath("../Player")
 default_zoom = Vector2(0.8, 0.8)
 fixed_position = Vector2(160, 90)
@@ -375,6 +375,7 @@ fixed_position = Vector2(160, 90)
 
 [node name="Shadows" type="TileMapLayer" parent="MapTopLayer" unique_id=255637794]
 position = Vector2(176, 91)
+tile_map_data = PackedByteArray("AADz//n/AAABAAMAAADz//r/AAABAAMAAADz//v/AAABAAMAAADz//z/AAABAAMAAADz//3/AAABAAMAAADz//7/AAABAAMAAADz////AAABAAMAAADz/wAAAAABAAMAAADz/wEAAAABAAMAAADz/wIAAAABAAMAAADz/wMAAAABAAMAAADz/wQAAAABAAMAAADz/wUAAAABAAMAAADz/wYAAAABAAMAAADz/wcAAAABAAMAAADz//j/AAAFAAMAAAD0//j/AAAAAAMAAAD1//j/AAAAAAMAAAD2//j/AAAAAAMAAAD3//j/AAAAAAMAAAD4//j/AAAAAAMAAAD5//j/AAAAAAMAAAD6//j/AAAAAAMAAAD7//j/AAAAAAMAAAD8//j/AAAAAAMAAAD9//j/AAAAAAMAAAD+//j/AAAAAAMAAAD///j/AAAAAAMAAAAAAPj/AAAAAAMAAAABAPj/AAAAAAMAAAACAPj/AAAAAAMAAAADAPj/AAAAAAMAAAAEAPj/AAAAAAMAAAAFAPj/AAAAAAMAAAAGAPj/AAAAAAMAAAAHAPj/AAAAAAMAAAAIAPj/AAAAAAMAAAAJAPj/AAAAAAMAAAAKAPj/AAAAAAMAAAA=")
 tile_set = ExtResource("5_7lwyg")
 
 [node name="Walls" type="TileMapLayer" parent="MapTopLayer" unique_id=766012576]
