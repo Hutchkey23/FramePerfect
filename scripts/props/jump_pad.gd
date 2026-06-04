@@ -49,6 +49,9 @@ func _process(_delta: float) -> void:
 		checking_for_player_landing = false
 
 func launch_player(player: Player) -> void:
+	if not player.player_sprite.visible:
+		return
+	
 	can_launch = false
 
 	player.start_jump_pad_jump(

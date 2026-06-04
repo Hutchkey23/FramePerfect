@@ -507,7 +507,7 @@ target = NodePath("../Player")
 default_zoom = Vector2(0.8, 0.8)
 fixed_position = Vector2(160, 90)
 use_bounds = true
-bounds = Rect2(-81, -59.55, 482, 380)
+bounds = Rect2(-181, -80, 682, 420)
 
 [node name="MapTopLayer" type="Node2D" parent="." unique_id=860982189]
 

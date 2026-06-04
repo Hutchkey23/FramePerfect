@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="LevelData" format=3 uid="uid://bmdy4tvlbx5ic"]
+
+[ext_resource type="PackedScene" uid="uid://ct2gsv02273ux" path="res://scenes/levels/51-75_frosted_frontier/level_063.tscn" id="1_3tg8j"]
+[ext_resource type="Script" uid="uid://do5fdotl7d638" path="res://resources/level_data/level_data.gd" id="2_pf7i0"]
+
+[resource]
+script = ExtResource("2_pf7i0")
+level_id = "level_063"
+level_title = "arctic express"
+medal_time = 7.0
+level_scene = ExtResource("1_3tg8j")
+metadata/_custom_type_script = "uid://do5fdotl7d638"
