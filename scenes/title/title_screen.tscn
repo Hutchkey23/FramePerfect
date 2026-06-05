@@ -232,30 +232,40 @@ stretch_mode = 5
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
+focus_neighbor_left = NodePath("../..")
+focus_neighbor_right = NodePath("../..")
 button_label_text = "PLAY"
 
 [node name="MarathonButton" parent="MainTitleVbox" unique_id=271914662 instance=ExtResource("3_iowo3")]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
+focus_neighbor_left = NodePath("../..")
+focus_neighbor_right = NodePath("../..")
 button_label_text = "MARATHON"
 
 [node name="LevelSelectButton" parent="MainTitleVbox" unique_id=759729335 instance=ExtResource("3_iowo3")]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
+focus_neighbor_left = NodePath("../..")
+focus_neighbor_right = NodePath("../..")
 button_label_text = "LEVEL SELECT"
 
 [node name="CustomizeButton" parent="MainTitleVbox" unique_id=1166705071 instance=ExtResource("3_iowo3")]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
+focus_neighbor_left = NodePath("../..")
+focus_neighbor_right = NodePath("../..")
 button_label_text = "CUSTOMIZE"
 
 [node name="OptionsButton" parent="MainTitleVbox" unique_id=1845220450 instance=ExtResource("3_iowo3")]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
+focus_neighbor_left = NodePath("../..")
+focus_neighbor_right = NodePath("../..")
 button_label_text = "OPTIONS"
 
 [node name="WishlistButton" parent="MainTitleVbox" unique_id=1787987159 instance=ExtResource("3_iowo3")]
@@ -263,12 +273,16 @@ visible = false
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
+focus_neighbor_left = NodePath("../..")
+focus_neighbor_right = NodePath("../..")
 button_label_text = "WISHLIST"
 
 [node name="QuitButton" parent="MainTitleVbox" unique_id=573003843 instance=ExtResource("3_iowo3")]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
+focus_neighbor_left = NodePath("../..")
+focus_neighbor_right = NodePath("../..")
 button_label_text = "QUIT"
 
 [node name="Transition" type="CanvasLayer" parent="." unique_id=1292473395]
