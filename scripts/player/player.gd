@@ -496,11 +496,54 @@ func start_dash() -> void:
 	dash_buffer_timer = 0.0
 
 	dash_direction = last_move_input.normalized()
+	
+	# Apply wall nudging grace before calculating final velocity
+	apply_wall_nudging()
+
 	velocity = dash_direction * DASH_SPEED
 	
 	camera_reference.add_shake(3.0)
 	play_sfx(DASH_SFX, DASH_VOLUME, DASH_PITCH_RANGE)
 	spawn_dash_clouds(dash_direction)
+
+func apply_wall_nudging() -> void:
+	if dash_direction.x != 0.0 and dash_direction.y != 0.0:
+		return
+
+	const NUDGE_DISTANCE: float = 4.0 
+	
+	var test_transform := global_transform
+	var hit_something := test_move(test_transform, dash_direction * 8.0)
+	
+	if hit_something:
+		var check_axis := Vector2.ZERO
+		if dash_direction.y != 0.0:
+			check_axis = Vector2.RIGHT
+		else:
+			check_axis = Vector2.DOWN 
+			
+		for side in [-1.0, 1.0]:
+			var nudge_offset = check_axis * (NUDGE_DISTANCE * side)
+			
+			var offset_transform := test_transform
+			offset_transform.origin += nudge_offset
+			
+			if not test_move(offset_transform, Vector2.ZERO):
+				if not test_move(offset_transform, dash_direction * 8.0):
+					# Kill any existing velocity causing wall drift
+					velocity = Vector2.ZERO 
+					
+					# Re-position the player
+					global_position += nudge_offset
+					
+					# 3. Force the physics server to register the new position immediately
+					# This prevents the next move_and_slide from checking against the old position's margins
+					PhysicsServer2D.body_set_state(
+						get_rid(), 
+						PhysicsServer2D.BODY_STATE_TRANSFORM, 
+						global_transform
+					)
+					break
 
 func spawn_dash_clouds(direction: Vector2, number_of_clouds: int = 5) -> void:
 	for cloud in number_of_clouds:
