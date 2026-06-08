@@ -24,6 +24,8 @@
 [ext_resource type="Resource" uid="uid://bmdy4tvlbx5ic" path="res://resources/level_data/51-75_frosted_frontier/level_063.tres" id="18_7nteh"]
 [ext_resource type="Resource" uid="uid://xgg3grohnvho" path="res://resources/level_data/51-75_frosted_frontier/level_069.tres" id="19_lyagh"]
 [ext_resource type="Resource" uid="uid://cftlyocgoi32t" path="res://resources/level_data/51-75_frosted_frontier/level_064.tres" id="19_mxuw2"]
+[ext_resource type="Resource" uid="uid://b5nmwwtacvi4b" path="res://resources/level_data/51-75_frosted_frontier/level_065.tres" id="20_nd6bl"]
+[ext_resource type="Resource" uid="uid://dvw0s1sil1xh0" path="res://resources/level_data/51-75_frosted_frontier/level_066.tres" id="21_26jqo"]
 
 [resource]
 script = ExtResource("2_75rkk")
@@ -32,7 +34,7 @@ world_title = "Frosted Frontier"
 world_number = 3
 world_intro_text = "Frosted Frontier"
 background_music = Array[ExtResource("2_mh3fp")]([ExtResource("3_a4nmb")])
-levels = Array[ExtResource("1_nkmhr")]([ExtResource("4_pejcj"), ExtResource("5_sbbhd"), ExtResource("9_a4nmb"), ExtResource("2_mr0f6"), ExtResource("11_4i0p3"), ExtResource("12_rqbgo"), ExtResource("13_o7xs1"), ExtResource("14_xc40e"), ExtResource("12_ppsfp"), ExtResource("16_s5n4w"), ExtResource("17_rygo8"), ExtResource("18_7nteh"), ExtResource("19_mxuw2"), ExtResource("19_lyagh"), ExtResource("14_v8y80"), ExtResource("17_ijpa4"), ExtResource("11_im71k")])
+levels = Array[ExtResource("1_nkmhr")]([ExtResource("4_pejcj"), ExtResource("5_sbbhd"), ExtResource("9_a4nmb"), ExtResource("2_mr0f6"), ExtResource("11_4i0p3"), ExtResource("12_rqbgo"), ExtResource("13_o7xs1"), ExtResource("14_xc40e"), ExtResource("12_ppsfp"), ExtResource("16_s5n4w"), ExtResource("17_rygo8"), ExtResource("18_7nteh"), ExtResource("19_mxuw2"), ExtResource("20_nd6bl"), ExtResource("21_26jqo"), ExtResource("19_lyagh"), ExtResource("14_v8y80"), ExtResource("17_ijpa4"), ExtResource("11_im71k")])
 front_image = ExtResource("2_pejcj")
 back_image = ExtResource("1_og4rg")
 font_color = Color(0.09803922, 0.29803923, 0.53333336, 1)
