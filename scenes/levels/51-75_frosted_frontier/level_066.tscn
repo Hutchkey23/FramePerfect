@@ -389,7 +389,7 @@ curve = ExtResource("9_w1nsk")
 [node name="WindmillHazard" parent="Hazards" unique_id=42799490 instance=ExtResource("12_aybih")]
 z_index = 2
 position = Vector2(176.00006, -607.99994)
-rotation = -2563.0708
+rotation = -12858.978
 length = 8
 rotation_speed = -100.0
 preview_rotation = true
@@ -497,7 +497,7 @@ position = Vector2(384, 555)
 
 [node name="GameCamera" parent="." unique_id=13152400 node_paths=PackedStringArray("target") instance=ExtResource("12_bdjrg")]
 z_index = 10
-position = Vector2(48, 83)
+position = Vector2(304, 555)
 target = NodePath("../Player")
 default_zoom = Vector2(0.8, 0.8)
 fixed_position = Vector2(160, 90)

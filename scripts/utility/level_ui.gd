@@ -69,7 +69,6 @@ func show_level_fail_prompts() -> void:
 
 func update_timer_display() -> void:
 	var time : float
-	var is_marathon: bool
 	
 	if game_manager and game_manager.game_mode == game_manager.GameMode.MARATHON:
 		time = game_manager.marathon_time
