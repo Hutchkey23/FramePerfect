@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="LevelData" format=3 uid="uid://beam6d66p6wpw"]
+
+[ext_resource type="PackedScene" uid="uid://dnk85rwdgn8b6" path="res://scenes/levels/51-75_frosted_frontier/level_073.tscn" id="1_vu0u2"]
+[ext_resource type="Script" uid="uid://do5fdotl7d638" path="res://resources/level_data/level_data.gd" id="2_smxp7"]
+
+[resource]
+script = ExtResource("2_smxp7")
+level_id = "level_073"
+level_title = "go go go"
+medal_time = 10.0
+level_scene = ExtResource("1_vu0u2")
+metadata/_custom_type_script = "uid://do5fdotl7d638"
