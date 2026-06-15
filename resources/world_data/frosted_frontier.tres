@@ -11,6 +11,7 @@
 [ext_resource type="Resource" uid="uid://dcty6k2bv6cl" path="res://resources/level_data/51-75_frosted_frontier/level_051.tres" id="4_pejcj"]
 [ext_resource type="Resource" uid="uid://e4xke5f67rtt" path="res://resources/level_data/51-75_frosted_frontier/level_052.tres" id="5_sbbhd"]
 [ext_resource type="Resource" uid="uid://dcrk1hilx4an5" path="res://resources/level_data/51-75_frosted_frontier/level_053.tres" id="9_a4nmb"]
+[ext_resource type="Resource" uid="uid://do7ibhn2hitwo" path="res://resources/level_data/51-75_frosted_frontier/level_054.tres" id="10_ornj6"]
 [ext_resource type="Resource" uid="uid://i78oa2wbogtt" path="res://resources/level_data/51-75_frosted_frontier/level_056.tres" id="11_4i0p3"]
 [ext_resource type="Resource" uid="uid://cushikult13dn" path="res://resources/level_data/51-75_frosted_frontier/level_075.tres" id="11_im71k"]
 [ext_resource type="Resource" uid="uid://vrq6gvrabpt5" path="res://resources/level_data/51-75_frosted_frontier/level_060.tres" id="12_ppsfp"]
@@ -28,6 +29,7 @@
 [ext_resource type="Resource" uid="uid://dvw0s1sil1xh0" path="res://resources/level_data/51-75_frosted_frontier/level_066.tres" id="21_26jqo"]
 [ext_resource type="Resource" uid="uid://bu2d55fmi7ttt" path="res://resources/level_data/51-75_frosted_frontier/level_067.tres" id="22_t0pfy"]
 [ext_resource type="Resource" uid="uid://beam6d66p6wpw" path="res://resources/level_data/51-75_frosted_frontier/level_073.tres" id="26_0v5ec"]
+[ext_resource type="Resource" uid="uid://0u1e7n32qou1" path="res://resources/level_data/51-75_frosted_frontier/level_072.tres" id="27_4xi42"]
 
 [resource]
 script = ExtResource("2_75rkk")
@@ -35,8 +37,8 @@ world_id = "frosted_frontier"
 world_title = "Frosted Frontier"
 world_number = 3
 world_intro_text = "Frosted Frontier"
-background_music = Array[ExtResource("2_mh3fp")]([ExtResource("3_a4nmb")])
-levels = Array[ExtResource("1_nkmhr")]([ExtResource("4_pejcj"), ExtResource("5_sbbhd"), ExtResource("9_a4nmb"), ExtResource("2_mr0f6"), ExtResource("11_4i0p3"), ExtResource("12_rqbgo"), ExtResource("13_o7xs1"), ExtResource("14_xc40e"), ExtResource("12_ppsfp"), ExtResource("16_s5n4w"), ExtResource("17_rygo8"), ExtResource("18_7nteh"), ExtResource("19_mxuw2"), ExtResource("20_nd6bl"), ExtResource("21_26jqo"), ExtResource("22_t0pfy"), ExtResource("19_lyagh"), ExtResource("14_v8y80"), ExtResource("17_ijpa4"), ExtResource("26_0v5ec"), ExtResource("11_im71k")])
+background_music = Array[ExtResource("2_mh3fp")]([ExtResource("3_a4nmb"), null])
+levels = Array[ExtResource("1_nkmhr")]([ExtResource("4_pejcj"), ExtResource("5_sbbhd"), ExtResource("9_a4nmb"), ExtResource("10_ornj6"), ExtResource("2_mr0f6"), ExtResource("11_4i0p3"), ExtResource("12_rqbgo"), ExtResource("13_o7xs1"), ExtResource("14_xc40e"), ExtResource("12_ppsfp"), ExtResource("16_s5n4w"), ExtResource("17_rygo8"), ExtResource("18_7nteh"), ExtResource("19_mxuw2"), ExtResource("20_nd6bl"), ExtResource("21_26jqo"), ExtResource("22_t0pfy"), ExtResource("19_lyagh"), ExtResource("14_v8y80"), ExtResource("17_ijpa4"), ExtResource("27_4xi42"), ExtResource("26_0v5ec"), ExtResource("11_im71k")])
 front_image = ExtResource("2_pejcj")
 back_image = ExtResource("1_og4rg")
 font_color = Color(0.09803922, 0.29803923, 0.53333336, 1)
