@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="LevelData" format=3 uid="uid://eylakqis5c1b"]
+
+[ext_resource type="PackedScene" uid="uid://dvkkl6c88lt6j" path="res://scenes/levels/51-75_frosted_frontier/level_068.tscn" id="1_46am1"]
+[ext_resource type="Script" uid="uid://do5fdotl7d638" path="res://resources/level_data/level_data.gd" id="2_8dtfp"]
+
+[resource]
+script = ExtResource("2_8dtfp")
+level_id = "level_068"
+level_title = "trial by fire"
+medal_time = 11.0
+level_scene = ExtResource("1_46am1")
+metadata/_custom_type_script = "uid://do5fdotl7d638"
