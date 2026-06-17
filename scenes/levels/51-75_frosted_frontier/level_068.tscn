@@ -258,7 +258,7 @@ position = Vector2(152, -859)
 
 [node name="GameCamera" parent="." unique_id=13152400 node_paths=PackedStringArray("target") instance=ExtResource("11_y5ypq")]
 z_index = 10
-position = Vector2(160, 90)
+position = Vector2(152, 139)
 target = NodePath("../Player")
 default_zoom = Vector2(0.8, 0.8)
 fixed_position = Vector2(160, 90)

@@ -31,6 +31,7 @@
 [ext_resource type="Resource" uid="uid://eylakqis5c1b" path="res://resources/level_data/51-75_frosted_frontier/level_068.tres" id="24_4xi42"]
 [ext_resource type="Resource" uid="uid://beam6d66p6wpw" path="res://resources/level_data/51-75_frosted_frontier/level_073.tres" id="26_0v5ec"]
 [ext_resource type="Resource" uid="uid://0u1e7n32qou1" path="res://resources/level_data/51-75_frosted_frontier/level_072.tres" id="27_4xi42"]
+[ext_resource type="Resource" uid="uid://bt3vy4n0wgndh" path="res://resources/level_data/51-75_frosted_frontier/level_074.tres" id="30_gx267"]
 
 [resource]
 script = ExtResource("2_75rkk")
@@ -39,7 +40,7 @@ world_title = "Frosted Frontier"
 world_number = 3
 world_intro_text = "Frosted Frontier"
 background_music = Array[ExtResource("2_mh3fp")]([ExtResource("3_a4nmb"), null])
-levels = Array[ExtResource("1_nkmhr")]([ExtResource("4_pejcj"), ExtResource("5_sbbhd"), ExtResource("9_a4nmb"), ExtResource("10_ornj6"), ExtResource("2_mr0f6"), ExtResource("11_4i0p3"), ExtResource("12_rqbgo"), ExtResource("13_o7xs1"), ExtResource("14_xc40e"), ExtResource("12_ppsfp"), ExtResource("16_s5n4w"), ExtResource("17_rygo8"), ExtResource("18_7nteh"), ExtResource("19_mxuw2"), ExtResource("20_nd6bl"), ExtResource("21_26jqo"), ExtResource("22_t0pfy"), ExtResource("24_4xi42"), ExtResource("19_lyagh"), ExtResource("14_v8y80"), ExtResource("17_ijpa4"), ExtResource("27_4xi42"), ExtResource("26_0v5ec"), ExtResource("11_im71k")])
+levels = Array[ExtResource("1_nkmhr")]([ExtResource("4_pejcj"), ExtResource("5_sbbhd"), ExtResource("9_a4nmb"), ExtResource("10_ornj6"), ExtResource("2_mr0f6"), ExtResource("11_4i0p3"), ExtResource("12_rqbgo"), ExtResource("13_o7xs1"), ExtResource("14_xc40e"), ExtResource("12_ppsfp"), ExtResource("16_s5n4w"), ExtResource("17_rygo8"), ExtResource("18_7nteh"), ExtResource("19_mxuw2"), ExtResource("20_nd6bl"), ExtResource("21_26jqo"), ExtResource("22_t0pfy"), ExtResource("24_4xi42"), ExtResource("19_lyagh"), ExtResource("14_v8y80"), ExtResource("17_ijpa4"), ExtResource("27_4xi42"), ExtResource("26_0v5ec"), ExtResource("30_gx267"), ExtResource("11_im71k")])
 front_image = ExtResource("2_pejcj")
 back_image = ExtResource("1_og4rg")
 font_color = Color(0.09803922, 0.29803923, 0.53333336, 1)

@@ -45,20 +45,40 @@ func _ready() -> void:
 func _draw() -> void:
 	if not Engine.is_editor_hint():
 		return
-	
-	if not show_bounds_in_editor:
+
+	if show_bounds_in_editor and use_bounds:
+		draw_rect(bounds, Color.WHITE, false, 2.0)
+
+	draw_camera_zoom_preview()
+
+
+func draw_camera_zoom_preview() -> void:
+	if camera == null:
 		return
-	
-	if not use_bounds:
-		return
-	
-	draw_rect(bounds, Color.WHITE, false, 2.0)
+
+	var preview_center := get_base_position()
+	var viewport_size := get_viewport_rect().size
+	var visible_size := viewport_size / camera.zoom
+
+	var rect := Rect2(
+		to_local(preview_center - visible_size * 0.5),
+		visible_size
+	)
+
+	draw_rect(rect, Color.YELLOW, false, 2.0)
 
 func _process(delta: float) -> void:
 	if Engine.is_editor_hint():
+		camera.zoom = default_zoom
+
+		if mode == CameraMode.FIXED:
+			global_position = fixed_position
+		elif target:
+			global_position = target.global_position
+
 		queue_redraw()
 		return
-	
+
 	update_base_position(delta)
 	update_shake(delta)
 
