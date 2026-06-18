@@ -1,0 +1,891 @@
+[gd_scene format=4 uid="uid://dh0a71e3umxer"]
+
+[ext_resource type="Shader" uid="uid://cy8e5yqoo68kc" path="res://shaders/starry_sky.gdshader" id="1_3uvcn"]
+[ext_resource type="PackedScene" uid="uid://cvsktm1iw46q4" path="res://scenes/utility/level_controller.tscn" id="2_ws652"]
+[ext_resource type="PackedScene" uid="uid://ecmje7pp4gyy" path="res://scenes/utility/level_ui.tscn" id="3_vlmfo"]
+[ext_resource type="PackedScene" uid="uid://bxry211ole85r" path="res://scenes/utility/cinematic_bars.tscn" id="4_7bmb6"]
+[ext_resource type="PackedScene" uid="uid://drnundi171cmh" path="res://scenes/player/player.tscn" id="5_i6vc0"]
+[ext_resource type="TileSet" uid="uid://7q8eymh2ksuh" path="res://scenes/tilesets/main_floor_and_walls.tres" id="6_p27r8"]
+[ext_resource type="Shader" uid="uid://cyftftn8qvqe5" path="res://shaders/hazard_shader.gdshader" id="7_hp03u"]
+[ext_resource type="PackedScene" uid="uid://ct44xka20hdp7" path="res://scenes/props/portal.tscn" id="8_neqtq"]
+[ext_resource type="PackedScene" uid="uid://cy567go6v1isl" path="res://scenes/props/toggle_platform.tscn" id="8_p27r8"]
+[ext_resource type="Script" uid="uid://cyfx3hv4kfs08" path="res://scripts/props/toggle_items_manager.gd" id="8_ws652"]
+[ext_resource type="PackedScene" uid="uid://cwv3wpwmybmey" path="res://scenes/props/goal.tscn" id="9_k3kp7"]
+[ext_resource type="PackedScene" uid="uid://bopp28ci4s4xu" path="res://scenes/props/toggle_block.tscn" id="9_vlmfo"]
+[ext_resource type="PackedScene" uid="uid://ca2uxdoweqwc1" path="res://scenes/utility/game_camera.tscn" id="10_ahsf2"]
+[ext_resource type="PackedScene" uid="uid://dsmg6rsp35s6l" path="res://scenes/hazards/laser_hazard.tscn" id="11_7bmb6"]
+[ext_resource type="PackedScene" uid="uid://b3b7a1qdd5k5g" path="res://scenes/hazards/square_hazard.tscn" id="12_i6vc0"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_jur53"]
+shader = ExtResource("1_3uvcn")
+shader_parameter/fade_alpha = 1.0
+shader_parameter/background_color = Color(0.012298316, 0.024600385, 0.090413176, 1)
+shader_parameter/star_color = Color(0.85, 0.82, 1, 1)
+shader_parameter/aspect_ratio = 1.0
+shader_parameter/density = 0.79999997976
+shader_parameter/layer_parascale = 3
+shader_parameter/star_speed = Vector2(0.01, 0.01)
+shader_parameter/star_wave = Vector2(0, 0)
+shader_parameter/star_size = 1.999999955296
+shader_parameter/star_rotate_speed = 0.08300014644250009
+shader_parameter/twinkle_effect = 1.0
+shader_parameter/twinkle_speed = 0.249999994412
+shader_parameter/pixelate_enabled = true
+shader_parameter/pixelate_count = 1000.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_wwkcr"]
+shader = ExtResource("7_hp03u")
+shader_parameter/pulse_color = Color(0.40390328, 8.4228816e-07, 9.62615e-08, 1)
+shader_parameter/pulse_strength = 1.0
+shader_parameter/pulse_speed = 5.00000023424012
+shader_parameter/center_glow_strength = 0.0
+
+[sub_resource type="Curve2D" id="Curve2D_p27r8"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 43, -43, 0, 0, 0, 0, 83, -43)
+}
+point_count = 2
+
+[node name="Level_087" type="Node2D" unique_id=1381461103]
+metadata/_edit_horizontal_guides_ = [90.0]
+
+[node name="Background" type="ColorRect" parent="." unique_id=882240186]
+material = SubResource("ShaderMaterial_jur53")
+offset_left = -84.0
+offset_top = -108.0
+offset_right = 469.0
+offset_bottom = 324.0
+
+[node name="LevelController" parent="." unique_id=1058685242 groups=["level_controller"] instance=ExtResource("2_ws652")]
+player_spawn_path = NodePath("../PlayerSpawn")
+camera_path = NodePath("../GameCamera")
+cinematic_bars_path = NodePath("../CinematicBars")
+level_ui_path = NodePath("../LevelUI")
+platforms_path = NodePath("../Platforms")
+hazards_path = NodePath("../Hazards")
+toggle_blocks_path = NodePath("../ToggleItems")
+
+[node name="LevelUI" parent="." unique_id=687480857 instance=ExtResource("3_vlmfo")]
+layer = 2
+visible = false
+level_controller_path = NodePath("../LevelController")
+
+[node name="CinematicBars" parent="." unique_id=3966864 instance=ExtResource("4_7bmb6")]
+visible = false
+
+[node name="Player" parent="." unique_id=1458309070 instance=ExtResource("5_i6vc0")]
+z_index = 1
+position = Vector2(71, 222)
+game_camera_path = NodePath("../GameCamera")
+
+[node name="PlayerSpawn" type="Node2D" parent="." unique_id=535208430]
+z_index = 1
+position = Vector2(71, 222)
+
+[node name="MapBottomLayer" type="Node2D" parent="." unique_id=1665801705]
+position = Vector2(159, 98)
+
+[node name="Floors" type="TileMapLayer" parent="MapBottomLayer" unique_id=1507503636 groups=["floors"]]
+tile_map_data = PackedByteArray("AAD5//r/AAAAAAkAAAD5//v/AAAAAAkAAAD5//z/AAAAAAkAAAD5//3/AAAAAAkAAAD5//7/AAAAAAkAAAD5////AAAAAAkAAAD5/wAAAAAAAAkAAAD5/wEAAAAAAAkAAAD5/wIAAAAAAAkAAAD5/wMAAAAAAAkAAAD5/wQAAAAAAAkAAAD5/wUAAAAAAAkAAAD5/wYAAAAAAAkAAAD5/wcAAAAAAAkAAAD5/wgAAAAAAAkAAAD6//r/AAAAAAkAAAD6//v/AAAAAAkAAAD6//z/AAAAAAkAAAD6//3/AAAAAAkAAAD6//7/AAAAAAkAAAD6////AAAAAAkAAAD6/wAAAAAAAAkAAAD6/wEAAAAAAAkAAAD6/wIAAAAAAAkAAAD6/wMAAAAAAAkAAAD6/wQAAAAAAAkAAAD6/wUAAAAAAAkAAAD6/wYAAAAAAAkAAAD6/wcAAAAAAAkAAAD6/wgAAAAAAAkAAAD7//r/AAAAAAkAAAD7//v/AAAAAAkAAAD7//z/AAAAAAkAAAD7//3/AAAAAAkAAAD7//7/AAAAAAkAAAD7////AAAAAAkAAAD7/wAAAAAAAAkAAAD7/wEAAAAAAAkAAAD7/wIAAAAAAAkAAAD7/wMAAAAAAAkAAAD7/wQAAAAAAAkAAAD7/wUAAAAAAAkAAAD7/wYAAAAAAAkAAAD7/wcAAAAAAAkAAAD7/wgAAAAAAAkAAAD+//r/AAAAAAkAAAD+//v/AAAAAAkAAAD+//z/AAAAAAkAAAD+//3/AAAAAAkAAAD+//7/AAAAAAkAAAD+////AAAAAAkAAAD+/wAAAAAAAAkAAAD+/wEAAAAAAAkAAAD+/wIAAAAAAAkAAAD+/wMAAAAAAAkAAAD+/wQAAAAAAAkAAAD+/wUAAAAAAAkAAAD+/wYAAAAAAAkAAAD+/wcAAAAAAAkAAAD+/wgAAAAAAAkAAAD///r/AAAAAAkAAAD///v/AAAAAAkAAAD///z/AAAAAAkAAAD///3/AAAAAAkAAAD///7/AAAAAAkAAAD/////AAAAAAkAAAD//wAAAAAAAAkAAAD//wEAAAAAAAkAAAD//wIAAAAAAAkAAAD//wMAAAAAAAkAAAD//wQAAAAAAAkAAAD//wUAAAAAAAkAAAD//wYAAAAAAAkAAAD//wcAAAAAAAkAAAD//wgAAAAAAAkAAAAAAPr/AAAAAAkAAAAAAPv/AAAAAAkAAAAAAPz/AAAAAAkAAAAAAP3/AAAAAAkAAAAAAP7/AAAAAAkAAAAAAP//AAAAAAkAAAAAAAAAAAAAAAkAAAAAAAEAAAAAAAkAAAAAAAIAAAAAAAkAAAAAAAMAAAAAAAkAAAAAAAQAAAAAAAkAAAAAAAUAAAAAAAkAAAAAAAYAAAAAAAkAAAAAAAcAAAAAAAkAAAAAAAgAAAAAAAkAAAADAAgAAAAAAAkAAAADAPr/AAAAAAkAAAADAPv/AAAAAAkAAAADAPz/AAAAAAkAAAADAP3/AAAAAAkAAAADAP7/AAAAAAkAAAADAP//AAAAAAkAAAADAAAAAAAAAAkAAAADAAEAAAAAAAkAAAADAAIAAAAAAAkAAAADAAMAAAAAAAkAAAADAAQAAAAAAAkAAAADAAUAAAAAAAkAAAADAAYAAAAAAAkAAAADAAcAAAAAAAkAAAAEAPr/AAAAAAkAAAAEAPv/AAAAAAkAAAAEAPz/AAAAAAkAAAAEAP3/AAAAAAkAAAAEAP7/AAAAAAkAAAAEAP//AAAAAAkAAAAEAAAAAAAAAAkAAAAEAAEAAAAAAAkAAAAEAAIAAAAAAAkAAAAEAAMAAAAAAAkAAAAEAAQAAAAAAAkAAAAEAAUAAAAAAAkAAAAEAAYAAAAAAAkAAAAEAAcAAAAAAAkAAAAEAAgAAAAAAAkAAAAFAPr/AAAAAAkAAAAFAPv/AAAAAAkAAAAFAPz/AAAAAAkAAAAFAP3/AAAAAAkAAAAFAP7/AAAAAAkAAAAFAP//AAAAAAkAAAAFAAAAAAAAAAkAAAAFAAEAAAAAAAkAAAAFAAIAAAAAAAkAAAAFAAMAAAAAAAkAAAAFAAQAAAAAAAkAAAAFAAUAAAAAAAkAAAAFAAYAAAAAAAkAAAAFAAcAAAAAAAkAAAAFAAgAAAAAAAkAAAAIAPr/AAAAAAkAAAAIAPv/AAAAAAkAAAAIAPz/AAAAAAkAAAAIAP3/AAAAAAkAAAAIAP7/AAAAAAkAAAAIAP//AAAAAAkAAAAIAAAAAAAAAAkAAAAIAAEAAAAAAAkAAAAIAAIAAAAAAAkAAAAIAAMAAAAAAAkAAAAIAAQAAAAAAAkAAAAIAAUAAAAAAAkAAAAIAAYAAAAAAAkAAAAIAAcAAAAAAAkAAAAIAAgAAAAAAAkAAAAJAPr/AAAAAAkAAAAJAPv/AAAAAAkAAAAJAPz/AAAAAAkAAAAJAP3/AAAAAAkAAAAJAP7/AAAAAAkAAAAJAP//AAAAAAkAAAAJAAAAAAAAAAkAAAAJAAEAAAAAAAkAAAAJAAIAAAAAAAkAAAAJAAMAAAAAAAkAAAAJAAQAAAAAAAkAAAAJAAUAAAAAAAkAAAAJAAYAAAAAAAkAAAAJAAcAAAAAAAkAAAAJAAgAAAAAAAkAAAAKAPr/AAAAAAkAAAAKAPv/AAAAAAkAAAAKAPz/AAAAAAkAAAAKAP3/AAAAAAkAAAAKAP7/AAAAAAkAAAAKAP//AAAAAAkAAAAKAAAAAAAAAAkAAAAKAAEAAAAAAAkAAAAKAAIAAAAAAAkAAAAKAAMAAAAAAAkAAAAKAAQAAAAAAAkAAAAKAAUAAAAAAAkAAAAKAAYAAAAAAAkAAAAKAAcAAAAAAAkAAAAKAAgAAAAAAAkAAAA=")
+tile_set = ExtResource("6_p27r8")
+
+[node name="Hazards" type="TileMapLayer" parent="MapBottomLayer" unique_id=876696869 groups=["floor_hazards"]]
+modulate = Color(0.5092862, 0.5092861, 0.5092864, 1)
+material = SubResource("ShaderMaterial_wwkcr")
+tile_map_data = PackedByteArray("AAD5/wIAAAAAAAEAAAD5/wMAAAAAAAEAAAD6/wIAAAAAAAEAAAD6/wMAAAAAAAEAAAD7/wIAAAAAAAEAAAD7/wMAAAAAAAEAAAD5//3/AAAAAAEAAAD5//7/AAAAAAEAAAD6//3/AAAAAAEAAAD6//7/AAAAAAEAAAD7//3/AAAAAAEAAAD7//7/AAAAAAEAAAD5/wQAAAAAAAEAAAD6/wQAAAAAAAEAAAD7/wQAAAAAAAEAAAD5////AAAAAAEAAAD6////AAAAAAEAAAD7////AAAAAAEAAAD+/wAAAAAAAAEAAAD//wAAAAAAAAEAAAAAAAAAAAAAAAEAAAD+/wEAAAAAAAEAAAD//wEAAAAAAAEAAAAAAAEAAAAAAAEAAAD+/wIAAAAAAAEAAAD//wIAAAAAAAEAAAAAAAIAAAAAAAEAAAD+////AAAAAAEAAAD/////AAAAAAEAAAAAAP//AAAAAAEAAAD5/wAAAAAAAAEAAAD5/wEAAAAAAAEAAAD6/wAAAAAAAAEAAAD6/wEAAAAAAAEAAAD7/wAAAAAAAAEAAAD7/wEAAAAAAAEAAAA=")
+tile_set = ExtResource("6_p27r8")
+
+[node name="Platforms" type="Node2D" parent="." unique_id=1928273324]
+
+[node name="ToggleItems" type="Node2D" parent="." unique_id=40036020]
+script = ExtResource("8_ws652")
+player_path = NodePath("../Player")
+
+[node name="ToggleBlock" parent="ToggleItems" unique_id=384204412 instance=ExtResource("9_vlmfo")]
+position = Vector2(135, 113)
+start_toggled = false
+
+[node name="ToggleBlock2" parent="ToggleItems" unique_id=763728191 instance=ExtResource("9_vlmfo")]
+position = Vector2(151, 113)
+start_toggled = false
+
+[node name="ToggleBlock3" parent="ToggleItems" unique_id=976591721 instance=ExtResource("9_vlmfo")]
+position = Vector2(167, 113)
+start_toggled = false
+
+[node name="ToggleBlock4" parent="ToggleItems" unique_id=1187133630 instance=ExtResource("9_vlmfo")]
+position = Vector2(135, 97)
+start_toggled = false
+
+[node name="ToggleBlock5" parent="ToggleItems" unique_id=2114333723 instance=ExtResource("9_vlmfo")]
+position = Vector2(151, 97)
+start_toggled = false
+
+[node name="ToggleBlock6" parent="ToggleItems" unique_id=1887260785 instance=ExtResource("9_vlmfo")]
+position = Vector2(167, 97)
+start_toggled = false
+
+[node name="ToggleBlock7" parent="ToggleItems" unique_id=1981987337 instance=ExtResource("9_vlmfo")]
+position = Vector2(135, 129)
+start_toggled = false
+
+[node name="ToggleBlock8" parent="ToggleItems" unique_id=1613333804 instance=ExtResource("9_vlmfo")]
+position = Vector2(151, 129)
+start_toggled = false
+
+[node name="ToggleBlock9" parent="ToggleItems" unique_id=833577202 instance=ExtResource("9_vlmfo")]
+position = Vector2(167, 129)
+start_toggled = false
+
+[node name="TogglePlatform" parent="ToggleItems" unique_id=588717540 instance=ExtResource("8_p27r8")]
+position = Vector2(71, 114)
+start_toggled = false
+
+[node name="Portals" type="Node2D" parent="." unique_id=304918047]
+position = Vector2(0, 7)
+
+[node name="BluePortal" parent="Portals" unique_id=1176273934 node_paths=PackedStringArray("target_portal") instance=ExtResource("8_neqtq")]
+position = Vector2(71, 10)
+target_portal = NodePath("../BluePortal2")
+
+[node name="BluePortal2" parent="Portals" unique_id=936736351 node_paths=PackedStringArray("target_portal") instance=ExtResource("8_neqtq")]
+position = Vector2(151, 215)
+target_portal = NodePath("../BluePortal")
+
+[node name="GreenPortal" parent="Portals" unique_id=1352491259 node_paths=PackedStringArray("target_portal") instance=ExtResource("8_neqtq")]
+position = Vector2(151, 10)
+portal_color = 1
+target_portal = NodePath("../GreenPortal2")
+
+[node name="GreenPortal2" parent="Portals" unique_id=1414537435 node_paths=PackedStringArray("target_portal") instance=ExtResource("8_neqtq")]
+position = Vector2(231, 215)
+portal_color = 1
+target_portal = NodePath("../GreenPortal")
+
+[node name="MagentaPortal" parent="Portals" unique_id=610866086 node_paths=PackedStringArray("target_portal") instance=ExtResource("8_neqtq")]
+position = Vector2(311, 215)
+portal_color = 2
+target_portal = NodePath("../MagentaPortal2")
+
+[node name="MagentaPortal2" parent="Portals" unique_id=1333854721 node_paths=PackedStringArray("target_portal") instance=ExtResource("8_neqtq")]
+position = Vector2(231, 10)
+portal_color = 2
+target_portal = NodePath("../MagentaPortal")
+
+[node name="Hazards" type="Node2D" parent="." unique_id=798262580]
+position = Vector2(168, 79)
+
+[node name="LaserHazard" parent="Hazards" unique_id=2109695187 instance=ExtResource("11_7bmb6")]
+position = Vector2(123, 38)
+active_time = 0.6
+off_time = 0.6
+
+[node name="RightCap" parent="Hazards/LaserHazard/Caps" parent_id_path=PackedInt32Array(2109695187, 1936609040) index="0" unique_id=713689459]
+position = Vector2(14, 0)
+
+[node name="Beam" parent="Hazards/LaserHazard" index="1" unique_id=1755055180]
+points = PackedVector2Array(0, 0, 40, 0)
+
+[node name="WarningBeam" parent="Hazards/LaserHazard" index="2" unique_id=1833803067]
+points = PackedVector2Array(0, 0, 40, 0)
+
+[node name="RCapParticles" parent="Hazards/LaserHazard" index="4" unique_id=1655741551]
+position = Vector2(40, 0)
+
+[node name="BeamCollision" parent="Hazards/LaserHazard" index="5" unique_id=1900670564]
+position = Vector2(20, 0)
+
+[node name="LaserHazard2" parent="Hazards" unique_id=1034948197 instance=ExtResource("11_7bmb6")]
+position = Vector2(123, 30)
+active_time = 0.6
+off_time = 0.6
+
+[node name="RightCap" parent="Hazards/LaserHazard2/Caps" parent_id_path=PackedInt32Array(1034948197, 1936609040) index="0" unique_id=713689459]
+position = Vector2(14, 0)
+
+[node name="Beam" parent="Hazards/LaserHazard2" index="1" unique_id=1755055180]
+points = PackedVector2Array(0, 0, 40, 0)
+
+[node name="WarningBeam" parent="Hazards/LaserHazard2" index="2" unique_id=1833803067]
+points = PackedVector2Array(0, 0, 40, 0)
+
+[node name="RCapParticles" parent="Hazards/LaserHazard2" index="4" unique_id=1655741551]
+position = Vector2(40, 0)
+
+[node name="BeamCollision" parent="Hazards/LaserHazard2" index="5" unique_id=1900670564]
+position = Vector2(20, 0)
+
+[node name="LaserHazard3" parent="Hazards" unique_id=1938035918 instance=ExtResource("11_7bmb6")]
+position = Vector2(123, 22)
+active_time = 0.6
+off_time = 0.6
+
+[node name="RightCap" parent="Hazards/LaserHazard3/Caps" parent_id_path=PackedInt32Array(1938035918, 1936609040) index="0" unique_id=713689459]
+position = Vector2(14, 0)
+
+[node name="Beam" parent="Hazards/LaserHazard3" index="1" unique_id=1755055180]
+points = PackedVector2Array(0, 0, 40, 0)
+
+[node name="WarningBeam" parent="Hazards/LaserHazard3" index="2" unique_id=1833803067]
+points = PackedVector2Array(0, 0, 40, 0)
+
+[node name="RCapParticles" parent="Hazards/LaserHazard3" index="4" unique_id=1655741551]
+position = Vector2(40, 0)
+
+[node name="BeamCollision" parent="Hazards/LaserHazard3" index="5" unique_id=1900670564]
+position = Vector2(20, 0)
+
+[node name="LaserHazard4" parent="Hazards" unique_id=1347242026 instance=ExtResource("11_7bmb6")]
+position = Vector2(123, 14)
+active_time = 0.6
+off_time = 0.6
+
+[node name="RightCap" parent="Hazards/LaserHazard4/Caps" parent_id_path=PackedInt32Array(1347242026, 1936609040) index="0" unique_id=713689459]
+position = Vector2(14, 0)
+
+[node name="Beam" parent="Hazards/LaserHazard4" index="1" unique_id=1755055180]
+points = PackedVector2Array(0, 0, 40, 0)
+
+[node name="WarningBeam" parent="Hazards/LaserHazard4" index="2" unique_id=1833803067]
+points = PackedVector2Array(0, 0, 40, 0)
+
+[node name="RCapParticles" parent="Hazards/LaserHazard4" index="4" unique_id=1655741551]
+position = Vector2(40, 0)
+
+[node name="BeamCollision" parent="Hazards/LaserHazard4" index="5" unique_id=1900670564]
+position = Vector2(20, 0)
+
+[node name="LaserHazard5" parent="Hazards" unique_id=377597770 instance=ExtResource("11_7bmb6")]
+position = Vector2(123, 6)
+active_time = 0.6
+off_time = 0.6
+
+[node name="RightCap" parent="Hazards/LaserHazard5/Caps" parent_id_path=PackedInt32Array(377597770, 1936609040) index="0" unique_id=713689459]
+position = Vector2(14, 0)
+
+[node name="Beam" parent="Hazards/LaserHazard5" index="1" unique_id=1755055180]
+points = PackedVector2Array(0, 0, 40, 0)
+
+[node name="WarningBeam" parent="Hazards/LaserHazard5" index="2" unique_id=1833803067]
+points = PackedVector2Array(0, 0, 40, 0)
+
+[node name="RCapParticles" parent="Hazards/LaserHazard5" index="4" unique_id=1655741551]
+position = Vector2(40, 0)
+
+[node name="BeamCollision" parent="Hazards/LaserHazard5" index="5" unique_id=1900670564]
+position = Vector2(20, 0)
+
+[node name="LaserHazard6" parent="Hazards" unique_id=1896320242 instance=ExtResource("11_7bmb6")]
+position = Vector2(123, -2)
+active_time = 0.6
+off_time = 0.6
+
+[node name="RightCap" parent="Hazards/LaserHazard6/Caps" parent_id_path=PackedInt32Array(1896320242, 1936609040) index="0" unique_id=713689459]
+position = Vector2(14, 0)
+
+[node name="Beam" parent="Hazards/LaserHazard6" index="1" unique_id=1755055180]
+points = PackedVector2Array(0, 0, 40, 0)
+
+[node name="WarningBeam" parent="Hazards/LaserHazard6" index="2" unique_id=1833803067]
+points = PackedVector2Array(0, 0, 40, 0)
+
+[node name="RCapParticles" parent="Hazards/LaserHazard6" index="4" unique_id=1655741551]
+position = Vector2(40, 0)
+
+[node name="BeamCollision" parent="Hazards/LaserHazard6" index="5" unique_id=1900670564]
+position = Vector2(20, 0)
+
+[node name="LaserHazard7" parent="Hazards" unique_id=1586362443 instance=ExtResource("11_7bmb6")]
+position = Vector2(123, -10)
+active_time = 0.6
+off_time = 0.6
+
+[node name="RightCap" parent="Hazards/LaserHazard7/Caps" parent_id_path=PackedInt32Array(1586362443, 1936609040) index="0" unique_id=713689459]
+position = Vector2(14, 0)
+
+[node name="Beam" parent="Hazards/LaserHazard7" index="1" unique_id=1755055180]
+points = PackedVector2Array(0, 0, 40, 0)
+
+[node name="WarningBeam" parent="Hazards/LaserHazard7" index="2" unique_id=1833803067]
+points = PackedVector2Array(0, 0, 40, 0)
+
+[node name="RCapParticles" parent="Hazards/LaserHazard7" index="4" unique_id=1655741551]
+position = Vector2(40, 0)
+
+[node name="BeamCollision" parent="Hazards/LaserHazard7" index="5" unique_id=1900670564]
+position = Vector2(20, 0)
+
+[node name="LaserHazard8" parent="Hazards" unique_id=491956832 instance=ExtResource("11_7bmb6")]
+position = Vector2(123, -18)
+active_time = 0.6
+off_time = 0.6
+
+[node name="RightCap" parent="Hazards/LaserHazard8/Caps" parent_id_path=PackedInt32Array(491956832, 1936609040) index="0" unique_id=713689459]
+position = Vector2(14, 0)
+
+[node name="Beam" parent="Hazards/LaserHazard8" index="1" unique_id=1755055180]
+points = PackedVector2Array(0, 0, 40, 0)
+
+[node name="WarningBeam" parent="Hazards/LaserHazard8" index="2" unique_id=1833803067]
+points = PackedVector2Array(0, 0, 40, 0)
+
+[node name="RCapParticles" parent="Hazards/LaserHazard8" index="4" unique_id=1655741551]
+position = Vector2(40, 0)
+
+[node name="BeamCollision" parent="Hazards/LaserHazard8" index="5" unique_id=1900670564]
+position = Vector2(20, 0)
+
+[node name="LaserHazard9" parent="Hazards" unique_id=1700240138 instance=ExtResource("11_7bmb6")]
+position = Vector2(123, -26)
+active_time = 0.6
+off_time = 0.6
+
+[node name="RightCap" parent="Hazards/LaserHazard9/Caps" parent_id_path=PackedInt32Array(1700240138, 1936609040) index="0" unique_id=713689459]
+position = Vector2(14, 0)
+
+[node name="Beam" parent="Hazards/LaserHazard9" index="1" unique_id=1755055180]
+points = PackedVector2Array(0, 0, 40, 0)
+
+[node name="WarningBeam" parent="Hazards/LaserHazard9" index="2" unique_id=1833803067]
+points = PackedVector2Array(0, 0, 40, 0)
+
+[node name="RCapParticles" parent="Hazards/LaserHazard9" index="4" unique_id=1655741551]
+position = Vector2(40, 0)
+
+[node name="BeamCollision" parent="Hazards/LaserHazard9" index="5" unique_id=1900670564]
+position = Vector2(20, 0)
+
+[node name="LaserHazard10" parent="Hazards" unique_id=696813700 instance=ExtResource("11_7bmb6")]
+position = Vector2(123, -34)
+active_time = 0.6
+off_time = 0.6
+
+[node name="RightCap" parent="Hazards/LaserHazard10/Caps" parent_id_path=PackedInt32Array(696813700, 1936609040) index="0" unique_id=713689459]
+position = Vector2(14, 0)
+
+[node name="Beam" parent="Hazards/LaserHazard10" index="1" unique_id=1755055180]
+points = PackedVector2Array(0, 0, 40, 0)
+
+[node name="WarningBeam" parent="Hazards/LaserHazard10" index="2" unique_id=1833803067]
+points = PackedVector2Array(0, 0, 40, 0)
+
+[node name="RCapParticles" parent="Hazards/LaserHazard10" index="4" unique_id=1655741551]
+position = Vector2(40, 0)
+
+[node name="BeamCollision" parent="Hazards/LaserHazard10" index="5" unique_id=1900670564]
+position = Vector2(20, 0)
+
+[node name="LaserHazard11" parent="Hazards" unique_id=1681353101 instance=ExtResource("11_7bmb6")]
+position = Vector2(123, -42)
+active_time = 0.6
+off_time = 0.6
+
+[node name="RightCap" parent="Hazards/LaserHazard11/Caps" parent_id_path=PackedInt32Array(1681353101, 1936609040) index="0" unique_id=713689459]
+position = Vector2(14, 0)
+
+[node name="Beam" parent="Hazards/LaserHazard11" index="1" unique_id=1755055180]
+points = PackedVector2Array(0, 0, 40, 0)
+
+[node name="WarningBeam" parent="Hazards/LaserHazard11" index="2" unique_id=1833803067]
+points = PackedVector2Array(0, 0, 40, 0)
+
+[node name="RCapParticles" parent="Hazards/LaserHazard11" index="4" unique_id=1655741551]
+position = Vector2(40, 0)
+
+[node name="BeamCollision" parent="Hazards/LaserHazard11" index="5" unique_id=1900670564]
+position = Vector2(20, 0)
+
+[node name="LaserHazard12" parent="Hazards" unique_id=2012104456 instance=ExtResource("11_7bmb6")]
+position = Vector2(123, -50)
+active_time = 0.6
+off_time = 0.6
+
+[node name="RightCap" parent="Hazards/LaserHazard12/Caps" parent_id_path=PackedInt32Array(2012104456, 1936609040) index="0" unique_id=713689459]
+position = Vector2(14, 0)
+
+[node name="Beam" parent="Hazards/LaserHazard12" index="1" unique_id=1755055180]
+points = PackedVector2Array(0, 0, 40, 0)
+
+[node name="WarningBeam" parent="Hazards/LaserHazard12" index="2" unique_id=1833803067]
+points = PackedVector2Array(0, 0, 40, 0)
+
+[node name="RCapParticles" parent="Hazards/LaserHazard12" index="4" unique_id=1655741551]
+position = Vector2(40, 0)
+
+[node name="BeamCollision" parent="Hazards/LaserHazard12" index="5" unique_id=1900670564]
+position = Vector2(20, 0)
+
+[node name="LaserHazard13" parent="Hazards" unique_id=932846909 instance=ExtResource("11_7bmb6")]
+position = Vector2(123, 70)
+active_time = 0.6
+off_time = 0.6
+
+[node name="RightCap" parent="Hazards/LaserHazard13/Caps" parent_id_path=PackedInt32Array(932846909, 1936609040) index="0" unique_id=713689459]
+position = Vector2(14, 0)
+
+[node name="Beam" parent="Hazards/LaserHazard13" index="1" unique_id=1755055180]
+points = PackedVector2Array(0, 0, 40, 0)
+
+[node name="WarningBeam" parent="Hazards/LaserHazard13" index="2" unique_id=1833803067]
+points = PackedVector2Array(0, 0, 40, 0)
+
+[node name="RCapParticles" parent="Hazards/LaserHazard13" index="4" unique_id=1655741551]
+position = Vector2(40, 0)
+
+[node name="BeamCollision" parent="Hazards/LaserHazard13" index="5" unique_id=1900670564]
+position = Vector2(20, 0)
+
+[node name="LaserHazard14" parent="Hazards" unique_id=574733708 instance=ExtResource("11_7bmb6")]
+position = Vector2(123, 62)
+active_time = 0.6
+off_time = 0.6
+
+[node name="RightCap" parent="Hazards/LaserHazard14/Caps" parent_id_path=PackedInt32Array(574733708, 1936609040) index="0" unique_id=713689459]
+position = Vector2(14, 0)
+
+[node name="Beam" parent="Hazards/LaserHazard14" index="1" unique_id=1755055180]
+points = PackedVector2Array(0, 0, 40, 0)
+
+[node name="WarningBeam" parent="Hazards/LaserHazard14" index="2" unique_id=1833803067]
+points = PackedVector2Array(0, 0, 40, 0)
+
+[node name="RCapParticles" parent="Hazards/LaserHazard14" index="4" unique_id=1655741551]
+position = Vector2(40, 0)
+
+[node name="BeamCollision" parent="Hazards/LaserHazard14" index="5" unique_id=1900670564]
+position = Vector2(20, 0)
+
+[node name="LaserHazard15" parent="Hazards" unique_id=212688332 instance=ExtResource("11_7bmb6")]
+position = Vector2(123, 54)
+active_time = 0.6
+off_time = 0.6
+
+[node name="RightCap" parent="Hazards/LaserHazard15/Caps" parent_id_path=PackedInt32Array(212688332, 1936609040) index="0" unique_id=713689459]
+position = Vector2(14, 0)
+
+[node name="Beam" parent="Hazards/LaserHazard15" index="1" unique_id=1755055180]
+points = PackedVector2Array(0, 0, 40, 0)
+
+[node name="WarningBeam" parent="Hazards/LaserHazard15" index="2" unique_id=1833803067]
+points = PackedVector2Array(0, 0, 40, 0)
+
+[node name="RCapParticles" parent="Hazards/LaserHazard15" index="4" unique_id=1655741551]
+position = Vector2(40, 0)
+
+[node name="BeamCollision" parent="Hazards/LaserHazard15" index="5" unique_id=1900670564]
+position = Vector2(20, 0)
+
+[node name="LaserHazard16" parent="Hazards" unique_id=1971009389 instance=ExtResource("11_7bmb6")]
+position = Vector2(123, 46)
+active_time = 0.6
+off_time = 0.6
+
+[node name="RightCap" parent="Hazards/LaserHazard16/Caps" parent_id_path=PackedInt32Array(1971009389, 1936609040) index="0" unique_id=713689459]
+position = Vector2(14, 0)
+
+[node name="Beam" parent="Hazards/LaserHazard16" index="1" unique_id=1755055180]
+points = PackedVector2Array(0, 0, 40, 0)
+
+[node name="WarningBeam" parent="Hazards/LaserHazard16" index="2" unique_id=1833803067]
+points = PackedVector2Array(0, 0, 40, 0)
+
+[node name="RCapParticles" parent="Hazards/LaserHazard16" index="4" unique_id=1655741551]
+position = Vector2(40, 0)
+
+[node name="BeamCollision" parent="Hazards/LaserHazard16" index="5" unique_id=1900670564]
+position = Vector2(20, 0)
+
+[node name="LaserHazard17" parent="Hazards" unique_id=1784482253 instance=ExtResource("11_7bmb6")]
+position = Vector2(123, 102)
+active_time = 0.6
+off_time = 0.6
+
+[node name="RightCap" parent="Hazards/LaserHazard17/Caps" parent_id_path=PackedInt32Array(1784482253, 1936609040) index="0" unique_id=713689459]
+position = Vector2(14, 0)
+
+[node name="Beam" parent="Hazards/LaserHazard17" index="1" unique_id=1755055180]
+points = PackedVector2Array(0, 0, 40, 0)
+
+[node name="WarningBeam" parent="Hazards/LaserHazard17" index="2" unique_id=1833803067]
+points = PackedVector2Array(0, 0, 40, 0)
+
+[node name="RCapParticles" parent="Hazards/LaserHazard17" index="4" unique_id=1655741551]
+position = Vector2(40, 0)
+
+[node name="BeamCollision" parent="Hazards/LaserHazard17" index="5" unique_id=1900670564]
+position = Vector2(20, 0)
+
+[node name="LaserHazard18" parent="Hazards" unique_id=2015062925 instance=ExtResource("11_7bmb6")]
+position = Vector2(123, 94)
+active_time = 0.6
+off_time = 0.6
+
+[node name="RightCap" parent="Hazards/LaserHazard18/Caps" parent_id_path=PackedInt32Array(2015062925, 1936609040) index="0" unique_id=713689459]
+position = Vector2(14, 0)
+
+[node name="Beam" parent="Hazards/LaserHazard18" index="1" unique_id=1755055180]
+points = PackedVector2Array(0, 0, 40, 0)
+
+[node name="WarningBeam" parent="Hazards/LaserHazard18" index="2" unique_id=1833803067]
+points = PackedVector2Array(0, 0, 40, 0)
+
+[node name="RCapParticles" parent="Hazards/LaserHazard18" index="4" unique_id=1655741551]
+position = Vector2(40, 0)
+
+[node name="BeamCollision" parent="Hazards/LaserHazard18" index="5" unique_id=1900670564]
+position = Vector2(20, 0)
+
+[node name="LaserHazard19" parent="Hazards" unique_id=1662776737 instance=ExtResource("11_7bmb6")]
+position = Vector2(123, 86)
+active_time = 0.6
+off_time = 0.6
+
+[node name="RightCap" parent="Hazards/LaserHazard19/Caps" parent_id_path=PackedInt32Array(1662776737, 1936609040) index="0" unique_id=713689459]
+position = Vector2(14, 0)
+
+[node name="Beam" parent="Hazards/LaserHazard19" index="1" unique_id=1755055180]
+points = PackedVector2Array(0, 0, 40, 0)
+
+[node name="WarningBeam" parent="Hazards/LaserHazard19" index="2" unique_id=1833803067]
+points = PackedVector2Array(0, 0, 40, 0)
+
+[node name="RCapParticles" parent="Hazards/LaserHazard19" index="4" unique_id=1655741551]
+position = Vector2(40, 0)
+
+[node name="BeamCollision" parent="Hazards/LaserHazard19" index="5" unique_id=1900670564]
+position = Vector2(20, 0)
+
+[node name="LaserHazard20" parent="Hazards" unique_id=1202385503 instance=ExtResource("11_7bmb6")]
+position = Vector2(123, 78)
+active_time = 0.6
+off_time = 0.6
+
+[node name="RightCap" parent="Hazards/LaserHazard20/Caps" parent_id_path=PackedInt32Array(1202385503, 1936609040) index="0" unique_id=713689459]
+position = Vector2(14, 0)
+
+[node name="Beam" parent="Hazards/LaserHazard20" index="1" unique_id=1755055180]
+points = PackedVector2Array(0, 0, 40, 0)
+
+[node name="WarningBeam" parent="Hazards/LaserHazard20" index="2" unique_id=1833803067]
+points = PackedVector2Array(0, 0, 40, 0)
+
+[node name="RCapParticles" parent="Hazards/LaserHazard20" index="4" unique_id=1655741551]
+position = Vector2(40, 0)
+
+[node name="BeamCollision" parent="Hazards/LaserHazard20" index="5" unique_id=1900670564]
+position = Vector2(20, 0)
+
+[node name="SquareHazard" parent="Hazards" unique_id=736354374 instance=ExtResource("12_i6vc0")]
+curve = SubResource("Curve2D_p27r8")
+moving = true
+loop = false
+speed_scale = 2.0
+
+[node name="SquareHazard2" parent="Hazards" unique_id=1974085857 instance=ExtResource("12_i6vc0")]
+position = Vector2(0, 9)
+curve = SubResource("Curve2D_p27r8")
+moving = true
+loop = false
+speed_scale = 2.0
+
+[node name="SquareHazard3" parent="Hazards" unique_id=626090340 instance=ExtResource("12_i6vc0")]
+position = Vector2(0, 18)
+curve = SubResource("Curve2D_p27r8")
+moving = true
+loop = false
+speed_scale = 2.0
+
+[node name="SquareHazard4" parent="Hazards" unique_id=1533705884 instance=ExtResource("12_i6vc0")]
+position = Vector2(0, 27)
+curve = SubResource("Curve2D_p27r8")
+moving = true
+loop = false
+speed_scale = 2.0
+
+[node name="SquareHazard5" parent="Hazards" unique_id=1564239518 instance=ExtResource("12_i6vc0")]
+position = Vector2(0, 36)
+curve = SubResource("Curve2D_p27r8")
+moving = true
+loop = false
+speed_scale = 2.0
+
+[node name="SquareHazard6" parent="Hazards" unique_id=2107440551 instance=ExtResource("12_i6vc0")]
+position = Vector2(0, 45)
+curve = SubResource("Curve2D_p27r8")
+moving = true
+loop = false
+speed_scale = 2.0
+
+[node name="SquareHazard7" parent="Hazards" unique_id=557035941 instance=ExtResource("12_i6vc0")]
+position = Vector2(0, 54)
+curve = SubResource("Curve2D_p27r8")
+moving = true
+loop = false
+speed_scale = 2.0
+
+[node name="SquareHazard8" parent="Hazards" unique_id=312490383 instance=ExtResource("12_i6vc0")]
+position = Vector2(0, 63)
+curve = SubResource("Curve2D_p27r8")
+moving = true
+loop = false
+speed_scale = 2.0
+
+[node name="SquareHazard9" parent="Hazards" unique_id=844407394 instance=ExtResource("12_i6vc0")]
+position = Vector2(0, 72)
+curve = SubResource("Curve2D_p27r8")
+moving = true
+loop = false
+speed_scale = 2.0
+
+[node name="SquareHazard10" parent="Hazards" unique_id=848427023 instance=ExtResource("12_i6vc0")]
+position = Vector2(0, 81)
+curve = SubResource("Curve2D_p27r8")
+moving = true
+loop = false
+speed_scale = 2.0
+
+[node name="SquareHazard11" parent="Hazards" unique_id=451267227 instance=ExtResource("12_i6vc0")]
+position = Vector2(0, 90)
+curve = SubResource("Curve2D_p27r8")
+moving = true
+loop = false
+speed_scale = 2.0
+
+[node name="SquareHazard12" parent="Hazards" unique_id=1699029753 instance=ExtResource("12_i6vc0")]
+position = Vector2(0, 99)
+curve = SubResource("Curve2D_p27r8")
+moving = true
+loop = false
+speed_scale = 2.0
+
+[node name="SquareHazard13" parent="Hazards" unique_id=1997229379 instance=ExtResource("12_i6vc0")]
+position = Vector2(0, 108)
+curve = SubResource("Curve2D_p27r8")
+moving = true
+loop = false
+speed_scale = 2.0
+
+[node name="SquareHazard14" parent="Hazards" unique_id=1576905230 instance=ExtResource("12_i6vc0")]
+position = Vector2(0, 117)
+curve = SubResource("Curve2D_p27r8")
+moving = true
+loop = false
+speed_scale = 2.0
+
+[node name="SquareHazard15" parent="Hazards" unique_id=994327274 instance=ExtResource("12_i6vc0")]
+position = Vector2(0, 126)
+curve = SubResource("Curve2D_p27r8")
+moving = true
+loop = false
+speed_scale = 2.0
+
+[node name="SquareHazard16" parent="Hazards" unique_id=2058274356 instance=ExtResource("12_i6vc0")]
+position = Vector2(0, 135)
+curve = SubResource("Curve2D_p27r8")
+moving = true
+loop = false
+speed_scale = 2.0
+
+[node name="SquareHazard17" parent="Hazards" unique_id=980980150 instance=ExtResource("12_i6vc0")]
+position = Vector2(0, 144)
+curve = SubResource("Curve2D_p27r8")
+moving = true
+loop = false
+speed_scale = 2.0
+
+[node name="SquareHazard18" parent="Hazards" unique_id=294436856 instance=ExtResource("12_i6vc0")]
+position = Vector2(0, 153)
+curve = SubResource("Curve2D_p27r8")
+moving = true
+loop = false
+speed_scale = 2.0
+
+[node name="SquareHazard19" parent="Hazards" unique_id=1029369066 instance=ExtResource("12_i6vc0")]
+curve = SubResource("Curve2D_p27r8")
+moving = true
+loop = false
+speed_scale = 2.0
+offset = 2.0
+
+[node name="SquareHazard20" parent="Hazards" unique_id=1059927373 instance=ExtResource("12_i6vc0")]
+position = Vector2(0, 9)
+curve = SubResource("Curve2D_p27r8")
+moving = true
+loop = false
+speed_scale = 2.0
+offset = 2.0
+
+[node name="SquareHazard21" parent="Hazards" unique_id=1129920701 instance=ExtResource("12_i6vc0")]
+position = Vector2(0, 18)
+curve = SubResource("Curve2D_p27r8")
+moving = true
+loop = false
+speed_scale = 2.0
+offset = 2.0
+
+[node name="SquareHazard22" parent="Hazards" unique_id=1298611490 instance=ExtResource("12_i6vc0")]
+position = Vector2(0, 27)
+curve = SubResource("Curve2D_p27r8")
+moving = true
+loop = false
+speed_scale = 2.0
+offset = 2.0
+
+[node name="SquareHazard23" parent="Hazards" unique_id=1710607914 instance=ExtResource("12_i6vc0")]
+position = Vector2(0, 36)
+curve = SubResource("Curve2D_p27r8")
+moving = true
+loop = false
+speed_scale = 2.0
+offset = 2.0
+
+[node name="SquareHazard24" parent="Hazards" unique_id=703654494 instance=ExtResource("12_i6vc0")]
+position = Vector2(0, 45)
+curve = SubResource("Curve2D_p27r8")
+moving = true
+loop = false
+speed_scale = 2.0
+offset = 2.0
+
+[node name="SquareHazard25" parent="Hazards" unique_id=1277129376 instance=ExtResource("12_i6vc0")]
+position = Vector2(0, 54)
+curve = SubResource("Curve2D_p27r8")
+moving = true
+loop = false
+speed_scale = 2.0
+offset = 2.0
+
+[node name="SquareHazard26" parent="Hazards" unique_id=251445345 instance=ExtResource("12_i6vc0")]
+position = Vector2(0, 63)
+curve = SubResource("Curve2D_p27r8")
+moving = true
+loop = false
+speed_scale = 2.0
+offset = 2.0
+
+[node name="SquareHazard27" parent="Hazards" unique_id=1539207521 instance=ExtResource("12_i6vc0")]
+position = Vector2(0, 72)
+curve = SubResource("Curve2D_p27r8")
+moving = true
+loop = false
+speed_scale = 2.0
+offset = 2.0
+
+[node name="SquareHazard28" parent="Hazards" unique_id=183679099 instance=ExtResource("12_i6vc0")]
+position = Vector2(0, 81)
+curve = SubResource("Curve2D_p27r8")
+moving = true
+loop = false
+speed_scale = 2.0
+offset = 2.0
+
+[node name="SquareHazard29" parent="Hazards" unique_id=1002581222 instance=ExtResource("12_i6vc0")]
+position = Vector2(0, 90)
+curve = SubResource("Curve2D_p27r8")
+moving = true
+loop = false
+speed_scale = 2.0
+offset = 2.0
+
+[node name="SquareHazard30" parent="Hazards" unique_id=800365874 instance=ExtResource("12_i6vc0")]
+position = Vector2(0, 99)
+curve = SubResource("Curve2D_p27r8")
+moving = true
+loop = false
+speed_scale = 2.0
+offset = 2.0
+
+[node name="SquareHazard31" parent="Hazards" unique_id=2142815952 instance=ExtResource("12_i6vc0")]
+position = Vector2(0, 108)
+curve = SubResource("Curve2D_p27r8")
+moving = true
+loop = false
+speed_scale = 2.0
+offset = 2.0
+
+[node name="SquareHazard32" parent="Hazards" unique_id=1877620231 instance=ExtResource("12_i6vc0")]
+position = Vector2(0, 117)
+curve = SubResource("Curve2D_p27r8")
+moving = true
+loop = false
+speed_scale = 2.0
+offset = 2.0
+
+[node name="SquareHazard33" parent="Hazards" unique_id=2130717515 instance=ExtResource("12_i6vc0")]
+position = Vector2(0, 126)
+curve = SubResource("Curve2D_p27r8")
+moving = true
+loop = false
+speed_scale = 2.0
+offset = 2.0
+
+[node name="SquareHazard34" parent="Hazards" unique_id=1878251367 instance=ExtResource("12_i6vc0")]
+position = Vector2(0, 135)
+curve = SubResource("Curve2D_p27r8")
+moving = true
+loop = false
+speed_scale = 2.0
+offset = 2.0
+
+[node name="SquareHazard35" parent="Hazards" unique_id=1032262824 instance=ExtResource("12_i6vc0")]
+position = Vector2(0, 144)
+curve = SubResource("Curve2D_p27r8")
+moving = true
+loop = false
+speed_scale = 2.0
+offset = 2.0
+
+[node name="SquareHazard36" parent="Hazards" unique_id=1370565897 instance=ExtResource("12_i6vc0")]
+position = Vector2(0, 153)
+curve = SubResource("Curve2D_p27r8")
+moving = true
+loop = false
+speed_scale = 2.0
+offset = 2.0
+
+[node name="Stamps" type="Node2D" parent="." unique_id=123113769]
+position = Vector2(168, 79)
+
+[node name="Goal" parent="." unique_id=652280647 instance=ExtResource("9_k3kp7")]
+position = Vector2(311, 16)
+
+[node name="GameCamera" parent="." unique_id=13152400 node_paths=PackedStringArray("target") instance=ExtResource("10_ahsf2")]
+position = Vector2(191, 123.31)
+mode = 1
+target = NodePath("../Player")
+default_zoom = Vector2(0.6, 0.6)
+fixed_position = Vector2(191, 123.31)
+
+[node name="MapTopLayer" type="Node2D" parent="." unique_id=1059944217]
+position = Vector2(0, 7)
+
+[node name="Shadows" type="TileMapLayer" parent="MapTopLayer" unique_id=255637794]
+position = Vector2(159, 91)
+tile_set = ExtResource("6_p27r8")
+
+[node name="Walls" type="TileMapLayer" parent="MapTopLayer" unique_id=766012576]
+z_index = 1
+position = Vector2(159, 91)
+tile_map_data = PackedByteArray("AAD4//r/AAADAAsAAAD4//v/AAADAAsAAAD4//z/AAADAAsAAAD4//3/AAADAAsAAAD4//7/AAADAAsAAAD4////AAADAAsAAAD4/wAAAAADAAsAAAD4/wEAAAADAAsAAAD4/wIAAAADAAsAAAD4/wMAAAADAAsAAAD4/wQAAAADAAsAAAD4/wUAAAADAAsAAAD4/wYAAAADAAsAAAD4/wcAAAADAAsAAAD4/wgAAAADAAsAAAD9//r/AAADAAsAAAD9//v/AAADAAsAAAD9//z/AAADAAsAAAD9//3/AAADAAsAAAD9//7/AAADAAsAAAD9////AAADAAsAAAD9/wAAAAADAAsAAAD9/wEAAAADAAsAAAD9/wIAAAADAAsAAAD9/wMAAAADAAsAAAD9/wQAAAADAAsAAAD9/wUAAAADAAsAAAD9/wYAAAADAAsAAAD9/wcAAAADAAsAAAD9/wgAAAADAAsAAAACAPr/AAADAAsAAAACAPv/AAADAAsAAAACAPz/AAADAAsAAAACAP3/AAADAAsAAAACAP7/AAADAAsAAAACAP//AAADAAsAAAACAAAAAAADAAsAAAACAAEAAAADAAsAAAACAAIAAAADAAsAAAACAAMAAAADAAsAAAACAAQAAAADAAsAAAACAAUAAAADAAsAAAACAAYAAAADAAsAAAACAAcAAAADAAsAAAACAAgAAAADAAsAAAAHAPr/AAADAAsAAAAHAPv/AAADAAsAAAAHAPz/AAADAAsAAAAHAP3/AAADAAsAAAAHAP7/AAADAAsAAAAHAP//AAADAAsAAAAHAAAAAAADAAsAAAAHAAEAAAADAAsAAAAHAAIAAAADAAsAAAAHAAMAAAADAAsAAAAHAAQAAAADAAsAAAAHAAUAAAADAAsAAAAHAAYAAAADAAsAAAAHAAcAAAADAAsAAAAHAAgAAAADAAsAAAD8//r/AAACAAsAAAD8//v/AAACAAsAAAD8//z/AAACAAsAAAD8//3/AAACAAsAAAD8//7/AAACAAsAAAD8////AAACAAsAAAD8/wAAAAACAAsAAAD8/wEAAAACAAsAAAD8/wIAAAACAAsAAAD8/wMAAAACAAsAAAD8/wQAAAACAAsAAAD8/wUAAAACAAsAAAD8/wYAAAACAAsAAAD8/wcAAAACAAsAAAD8/wgAAAACAAsAAAABAPr/AAACAAsAAAABAPv/AAACAAsAAAABAPz/AAACAAsAAAABAP3/AAACAAsAAAABAP7/AAACAAsAAAABAP//AAACAAsAAAABAAAAAAACAAsAAAABAAEAAAACAAsAAAABAAIAAAACAAsAAAABAAMAAAACAAsAAAABAAQAAAACAAsAAAABAAUAAAACAAsAAAABAAYAAAACAAsAAAABAAcAAAACAAsAAAABAAgAAAACAAsAAAAGAPr/AAACAAsAAAAGAPv/AAACAAsAAAAGAPz/AAACAAsAAAAGAP3/AAACAAsAAAAGAP7/AAACAAsAAAAGAP//AAACAAsAAAAGAAAAAAACAAsAAAAGAAEAAAACAAsAAAAGAAIAAAACAAsAAAAGAAMAAAACAAsAAAAGAAQAAAACAAsAAAAGAAUAAAACAAsAAAAGAAYAAAACAAsAAAAGAAcAAAACAAsAAAAGAAgAAAACAAsAAAALAPr/AAACAAsAAAALAPv/AAACAAsAAAALAPz/AAACAAsAAAALAP3/AAACAAsAAAALAP7/AAACAAsAAAALAP//AAACAAsAAAALAAAAAAACAAsAAAALAAEAAAACAAsAAAALAAIAAAACAAsAAAALAAMAAAACAAsAAAALAAQAAAACAAsAAAALAAUAAAACAAsAAAALAAYAAAACAAsAAAALAAcAAAACAAsAAAALAAgAAAACAAsAAAALAAkAAAAFAAoAAAAGAAkAAAAFAAoAAAABAAkAAAAFAAoAAAD8/wkAAAAFAAoAAAD4/wkAAAAGAAoAAAD9/wkAAAAGAAoAAAACAAkAAAAGAAoAAAAHAAkAAAAGAAoAAAALAPn/AAAFAAsAAAAGAPn/AAAFAAsAAAABAPn/AAAFAAsAAAD8//n/AAAFAAsAAAD4//n/AAAGAAsAAAD9//n/AAAGAAsAAAACAPn/AAAGAAsAAAAHAPn/AAAGAAsAAAD5//n/AAABAAsAAAD6//n/AAABAAsAAAD7//n/AAABAAsAAAD+//n/AAABAAsAAAD///n/AAABAAsAAAAAAPn/AAABAAsAAAADAPn/AAABAAsAAAAEAPn/AAABAAsAAAAFAPn/AAABAAsAAAAIAPn/AAABAAsAAAAJAPn/AAABAAsAAAAKAPn/AAABAAsAAAD5/wkAAAAAAAsAAAD6/wkAAAAAAAsAAAD7/wkAAAAAAAsAAAD+/wkAAAAAAAsAAAD//wkAAAAAAAsAAAAAAAkAAAAAAAsAAAADAAkAAAAAAAsAAAAEAAkAAAAAAAsAAAAFAAkAAAAAAAsAAAAIAAkAAAAAAAsAAAAJAAkAAAAAAAsAAAAKAAkAAAAAAAsAAAA=")
+tile_set = ExtResource("6_p27r8")
+
+[editable path="Hazards/LaserHazard"]
+[editable path="Hazards/LaserHazard2"]
+[editable path="Hazards/LaserHazard3"]
+[editable path="Hazards/LaserHazard4"]
+[editable path="Hazards/LaserHazard5"]
+[editable path="Hazards/LaserHazard6"]
+[editable path="Hazards/LaserHazard7"]
+[editable path="Hazards/LaserHazard8"]
+[editable path="Hazards/LaserHazard9"]
+[editable path="Hazards/LaserHazard10"]
+[editable path="Hazards/LaserHazard11"]
+[editable path="Hazards/LaserHazard12"]
+[editable path="Hazards/LaserHazard13"]
+[editable path="Hazards/LaserHazard14"]
+[editable path="Hazards/LaserHazard15"]
+[editable path="Hazards/LaserHazard16"]
+[editable path="Hazards/LaserHazard17"]
+[editable path="Hazards/LaserHazard18"]
+[editable path="Hazards/LaserHazard19"]
+[editable path="Hazards/LaserHazard20"]
