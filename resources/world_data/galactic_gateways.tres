@@ -12,6 +12,7 @@
 [ext_resource type="Resource" uid="uid://etng3pdn2hd" path="res://resources/level_data/76-100_galactic_gateway/level_077.tres" id="4_v77qx"]
 [ext_resource type="Resource" uid="uid://2oi37uydf0yx" path="res://resources/level_data/76-100_galactic_gateway/level_085.tres" id="6_1l6e2"]
 [ext_resource type="Resource" uid="uid://ctiabn6pprd78" path="res://resources/level_data/76-100_galactic_gateway/level_078.tres" id="6_m8206"]
+[ext_resource type="Resource" uid="uid://fljpcnaa73ui" path="res://resources/level_data/76-100_galactic_gateway/level_079.tres" id="11_1ugub"]
 [ext_resource type="Resource" uid="uid://dgj8retlxc83r" path="res://resources/level_data/76-100_galactic_gateway/level_087.tres" id="12_as8r7"]
 
 [resource]
@@ -21,7 +22,7 @@ world_title = "Galactic Gateways"
 world_number = 4
 world_intro_text = "Galactic Gateways"
 background_music = Array[ExtResource("2_y3gyt")]([ExtResource("3_as8r7"), ExtResource("4_1ugub")])
-levels = Array[ExtResource("1_pcbvh")]([ExtResource("4_pg1hn"), ExtResource("4_v77qx"), ExtResource("6_m8206"), ExtResource("6_1l6e2"), ExtResource("12_as8r7")])
+levels = Array[ExtResource("1_pcbvh")]([ExtResource("4_pg1hn"), ExtResource("4_v77qx"), ExtResource("6_m8206"), ExtResource("11_1ugub"), ExtResource("6_1l6e2"), ExtResource("12_as8r7")])
 front_image = ExtResource("2_v77qx")
 back_image = ExtResource("1_l5xfb")
 font_color = Color(0.3529412, 0.3019608, 0.6392157, 1)

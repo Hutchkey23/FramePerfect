@@ -1,0 +1,600 @@
+[gd_scene format=4 uid="uid://b5jxe8buvucqw"]
+
+[ext_resource type="Shader" uid="uid://cy8e5yqoo68kc" path="res://shaders/starry_sky.gdshader" id="1_p27r8"]
+[ext_resource type="PackedScene" uid="uid://cvsktm1iw46q4" path="res://scenes/utility/level_controller.tscn" id="2_hp03u"]
+[ext_resource type="PackedScene" uid="uid://ecmje7pp4gyy" path="res://scenes/utility/level_ui.tscn" id="3_neqtq"]
+[ext_resource type="PackedScene" uid="uid://bxry211ole85r" path="res://scenes/utility/cinematic_bars.tscn" id="4_k3kp7"]
+[ext_resource type="PackedScene" uid="uid://drnundi171cmh" path="res://scenes/player/player.tscn" id="5_ahsf2"]
+[ext_resource type="TileSet" uid="uid://7q8eymh2ksuh" path="res://scenes/tilesets/main_floor_and_walls.tres" id="6_ny4cc"]
+[ext_resource type="Shader" uid="uid://cyftftn8qvqe5" path="res://shaders/hazard_shader.gdshader" id="7_moi56"]
+[ext_resource type="Script" uid="uid://cyfx3hv4kfs08" path="res://scripts/props/toggle_items_manager.gd" id="8_ib5y3"]
+[ext_resource type="PackedScene" uid="uid://cbd6vy48abvih" path="res://scenes/props/jump_pad.tscn" id="8_p27r8"]
+[ext_resource type="PackedScene" uid="uid://dq2k03846pui7" path="res://scenes/props/boost_pad.tscn" id="9_hp03u"]
+[ext_resource type="PackedScene" uid="uid://s1u03rhom1d4" path="res://scenes/hazards/windmill_hazard.tscn" id="11_7bmb6"]
+[ext_resource type="PackedScene" uid="uid://ct44xka20hdp7" path="res://scenes/props/portal.tscn" id="11_e68jm"]
+[ext_resource type="PackedScene" uid="uid://dsmg6rsp35s6l" path="res://scenes/hazards/laser_hazard.tscn" id="12_gh5uy"]
+[ext_resource type="PackedScene" uid="uid://cwv3wpwmybmey" path="res://scenes/props/goal.tscn" id="14_6ouic"]
+[ext_resource type="PackedScene" uid="uid://ca2uxdoweqwc1" path="res://scenes/utility/game_camera.tscn" id="15_q016x"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_jur53"]
+shader = ExtResource("1_p27r8")
+shader_parameter/fade_alpha = 1.0
+shader_parameter/background_color = Color(0.012298316, 0.024600385, 0.090413176, 1)
+shader_parameter/star_color = Color(0.85, 0.82, 1, 1)
+shader_parameter/aspect_ratio = 1.0
+shader_parameter/density = 0.79999997976
+shader_parameter/layer_parascale = 3
+shader_parameter/star_speed = Vector2(0.01, 0.01)
+shader_parameter/star_wave = Vector2(0, 0)
+shader_parameter/star_size = 1.999999955296
+shader_parameter/star_rotate_speed = 0.08300014644250009
+shader_parameter/twinkle_effect = 1.0
+shader_parameter/twinkle_speed = 0.249999994412
+shader_parameter/pixelate_enabled = true
+shader_parameter/pixelate_count = 1000.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_wwkcr"]
+shader = ExtResource("7_moi56")
+shader_parameter/pulse_color = Color(0.40390328, 8.4228816e-07, 9.62615e-08, 1)
+shader_parameter/pulse_strength = 1.0
+shader_parameter/pulse_speed = 5.00000023424012
+shader_parameter/center_glow_strength = 0.0
+
+[node name="Level_079" type="Node2D" unique_id=1381461103]
+metadata/_edit_horizontal_guides_ = [90.0]
+
+[node name="Background" type="ColorRect" parent="." unique_id=882240186]
+material = SubResource("ShaderMaterial_jur53")
+offset_left = -542.0
+offset_top = -422.0
+offset_right = 658.0
+offset_bottom = 778.0
+
+[node name="LevelController" parent="." unique_id=1058685242 groups=["level_controller"] instance=ExtResource("2_hp03u")]
+player_spawn_path = NodePath("../PlayerSpawn")
+camera_path = NodePath("../GameCamera")
+cinematic_bars_path = NodePath("../CinematicBars")
+level_ui_path = NodePath("../LevelUI")
+platforms_path = NodePath("../Platforms")
+hazards_path = NodePath("../Hazards")
+toggle_blocks_path = NodePath("../ToggleItems")
+
+[node name="LevelUI" parent="." unique_id=687480857 instance=ExtResource("3_neqtq")]
+layer = 2
+visible = false
+level_controller_path = NodePath("../LevelController")
+
+[node name="CinematicBars" parent="." unique_id=3966864 instance=ExtResource("4_k3kp7")]
+visible = false
+
+[node name="Player" parent="." unique_id=1458309070 instance=ExtResource("5_ahsf2")]
+z_index = 1
+position = Vector2(-105, 523)
+game_camera_path = NodePath("../GameCamera")
+
+[node name="PlayerSpawn" type="Node2D" parent="." unique_id=535208430]
+z_index = 1
+position = Vector2(-105, 523)
+
+[node name="MapBottomLayer" type="Node2D" parent="." unique_id=1665801705]
+position = Vector2(159, 98)
+
+[node name="Floors" type="TileMapLayer" parent="MapBottomLayer" unique_id=1507503636 groups=["floors"]]
+tile_map_data = PackedByteArray("AADu/xgAAAAAAAkAAADu/xkAAAAAAAkAAADu/xoAAAAAAAkAAADu/xsAAAAAAAkAAADv/xgAAAAAAAkAAADv/xkAAAAAAAkAAADv/xoAAAAAAAkAAADv/xsAAAAAAAkAAADw/xgAAAAAAAkAAADw/xkAAAAAAAkAAADw/xoAAAAAAAkAAADw/xsAAAAAAAkAAADu/xMAAAAAAAkAAADu/xQAAAAAAAkAAADu/xUAAAAAAAkAAADu/xYAAAAAAAkAAADu/xcAAAAAAAkAAADv/xMAAAAAAAkAAADv/xQAAAAAAAkAAADv/xUAAAAAAAkAAADv/xYAAAAAAAkAAADv/xcAAAAAAAkAAADw/xMAAAAAAAkAAADw/xQAAAAAAAkAAADw/xUAAAAAAAkAAADw/xYAAAAAAAkAAADw/xcAAAAAAAkAAADr/xAAAAAAAAkAAADr/xEAAAAAAAkAAADr/xIAAAAAAAkAAADs/xAAAAAAAAkAAADs/xEAAAAAAAkAAADs/xIAAAAAAAkAAADt/xAAAAAAAAkAAADt/xEAAAAAAAkAAADt/xIAAAAAAAkAAADu/xAAAAAAAAkAAADu/xEAAAAAAAkAAADu/xIAAAAAAAkAAADv/xAAAAAAAAkAAADv/xEAAAAAAAkAAADv/xIAAAAAAAkAAADw/xAAAAAAAAkAAADw/xEAAAAAAAkAAADw/xIAAAAAAAkAAADx/xAAAAAAAAkAAADx/xEAAAAAAAkAAADx/xIAAAAAAAkAAADy/xAAAAAAAAkAAADy/xEAAAAAAAkAAADy/xIAAAAAAAkAAADz/xAAAAAAAAkAAADz/xEAAAAAAAkAAADz/xIAAAAAAAkAAADr/wsAAAAAAAkAAADr/wwAAAAAAAkAAADr/w0AAAAAAAkAAADr/w4AAAAAAAkAAADr/w8AAAAAAAkAAADs/wsAAAAAAAkAAADs/wwAAAAAAAkAAADs/w0AAAAAAAkAAADs/w4AAAAAAAkAAADs/w8AAAAAAAkAAADt/wsAAAAAAAkAAADt/wwAAAAAAAkAAADt/w0AAAAAAAkAAADt/w4AAAAAAAkAAADt/w8AAAAAAAkAAADu/wsAAAAAAAkAAADu/wwAAAAAAAkAAADu/w0AAAAAAAkAAADu/w4AAAAAAAkAAADu/w8AAAAAAAkAAADv/wsAAAAAAAkAAADv/wwAAAAAAAkAAADv/w0AAAAAAAkAAADv/w4AAAAAAAkAAADv/w8AAAAAAAkAAADw/wsAAAAAAAkAAADw/wwAAAAAAAkAAADw/w0AAAAAAAkAAADw/w4AAAAAAAkAAADw/w8AAAAAAAkAAADx/wsAAAAAAAkAAADx/wwAAAAAAAkAAADx/w0AAAAAAAkAAADx/w4AAAAAAAkAAADx/w8AAAAAAAkAAADy/wsAAAAAAAkAAADy/wwAAAAAAAkAAADy/w0AAAAAAAkAAADy/w4AAAAAAAkAAADy/w8AAAAAAAkAAADz/wsAAAAAAAkAAADz/wwAAAAAAAkAAADz/w0AAAAAAAkAAADz/w4AAAAAAAkAAADz/w8AAAAAAAkAAADr/wMAAAAAAAkAAADr/wQAAAAAAAkAAADr/wUAAAAAAAkAAADr/wYAAAAAAAkAAADr/wcAAAAAAAkAAADr/wgAAAAAAAkAAADr/wkAAAAAAAkAAADr/woAAAAAAAkAAADs/wMAAAAAAAkAAADs/wQAAAAAAAkAAADs/wUAAAAAAAkAAADs/wYAAAAAAAkAAADs/wcAAAAAAAkAAADs/wgAAAAAAAkAAADs/wkAAAAAAAkAAADs/woAAAAAAAkAAADt/wMAAAAAAAkAAADt/wQAAAAAAAkAAADt/wUAAAAAAAkAAADt/wYAAAAAAAkAAADt/wcAAAAAAAkAAADt/wgAAAAAAAkAAADt/wkAAAAAAAkAAADt/woAAAAAAAkAAADu/wMAAAAAAAkAAADu/wQAAAAAAAkAAADu/wUAAAAAAAkAAADu/wYAAAAAAAkAAADu/wcAAAAAAAkAAADu/wgAAAAAAAkAAADu/wkAAAAAAAkAAADu/woAAAAAAAkAAADv/wMAAAAAAAkAAADv/wQAAAAAAAkAAADv/wUAAAAAAAkAAADv/wYAAAAAAAkAAADv/wcAAAAAAAkAAADv/wgAAAAAAAkAAADv/wkAAAAAAAkAAADv/woAAAAAAAkAAADw/wMAAAAAAAkAAADw/wQAAAAAAAkAAADw/wUAAAAAAAkAAADw/wYAAAAAAAkAAADw/wcAAAAAAAkAAADw/wgAAAAAAAkAAADw/wkAAAAAAAkAAADw/woAAAAAAAkAAADx/wMAAAAAAAkAAADx/wQAAAAAAAkAAADx/wUAAAAAAAkAAADx/wYAAAAAAAkAAADx/wcAAAAAAAkAAADx/wgAAAAAAAkAAADx/wkAAAAAAAkAAADx/woAAAAAAAkAAADy/wMAAAAAAAkAAADy/wQAAAAAAAkAAADy/wUAAAAAAAkAAADy/wYAAAAAAAkAAADy/wcAAAAAAAkAAADy/wgAAAAAAAkAAADy/wkAAAAAAAkAAADy/woAAAAAAAkAAADz/wMAAAAAAAkAAADz/wQAAAAAAAkAAADz/wUAAAAAAAkAAADz/wYAAAAAAAkAAADz/wcAAAAAAAkAAADz/wgAAAAAAAkAAADz/wkAAAAAAAkAAADz/woAAAAAAAkAAADo//X/AAAAAAkAAADo//b/AAAAAAkAAADo//f/AAAAAAkAAADp//X/AAAAAAkAAADp//b/AAAAAAkAAADp//f/AAAAAAkAAADq//X/AAAAAAkAAADq//b/AAAAAAkAAADq//f/AAAAAAkAAADr//X/AAAAAAkAAADr//b/AAAAAAkAAADr//f/AAAAAAkAAADs//X/AAAAAAkAAADs//b/AAAAAAkAAADs//f/AAAAAAkAAADt//X/AAAAAAkAAADt//b/AAAAAAkAAADt//f/AAAAAAkAAADu//X/AAAAAAkAAADu//b/AAAAAAkAAADu//f/AAAAAAkAAADv//X/AAAAAAkAAADv//b/AAAAAAkAAADv//f/AAAAAAkAAADw//X/AAAAAAkAAADw//b/AAAAAAkAAADw//f/AAAAAAkAAADx//X/AAAAAAkAAADx//b/AAAAAAkAAADx//f/AAAAAAkAAADy//X/AAAAAAkAAADy//b/AAAAAAkAAADy//f/AAAAAAkAAADz//X/AAAAAAkAAADz//b/AAAAAAkAAADz//f/AAAAAAkAAAD0//L/AAAAAAkAAAD0//P/AAAAAAkAAAD0//T/AAAAAAkAAAD0//X/AAAAAAkAAAD0//b/AAAAAAkAAAD0//f/AAAAAAkAAAD0//j/AAAAAAkAAAD0//n/AAAAAAkAAAD0//r/AAAAAAkAAAD1//L/AAAAAAkAAAD1//P/AAAAAAkAAAD1//T/AAAAAAkAAAD1//X/AAAAAAkAAAD1//b/AAAAAAkAAAD1//f/AAAAAAkAAAD1//j/AAAAAAkAAAD1//n/AAAAAAkAAAD1//r/AAAAAAkAAAD2//L/AAAAAAkAAAD2//P/AAAAAAkAAAD2//T/AAAAAAkAAAD2//X/AAAAAAkAAAD2//b/AAAAAAkAAAD2//f/AAAAAAkAAAD2//j/AAAAAAkAAAD2//n/AAAAAAkAAAD2//r/AAAAAAkAAAD3//L/AAAAAAkAAAD3//P/AAAAAAkAAAD3//T/AAAAAAkAAAD3//X/AAAAAAkAAAD3//b/AAAAAAkAAAD3//f/AAAAAAkAAAD3//j/AAAAAAkAAAD3//n/AAAAAAkAAAD3//r/AAAAAAkAAAD4//L/AAAAAAkAAAD4//P/AAAAAAkAAAD4//T/AAAAAAkAAAD4//X/AAAAAAkAAAD4//b/AAAAAAkAAAD4//f/AAAAAAkAAAD4//j/AAAAAAkAAAD4//n/AAAAAAkAAAD4//r/AAAAAAkAAAD5//L/AAAAAAkAAAD5//P/AAAAAAkAAAD5//T/AAAAAAkAAAD5//X/AAAAAAkAAAD5//b/AAAAAAkAAAD5//f/AAAAAAkAAAD5//j/AAAAAAkAAAD5//n/AAAAAAkAAAD5//r/AAAAAAkAAAD6//L/AAAAAAkAAAD6//P/AAAAAAkAAAD6//T/AAAAAAkAAAD6//X/AAAAAAkAAAD6//b/AAAAAAkAAAD6//f/AAAAAAkAAAD6//j/AAAAAAkAAAD6//n/AAAAAAkAAAD6//r/AAAAAAkAAAD7//L/AAAAAAkAAAD7//P/AAAAAAkAAAD7//T/AAAAAAkAAAD7//X/AAAAAAkAAAD7//b/AAAAAAkAAAD7//f/AAAAAAkAAAD7//j/AAAAAAkAAAD7//n/AAAAAAkAAAD7//r/AAAAAAkAAAD8//L/AAAAAAkAAAD8//P/AAAAAAkAAAD8//T/AAAAAAkAAAD8//X/AAAAAAkAAAD8//b/AAAAAAkAAAD8//f/AAAAAAkAAAD8//j/AAAAAAkAAAD8//n/AAAAAAkAAAD8//r/AAAAAAkAAAD9//L/AAAAAAkAAAD9//P/AAAAAAkAAAD9//T/AAAAAAkAAAD9//X/AAAAAAkAAAD9//b/AAAAAAkAAAD9//f/AAAAAAkAAAD9//j/AAAAAAkAAAD9//n/AAAAAAkAAAD9//r/AAAAAAkAAAD+//L/AAAAAAkAAAD+//P/AAAAAAkAAAD+//T/AAAAAAkAAAD+//X/AAAAAAkAAAD+//b/AAAAAAkAAAD+//f/AAAAAAkAAAD+//j/AAAAAAkAAAD+//n/AAAAAAkAAAD+//r/AAAAAAkAAAD///L/AAAAAAkAAAD///P/AAAAAAkAAAD///T/AAAAAAkAAAD///X/AAAAAAkAAAD///b/AAAAAAkAAAD///f/AAAAAAkAAAD///j/AAAAAAkAAAD///n/AAAAAAkAAAD///r/AAAAAAkAAAAAAPL/AAAAAAkAAAAAAPP/AAAAAAkAAAAAAPT/AAAAAAkAAAAAAPX/AAAAAAkAAAAAAPb/AAAAAAkAAAAAAPf/AAAAAAkAAAAAAPj/AAAAAAkAAAAAAPn/AAAAAAkAAAAAAPr/AAAAAAkAAAABAPL/AAAAAAkAAAABAPP/AAAAAAkAAAABAPT/AAAAAAkAAAABAPX/AAAAAAkAAAABAPb/AAAAAAkAAAABAPf/AAAAAAkAAAABAPj/AAAAAAkAAAABAPn/AAAAAAkAAAABAPr/AAAAAAkAAAACAPL/AAAAAAkAAAACAPP/AAAAAAkAAAACAPT/AAAAAAkAAAACAPX/AAAAAAkAAAACAPb/AAAAAAkAAAACAPf/AAAAAAkAAAACAPj/AAAAAAkAAAACAPn/AAAAAAkAAAACAPr/AAAAAAkAAAADAPL/AAAAAAkAAAADAPP/AAAAAAkAAAADAPT/AAAAAAkAAAADAPX/AAAAAAkAAAADAPb/AAAAAAkAAAADAPf/AAAAAAkAAAADAPj/AAAAAAkAAAADAPn/AAAAAAkAAAADAPr/AAAAAAkAAAAEAPL/AAAAAAkAAAAEAPP/AAAAAAkAAAAEAPT/AAAAAAkAAAAEAPX/AAAAAAkAAAAEAPb/AAAAAAkAAAAEAPf/AAAAAAkAAAAEAPj/AAAAAAkAAAAEAPn/AAAAAAkAAAAEAPr/AAAAAAkAAAAFAPL/AAAAAAkAAAAFAPP/AAAAAAkAAAAFAPT/AAAAAAkAAAAFAPX/AAAAAAkAAAAFAPb/AAAAAAkAAAAFAPf/AAAAAAkAAAAFAPj/AAAAAAkAAAAFAPn/AAAAAAkAAAAFAPr/AAAAAAkAAAAGAPL/AAAAAAkAAAAGAPP/AAAAAAkAAAAGAPT/AAAAAAkAAAAGAPX/AAAAAAkAAAAGAPb/AAAAAAkAAAAGAPf/AAAAAAkAAAAGAPj/AAAAAAkAAAAGAPn/AAAAAAkAAAAGAPr/AAAAAAkAAAAHAPL/AAAAAAkAAAAHAPP/AAAAAAkAAAAHAPT/AAAAAAkAAAAHAPX/AAAAAAkAAAAHAPb/AAAAAAkAAAAHAPf/AAAAAAkAAAAHAPj/AAAAAAkAAAAHAPn/AAAAAAkAAAAHAPr/AAAAAAkAAAAIAPL/AAAAAAkAAAAIAPP/AAAAAAkAAAAIAPT/AAAAAAkAAAAIAPX/AAAAAAkAAAAIAPb/AAAAAAkAAAAIAPf/AAAAAAkAAAAIAPj/AAAAAAkAAAAIAPn/AAAAAAkAAAAIAPr/AAAAAAkAAAABAAIAAAAAAAkAAAABAAMAAAAAAAkAAAABAAQAAAAAAAkAAAABAAUAAAAAAAkAAAABAAYAAAAAAAkAAAABAAcAAAAAAAkAAAABAAgAAAAAAAkAAAABAAkAAAAAAAkAAAABAAoAAAAAAAkAAAABAAsAAAAAAAkAAAACAAIAAAAAAAkAAAACAAMAAAAAAAkAAAACAAQAAAAAAAkAAAACAAUAAAAAAAkAAAACAAYAAAAAAAkAAAACAAcAAAAAAAkAAAACAAgAAAAAAAkAAAACAAkAAAAAAAkAAAACAAoAAAAAAAkAAAACAAsAAAAAAAkAAAADAAIAAAAAAAkAAAADAAMAAAAAAAkAAAADAAQAAAAAAAkAAAADAAUAAAAAAAkAAAADAAYAAAAAAAkAAAADAAcAAAAAAAkAAAADAAgAAAAAAAkAAAADAAkAAAAAAAkAAAADAAoAAAAAAAkAAAADAAsAAAAAAAkAAAD7/wwAAAAAAAkAAAD8/wwAAAAAAAkAAAD9/wwAAAAAAAkAAAD+/wwAAAAAAAkAAAD//wwAAAAAAAkAAAAAAAwAAAAAAAkAAAABAAwAAAAAAAkAAAACAAwAAAAAAAkAAAADAAwAAAAAAAkAAAAEAAwAAAAAAAkAAAAFAAwAAAAAAAkAAAAGAAwAAAAAAAkAAAAHAAwAAAAAAAkAAAAIAAwAAAAAAAkAAAAJAAwAAAAAAAkAAAD7/w0AAAAAAAkAAAD7/w4AAAAAAAkAAAD7/w8AAAAAAAkAAAD7/xAAAAAAAAkAAAD7/xEAAAAAAAkAAAD7/xIAAAAAAAkAAAD7/xMAAAAAAAkAAAD7/xQAAAAAAAkAAAD7/xUAAAAAAAkAAAD7/xYAAAAAAAkAAAD7/xcAAAAAAAkAAAD7/xgAAAAAAAkAAAD7/xkAAAAAAAkAAAD7/xoAAAAAAAkAAAD7/xsAAAAAAAkAAAD7/xwAAAAAAAkAAAD8/w0AAAAAAAkAAAD8/w4AAAAAAAkAAAD8/w8AAAAAAAkAAAD8/xAAAAAAAAkAAAD8/xEAAAAAAAkAAAD8/xIAAAAAAAkAAAD8/xMAAAAAAAkAAAD8/xQAAAAAAAkAAAD8/xUAAAAAAAkAAAD8/xYAAAAAAAkAAAD8/xcAAAAAAAkAAAD8/xgAAAAAAAkAAAD8/xkAAAAAAAkAAAD8/xoAAAAAAAkAAAD8/xsAAAAAAAkAAAD8/xwAAAAAAAkAAAD9/w0AAAAAAAkAAAD9/w4AAAAAAAkAAAD9/w8AAAAAAAkAAAD9/xAAAAAAAAkAAAD9/xEAAAAAAAkAAAD9/xIAAAAAAAkAAAD9/xMAAAAAAAkAAAD9/xQAAAAAAAkAAAD9/xUAAAAAAAkAAAD9/xYAAAAAAAkAAAD9/xcAAAAAAAkAAAD9/xgAAAAAAAkAAAD9/xkAAAAAAAkAAAD9/xoAAAAAAAkAAAD9/xsAAAAAAAkAAAD9/xwAAAAAAAkAAAD+/w0AAAAAAAkAAAD+/w4AAAAAAAkAAAD+/w8AAAAAAAkAAAD+/xAAAAAAAAkAAAD+/xEAAAAAAAkAAAD+/xIAAAAAAAkAAAD+/xMAAAAAAAkAAAD+/xQAAAAAAAkAAAD+/xUAAAAAAAkAAAD+/xYAAAAAAAkAAAD+/xcAAAAAAAkAAAD+/xgAAAAAAAkAAAD+/xkAAAAAAAkAAAD+/xoAAAAAAAkAAAD+/xsAAAAAAAkAAAD+/xwAAAAAAAkAAAD//w0AAAAAAAkAAAD//w4AAAAAAAkAAAD//w8AAAAAAAkAAAD//xAAAAAAAAkAAAD//xEAAAAAAAkAAAD//xIAAAAAAAkAAAD//xMAAAAAAAkAAAD//xQAAAAAAAkAAAD//xUAAAAAAAkAAAD//xYAAAAAAAkAAAD//xcAAAAAAAkAAAD//xgAAAAAAAkAAAD//xkAAAAAAAkAAAD//xoAAAAAAAkAAAD//xsAAAAAAAkAAAD//xwAAAAAAAkAAAAAAA0AAAAAAAkAAAAAAA4AAAAAAAkAAAAAAA8AAAAAAAkAAAAAABAAAAAAAAkAAAAAABEAAAAAAAkAAAAAABIAAAAAAAkAAAAAABMAAAAAAAkAAAAAABQAAAAAAAkAAAAAABUAAAAAAAkAAAAAABYAAAAAAAkAAAAAABcAAAAAAAkAAAAAABgAAAAAAAkAAAAAABkAAAAAAAkAAAAAABoAAAAAAAkAAAAAABsAAAAAAAkAAAAAABwAAAAAAAkAAAABAA0AAAAAAAkAAAABAA4AAAAAAAkAAAABAA8AAAAAAAkAAAABABAAAAAAAAkAAAABABEAAAAAAAkAAAABABIAAAAAAAkAAAABABMAAAAAAAkAAAABABQAAAAAAAkAAAABABUAAAAAAAkAAAABABYAAAAAAAkAAAABABcAAAAAAAkAAAABABgAAAAAAAkAAAABABkAAAAAAAkAAAABABoAAAAAAAkAAAABABsAAAAAAAkAAAABABwAAAAAAAkAAAACAA0AAAAAAAkAAAACAA4AAAAAAAkAAAACAA8AAAAAAAkAAAACABAAAAAAAAkAAAACABEAAAAAAAkAAAACABIAAAAAAAkAAAACABMAAAAAAAkAAAACABQAAAAAAAkAAAACABUAAAAAAAkAAAACABYAAAAAAAkAAAACABcAAAAAAAkAAAACABgAAAAAAAkAAAACABkAAAAAAAkAAAACABoAAAAAAAkAAAACABsAAAAAAAkAAAACABwAAAAAAAkAAAADAA0AAAAAAAkAAAADAA4AAAAAAAkAAAADAA8AAAAAAAkAAAADABAAAAAAAAkAAAADABEAAAAAAAkAAAADABIAAAAAAAkAAAADABMAAAAAAAkAAAADABQAAAAAAAkAAAADABUAAAAAAAkAAAADABYAAAAAAAkAAAADABcAAAAAAAkAAAADABgAAAAAAAkAAAADABkAAAAAAAkAAAADABoAAAAAAAkAAAADABsAAAAAAAkAAAADABwAAAAAAAkAAAAEAA0AAAAAAAkAAAAEAA4AAAAAAAkAAAAEAA8AAAAAAAkAAAAEABAAAAAAAAkAAAAEABEAAAAAAAkAAAAEABIAAAAAAAkAAAAEABMAAAAAAAkAAAAEABQAAAAAAAkAAAAEABUAAAAAAAkAAAAEABYAAAAAAAkAAAAEABcAAAAAAAkAAAAEABgAAAAAAAkAAAAEABkAAAAAAAkAAAAEABoAAAAAAAkAAAAEABsAAAAAAAkAAAAEABwAAAAAAAkAAAAFAA0AAAAAAAkAAAAFAA4AAAAAAAkAAAAFAA8AAAAAAAkAAAAFABAAAAAAAAkAAAAFABEAAAAAAAkAAAAFABIAAAAAAAkAAAAFABMAAAAAAAkAAAAFABQAAAAAAAkAAAAFABUAAAAAAAkAAAAFABYAAAAAAAkAAAAFABcAAAAAAAkAAAAFABgAAAAAAAkAAAAFABkAAAAAAAkAAAAFABoAAAAAAAkAAAAFABsAAAAAAAkAAAAFABwAAAAAAAkAAAAGAA0AAAAAAAkAAAAGAA4AAAAAAAkAAAAGAA8AAAAAAAkAAAAGABAAAAAAAAkAAAAGABEAAAAAAAkAAAAGABIAAAAAAAkAAAAGABMAAAAAAAkAAAAGABQAAAAAAAkAAAAGABUAAAAAAAkAAAAGABYAAAAAAAkAAAAGABcAAAAAAAkAAAAGABgAAAAAAAkAAAAGABkAAAAAAAkAAAAGABoAAAAAAAkAAAAGABsAAAAAAAkAAAAGABwAAAAAAAkAAAAHAA0AAAAAAAkAAAAHAA4AAAAAAAkAAAAHAA8AAAAAAAkAAAAHABAAAAAAAAkAAAAHABEAAAAAAAkAAAAHABIAAAAAAAkAAAAHABMAAAAAAAkAAAAHABQAAAAAAAkAAAAHABUAAAAAAAkAAAAHABYAAAAAAAkAAAAHABcAAAAAAAkAAAAHABgAAAAAAAkAAAAHABkAAAAAAAkAAAAHABoAAAAAAAkAAAAHABsAAAAAAAkAAAAHABwAAAAAAAkAAAAIAA0AAAAAAAkAAAAIAA4AAAAAAAkAAAAIAA8AAAAAAAkAAAAIABAAAAAAAAkAAAAIABEAAAAAAAkAAAAIABIAAAAAAAkAAAAIABMAAAAAAAkAAAAIABQAAAAAAAkAAAAIABUAAAAAAAkAAAAIABYAAAAAAAkAAAAIABcAAAAAAAkAAAAIABgAAAAAAAkAAAAIABkAAAAAAAkAAAAIABoAAAAAAAkAAAAIABsAAAAAAAkAAAAIABwAAAAAAAkAAAAJAA0AAAAAAAkAAAAJAA4AAAAAAAkAAAAJAA8AAAAAAAkAAAAJABAAAAAAAAkAAAAJABEAAAAAAAkAAAAJABIAAAAAAAkAAAAJABMAAAAAAAkAAAAJABQAAAAAAAkAAAAJABUAAAAAAAkAAAAJABYAAAAAAAkAAAAJABcAAAAAAAkAAAAJABgAAAAAAAkAAAAJABkAAAAAAAkAAAAJABoAAAAAAAkAAAAJABsAAAAAAAkAAAAJABwAAAAAAAkAAADt/xMAAAAAAAkAAADx/xMAAAAAAAkAAADq/wMAAAAAAAkAAADq/wQAAAAAAAkAAADq/wUAAAAAAAkAAADq/wYAAAAAAAkAAADq/wcAAAAAAAkAAADq/wgAAAAAAAkAAADq/wkAAAAAAAkAAADq/woAAAAAAAkAAADq/wsAAAAAAAkAAADq/wwAAAAAAAkAAADq/w0AAAAAAAkAAADq/w4AAAAAAAkAAADq/w8AAAAAAAkAAADq/xAAAAAAAAkAAADq/xEAAAAAAAkAAADq/xIAAAAAAAkAAAD0/wMAAAAAAAkAAAD0/wQAAAAAAAkAAAD0/wUAAAAAAAkAAAD0/wYAAAAAAAkAAAD0/wcAAAAAAAkAAAD0/wgAAAAAAAkAAAD0/wkAAAAAAAkAAAD0/woAAAAAAAkAAAD0/wsAAAAAAAkAAAD0/wwAAAAAAAkAAAD0/w0AAAAAAAkAAAD0/w4AAAAAAAkAAAD0/w8AAAAAAAkAAAD0/xAAAAAAAAkAAAD0/xEAAAAAAAkAAAD0/xIAAAAAAAkAAAD0//v/AAAAAAkAAAD1//v/AAAAAAkAAAD2//v/AAAAAAkAAAD3//v/AAAAAAkAAAD4//v/AAAAAAkAAAD5//v/AAAAAAkAAAD6//v/AAAAAAkAAAD7//v/AAAAAAkAAAD8//v/AAAAAAkAAAD9//v/AAAAAAkAAAD+//v/AAAAAAkAAAD///v/AAAAAAkAAAAAAPv/AAAAAAkAAAABAPv/AAAAAAkAAAACAPv/AAAAAAkAAAADAPv/AAAAAAkAAAAEAPv/AAAAAAkAAAAFAPv/AAAAAAkAAAAGAPv/AAAAAAkAAAAHAPv/AAAAAAkAAAAIAPv/AAAAAAkAAAD0//H/AAAAAAkAAAD1//H/AAAAAAkAAAD2//H/AAAAAAkAAAD3//H/AAAAAAkAAAD4//H/AAAAAAkAAAD5//H/AAAAAAkAAAD6//H/AAAAAAkAAAD7//H/AAAAAAkAAAD8//H/AAAAAAkAAAD9//H/AAAAAAkAAAD+//H/AAAAAAkAAAD///H/AAAAAAkAAAAAAPH/AAAAAAkAAAABAPH/AAAAAAkAAAACAPH/AAAAAAkAAAADAPH/AAAAAAkAAAAEAPH/AAAAAAkAAAAFAPH/AAAAAAkAAAAGAPH/AAAAAAkAAAAHAPH/AAAAAAkAAAAIAPH/AAAAAAkAAADz//T/AAAAAAkAAADz//j/AAAAAAkAAAD6/wwAAAAAAAkAAAD6/w0AAAAAAAkAAAD6/w4AAAAAAAkAAAD6/w8AAAAAAAkAAAD6/xAAAAAAAAkAAAD6/xEAAAAAAAkAAAD6/xIAAAAAAAkAAAD6/xMAAAAAAAkAAAD6/xQAAAAAAAkAAAD6/xUAAAAAAAkAAAD6/xYAAAAAAAkAAAD6/xcAAAAAAAkAAAD6/xgAAAAAAAkAAAD6/xkAAAAAAAkAAAD6/xoAAAAAAAkAAAD6/xsAAAAAAAkAAAD6/xwAAAAAAAkAAAAKAAwAAAAAAAkAAAAKAA0AAAAAAAkAAAAKAA4AAAAAAAkAAAAKAA8AAAAAAAkAAAAKABAAAAAAAAkAAAAKABEAAAAAAAkAAAAKABIAAAAAAAkAAAAKABMAAAAAAAkAAAAKABQAAAAAAAkAAAAKABUAAAAAAAkAAAAKABYAAAAAAAkAAAAKABcAAAAAAAkAAAAKABgAAAAAAAkAAAAKABkAAAAAAAkAAAAKABoAAAAAAAkAAAAKABsAAAAAAAkAAAAKABwAAAAAAAkAAAD5/wwAAAAAAAkAAAD5/w0AAAAAAAkAAAD5/w4AAAAAAAkAAAD5/w8AAAAAAAkAAAD5/xAAAAAAAAkAAAD5/xEAAAAAAAkAAAD5/xIAAAAAAAkAAAD5/xMAAAAAAAkAAAD5/xQAAAAAAAkAAAD5/xUAAAAAAAkAAAD5/xYAAAAAAAkAAAD5/xcAAAAAAAkAAAD5/xgAAAAAAAkAAAD5/xkAAAAAAAkAAAD5/xoAAAAAAAkAAAD5/xsAAAAAAAkAAAD5/xwAAAAAAAkAAAALAAwAAAAAAAkAAAALAA0AAAAAAAkAAAALAA4AAAAAAAkAAAALAA8AAAAAAAkAAAALABAAAAAAAAkAAAALABEAAAAAAAkAAAALABIAAAAAAAkAAAALABMAAAAAAAkAAAALABQAAAAAAAkAAAALABUAAAAAAAkAAAALABYAAAAAAAkAAAALABcAAAAAAAkAAAALABgAAAAAAAkAAAALABkAAAAAAAkAAAALABoAAAAAAAkAAAALABsAAAAAAAkAAAALABwAAAAAAAkAAAAAAAsAAAAAAAkAAAAEAAsAAAAAAAkAAAA=")
+tile_set = ExtResource("6_ny4cc")
+
+[node name="Hazards" type="TileMapLayer" parent="MapBottomLayer" unique_id=876696869 groups=["floor_hazards"]]
+modulate = Color(0.5092862, 0.5092861, 0.5092864, 1)
+material = SubResource("ShaderMaterial_wwkcr")
+tile_map_data = PackedByteArray("AADr/wMAAAAAAAEAAADr/wQAAAAAAAEAAADs/wMAAAAAAAEAAADs/wQAAAAAAAEAAADt/wMAAAAAAAEAAADt/wQAAAAAAAEAAADu/wMAAAAAAAEAAADu/wQAAAAAAAEAAADv/wMAAAAAAAEAAADv/wQAAAAAAAEAAADw/wMAAAAAAAEAAADw/wQAAAAAAAEAAADr/w4AAAAAAAEAAADr/w8AAAAAAAEAAADs/w4AAAAAAAEAAADs/w8AAAAAAAEAAADt/w4AAAAAAAEAAADt/w8AAAAAAAEAAADu/w4AAAAAAAEAAADu/w8AAAAAAAEAAADv/w4AAAAAAAEAAADv/w8AAAAAAAEAAADw/w4AAAAAAAEAAADw/w8AAAAAAAEAAADx/w4AAAAAAAEAAADx/w8AAAAAAAEAAADy/w4AAAAAAAEAAADy/w8AAAAAAAEAAADz/w4AAAAAAAEAAADz/w8AAAAAAAEAAADr/wgAAAAAAAEAAADs/wgAAAAAAAEAAADt/wgAAAAAAAEAAADu/wgAAAAAAAEAAADv/wgAAAAAAAEAAADw/wgAAAAAAAEAAADx/wgAAAAAAAEAAADy/wgAAAAAAAEAAADz/wgAAAAAAAEAAADr/wkAAAAAAAEAAADs/wkAAAAAAAEAAADt/wkAAAAAAAEAAADu/wkAAAAAAAEAAADv/wkAAAAAAAEAAADw/wkAAAAAAAEAAADx/wkAAAAAAAEAAADy/wkAAAAAAAEAAADz/wkAAAAAAAEAAADq/wMAAAAAAAEAAADq/wQAAAAAAAEAAADq/wgAAAAAAAEAAADq/wkAAAAAAAEAAADq/w4AAAAAAAEAAADq/w8AAAAAAAEAAAD0/w4AAAAAAAEAAAD0/w8AAAAAAAEAAAD0/wgAAAAAAAEAAAD0/wkAAAAAAAEAAAAHAPX/AAAAAAEAAAAHAPb/AAAAAAEAAAAHAPf/AAAAAAEAAAAHAPj/AAAAAAEAAAAHAPn/AAAAAAEAAAAHAPr/AAAAAAEAAAAHAPv/AAAAAAEAAAAIAPX/AAAAAAEAAAAIAPb/AAAAAAEAAAAIAPf/AAAAAAEAAAAIAPj/AAAAAAEAAAAIAPn/AAAAAAEAAAAIAPr/AAAAAAEAAAAIAPv/AAAAAAEAAAABAAYAAAAAAAEAAAABAAcAAAAAAAEAAAABAAgAAAAAAAEAAAABAAkAAAAAAAEAAAABAAoAAAAAAAEAAAACAAYAAAAAAAEAAAACAAcAAAAAAAEAAAACAAgAAAAAAAEAAAACAAkAAAAAAAEAAAACAAoAAAAAAAEAAAADAAYAAAAAAAEAAAADAAcAAAAAAAEAAAADAAgAAAAAAAEAAAADAAkAAAAAAAEAAAADAAoAAAAAAAEAAAD5/xMAAAAAAAEAAAD5/xQAAAAAAAEAAAD5/xUAAAAAAAEAAAD5/xYAAAAAAAEAAAD5/xcAAAAAAAEAAAD5/xgAAAAAAAEAAAD5/xkAAAAAAAEAAAD6/xMAAAAAAAEAAAD6/xQAAAAAAAEAAAD6/xUAAAAAAAEAAAD6/xYAAAAAAAEAAAD6/xcAAAAAAAEAAAD6/xgAAAAAAAEAAAD6/xkAAAAAAAEAAAD7/xMAAAAAAAEAAAD7/xQAAAAAAAEAAAD7/xUAAAAAAAEAAAD7/xYAAAAAAAEAAAD7/xcAAAAAAAEAAAD7/xgAAAAAAAEAAAD7/xkAAAAAAAEAAAD8/xMAAAAAAAEAAAD8/xQAAAAAAAEAAAD8/xUAAAAAAAEAAAD8/xYAAAAAAAEAAAD8/xcAAAAAAAEAAAD8/xgAAAAAAAEAAAD8/xkAAAAAAAEAAAD9/xMAAAAAAAEAAAD9/xQAAAAAAAEAAAD9/xUAAAAAAAEAAAD9/xYAAAAAAAEAAAD9/xcAAAAAAAEAAAD9/xgAAAAAAAEAAAD9/xkAAAAAAAEAAAD+/xMAAAAAAAEAAAD+/xQAAAAAAAEAAAD+/xUAAAAAAAEAAAD+/xYAAAAAAAEAAAD+/xcAAAAAAAEAAAD+/xgAAAAAAAEAAAD+/xkAAAAAAAEAAAD//xMAAAAAAAEAAAD//xQAAAAAAAEAAAD//xUAAAAAAAEAAAD//xYAAAAAAAEAAAD//xcAAAAAAAEAAAD//xgAAAAAAAEAAAD//xkAAAAAAAEAAAAAABMAAAAAAAEAAAAAABQAAAAAAAEAAAAAABUAAAAAAAEAAAAAABYAAAAAAAEAAAAAABcAAAAAAAEAAAAAABgAAAAAAAEAAAAAABkAAAAAAAEAAAABABMAAAAAAAEAAAABABQAAAAAAAEAAAABABUAAAAAAAEAAAABABYAAAAAAAEAAAABABcAAAAAAAEAAAABABgAAAAAAAEAAAABABkAAAAAAAEAAAACABMAAAAAAAEAAAACABQAAAAAAAEAAAACABUAAAAAAAEAAAACABYAAAAAAAEAAAACABcAAAAAAAEAAAACABgAAAAAAAEAAAACABkAAAAAAAEAAAADABMAAAAAAAEAAAADABQAAAAAAAEAAAADABUAAAAAAAEAAAADABYAAAAAAAEAAAADABcAAAAAAAEAAAADABgAAAAAAAEAAAADABkAAAAAAAEAAAAEABMAAAAAAAEAAAAEABQAAAAAAAEAAAAEABUAAAAAAAEAAAAEABYAAAAAAAEAAAAEABcAAAAAAAEAAAAEABgAAAAAAAEAAAAEABkAAAAAAAEAAAAFABMAAAAAAAEAAAAFABQAAAAAAAEAAAAFABUAAAAAAAEAAAAFABYAAAAAAAEAAAAFABcAAAAAAAEAAAAFABgAAAAAAAEAAAAFABkAAAAAAAEAAAAGABMAAAAAAAEAAAAGABQAAAAAAAEAAAAGABUAAAAAAAEAAAAGABYAAAAAAAEAAAAGABcAAAAAAAEAAAAGABgAAAAAAAEAAAAGABkAAAAAAAEAAAAHABMAAAAAAAEAAAAHABQAAAAAAAEAAAAHABUAAAAAAAEAAAAHABYAAAAAAAEAAAAHABcAAAAAAAEAAAAHABgAAAAAAAEAAAAHABkAAAAAAAEAAAAIABMAAAAAAAEAAAAIABQAAAAAAAEAAAAIABUAAAAAAAEAAAAIABYAAAAAAAEAAAAIABcAAAAAAAEAAAAIABgAAAAAAAEAAAAIABkAAAAAAAEAAAAJABMAAAAAAAEAAAAJABQAAAAAAAEAAAAJABUAAAAAAAEAAAAJABYAAAAAAAEAAAAJABcAAAAAAAEAAAAJABgAAAAAAAEAAAAJABkAAAAAAAEAAAAKABMAAAAAAAEAAAAKABQAAAAAAAEAAAAKABUAAAAAAAEAAAAKABYAAAAAAAEAAAAKABcAAAAAAAEAAAAKABgAAAAAAAEAAAAKABkAAAAAAAEAAAALABMAAAAAAAEAAAALABQAAAAAAAEAAAALABUAAAAAAAEAAAALABYAAAAAAAEAAAALABcAAAAAAAEAAAALABgAAAAAAAEAAAALABkAAAAAAAEAAAD5/xoAAAAAAAEAAAD5/xsAAAAAAAEAAAD5/xwAAAAAAAEAAAD6/xoAAAAAAAEAAAD6/xsAAAAAAAEAAAD6/xwAAAAAAAEAAAD7/xoAAAAAAAEAAAD7/xsAAAAAAAEAAAD7/xwAAAAAAAEAAAD9/xoAAAAAAAEAAAD9/xsAAAAAAAEAAAD9/xwAAAAAAAEAAAD+/xoAAAAAAAEAAAD+/xsAAAAAAAEAAAD+/xwAAAAAAAEAAAD//xoAAAAAAAEAAAD//xsAAAAAAAEAAAD//xwAAAAAAAEAAAD8/xoAAAAAAAEAAAD8/xsAAAAAAAEAAAD8/xwAAAAAAAEAAAAAABoAAAAAAAEAAAAAABsAAAAAAAEAAAAAABwAAAAAAAEAAAABABoAAAAAAAEAAAABABsAAAAAAAEAAAABABwAAAAAAAEAAAACABoAAAAAAAEAAAACABsAAAAAAAEAAAACABwAAAAAAAEAAAADABoAAAAAAAEAAAADABsAAAAAAAEAAAADABwAAAAAAAEAAAAEABoAAAAAAAEAAAAEABsAAAAAAAEAAAAEABwAAAAAAAEAAAAIABoAAAAAAAEAAAAIABsAAAAAAAEAAAAIABwAAAAAAAEAAAAJABoAAAAAAAEAAAAJABsAAAAAAAEAAAAJABwAAAAAAAEAAAAKABoAAAAAAAEAAAAKABsAAAAAAAEAAAAKABwAAAAAAAEAAAALABoAAAAAAAEAAAALABsAAAAAAAEAAAALABwAAAAAAAEAAAA=")
+tile_set = ExtResource("6_ny4cc")
+
+[node name="Ice" type="TileMapLayer" parent="MapBottomLayer" unique_id=1119041539 groups=["ice_surfaces"]]
+tile_set = ExtResource("6_ny4cc")
+
+[node name="Platforms" type="Node2D" parent="." unique_id=1928273324]
+
+[node name="JumpPad" parent="Platforms" unique_id=1176273934 instance=ExtResource("8_p27r8")]
+position = Vector2(187, 182)
+
+[node name="JumpPad3" parent="Platforms" unique_id=786961932 instance=ExtResource("8_p27r8")]
+position = Vector2(71, 385)
+
+[node name="JumpPad4" parent="Platforms" unique_id=1235263106 instance=ExtResource("8_p27r8")]
+position = Vector2(135, 385)
+
+[node name="JumpPad5" parent="Platforms" unique_id=1932256240 instance=ExtResource("8_p27r8")]
+position = Vector2(199, 385)
+
+[node name="JumpPad6" parent="Platforms" unique_id=1018769118 instance=ExtResource("8_p27r8")]
+position = Vector2(263, 385)
+
+[node name="JumpPad7" parent="Platforms" unique_id=411919596 instance=ExtResource("8_p27r8")]
+position = Vector2(327, 385)
+
+[node name="JumpPad2" parent="Platforms" unique_id=132310675 instance=ExtResource("8_p27r8")]
+position = Vector2(211, 182)
+
+[node name="BoostPad" parent="Platforms" unique_id=1115631699 instance=ExtResource("9_hp03u")]
+position = Vector2(135, 356)
+rotation = 1.5707964
+
+[node name="BoostPad3" parent="Platforms" unique_id=1305675533 instance=ExtResource("9_hp03u")]
+position = Vector2(199, 356)
+rotation = 1.5707964
+
+[node name="BoostPad4" parent="Platforms" unique_id=1633049463 instance=ExtResource("9_hp03u")]
+position = Vector2(263, 356)
+rotation = 1.5707964
+
+[node name="BoostPad5" parent="Platforms" unique_id=1754472742 instance=ExtResource("9_hp03u")]
+position = Vector2(327, 356)
+rotation = 1.5707964
+
+[node name="BoostPad2" parent="Platforms" unique_id=1906447113 instance=ExtResource("9_hp03u")]
+position = Vector2(71, 356)
+rotation = 1.5707964
+
+[node name="ToggleItems" type="Node2D" parent="." unique_id=40036020]
+script = ExtResource("8_ib5y3")
+player_path = NodePath("../Player")
+
+[node name="Portals" type="Node2D" parent="." unique_id=304918047]
+position = Vector2(0, 7)
+
+[node name="GroupOne" parent="Portals" unique_id=132663724 instance=ExtResource("11_e68jm")]
+position = Vector2(-52, 495)
+portal_color = 3
+
+[node name="GroupOne2" parent="Portals" unique_id=909350985 instance=ExtResource("11_e68jm")]
+position = Vector2(-28, 495)
+portal_color = 3
+
+[node name="GroupOne3" parent="Portals" unique_id=119768878 instance=ExtResource("11_e68jm")]
+position = Vector2(-4, 495)
+portal_color = 1
+
+[node name="Correct1Source" parent="Portals" unique_id=647882105 node_paths=PackedStringArray("target_portal") instance=ExtResource("11_e68jm")]
+position = Vector2(-41, 155)
+portal_color = 1
+target_portal = NodePath("../Correct1Destination")
+
+[node name="Correct1Destination" parent="Portals" unique_id=1778446681 node_paths=PackedStringArray("target_portal") instance=ExtResource("11_e68jm")]
+position = Vector2(-208, -61)
+portal_color = 1
+target_portal = NodePath("../Correct1Source")
+
+[node name="GroupTwo" parent="Portals" unique_id=649715804 instance=ExtResource("11_e68jm")]
+position = Vector2(-256, -37)
+portal_color = 3
+
+[node name="GroupTwo2" parent="Portals" unique_id=732828997 instance=ExtResource("11_e68jm")]
+position = Vector2(-256, -61)
+portal_color = 3
+
+[node name="GroupTwo3" parent="Portals" unique_id=1824924146 instance=ExtResource("11_e68jm")]
+position = Vector2(-256, -85)
+portal_color = 1
+
+[node name="Correct2Source" parent="Portals" unique_id=844074630 node_paths=PackedStringArray("target_portal") instance=ExtResource("11_e68jm")]
+position = Vector2(287, -125)
+portal_color = 1
+target_portal = NodePath("../Correct2Destination")
+
+[node name="Correct2Destination" parent="Portals" unique_id=700837227 node_paths=PackedStringArray("target_portal") instance=ExtResource("11_e68jm")]
+position = Vector2(199, 141)
+portal_color = 1
+target_portal = NodePath("../Correct2Source")
+
+[node name="GroupThree" parent="Portals" unique_id=71552682 instance=ExtResource("11_e68jm")]
+position = Vector2(151, 83)
+portal_color = 3
+
+[node name="GroupThree2" parent="Portals" unique_id=574314121 instance=ExtResource("11_e68jm")]
+position = Vector2(175, 83)
+portal_color = 3
+
+[node name="GroupThree3" parent="Portals" unique_id=762837409 instance=ExtResource("11_e68jm")]
+position = Vector2(199, 83)
+portal_color = 3
+
+[node name="GroupThree4" parent="Portals" unique_id=1270891065 instance=ExtResource("11_e68jm")]
+position = Vector2(223, 83)
+portal_color = 1
+
+[node name="GroupThree5" parent="Portals" unique_id=1896232055 instance=ExtResource("11_e68jm")]
+position = Vector2(247, 83)
+portal_color = 3
+
+[node name="Hazards" type="Node2D" parent="." unique_id=798262580]
+position = Vector2(168, 79)
+
+[node name="LaserHazard" parent="Hazards" unique_id=2109695187 instance=ExtResource("12_gh5uy")]
+position = Vector2(-332, -153)
+active_time = 0.5
+off_time = 0.5
+
+[node name="RightCap" parent="Hazards/LaserHazard/Caps" parent_id_path=PackedInt32Array(2109695187, 1936609040) index="0" unique_id=713689459]
+position = Vector2(-26, 40)
+
+[node name="Beam" parent="Hazards/LaserHazard" index="1" unique_id=1755055180]
+points = PackedVector2Array(0, 0, 0, 40)
+
+[node name="WarningBeam" parent="Hazards/LaserHazard" index="2" unique_id=1833803067]
+points = PackedVector2Array(0, 0, 0, 40)
+
+[node name="RCapParticles" parent="Hazards/LaserHazard" index="4" unique_id=1655741551]
+position = Vector2(0, 40)
+
+[node name="BeamCollision" parent="Hazards/LaserHazard" index="5" unique_id=1900670564]
+position = Vector2(0, 20)
+rotation = 1.5707964
+
+[node name="LaserHazard2" parent="Hazards" unique_id=951488223 instance=ExtResource("12_gh5uy")]
+position = Vector2(-324, -153)
+active_time = 0.5
+off_time = 0.5
+
+[node name="RightCap" parent="Hazards/LaserHazard2/Caps" parent_id_path=PackedInt32Array(951488223, 1936609040) index="0" unique_id=713689459]
+position = Vector2(-26, 40)
+
+[node name="Beam" parent="Hazards/LaserHazard2" index="1" unique_id=1755055180]
+points = PackedVector2Array(0, 0, 0, 40)
+
+[node name="WarningBeam" parent="Hazards/LaserHazard2" index="2" unique_id=1833803067]
+points = PackedVector2Array(0, 0, 0, 40)
+
+[node name="RCapParticles" parent="Hazards/LaserHazard2" index="4" unique_id=1655741551]
+position = Vector2(0, 40)
+
+[node name="BeamCollision" parent="Hazards/LaserHazard2" index="5" unique_id=1900670564]
+position = Vector2(0, 20)
+rotation = 1.5707964
+
+[node name="LaserHazard3" parent="Hazards" unique_id=1269273690 instance=ExtResource("12_gh5uy")]
+position = Vector2(-316, -153)
+active_time = 0.5
+off_time = 0.5
+
+[node name="RightCap" parent="Hazards/LaserHazard3/Caps" parent_id_path=PackedInt32Array(1269273690, 1936609040) index="0" unique_id=713689459]
+position = Vector2(-26, 40)
+
+[node name="Beam" parent="Hazards/LaserHazard3" index="1" unique_id=1755055180]
+points = PackedVector2Array(0, 0, 0, 40)
+
+[node name="WarningBeam" parent="Hazards/LaserHazard3" index="2" unique_id=1833803067]
+points = PackedVector2Array(0, 0, 0, 40)
+
+[node name="RCapParticles" parent="Hazards/LaserHazard3" index="4" unique_id=1655741551]
+position = Vector2(0, 40)
+
+[node name="BeamCollision" parent="Hazards/LaserHazard3" index="5" unique_id=1900670564]
+position = Vector2(0, 20)
+rotation = 1.5707964
+
+[node name="LaserHazard4" parent="Hazards" unique_id=2100072901 instance=ExtResource("12_gh5uy")]
+position = Vector2(-308, -153)
+active_time = 0.5
+off_time = 0.5
+
+[node name="RightCap" parent="Hazards/LaserHazard4/Caps" parent_id_path=PackedInt32Array(2100072901, 1936609040) index="0" unique_id=713689459]
+position = Vector2(-26, 40)
+
+[node name="Beam" parent="Hazards/LaserHazard4" index="1" unique_id=1755055180]
+points = PackedVector2Array(0, 0, 0, 40)
+
+[node name="WarningBeam" parent="Hazards/LaserHazard4" index="2" unique_id=1833803067]
+points = PackedVector2Array(0, 0, 0, 40)
+
+[node name="RCapParticles" parent="Hazards/LaserHazard4" index="4" unique_id=1655741551]
+position = Vector2(0, 40)
+
+[node name="BeamCollision" parent="Hazards/LaserHazard4" index="5" unique_id=1900670564]
+position = Vector2(0, 20)
+rotation = 1.5707964
+
+[node name="LaserHazard5" parent="Hazards" unique_id=590225436 instance=ExtResource("12_gh5uy")]
+position = Vector2(-300, -153)
+active_time = 0.5
+off_time = 0.5
+
+[node name="RightCap" parent="Hazards/LaserHazard5/Caps" parent_id_path=PackedInt32Array(590225436, 1936609040) index="0" unique_id=713689459]
+position = Vector2(-26, 40)
+
+[node name="Beam" parent="Hazards/LaserHazard5" index="1" unique_id=1755055180]
+points = PackedVector2Array(0, 0, 0, 40)
+
+[node name="WarningBeam" parent="Hazards/LaserHazard5" index="2" unique_id=1833803067]
+points = PackedVector2Array(0, 0, 0, 40)
+
+[node name="RCapParticles" parent="Hazards/LaserHazard5" index="4" unique_id=1655741551]
+position = Vector2(0, 40)
+
+[node name="BeamCollision" parent="Hazards/LaserHazard5" index="5" unique_id=1900670564]
+position = Vector2(0, 20)
+rotation = 1.5707964
+
+[node name="LaserHazard6" parent="Hazards" unique_id=936183369 instance=ExtResource("12_gh5uy")]
+position = Vector2(-292, -153)
+active_time = 0.5
+off_time = 0.5
+
+[node name="RightCap" parent="Hazards/LaserHazard6/Caps" parent_id_path=PackedInt32Array(936183369, 1936609040) index="0" unique_id=713689459]
+position = Vector2(-26, 40)
+
+[node name="Beam" parent="Hazards/LaserHazard6" index="1" unique_id=1755055180]
+points = PackedVector2Array(0, 0, 0, 40)
+
+[node name="WarningBeam" parent="Hazards/LaserHazard6" index="2" unique_id=1833803067]
+points = PackedVector2Array(0, 0, 0, 40)
+
+[node name="RCapParticles" parent="Hazards/LaserHazard6" index="4" unique_id=1655741551]
+position = Vector2(0, 40)
+
+[node name="BeamCollision" parent="Hazards/LaserHazard6" index="5" unique_id=1900670564]
+position = Vector2(0, 20)
+rotation = 1.5707964
+
+[node name="LaserHazard7" parent="Hazards" unique_id=294557469 instance=ExtResource("12_gh5uy")]
+position = Vector2(-284, -153)
+active_time = 0.5
+off_time = 0.5
+
+[node name="RightCap" parent="Hazards/LaserHazard7/Caps" parent_id_path=PackedInt32Array(294557469, 1936609040) index="0" unique_id=713689459]
+position = Vector2(-26, 40)
+
+[node name="Beam" parent="Hazards/LaserHazard7" index="1" unique_id=1755055180]
+points = PackedVector2Array(0, 0, 0, 40)
+
+[node name="WarningBeam" parent="Hazards/LaserHazard7" index="2" unique_id=1833803067]
+points = PackedVector2Array(0, 0, 0, 40)
+
+[node name="RCapParticles" parent="Hazards/LaserHazard7" index="4" unique_id=1655741551]
+position = Vector2(0, 40)
+
+[node name="BeamCollision" parent="Hazards/LaserHazard7" index="5" unique_id=1900670564]
+position = Vector2(0, 20)
+rotation = 1.5707964
+
+[node name="LaserHazard8" parent="Hazards" unique_id=1779963589 instance=ExtResource("12_gh5uy")]
+position = Vector2(-276, -153)
+active_time = 0.5
+off_time = 0.5
+
+[node name="RightCap" parent="Hazards/LaserHazard8/Caps" parent_id_path=PackedInt32Array(1779963589, 1936609040) index="0" unique_id=713689459]
+position = Vector2(-26, 40)
+
+[node name="Beam" parent="Hazards/LaserHazard8" index="1" unique_id=1755055180]
+points = PackedVector2Array(0, 0, 0, 40)
+
+[node name="WarningBeam" parent="Hazards/LaserHazard8" index="2" unique_id=1833803067]
+points = PackedVector2Array(0, 0, 0, 40)
+
+[node name="RCapParticles" parent="Hazards/LaserHazard8" index="4" unique_id=1655741551]
+position = Vector2(0, 40)
+
+[node name="BeamCollision" parent="Hazards/LaserHazard8" index="5" unique_id=1900670564]
+position = Vector2(0, 20)
+rotation = 1.5707964
+
+[node name="LaserHazard9" parent="Hazards" unique_id=1028571642 instance=ExtResource("12_gh5uy")]
+position = Vector2(-268, -153)
+active_time = 0.5
+off_time = 0.5
+
+[node name="RightCap" parent="Hazards/LaserHazard9/Caps" parent_id_path=PackedInt32Array(1028571642, 1936609040) index="0" unique_id=713689459]
+position = Vector2(-26, 40)
+
+[node name="Beam" parent="Hazards/LaserHazard9" index="1" unique_id=1755055180]
+points = PackedVector2Array(0, 0, 0, 40)
+
+[node name="WarningBeam" parent="Hazards/LaserHazard9" index="2" unique_id=1833803067]
+points = PackedVector2Array(0, 0, 0, 40)
+
+[node name="RCapParticles" parent="Hazards/LaserHazard9" index="4" unique_id=1655741551]
+position = Vector2(0, 40)
+
+[node name="BeamCollision" parent="Hazards/LaserHazard9" index="5" unique_id=1900670564]
+position = Vector2(0, 20)
+rotation = 1.5707964
+
+[node name="LaserHazard10" parent="Hazards" unique_id=193210246 instance=ExtResource("12_gh5uy")]
+position = Vector2(-260, -153)
+active_time = 0.5
+off_time = 0.5
+
+[node name="RightCap" parent="Hazards/LaserHazard10/Caps" parent_id_path=PackedInt32Array(193210246, 1936609040) index="0" unique_id=713689459]
+position = Vector2(-26, 40)
+
+[node name="Beam" parent="Hazards/LaserHazard10" index="1" unique_id=1755055180]
+points = PackedVector2Array(0, 0, 0, 40)
+
+[node name="WarningBeam" parent="Hazards/LaserHazard10" index="2" unique_id=1833803067]
+points = PackedVector2Array(0, 0, 0, 40)
+
+[node name="RCapParticles" parent="Hazards/LaserHazard10" index="4" unique_id=1655741551]
+position = Vector2(0, 40)
+
+[node name="BeamCollision" parent="Hazards/LaserHazard10" index="5" unique_id=1900670564]
+position = Vector2(0, 20)
+rotation = 1.5707964
+
+[node name="LaserHazard11" parent="Hazards" unique_id=798246893 instance=ExtResource("12_gh5uy")]
+position = Vector2(-252, -153)
+active_time = 0.5
+off_time = 0.5
+
+[node name="RightCap" parent="Hazards/LaserHazard11/Caps" parent_id_path=PackedInt32Array(798246893, 1936609040) index="0" unique_id=713689459]
+position = Vector2(-26, 40)
+
+[node name="Beam" parent="Hazards/LaserHazard11" index="1" unique_id=1755055180]
+points = PackedVector2Array(0, 0, 0, 40)
+
+[node name="WarningBeam" parent="Hazards/LaserHazard11" index="2" unique_id=1833803067]
+points = PackedVector2Array(0, 0, 0, 40)
+
+[node name="RCapParticles" parent="Hazards/LaserHazard11" index="4" unique_id=1655741551]
+position = Vector2(0, 40)
+
+[node name="BeamCollision" parent="Hazards/LaserHazard11" index="5" unique_id=1900670564]
+position = Vector2(0, 20)
+rotation = 1.5707964
+
+[node name="LaserHazard12" parent="Hazards" unique_id=422459909 instance=ExtResource("12_gh5uy")]
+position = Vector2(-244, -153)
+active_time = 0.5
+off_time = 0.5
+
+[node name="RightCap" parent="Hazards/LaserHazard12/Caps" parent_id_path=PackedInt32Array(422459909, 1936609040) index="0" unique_id=713689459]
+position = Vector2(-26, 40)
+
+[node name="Beam" parent="Hazards/LaserHazard12" index="1" unique_id=1755055180]
+points = PackedVector2Array(0, 0, 0, 40)
+
+[node name="WarningBeam" parent="Hazards/LaserHazard12" index="2" unique_id=1833803067]
+points = PackedVector2Array(0, 0, 0, 40)
+
+[node name="RCapParticles" parent="Hazards/LaserHazard12" index="4" unique_id=1655741551]
+position = Vector2(0, 40)
+
+[node name="BeamCollision" parent="Hazards/LaserHazard12" index="5" unique_id=1900670564]
+position = Vector2(0, 20)
+rotation = 1.5707964
+
+[node name="LaserHazard13" parent="Hazards" unique_id=92379904 instance=ExtResource("12_gh5uy")]
+position = Vector2(-236, -153)
+active_time = 0.5
+off_time = 0.5
+
+[node name="RightCap" parent="Hazards/LaserHazard13/Caps" parent_id_path=PackedInt32Array(92379904, 1936609040) index="0" unique_id=713689459]
+position = Vector2(-26, 40)
+
+[node name="Beam" parent="Hazards/LaserHazard13" index="1" unique_id=1755055180]
+points = PackedVector2Array(0, 0, 0, 40)
+
+[node name="WarningBeam" parent="Hazards/LaserHazard13" index="2" unique_id=1833803067]
+points = PackedVector2Array(0, 0, 0, 40)
+
+[node name="RCapParticles" parent="Hazards/LaserHazard13" index="4" unique_id=1655741551]
+position = Vector2(0, 40)
+
+[node name="BeamCollision" parent="Hazards/LaserHazard13" index="5" unique_id=1900670564]
+position = Vector2(0, 20)
+rotation = 1.5707964
+
+[node name="LaserHazard14" parent="Hazards" unique_id=1976444029 instance=ExtResource("12_gh5uy")]
+position = Vector2(-228, -153)
+active_time = 0.5
+off_time = 0.5
+
+[node name="RightCap" parent="Hazards/LaserHazard14/Caps" parent_id_path=PackedInt32Array(1976444029, 1936609040) index="0" unique_id=713689459]
+position = Vector2(-26, 40)
+
+[node name="Beam" parent="Hazards/LaserHazard14" index="1" unique_id=1755055180]
+points = PackedVector2Array(0, 0, 0, 40)
+
+[node name="WarningBeam" parent="Hazards/LaserHazard14" index="2" unique_id=1833803067]
+points = PackedVector2Array(0, 0, 0, 40)
+
+[node name="RCapParticles" parent="Hazards/LaserHazard14" index="4" unique_id=1655741551]
+position = Vector2(0, 40)
+
+[node name="BeamCollision" parent="Hazards/LaserHazard14" index="5" unique_id=1900670564]
+position = Vector2(0, 20)
+rotation = 1.5707964
+
+[node name="LaserHazard15" parent="Hazards" unique_id=1456847321 instance=ExtResource("12_gh5uy")]
+position = Vector2(-220, -153)
+active_time = 0.5
+off_time = 0.5
+
+[node name="RightCap" parent="Hazards/LaserHazard15/Caps" parent_id_path=PackedInt32Array(1456847321, 1936609040) index="0" unique_id=713689459]
+position = Vector2(-26, 40)
+
+[node name="Beam" parent="Hazards/LaserHazard15" index="1" unique_id=1755055180]
+points = PackedVector2Array(0, 0, 0, 40)
+
+[node name="WarningBeam" parent="Hazards/LaserHazard15" index="2" unique_id=1833803067]
+points = PackedVector2Array(0, 0, 0, 40)
+
+[node name="RCapParticles" parent="Hazards/LaserHazard15" index="4" unique_id=1655741551]
+position = Vector2(0, 40)
+
+[node name="BeamCollision" parent="Hazards/LaserHazard15" index="5" unique_id=1900670564]
+position = Vector2(0, 20)
+rotation = 1.5707964
+
+[node name="LaserHazard16" parent="Hazards" unique_id=893846940 instance=ExtResource("12_gh5uy")]
+position = Vector2(-220, -153)
+active_time = 0.5
+off_time = 0.5
+
+[node name="RightCap" parent="Hazards/LaserHazard16/Caps" parent_id_path=PackedInt32Array(893846940, 1936609040) index="0" unique_id=713689459]
+position = Vector2(-26, 40)
+
+[node name="Beam" parent="Hazards/LaserHazard16" index="1" unique_id=1755055180]
+points = PackedVector2Array(0, 0, 0, 40)
+
+[node name="WarningBeam" parent="Hazards/LaserHazard16" index="2" unique_id=1833803067]
+points = PackedVector2Array(0, 0, 0, 40)
+
+[node name="RCapParticles" parent="Hazards/LaserHazard16" index="4" unique_id=1655741551]
+position = Vector2(0, 40)
+
+[node name="BeamCollision" parent="Hazards/LaserHazard16" index="5" unique_id=1900670564]
+position = Vector2(0, 20)
+rotation = 1.5707964
+
+[node name="WindmillHazard" parent="Hazards" unique_id=42799490 instance=ExtResource("11_7bmb6")]
+z_index = 2
+position = Vector2(-121, -133)
+length = 10
+rotation_speed = -120.0
+
+[node name="WindmillHazard2" parent="Hazards" unique_id=492577636 instance=ExtResource("11_7bmb6")]
+z_index = 2
+position = Vector2(68, -133)
+length = 10
+rotation_speed = -120.0
+
+[node name="Stamps" type="Node2D" parent="." unique_id=123113769]
+position = Vector2(168, 79)
+
+[node name="Goal" parent="." unique_id=652280647 instance=ExtResource("14_6ouic")]
+position = Vector2(263, 546)
+
+[node name="GameCamera" parent="." unique_id=13152400 node_paths=PackedStringArray("target") instance=ExtResource("15_q016x")]
+position = Vector2(-105, 523)
+target = NodePath("../Player")
+default_zoom = Vector2(0.8, 0.8)
+
+[node name="MapTopLayer" type="Node2D" parent="." unique_id=1059944217]
+position = Vector2(0, 7)
+
+[node name="Shadows" type="TileMapLayer" parent="MapTopLayer" unique_id=255637794]
+position = Vector2(159, 91)
+tile_map_data = PackedByteArray("AADu/xkAAAABAAMAAADu/xoAAAABAAMAAADu/xsAAAABAAMAAADu/xUAAAABAAMAAADu/xYAAAABAAMAAADu/xcAAAABAAMAAADu/xgAAAABAAMAAADu/xQAAAABAAMAAADq/wUAAAABAAMAAADq/wYAAAABAAMAAADq/wcAAAABAAMAAADq/wgAAAABAAMAAADq/wkAAAABAAMAAADq/woAAAABAAMAAADq/wsAAAABAAMAAADq/wwAAAABAAMAAADq/w0AAAABAAMAAADq/w4AAAABAAMAAADq/w8AAAABAAMAAADq/xAAAAABAAMAAADq/xEAAAABAAMAAADq/xIAAAABAAMAAADq/wMAAAAFAAQAAADq/wQAAAABAAMAAADu/wMAAAAFAAQAAADu/wQAAAABAAMAAADu/wUAAAABAAMAAADu/wYAAAABAAMAAADu/wcAAAABAAMAAADu/wgAAAABAAMAAADu/wkAAAABAAMAAADu/woAAAABAAMAAADu/wsAAAABAAMAAADu/wwAAAABAAMAAADu/w0AAAABAAMAAADu/w4AAAABAAMAAADu/w8AAAABAAMAAADy/wMAAAAFAAQAAADy/wQAAAABAAMAAADy/wUAAAABAAMAAADy/wYAAAABAAMAAADy/wcAAAABAAMAAADy/wgAAAABAAMAAADy/wkAAAABAAMAAADy/woAAAABAAMAAADy/wsAAAABAAMAAADy/wwAAAABAAMAAADy/w0AAAABAAMAAADy/w4AAAABAAMAAADy/w8AAAABAAMAAADr/wMAAAAAAAMAAADs/wMAAAAAAAMAAADv/wMAAAAAAAMAAADw/wMAAAAAAAMAAADz/wMAAAAAAAMAAAD0/wMAAAAAAAMAAADx/xAAAAAAAAMAAADt/xAAAAAAAAMAAADy/xAAAAABAAQAAADu/xAAAAABAAQAAAA=")
+tile_set = ExtResource("6_ny4cc")
+
+[node name="Walls" type="TileMapLayer" parent="MapTopLayer" unique_id=766012576]
+z_index = 1
+position = Vector2(159, 91)
+tile_map_data = PackedByteArray("AADt/xQAAAAAAAoAAADt/xUAAAAAAAoAAADt/xYAAAAAAAoAAADt/xcAAAAAAAoAAADt/xgAAAAAAAoAAADt/xkAAAAAAAoAAADt/xoAAAAAAAoAAADt/xsAAAAAAAoAAADx/xQAAAAAAAoAAADx/xUAAAAAAAoAAADx/xYAAAAAAAoAAADx/xcAAAAAAAoAAADx/xgAAAAAAAoAAADx/xkAAAAAAAoAAADx/xoAAAAAAAoAAADx/xsAAAAAAAoAAADt/xwAAAAEAAwAAADu/xwAAAAAAAoAAADv/xwAAAAAAAoAAADw/xwAAAAAAAoAAADx/xwAAAAFAAwAAADy/xQAAAAFAAoAAADs/xQAAAAGAAoAAADu/xsAAAAFAAsAAADw/xsAAAAGAAsAAADs/xMAAAAAAAoAAADq/xMAAAAAAAoAAADr/xMAAAAAAAoAAADp/xMAAAAEAAwAAADy/xMAAAAAAAoAAADz/xMAAAAAAAoAAAD0/xMAAAAAAAoAAAD1/xMAAAAFAAwAAADp/wIAAAAHAAwAAADp/wMAAAAAAAoAAADp/wQAAAAAAAoAAADp/wUAAAAAAAoAAADp/wYAAAAAAAoAAADp/wcAAAAAAAoAAADp/wgAAAAAAAoAAADp/wkAAAAAAAoAAADp/woAAAAAAAoAAADp/wsAAAAAAAoAAADp/wwAAAAAAAoAAADp/w0AAAAAAAoAAADp/w4AAAAAAAoAAADp/w8AAAAAAAoAAADp/xAAAAAAAAoAAADp/xEAAAAAAAoAAADp/xIAAAAAAAoAAADq/wIAAAAAAAoAAADr/wIAAAAAAAoAAADs/wIAAAAAAAoAAADt/wIAAAAAAAoAAADu/wIAAAAAAAoAAADv/wIAAAAAAAoAAADw/wIAAAAAAAoAAADx/wIAAAAAAAoAAADy/wIAAAAAAAoAAADz/wIAAAAAAAoAAAD0/wIAAAAAAAoAAAD1/wIAAAAGAAwAAAD1/wMAAAAAAAoAAAD1/wQAAAAAAAoAAAD1/wUAAAAAAAoAAAD1/wYAAAAAAAoAAAD1/wcAAAAAAAoAAAD1/wgAAAAAAAoAAAD1/wkAAAAAAAoAAAD1/woAAAAAAAoAAAD1/wsAAAAAAAoAAAD1/wwAAAAAAAoAAAD1/w0AAAAAAAoAAAD1/w4AAAAAAAoAAAD1/w8AAAAAAAoA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AAAFAPT/AAAAAAoAAAAGAPT/AAAAAAoAAAAHAPT/AAAAAAoAAAAIAPT/AAAAAAoAAAD4//j/AAAAAAoAAAD5//j/AAAAAAoAAAD6//j/AAAAAAoAAAD7//j/AAAAAAoAAAD8//j/AAAAAAoAAAD9//j/AAAAAAoAAAD+//j/AAAAAAoAAAD///j/AAAAAAoAAAAAAPj/AAAAAAoAAAABAPj/AAAAAAoAAAACAPj/AAAAAAoAAAADAPj/AAAAAAoAAAAEAPj/AAAAAAoAAAAFAPj/AAAAAAoAAAAGAPj/AAAAAAoAAAAHAPj/AAAAAAoAAAAIAPj/AAAAAAoAAAD3//T/AAAAAAoAAAD3//j/AAAAAAoAAAAIAPP/AAAGAAsAAAAIAPf/AAAGAAsAAAAIAPX/AAAGAAoAAAAIAPn/AAAGAAoAAAAAAA8AAAAAAAoAAAAAABAAAAAAAAoAAAAAABEAAAAAAAoAAAAAABIAAAAAAAoAAAAAABMAAAAAAAoAAAAAABQAAAAAAAoAAAAAABUAAAAAAAoAAAAAABYAAAAAAAoAAAAAABcAAAAAAAoAAAAEAA8AAAAAAAoAAAAEABAAAAAAAAoAAAAEABEAAAAAAAoAAAAEABIAAAAAAAoAAAAEABMAAAAAAAoAAAAEABQAAAAAAAoAAAAEABUAAAAAAAoAAAAEABYAAAAAAAoAAAAEABcAAAAAAAoAAAAIAA8AAAAAAAoAAAAIABAAAAAAAAoAAAAIABEAAAAAAAoAAAAIABIAAAAAAAoAAAAIABMAAAAAAAoAAAAIABQAAAAAAAoAAAAIABUAAAAAAAoAAAAIABYAAAAAAAoAAAAIABcAAAAAAAoAAAD8/w8AAAAAAAoAAAD8/xAAAAAAAAoAAAD8/xEAAAAAAAoAAAD8/xIAAAAAAAoAAAD8/xMAAAAAAAoAAAD8/xQAAAAAAAoAAAD8/xUAAAAAAAoAAAD8/xYAAAAAAAoAAAD8/xcAAAAAAAoAAAD8/xgAAAAAAAoAAAD8/xkAAAAAAAoAAAD8/xoAAAAAAAoAAAD4/wsAAAAHAAwAAAD5/wsAAAAAAAoAAAD6/wsAAAAAAAoAAAD7/wsAAAAAAAoAAAD8/wsAAAAAAAoAAAD9/wsAAAAAAAoAAAD+/wsAAAAAAAoAAAD//wsAAAAAAAoAAAAAAAsAAAAFAAwAAAD4/wwAAAAAAAoAAAD4/w0AAAAAAAoAAAD4/w4AAAAAAAoAAAD4/w8AAAAAAAoAAAD4/xAAAAAAAAoAAAD4/xEAAAAAAAoAAAD4/xIAAAAAAAoAAAD4/xMAAAAAAAoAAAD4/xQAAAAAAAoAAAD4/xUAAAAAAAoAAAD4/xYAAAAAAAoAAAD4/xcAAAAAAAoAAAD4/xgAAAAAAAoAAAD4/xkAAAAAAAoAAAD4/xoAAAAAAAoAAAD4/xsAAAAAAAoAAAD4/xwAAAAAAAoAAAD4/x0AAAAEAAwAAAD5/x0AAAAAAAoAAAD6/x0AAAAAAAoAAAD7/x0AAAAAAAoAAAD8/x0AAAAAAAoAAAD9/x0AAAAAAAoAAAD+/x0AAAAAAAoAAAD//x0AAAAAAAoAAAAAAB0AAAAAAAoAAAABAB0AAAAAAAoAAAACAB0AAAAAAAoAAAADAB0AAAAAAAoAAAAEAB0AAAAAAAoAAAAFAB0AAAAAAAoAAAAGAB0AAAAAAAoAAAAHAB0AAAAAAAoAAAAIAB0AAAAAAAoAAAAJAB0AAAAAAAoAAAAKAB0AAAAAAAoAAAALAB0AAAAAAAoAAAAMAB0AAAAFAAwAAAAMAAsAAAAGAAwAAAAMAAwAAAAAAAoAAAAMAA0AAAAAAAoAAAAMAA4AAAAAAAoAAAAMAA8AAAAAAAoAAAAMABAAAAAAAAoAAAAMABEAAAAAAAoAAAAMABIAAAAAAAoAAAAMABMAAAAAAAoAAAAMABQAAAAAAAoAAAAMABUAAAAAAAoAAAAMABYAAAAAAAoAAAAMABcAAAAAAAoAAAAMABgAAAAAAAoAAAAMABkAAAAAAAoAAAAMABoAAAAAAAoAAAAMABsAAAAAAAoAAAAMABwAAAAAAAoAAAAEAAsAAAAEAAwAAAAFAAsAAAAAAAoAAAAGAAsAAAAAAAoAAAAHAAsAAAAAAAoAAAAIAAsAAAAAAAoAAAAJAAsAAAAAAAoAAAAKAAsAAAAAAAoAAAALAAsAAAAAAAoAAAAEAAEAAAAGAAwAAAAEAAIAAAAAAAoAAAAEAAMAAAAAAAoAAAAEAAQAAAAAAAoAAAAEAAUAAAAAAAoAAAAEAAYAAAAAAAoAAAAEAAcAAAAAAAoAAAAEAAgAAAAAAAoAAAAEAAkAAAAAAAoAAAAEAAoAAAAAAAoAAAAAAAEAAAAHAAwAAAABAAEAAAAAAAoAAAACAAEAAAAAAAoAAAADAAEAAAAAAAoAAAAAAAIAAAAAAAoAAAAAAAMAAAAAAAoAAAAAAAQAAAAAAAoAAAAAAAUAAAAAAAoAAAAAAAYAAAAAAAoAAAAAAAcAAAAAAAoAAAAAAAgAAAAAAAoAAAAAAAkAAAAAAAoAAAAAAAoAAAAAAAoAAAD8/xsAAAAAAAoAAAD8/xwAAAAAAAoAAAAAABgAAAAAAAoAAAAAABkAAAAAAAoAAAAAABoAAAAAAAoAAAAAABsAAAAAAAoAAAAAABwAAAAAAAoAAAAEABgAAAAAAAoAAAAEABkAAAAAAAoAAAAEABoAAAAAAAoAAAAEABsAAAAAAAoAAAAEABwAAAAAAAoAAAAIABgAAAAAAAoAAAAIABkAAAAAAAoAAAAIABoAAAAAAAoAAAAIABsAAAAAAAoAAAAIABwAAAAAAAoAAAADAAIAAAAGAAoAAAABAAIAAAAFAAoAAAD5/wwAAAAFAAoAAAALAAwAAAAGAAoAAAD5/xwAAAAFAAsAAAD9/xwAAAAFAAsAAAABABwAAAAFAAsAAAAFABwAAAAFAAsAAAAJABwAAAAFAAsAAAALABwAAAAGAAsAAAAHABwAAAAGAAsAAAADABwAAAAGAAsAAAD//xwAAAAGAAsAAAD7/xwAAAAGAAsAAAA=")
+tile_set = ExtResource("6_ny4cc")
+
+[editable path="Hazards/LaserHazard"]
+[editable path="Hazards/LaserHazard2"]
+[editable path="Hazards/LaserHazard3"]
+[editable path="Hazards/LaserHazard4"]
+[editable path="Hazards/LaserHazard5"]
+[editable path="Hazards/LaserHazard6"]
+[editable path="Hazards/LaserHazard7"]
+[editable path="Hazards/LaserHazard8"]
+[editable path="Hazards/LaserHazard9"]
+[editable path="Hazards/LaserHazard10"]
+[editable path="Hazards/LaserHazard11"]
+[editable path="Hazards/LaserHazard12"]
+[editable path="Hazards/LaserHazard13"]
+[editable path="Hazards/LaserHazard14"]
+[editable path="Hazards/LaserHazard15"]
+[editable path="Hazards/LaserHazard16"]
