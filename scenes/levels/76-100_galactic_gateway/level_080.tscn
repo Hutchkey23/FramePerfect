@@ -1,0 +1,300 @@
+[gd_scene format=4 uid="uid://b6y40cfmspotu"]
+
+[ext_resource type="Shader" uid="uid://cy8e5yqoo68kc" path="res://shaders/starry_sky.gdshader" id="1_pyww6"]
+[ext_resource type="PackedScene" uid="uid://cvsktm1iw46q4" path="res://scenes/utility/level_controller.tscn" id="2_pr6cy"]
+[ext_resource type="PackedScene" uid="uid://ecmje7pp4gyy" path="res://scenes/utility/level_ui.tscn" id="3_bhyut"]
+[ext_resource type="PackedScene" uid="uid://bxry211ole85r" path="res://scenes/utility/cinematic_bars.tscn" id="4_lvpq2"]
+[ext_resource type="PackedScene" uid="uid://drnundi171cmh" path="res://scenes/player/player.tscn" id="5_7c5lm"]
+[ext_resource type="TileSet" uid="uid://7q8eymh2ksuh" path="res://scenes/tilesets/main_floor_and_walls.tres" id="6_27een"]
+[ext_resource type="Shader" uid="uid://cyftftn8qvqe5" path="res://shaders/hazard_shader.gdshader" id="7_65ioe"]
+[ext_resource type="Script" uid="uid://cyfx3hv4kfs08" path="res://scripts/props/toggle_items_manager.gd" id="10_0j3p8"]
+[ext_resource type="PackedScene" uid="uid://b3b7a1qdd5k5g" path="res://scenes/hazards/square_hazard.tscn" id="10_5vamg"]
+[ext_resource type="PackedScene" uid="uid://corxf66b7yfmg" path="res://scenes/props/shaky_platform.tscn" id="11_pr6cy"]
+[ext_resource type="PackedScene" uid="uid://ct44xka20hdp7" path="res://scenes/props/portal.tscn" id="11_wn03o"]
+[ext_resource type="PackedScene" uid="uid://cwv3wpwmybmey" path="res://scenes/props/goal.tscn" id="14_qmjjs"]
+[ext_resource type="PackedScene" uid="uid://ca2uxdoweqwc1" path="res://scenes/utility/game_camera.tscn" id="15_nbfjx"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_jur53"]
+shader = ExtResource("1_pyww6")
+shader_parameter/fade_alpha = 1.0
+shader_parameter/background_color = Color(0.012298316, 0.024600385, 0.090413176, 1)
+shader_parameter/star_color = Color(0.85, 0.82, 1, 1)
+shader_parameter/aspect_ratio = 1.0
+shader_parameter/density = 0.79999997976
+shader_parameter/layer_parascale = 3
+shader_parameter/star_speed = Vector2(0.01, 0.01)
+shader_parameter/star_wave = Vector2(0, 0)
+shader_parameter/star_size = 1.999999955296
+shader_parameter/star_rotate_speed = 0.08300014644250009
+shader_parameter/twinkle_effect = 1.0
+shader_parameter/twinkle_speed = 0.249999994412
+shader_parameter/pixelate_enabled = true
+shader_parameter/pixelate_count = 1000.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_wwkcr"]
+shader = ExtResource("7_65ioe")
+shader_parameter/pulse_color = Color(0.40390328, 8.4228816e-07, 9.62615e-08, 1)
+shader_parameter/pulse_strength = 1.0
+shader_parameter/pulse_speed = 5.00000023424012
+shader_parameter/center_glow_strength = 0.0
+
+[sub_resource type="Curve2D" id="Curve2D_qj4x5"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, -141, 11, 0, 0, 0, 0, 107, 11)
+}
+point_count = 2
+
+[sub_resource type="Curve2D" id="Curve2D_pyww6"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, -97, 11, 0, 0, 0, 0, 47, 11)
+}
+point_count = 2
+
+[sub_resource type="Curve2D" id="Curve2D_xq4t3"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, -101, 11, 0, 0, 0, 0, 17, 11)
+}
+point_count = 2
+
+[node name="Level_080" type="Node2D" unique_id=1381461103]
+metadata/_edit_horizontal_guides_ = [90.0]
+
+[node name="Background" type="ColorRect" parent="." unique_id=882240186]
+material = SubResource("ShaderMaterial_jur53")
+offset_left = -542.0
+offset_top = -422.0
+offset_right = 658.0
+offset_bottom = 778.0
+
+[node name="LevelController" parent="." unique_id=1058685242 groups=["level_controller"] instance=ExtResource("2_pr6cy")]
+player_spawn_path = NodePath("../PlayerSpawn")
+camera_path = NodePath("../GameCamera")
+cinematic_bars_path = NodePath("../CinematicBars")
+level_ui_path = NodePath("../LevelUI")
+platforms_path = NodePath("../Platforms")
+hazards_path = NodePath("../Hazards")
+toggle_blocks_path = NodePath("../ToggleItems")
+
+[node name="LevelUI" parent="." unique_id=687480857 instance=ExtResource("3_bhyut")]
+layer = 2
+visible = false
+level_controller_path = NodePath("../LevelController")
+
+[node name="CinematicBars" parent="." unique_id=3966864 instance=ExtResource("4_lvpq2")]
+visible = false
+
+[node name="Player" parent="." unique_id=1458309070 instance=ExtResource("5_7c5lm")]
+z_index = 1
+position = Vector2(22, 26)
+game_camera_path = NodePath("../GameCamera")
+
+[node name="PlayerSpawn" type="Node2D" parent="." unique_id=535208430]
+z_index = 1
+position = Vector2(22, 26)
+
+[node name="MapBottomLayer" type="Node2D" parent="." unique_id=1665801705]
+position = Vector2(159, 98)
+
+[node name="Floors" type="TileMapLayer" parent="MapBottomLayer" unique_id=1507503636 groups=["floors"]]
+tile_map_data = PackedByteArray("AAD3//v/AAAAAAkAAAD4//v/AAAAAAkAAAD5//v/AAAAAAkAAAD6//v/AAAAAAkAAAD7//v/AAAAAAkAAAD8//v/AAAAAAkAAAD9//v/AAAAAAkAAAD+//v/AAAAAAkAAAD///v/AAAAAAkAAAAAAPv/AAAAAAkAAAABAPv/AAAAAAkAAAACAPv/AAAAAAkAAAADAPv/AAAAAAkAAAAEAPv/AAAAAAkAAAAFAPv/AAAAAAkAAAAGAPv/AAAAAAkAAAAHAPv/AAAAAAkAAAD3////AAAAAAkAAAD4////AAAAAAkAAAD5////AAAAAAkAAAD6////AAAAAAkAAAD7////AAAAAAkAAAD8////AAAAAAkAAAD9////AAAAAAkAAAD+////AAAAAAkAAAD/////AAAAAAkAAAAAAP//AAAAAAkAAAABAP//AAAAAAkAAAACAP//AAAAAAkAAAADAP//AAAAAAkAAAAEAP//AAAAAAkAAAAFAP//AAAAAAkAAAAGAP//AAAAAAkAAAAHAP//AAAAAAkAAAD3/wMAAAAAAAkAAAD4/wMAAAAAAAkAAAD5/wMAAAAAAAkAAAD6/wMAAAAAAAkAAAD7/wMAAAAAAAkAAAD8/wMAAAAAAAkAAAD9/wMAAAAAAAkAAAD+/wMAAAAAAAkAAAD//wMAAAAAAAkAAAAAAAMAAAAAAAkAAAABAAMAAAAAAAkAAAACAAMAAAAAAAkAAAADAAMAAAAAAAkAAAAEAAMAAAAAAAkAAAAFAAMAAAAAAAkAAAAGAAMAAAAAAAkAAAAHAAMAAAAAAAkAAAA=")
+tile_set = ExtResource("6_27een")
+
+[node name="Hazards" type="TileMapLayer" parent="MapBottomLayer" unique_id=876696869 groups=["floor_hazards"]]
+modulate = Color(0.5092862, 0.5092861, 0.5092864, 1)
+material = SubResource("ShaderMaterial_wwkcr")
+tile_map_data = PackedByteArray("AAADAAMAAAAAAAEAAAD8//v/AAAAAAEAAAD9//v/AAAAAAEAAAD+//v/AAAAAAEAAAD///v/AAAAAAEAAAAAAPv/AAAAAAEAAAABAPv/AAAAAAEAAAACAPv/AAAAAAEAAAADAPv/AAAAAAEAAAAEAPv/AAAAAAEAAAD5//v/AAAAAAEAAAD6//v/AAAAAAEAAAD7//v/AAAAAAEAAAAEAAMAAAAAAAEAAAAFAAMAAAAAAAEAAAA=")
+tile_set = ExtResource("6_27een")
+
+[node name="Ice" type="TileMapLayer" parent="MapBottomLayer" unique_id=1119041539 groups=["ice_surfaces"]]
+tile_set = ExtResource("6_27een")
+
+[node name="Platforms" type="Node2D" parent="." unique_id=1928273324]
+
+[node name="ShakyPlatform2" parent="Platforms" unique_id=1856849630 instance=ExtResource("11_pr6cy")]
+position = Vector2(215, 26)
+
+[node name="ShakyPlatform3" parent="Platforms" unique_id=494817688 instance=ExtResource("11_pr6cy")]
+position = Vector2(191, 26)
+
+[node name="ShakyPlatform4" parent="Platforms" unique_id=1821925677 instance=ExtResource("11_pr6cy")]
+position = Vector2(167, 26)
+
+[node name="ShakyPlatform5" parent="Platforms" unique_id=1047506295 instance=ExtResource("11_pr6cy")]
+position = Vector2(143, 26)
+
+[node name="ShakyPlatform6" parent="Platforms" unique_id=95820627 instance=ExtResource("11_pr6cy")]
+position = Vector2(119, 26)
+
+[node name="ShakyPlatform7" parent="Platforms" unique_id=878827434 instance=ExtResource("11_pr6cy")]
+position = Vector2(95, 26)
+
+[node name="ShakyPlatform8" parent="Platforms" unique_id=1260514949 instance=ExtResource("11_pr6cy")]
+position = Vector2(71, 26)
+
+[node name="ToggleItems" type="Node2D" parent="." unique_id=40036020]
+position = Vector2(-12, 0)
+script = ExtResource("10_0j3p8")
+player_path = NodePath("../Player")
+
+[node name="Portals" type="Node2D" parent="." unique_id=304918047]
+position = Vector2(0, 7)
+
+[node name="Portal" parent="Portals" unique_id=1266448565 node_paths=PackedStringArray("target_portal") instance=ExtResource("11_wn03o")]
+position = Vector2(274, 19)
+target_portal = NodePath("../Portal2")
+
+[node name="Portal2" parent="Portals" unique_id=2126019677 node_paths=PackedStringArray("target_portal") instance=ExtResource("11_wn03o")]
+position = Vector2(27, 83)
+target_portal = NodePath("../Portal")
+
+[node name="Portal3" parent="Portals" unique_id=2055144259 node_paths=PackedStringArray("target_portal") instance=ExtResource("11_wn03o")]
+position = Vector2(275, 83)
+portal_color = 2
+target_portal = NodePath("../Portal4")
+
+[node name="Portal4" parent="Portals" unique_id=442740503 node_paths=PackedStringArray("target_portal") instance=ExtResource("11_wn03o")]
+position = Vector2(27, 147)
+portal_color = 2
+target_portal = NodePath("../Portal3")
+
+[node name="Hazards" type="Node2D" parent="." unique_id=798262580]
+position = Vector2(168, 79)
+
+[node name="SquareHazard" parent="Hazards" unique_id=736354374 instance=ExtResource("10_5vamg")]
+curve = SubResource("Curve2D_qj4x5")
+moving = true
+loop = false
+speed_scale = 2.0
+
+[node name="SquareHazard2" parent="Hazards" unique_id=1489030450 instance=ExtResource("10_5vamg")]
+curve = SubResource("Curve2D_qj4x5")
+moving = true
+loop = false
+speed_scale = 2.0
+offset = 0.1
+
+[node name="SquareHazard3" parent="Hazards" unique_id=1123008583 instance=ExtResource("10_5vamg")]
+curve = SubResource("Curve2D_qj4x5")
+moving = true
+loop = false
+speed_scale = 2.0
+offset = 0.2
+
+[node name="SquareHazard4" parent="Hazards" unique_id=666453951 instance=ExtResource("10_5vamg")]
+curve = SubResource("Curve2D_qj4x5")
+moving = true
+loop = false
+speed_scale = 2.0
+offset = 0.3
+
+[node name="SquareHazard5" parent="Hazards" unique_id=221557889 instance=ExtResource("10_5vamg")]
+curve = SubResource("Curve2D_qj4x5")
+moving = true
+loop = false
+speed_scale = 2.0
+offset = 0.4
+
+[node name="SquareHazard6" parent="Hazards" unique_id=1800977006 instance=ExtResource("10_5vamg")]
+position = Vector2(0, -64)
+curve = SubResource("Curve2D_pyww6")
+moving = true
+loop = false
+speed_scale = 2.0
+
+[node name="SquareHazard7" parent="Hazards" unique_id=15596279 instance=ExtResource("10_5vamg")]
+position = Vector2(0, -64)
+curve = SubResource("Curve2D_pyww6")
+moving = true
+loop = false
+speed_scale = 2.0
+offset = 0.1
+
+[node name="SquareHazard8" parent="Hazards" unique_id=1839488175 instance=ExtResource("10_5vamg")]
+position = Vector2(0, -64)
+curve = SubResource("Curve2D_pyww6")
+moving = true
+loop = false
+speed_scale = 2.0
+offset = 0.2
+
+[node name="SquareHazard9" parent="Hazards" unique_id=855365616 instance=ExtResource("10_5vamg")]
+position = Vector2(0, -64)
+curve = SubResource("Curve2D_pyww6")
+moving = true
+loop = false
+speed_scale = 2.0
+offset = 0.3
+
+[node name="SquareHazard10" parent="Hazards" unique_id=1388089181 instance=ExtResource("10_5vamg")]
+position = Vector2(0, -64)
+curve = SubResource("Curve2D_pyww6")
+moving = true
+loop = false
+speed_scale = 2.0
+offset = 0.4
+
+[node name="SquareHazard11" parent="Hazards" unique_id=2147057783 instance=ExtResource("10_5vamg")]
+position = Vector2(0, 64)
+curve = SubResource("Curve2D_xq4t3")
+moving = true
+loop = false
+speed_scale = 2.0
+
+[node name="SquareHazard12" parent="Hazards" unique_id=98013231 instance=ExtResource("10_5vamg")]
+position = Vector2(0, 64)
+curve = SubResource("Curve2D_xq4t3")
+moving = true
+loop = false
+speed_scale = 2.0
+offset = 0.1
+
+[node name="SquareHazard13" parent="Hazards" unique_id=704187090 instance=ExtResource("10_5vamg")]
+position = Vector2(0, 64)
+curve = SubResource("Curve2D_xq4t3")
+moving = true
+loop = false
+speed_scale = 2.0
+offset = 0.2
+
+[node name="SquareHazard14" parent="Hazards" unique_id=1397380468 instance=ExtResource("10_5vamg")]
+position = Vector2(0, 64)
+curve = SubResource("Curve2D_xq4t3")
+moving = true
+loop = false
+speed_scale = 2.0
+offset = 0.3
+
+[node name="SquareHazard15" parent="Hazards" unique_id=1126238435 instance=ExtResource("10_5vamg")]
+position = Vector2(0, 64)
+curve = SubResource("Curve2D_xq4t3")
+moving = true
+loop = false
+speed_scale = 2.0
+offset = 0.4
+
+[node name="Stamps" type="Node2D" parent="." unique_id=123113769]
+position = Vector2(168, 79)
+
+[node name="Goal" parent="." unique_id=652280647 instance=ExtResource("14_qmjjs")]
+position = Vector2(275, 154)
+
+[node name="GameCamera" parent="." unique_id=13152400 node_paths=PackedStringArray("target") instance=ExtResource("15_nbfjx")]
+position = Vector2(160, 90)
+mode = 1
+target = NodePath("../Player")
+default_zoom = Vector2(1, 1)
+fixed_position = Vector2(160, 90)
+
+[node name="MapTopLayer" type="Node2D" parent="." unique_id=1059944217]
+position = Vector2(0, 7)
+
+[node name="Shadows" type="TileMapLayer" parent="MapTopLayer" unique_id=255637794]
+position = Vector2(159, 91)
+tile_map_data = PackedByteArray("AAD3//v/AAAGAAMAAAD3////AAAGAAMAAAD3/wMAAAAGAAMAAAD4//v/AAAAAAMAAAD5//v/AAAAAAMAAAD6//v/AAAAAAMAAAD7//v/AAAAAAMAAAD8//v/AAAAAAMAAAD9//v/AAAAAAMAAAD+//v/AAAAAAMAAAD///v/AAAAAAMAAAAAAPv/AAAAAAMAAAABAPv/AAAAAAMAAAACAPv/AAAAAAMAAAADAPv/AAAAAAMAAAAEAPv/AAAAAAMAAAAFAPv/AAAAAAMAAAAGAPv/AAAAAAMAAAAHAPv/AAAAAAMAAAD4////AAAAAAMAAAD5////AAAAAAMAAAD6////AAAAAAMAAAD7////AAAAAAMAAAD8////AAAAAAMAAAD9////AAAAAAMAAAD+////AAAAAAMAAAD/////AAAAAAMAAAAAAP//AAAAAAMAAAABAP//AAAAAAMAAAACAP//AAAAAAMAAAADAP//AAAAAAMAAAAEAP//AAAAAAMAAAAFAP//AAAAAAMAAAAGAP//AAAAAAMAAAAHAP//AAAAAAMAAAD4/wMAAAAAAAMAAAD5/wMAAAAAAAMAAAD6/wMAAAAAAAMAAAD7/wMAAAAAAAMAAAD8/wMAAAAAAAMAAAD9/wMAAAAAAAMAAAD+/wMAAAAAAAMAAAD//wMAAAAAAAMAAAAAAAMAAAAAAAMAAAABAAMAAAAAAAMAAAACAAMAAAAAAAMAAAADAAMAAAAAAAMAAAAEAAMAAAAAAAMAAAAFAAMAAAAAAAMAAAAGAAMAAAAAAAMAAAAHAAMAAAAAAAMAAAA=")
+tile_set = ExtResource("6_27een")
+
+[node name="Walls" type="TileMapLayer" parent="MapTopLayer" unique_id=766012576]
+z_index = 1
+position = Vector2(159, 91)
+tile_map_data = PackedByteArray("AAD3//r/AAABAAsAAAD4//r/AAABAAsAAAD5//r/AAABAAsAAAD6//r/AAABAAsAAAD7//r/AAABAAsAAAD8//r/AAABAAsAAAD9//r/AAABAAsAAAD+//r/AAABAAsAAAD///r/AAABAAsAAAAAAPr/AAABAAsAAAABAPr/AAABAAsAAAACAPr/AAABAAsAAAADAPr/AAABAAsAAAAEAPr/AAABAAsAAAAFAPr/AAABAAsAAAAGAPr/AAABAAsAAAAHAPr/AAABAAsAAAD3//7/AAABAAsAAAD4//7/AAABAAsAAAD5//7/AAABAAsAAAD6//7/AAABAAsAAAD7//7/AAABAAsAAAD8//7/AAABAAsAAAD9//7/AAABAAsAAAD+//7/AAABAAsAAAD///7/AAABAAsAAAAAAP7/AAABAAsAAAABAP7/AAABAAsAAAACAP7/AAABAAsAAAADAP7/AAABAAsAAAAEAP7/AAABAAsAAAAFAP7/AAABAAsAAAAGAP7/AAABAAsAAAAHAP7/AAABAAsAAAD3/wIAAAABAAsAAAD4/wIAAAABAAsAAAD5/wIAAAABAAsAAAD6/wIAAAABAAsAAAD7/wIAAAABAAsAAAD8/wIAAAABAAsAAAD9/wIAAAABAAsAAAD+/wIAAAABAAsAAAD//wIAAAABAAsAAAAAAAIAAAABAAsAAAABAAIAAAABAAsAAAACAAIAAAABAAsAAAADAAIAAAABAAsAAAAEAAIAAAABAAsAAAAFAAIAAAABAAsAAAAGAAIAAAABAAsAAAAHAAIAAAABAAsAAAD3/wQAAAAAAAsAAAD4/wQAAAAAAAsAAAD5/wQAAAAAAAsAAAD6/wQAAAAAAAsAAAD7/wQAAAAAAAsAAAD8/wQAAAAAAAsAAAD9/wQAAAAAAAsAAAD+/wQAAAAAAAsAAAD//wQAAAAAAAsAAAAAAAQAAAAAAAsAAAABAAQAAAAAAAsAAAACAAQAAAAAAAsAAAADAAQAAAAAAAsAAAAEAAQAAAAAAAsAAAAFAAQAAAAAAAsAAAAGAAQAAAAAAAsAAAAHAAQAAAAAAAsAAAD3/wAAAAAAAAsAAAD4/wAAAAAAAAsAAAD5/wAAAAAAAAsAAAD6/wAAAAAAAAsAAAD7/wAAAAAAAAsAAAD8/wAAAAAAAAsAAAD9/wAAAAAAAAsAAAD+/wAAAAAAAAsAAAD//wAAAAAAAAsAAAAAAAAAAAAAAAsAAAABAAAAAAAAAAsAAAACAAAAAAAAAAsAAAADAAAAAAAAAAsAAAAEAAAAAAAAAAsAAAAFAAAAAAAAAAsAAAAGAAAAAAAAAAsAAAAHAAAAAAAAAAsAAAD3//z/AAAAAAsAAAD4//z/AAAAAAsAAAD5//z/AAAAAAsAAAD6//z/AAAAAAsAAAD7//z/AAAAAAsAAAD8//z/AAAAAAsAAAD9//z/AAAAAAsAAAD+//z/AAAAAAsAAAD///z/AAAAAAsAAAAAAPz/AAAAAAsAAAABAPz/AAAAAAsAAAACAPz/AAAAAAsAAAADAPz/AAAAAAsAAAAEAPz/AAAAAAsAAAAFAPz/AAAAAAsAAAAGAPz/AAAAAAsAAAAHAPz/AAAAAAsAAAAIAPv/AAACAAsAAAAIAP//AAACAAsAAAAIAAMAAAACAAsAAAD2/wMAAAADAAsAAAD2////AAADAAsAAAD2//v/AAADAAsAAAD2//r/AAAGAAsAAAD2//7/AAAGAAsAAAD2/wIAAAAGAAsAAAAIAAIAAAAFAAsAAAAIAP7/AAAFAAsAAAAIAPr/AAAFAAsAAAAIAAQAAAAFAAoAAAAIAAAAAAAFAAoAAAAIAPz/AAAFAAoAAAD2/wQAAAAGAAoAAAD2/wAAAAAGAAoAAAD2//z/AAAGAAoAAAA=")
+tile_set = ExtResource("6_27een")
