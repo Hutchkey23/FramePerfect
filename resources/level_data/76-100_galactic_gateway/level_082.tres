@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="LevelData" format=3 uid="uid://b50pvrqj0255s"]
+
+[ext_resource type="PackedScene" uid="uid://cxo8xosm1seg7" path="res://scenes/levels/76-100_galactic_gateway/level_082.tscn" id="1_2sawn"]
+[ext_resource type="Script" uid="uid://do5fdotl7d638" path="res://resources/level_data/level_data.gd" id="2_8giqy"]
+
+[resource]
+script = ExtResource("2_8giqy")
+level_id = "level_082"
+level_title = "super road"
+medal_time = 7.5
+level_scene = ExtResource("1_2sawn")
+metadata/_custom_type_script = "uid://do5fdotl7d638"
