@@ -1,12 +1,12 @@
 [gd_resource type="Resource" script_class="LevelData" format=3 uid="uid://cmjvnqa6rglys"]
 
-[ext_resource type="PackedScene" uid="uid://c62prjtd7iecg" path="res://scenes/levels/76-100_galactic_gateway/level_100.tscn" id="1_ww7ev"]
-[ext_resource type="Script" uid="uid://do5fdotl7d638" path="res://resources/level_data/level_data.gd" id="2_3vuab"]
+[ext_resource type="PackedScene" uid="uid://c62prjtd7iecg" path="res://scenes/levels/76-100_galactic_gateway/level_100.tscn" id="1_desde"]
+[ext_resource type="Script" uid="uid://do5fdotl7d638" path="res://resources/level_data/level_data.gd" id="2_s7m4c"]
 
 [resource]
-script = ExtResource("2_3vuab")
+script = ExtResource("2_s7m4c")
 level_id = "level_100"
-level_title = "spacebound"
+level_title = "send it!"
 medal_time = 20.0
-level_scene = ExtResource("1_ww7ev")
+level_scene = ExtResource("1_desde")
 metadata/_custom_type_script = "uid://do5fdotl7d638"
