@@ -45,6 +45,9 @@ var player_reference: Player = null
 
 func _ready() -> void:
 	set_color(portal_color)
+	
+	if not target_portal:
+		can_teleport = false
 
 func _process(_delta: float) -> void:
 	if Engine.is_editor_hint():
@@ -167,7 +170,8 @@ func set_color(new_color: PortalColor) -> void:
 func _on_body_exited(body: Node2D) -> void:
 	if body.is_in_group("player"):
 		player_reference = null
-		can_teleport = true
+		if target_portal:
+			can_teleport = true
 
 ####### AUDIO HANDLING ########
 func play_sfx(sfx: AudioStream, volume_db: float = 0.0, pitch_range: Vector2 = Vector2(0.95, 1.05)):
