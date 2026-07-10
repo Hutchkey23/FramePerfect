@@ -103,6 +103,9 @@ const ICE_BRAKING_MULTIPLIER: float = 0.3
 
 var ice_surface_count: int = 0
 
+# Sticky Platforms
+var sticky_surface_count: int = 0
+
 # Dashing
 const DASH_SPEED: float = 220.0
 const DASH_DURATION: float = 0.20
@@ -768,6 +771,28 @@ func start_jump_pad_jump(
 	var jump_cloud_instance = JUMP_CLOUD.instantiate()
 	get_parent().add_child(jump_cloud_instance)
 	jump_cloud_instance.global_position = global_position
+
+func land_on_sticky_platform() -> void:
+	if current_state == PlayerState.JUMP:
+		player_sprite.position.y = sprite_ground_y
+		shadow_sprite.scale = Vector2.ONE
+		shadow_sprite.modulate.a = 1.0
+
+		set_jump_over_blockers_enabled(true)
+
+		jump_timer = 0.0
+		jumped_from_dash = false
+
+	current_state = PlayerState.NORMAL
+	velocity = Vector2.ZERO
+
+	jump_buffer_timer = 0.0
+	dash_buffer_timer = 0.0
+	jump_buffer_used_this_jump = false
+	dash_buffer_used_this_jump = false
+
+	current_state = PlayerState.NORMAL
+	velocity = Vector2.ZERO
 
 func set_jump_over_blockers_enabled(enabled: bool) -> void:
 	set_collision_mask_value(JUMP_OVER_BLOCKER_LAYER, enabled)
