@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="LevelData" format=3 uid="uid://co8wj55gueax2"]
+
+[ext_resource type="PackedScene" uid="uid://cij5gfc1yosxm" path="res://scenes/levels/76-100_galactic_gateway/level_086.tscn" id="1_aq7g6"]
+[ext_resource type="Script" uid="uid://do5fdotl7d638" path="res://resources/level_data/level_data.gd" id="2_snjs6"]
+
+[resource]
+script = ExtResource("2_snjs6")
+level_id = "level_086"
+level_title = "riff raff"
+medal_time = 7.0
+level_scene = ExtResource("1_aq7g6")
+metadata/_custom_type_script = "uid://do5fdotl7d638"

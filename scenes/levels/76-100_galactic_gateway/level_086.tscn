@@ -1,0 +1,388 @@
+[gd_scene format=4 uid="uid://cij5gfc1yosxm"]
+
+[ext_resource type="Shader" uid="uid://cy8e5yqoo68kc" path="res://shaders/starry_sky.gdshader" id="1_oixqg"]
+[ext_resource type="PackedScene" uid="uid://cvsktm1iw46q4" path="res://scenes/utility/level_controller.tscn" id="2_hy5ke"]
+[ext_resource type="PackedScene" uid="uid://ecmje7pp4gyy" path="res://scenes/utility/level_ui.tscn" id="3_c6whf"]
+[ext_resource type="PackedScene" uid="uid://bxry211ole85r" path="res://scenes/utility/cinematic_bars.tscn" id="4_5bo03"]
+[ext_resource type="PackedScene" uid="uid://drnundi171cmh" path="res://scenes/player/player.tscn" id="5_dan0n"]
+[ext_resource type="TileSet" uid="uid://7q8eymh2ksuh" path="res://scenes/tilesets/main_floor_and_walls.tres" id="6_usiyw"]
+[ext_resource type="Shader" uid="uid://cyftftn8qvqe5" path="res://shaders/hazard_shader.gdshader" id="7_74042"]
+[ext_resource type="PackedScene" uid="uid://cbd6vy48abvih" path="res://scenes/props/jump_pad.tscn" id="9_h63x1"]
+[ext_resource type="PackedScene" uid="uid://dsmg6rsp35s6l" path="res://scenes/hazards/laser_hazard.tscn" id="9_hy5ke"]
+[ext_resource type="PackedScene" uid="uid://cwv3wpwmybmey" path="res://scenes/props/goal.tscn" id="9_kbuko"]
+[ext_resource type="PackedScene" uid="uid://ca2uxdoweqwc1" path="res://scenes/utility/game_camera.tscn" id="10_0tn1s"]
+[ext_resource type="PackedScene" uid="uid://dq2k03846pui7" path="res://scenes/props/boost_pad.tscn" id="10_kbuko"]
+[ext_resource type="Script" uid="uid://cyfx3hv4kfs08" path="res://scripts/props/toggle_items_manager.gd" id="11_0tn1s"]
+[ext_resource type="PackedScene" uid="uid://cy567go6v1isl" path="res://scenes/props/toggle_platform.tscn" id="13_m3u6p"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_jur53"]
+shader = ExtResource("1_oixqg")
+shader_parameter/fade_alpha = 1.0
+shader_parameter/background_color = Color(0.012298316, 0.024600385, 0.090413176, 1)
+shader_parameter/star_color = Color(0.85, 0.82, 1, 1)
+shader_parameter/aspect_ratio = 1.0
+shader_parameter/density = 0.79999997976
+shader_parameter/layer_parascale = 3
+shader_parameter/star_speed = Vector2(0.01, 0.01)
+shader_parameter/star_wave = Vector2(0, 0)
+shader_parameter/star_size = 1.999999955296
+shader_parameter/star_rotate_speed = 0.08300014644250009
+shader_parameter/twinkle_effect = 1.0
+shader_parameter/twinkle_speed = 0.249999994412
+shader_parameter/pixelate_enabled = true
+shader_parameter/pixelate_count = 1000.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_wwkcr"]
+shader = ExtResource("7_74042")
+shader_parameter/pulse_color = Color(0.40390328, 8.4228816e-07, 9.62615e-08, 1)
+shader_parameter/pulse_strength = 1.0
+shader_parameter/pulse_speed = 5.00000023424012
+shader_parameter/center_glow_strength = 0.0
+
+[node name="Level_086" type="Node2D" unique_id=1381461103]
+metadata/_edit_horizontal_guides_ = [90.0]
+
+[node name="Background" type="ColorRect" parent="." unique_id=882240186]
+material = SubResource("ShaderMaterial_jur53")
+offset_left = -542.0
+offset_top = -422.0
+offset_right = 658.0
+offset_bottom = 778.0
+
+[node name="LevelController" parent="." unique_id=1058685242 groups=["level_controller"] instance=ExtResource("2_hy5ke")]
+player_spawn_path = NodePath("../PlayerSpawn")
+camera_path = NodePath("../GameCamera")
+cinematic_bars_path = NodePath("../CinematicBars")
+level_ui_path = NodePath("../LevelUI")
+platforms_path = NodePath("../Platforms")
+hazards_path = NodePath("../Hazards")
+toggle_blocks_path = NodePath("../ToggleItems")
+
+[node name="LevelUI" parent="." unique_id=687480857 instance=ExtResource("3_c6whf")]
+layer = 2
+visible = false
+level_controller_path = NodePath("../LevelController")
+
+[node name="CinematicBars" parent="." unique_id=3966864 instance=ExtResource("4_5bo03")]
+visible = false
+
+[node name="Player" parent="." unique_id=1458309070 instance=ExtResource("5_dan0n")]
+z_index = 1
+position = Vector2(-225, 338)
+game_camera_path = NodePath("../GameCamera")
+
+[node name="PlayerSpawn" type="Node2D" parent="." unique_id=535208430]
+z_index = 1
+position = Vector2(-225, 338)
+
+[node name="MapBottomLayer" type="Node2D" parent="." unique_id=1665801705]
+position = Vector2(159, 98)
+
+[node name="Floors" type="TileMapLayer" parent="MapBottomLayer" unique_id=1507503636 groups=["floors"]]
+tile_map_data = PackedByteArray("AADn/w4AAAAAAAkAAADn/w8AAAAAAAkAAADo/w4AAAAAAAkAAADo/w8AAAAAAAkAAADp/w4AAAAAAAkAAADp/w8AAAAAAAkAAADq/w4AAAAAAAkAAADq/w8AAAAAAAkAAADr/w4AAAAAAAkAAADr/w8AAAAAAAkAAADs/w4AAAAAAAkAAADs/w8AAAAAAAkAAADt/w4AAAAAAAkAAADt/w8AAAAAAAkAAADu/w4AAAAAAAkAAADv/w0AAAAAAAkAAADw/wwAAAAAAAkAAADx/wsAAAAAAAkAAADy/woAAAAAAAkAAADz/wkAAAAAAAkAAAD0/wgAAAAAAAkAAAD1/wcAAAAAAAkAAAD2/wYAAAAAAAkAAAD3/wUAAAAAAAkAAAD4/wQAAAAAAAkAAAD5/wMAAAAAAAkAAADu/w8AAAAAAAkAAADv/w4AAAAAAAkAAADw/w0AAAAAAAkAAADx/wwAAAAAAAkAAADy/wsAAAAAAAkAAADz/woAAAAAAAkAAAD0/wkAAAAAAAkAAAD1/wgAAAAAAAkAAAD2/wcAAAAAAAkAAAD3/wYAAAAAAAkAAAD4/wUAAAAAAAkAAAD5/wQAAAAAAAkAAAD6/wMAAAAAAAkAAAD7/wQAAAAAAAkAAAD8/wUAAAAAAAkAAAD9/wYAAAAAAAkAAAD6/wQAAAAAAAkAAAD7/wUAAAAAAAkAAAD8/wYAAAAAAAkAAAD9/wcAAAAAAAkAAAD+/wgAAAAAAAkAAAD//wkAAAAAAAkAAAAAAAoAAAAAAAkAAAABAAsAAAAAAAkAAAACAAwAAAAAAAkAAAADAA0AAAAAAAkAAADn/xMAAAAAAAkAAADn/xQAAAAAAAkAAADo/xMAAAAAAAkAAADo/xQAAAAAAAkAAADp/xMAAAAAAAkAAADp/xQAAAAAAAkAAADq/xMAAAAAAAkAAADq/xQAAAAAAAkAAADr/xMAAAAAAAkAAADr/xQAAAAAAAkAAADs/xMAAAAAAAkAAADs/xQAAAAAAAkAAADt/xMAAAAAAAkAAADt/xQAAAAAAAkAAADu/xMAAAAAAAkAAADu/xQAAAAAAAkAAADv/xMAAAAAAAkAAADv/xQAAAAAAAkAAADw/xMAAAAAAAkAAADw/xQAAAAAAAkAAADx/xMAAAAAAAkAAADx/xQAAAAAAAkAAADy/xMAAAAAAAkAAADy/xQAAAAAAAkAAADz/xMAAAAAAAkAAADz/xQAAAAAAAkAAAD0/xMAAAAAAAkAAAD0/xQAAAAAAAkAAAD1/xMAAAAAAAkAAAD1/xQAAAAAAAkAAAD2/xMAAAAAAAkAAAD2/xQAAAAAAAkAAAD3/xMAAAAAAAkAAAD3/xQAAAAAAAkAAAD4/xMAAAAAAAkAAAD4/xQAAAAAAAkAAAD5/xMAAAAAAAkAAAD5/xQAAAAAAAkAAAD6/xMAAAAAAAkAAAD6/xQAAAAAAAkAAAD7/xMAAAAAAAkAAAD7/xQAAAAAAAkAAAD8/xMAAAAAAAkAAAD8/xQAAAAAAAkAAAD9/xMAAAAAAAkAAAD9/xQAAAAAAAkAAAD+/xMAAAAAAAkAAAD+/xQAAAAAAAkAAAD//xMAAAAAAAkAAAD//xQAAAAAAAkAAAAAABMAAAAAAAkAAAAAABQAAAAAAAkAAAABABMAAAAAAAkAAAABABQAAAAAAAkAAAACABMAAAAAAAkAAAACABQAAAAAAAkAAAADABMAAAAAAAkAAAADABQAAAAAAAkAAADu/w0AAAAAAAkAAADv/wwAAAAAAAkAAADw/wsAAAAAAAkAAADx/woAAAAAAAkAAADy/wkAAAAAAAkAAADz/wgAAAAAAAkAAAD0/wcAAAAAAAkAAAD1/wYAAAAAAAkAAAD2/wUAAAAAAAkAAAD3/wQAAAAAAAkAAAD4/wMAAAAAAAkAAADv/w8AAAAAAAkAAADw/w4AAAAAAAkAAADx/w0AAAAAAAkAAADy/wwAAAAAAAkAAADz/wsAAAAAAAkAAAD0/woAAAAAAAkAAAD1/wkAAAAAAAkAAAD2/wgAAAAAAAkAAAD3/wcAAAAAAAkAAAD4/wYAAAAAAAkAAAD5/wUAAAAAAAkAAAD6/wUAAAAAAAkAAAD8/wQAAAAAAAkAAAD7/wMAAAAAAAkAAAD+/wcAAAAAAAkAAAD//wgAAAAAAAkAAAAAAAkAAAAAAAkAAAABAAoAAAAAAAkAAAACAAsAAAAAAAkAAAADAAwAAAAAAAkAAAAEAA0AAAAAAAkAAAD7/wYAAAAAAAkAAAD8/wcAAAAAAAkAAAD9/wUAAAAAAAkAAAD9/wgAAAAAAAkAAAD+/wYAAAAAAAkAAAD+/wkAAAAAAAkAAAD//wcAAAAAAAkAAAD//woAAAAAAAkAAAAAAAgAAAAAAAkAAAAAAAsAAAAAAAkAAAABAAkAAAAAAAkAAAABAAwAAAAAAAkAAAACAAoAAAAAAAkAAAACAA0AAAAAAAkAAAADAAsAAAAAAAkAAAADAA4AAAAAAAkAAAAEAAwAAAAAAAkAAAACABUAAAAAAAkAAAACABYAAAAAAAkAAAACABcAAAAAAAkAAAACABgAAAAAAAkAAAACABkAAAAAAAkAAAADABUAAAAAAAkAAAADABYAAAAAAAkAAAADABcAAAAAAAkAAAADABgAAAAAAAkAAAADABkAAAAAAAkAAAAEABgAAAAAAAkAAAAEABkAAAAAAAkAAAAFABgAAAAAAAkAAAAFABkAAAAAAAkAAAAGABgAAAAAAAkAAAAGABkAAAAAAAkAAAAHABgAAAAAAAkAAAAHABkAAAAAAAkAAAAIABgAAAAAAAkAAAAIABkAAAAAAAkAAAAJABgAAAAAAAkAAAAJABkAAAAAAAkAAAAKABgAAAAAAAkAAAAKABkAAAAAAAkAAAALABgAAAAAAAkAAAALABkAAAAAAAkAAAAMABgAAAAAAAkAAAAMABkAAAAAAAkAAAANABgAAAAAAAkAAAANABkAAAAAAAkAAAAMABYAAAAAAAkAAAAMABcAAAAAAAkAAAANABYAAAAAAAkAAAANABcAAAAAAAkAAAAEAA8AAAAAAAkAAAAFABAAAAAAAAkAAAAGABEAAAAAAAkAAAAHABIAAAAAAAkAAAAIABMAAAAAAAkAAAAJABQAAAAAAAkAAAAKABUAAAAAAAkAAAALABYAAAAAAAkAAAAFAA0AAAAAAAkAAAAGAA4AAAAAAAkAAAAHAA8AAAAAAAkAAAAIABAAAAAAAAkAAAAJABEAAAAAAAkAAAAKABIAAAAAAAkAAAALABMAAAAAAAkAAAAMABQAAAAAAAkAAAANABUAAAAAAAkAAAAFAA4AAAAAAAkAAAAGAA8AAAAAAAkAAAAHABAAAAAAAAkAAAAIABEAAAAAAAkAAAAJABIAAAAAAAkAAAAKABMAAAAAAAkAAAALABQAAAAAAAkAAAAMABUAAAAAAAkAAAALABUAAAAAAAkAAAAKABQAAAAAAAkAAAAJABMAAAAAAAkAAAAIABIAAAAAAAkAAAAHABEAAAAAAAkAAAAGABAAAAAAAAkAAAAFAA8AAAAAAAkAAAAEAA4AAAAAAAkAAAA=")
+tile_set = ExtResource("6_usiyw")
+
+[node name="Hazards" type="TileMapLayer" parent="MapBottomLayer" unique_id=876696869 groups=["floor_hazards"]]
+modulate = Color(0.5092862, 0.5092861, 0.5092864, 1)
+material = SubResource("ShaderMaterial_wwkcr")
+tile_map_data = PackedByteArray("AADw/wsAAAABAAEAAADx/wwAAAABAAEAAADy/wwAAAAAAAEAAADx/wsAAAAAAAEAAADx/woAAAAAAAEAAADy/wsAAAAAAAEAAADz/wsAAAADAAEAAADy/woAAAADAAEAAAD0/wcAAAABAAEAAAD1/wYAAAAAAAEAAAD1/wcAAAAAAAEAAAD1/wgAAAABAAEAAAD2/wYAAAADAAEAAAD2/wcAAAAAAAEAAAD2/wgAAAAAAAEAAAD3/wcAAAADAAEAAAD//wcAAAAAAAEAAAD+/wgAAAAAAAEAAAD9/wgAAAAAAAEAAAD+/wcAAAAAAAEAAAD//wgAAAAAAAEAAAD+/wkAAAAAAAEAAAAAAAgAAAAAAAEAAAAAAAkAAAAAAAEAAAD//wkAAAAAAAEAAAAAAAoAAAAAAAEAAAD//woAAAAAAAEAAAABAAkAAAAAAAEAAAABAAoAAAAAAAEAAAAAAAsAAAAAAAEAAAABAAsAAAAAAAEAAAACAAoAAAAAAAEAAAACAAsAAAAAAAEAAAACAAwAAAAAAAEAAAABAAwAAAAAAAEAAAADAAsAAAAAAAEAAAADAAwAAAAAAAEAAAADAA0AAAAAAAEAAAACAA0AAAAAAAEAAAADAA4AAAAAAAEAAAAEAAwAAAAAAAEAAAAEAA0AAAAAAAEAAAD9/wcAAAAAAAEAAAD9/wYAAAAAAAEAAAD8/wcAAAAAAAEAAAD+/wYAAAAAAAEAAAD8/wYAAAAEAAEAAAD9/wUAAAAEAAEAAAAEAA4AAAAAAAEAAAAFAA0AAAAAAAEAAAAEAA8AAAAAAAEAAAAFAA4AAAAAAAEAAAAFAA8AAAAAAAEAAAAFABAAAAAAAAEAAAAGAA4AAAAAAAEAAAAGAA8AAAAAAAEAAAAGABAAAAAAAAEAAAAGABEAAAAAAAEAAAAHAA8AAAAAAAEAAAAHABAAAAAAAAEAAAAHABEAAAAAAAEAAAAHABIAAAAAAAEAAAAIABAAAAAAAAEAAAAIABEAAAAAAAEAAAAIABIAAAAAAAEAAAAIABMAAAAAAAEAAAAJABEAAAAAAAEAAAAJABIAAAAAAAEAAAAJABMAAAAAAAEAAAAJABQAAAAAAAEAAAAKABIAAAAAAAEAAAAKABMAAAAAAAEAAAAKABQAAAAAAAEAAAAKABUAAAACAAEAAAALABMAAAAAAAEAAAALABQAAAACAAEAAAACABUAAAAAAAEAAAACABYAAAAAAAEAAAADABcAAAAAAAEAAAACABcAAAAAAAEAAAADABYAAAAAAAEAAAADABUAAAAAAAEAAAD//xMAAAAAAAEAAAD//xQAAAAAAAEAAAAAABMAAAAAAAEAAAAAABQAAAAAAAEAAAABABMAAAAAAAEAAAABABQAAAAAAAEAAAD5/xMAAAAAAAEAAAD5/xQAAAAAAAEAAAD6/xMAAAAAAAEAAAD6/xQAAAAAAAEAAAD7/xMAAAAAAAEAAAD7/xQAAAAAAAEAAADz/xMAAAAAAAEAAADz/xQAAAAAAAEAAAD0/xMAAAAAAAEAAAD0/xQAAAAAAAEAAAD1/xMAAAAAAAEAAAD1/xQAAAAAAAEAAADp/xMAAAAAAAEAAADp/xQAAAAAAAEAAADq/xMAAAAAAAEAAADq/xQAAAAAAAEAAADr/xMAAAAAAAEAAADr/xQAAAAAAAEAAAA=")
+tile_set = ExtResource("6_usiyw")
+
+[node name="Ice" type="TileMapLayer" parent="MapBottomLayer" unique_id=1119041539 groups=["ice_surfaces"]]
+tile_set = ExtResource("6_usiyw")
+
+[node name="Platforms" type="Node2D" parent="." unique_id=1928273324]
+
+[node name="JumpPad" parent="Platforms" unique_id=1176273934 instance=ExtResource("9_h63x1")]
+position = Vector2(217, 308)
+rotation = 0.7853982
+
+[node name="JumpPad3" parent="Platforms" unique_id=1761442089 instance=ExtResource("9_h63x1")]
+position = Vector2(285, 376)
+rotation = 0.7853982
+
+[node name="BoostPad" parent="Platforms" unique_id=1115631699 instance=ExtResource("10_kbuko")]
+position = Vector2(365, 499)
+rotation = 3.1415927
+
+[node name="ToggleItems" type="Node2D" parent="." unique_id=40036020]
+position = Vector2(-12, 0)
+script = ExtResource("11_0tn1s")
+player_path = NodePath("../Player")
+
+[node name="TogglePlatform" parent="ToggleItems" unique_id=588717540 instance=ExtResource("13_m3u6p")]
+position = Vector2(127.000015, 206.00003)
+rotation = 0.7853982
+
+[node name="TogglePlatform2" parent="ToggleItems" unique_id=270915178 instance=ExtResource("13_m3u6p")]
+position = Vector2(144, 223.00002)
+rotation = 0.7853982
+
+[node name="TogglePlatform3" parent="ToggleItems" unique_id=1343819313 instance=ExtResource("13_m3u6p")]
+position = Vector2(161, 240)
+rotation = 0.7853982
+
+[node name="TogglePlatform4" parent="ToggleItems" unique_id=1470536017 instance=ExtResource("13_m3u6p")]
+position = Vector2(177.99998, 257)
+rotation = 0.7853982
+
+[node name="TogglePlatform5" parent="ToggleItems" unique_id=185447271 instance=ExtResource("13_m3u6p")]
+position = Vector2(195, 274)
+rotation = 0.7853982
+
+[node name="TogglePlatform6" parent="ToggleItems" unique_id=1462266507 instance=ExtResource("13_m3u6p")]
+position = Vector2(211.99998, 291)
+rotation = 0.7853982
+
+[node name="Portals" type="Node2D" parent="." unique_id=304918047]
+position = Vector2(0, 7)
+
+[node name="Hazards" type="Node2D" parent="." unique_id=798262580]
+position = Vector2(168, 79)
+
+[node name="LaserHazard" parent="Hazards" unique_id=2109695187 instance=ExtResource("9_hy5ke")]
+position = Vector2(-374, 247)
+active_time = 0.5
+off_time = 0.5
+
+[node name="RightCap" parent="Hazards/LaserHazard/Caps" parent_id_path=PackedInt32Array(2109695187, 1936609040) index="0" unique_id=713689459]
+position = Vector2(-26, 24)
+
+[node name="Beam" parent="Hazards/LaserHazard" index="1" unique_id=1755055180]
+points = PackedVector2Array(0, 0, 0, 24)
+
+[node name="WarningBeam" parent="Hazards/LaserHazard" index="2" unique_id=1833803067]
+points = PackedVector2Array(0, 0, 0, 24)
+
+[node name="RCapParticles" parent="Hazards/LaserHazard" index="4" unique_id=1655741551]
+position = Vector2(0, 24)
+
+[node name="BeamCollision" parent="Hazards/LaserHazard" index="5" unique_id=1900670564]
+position = Vector2(0, 12)
+rotation = 1.5707964
+
+[node name="LaserHazard2" parent="Hazards" unique_id=1011233359 instance=ExtResource("9_hy5ke")]
+position = Vector2(-366, 247)
+active_time = 0.5
+off_time = 0.5
+
+[node name="RightCap" parent="Hazards/LaserHazard2/Caps" parent_id_path=PackedInt32Array(1011233359, 1936609040) index="0" unique_id=713689459]
+position = Vector2(-26, 24)
+
+[node name="Beam" parent="Hazards/LaserHazard2" index="1" unique_id=1755055180]
+points = PackedVector2Array(0, 0, 0, 24)
+
+[node name="WarningBeam" parent="Hazards/LaserHazard2" index="2" unique_id=1833803067]
+points = PackedVector2Array(0, 0, 0, 24)
+
+[node name="RCapParticles" parent="Hazards/LaserHazard2" index="4" unique_id=1655741551]
+position = Vector2(0, 24)
+
+[node name="BeamCollision" parent="Hazards/LaserHazard2" index="5" unique_id=1900670564]
+position = Vector2(0, 12)
+rotation = 1.5707964
+
+[node name="LaserHazard3" parent="Hazards" unique_id=10563785 instance=ExtResource("9_hy5ke")]
+position = Vector2(-358, 247)
+active_time = 0.5
+off_time = 0.5
+
+[node name="RightCap" parent="Hazards/LaserHazard3/Caps" parent_id_path=PackedInt32Array(10563785, 1936609040) index="0" unique_id=713689459]
+position = Vector2(-26, 24)
+
+[node name="Beam" parent="Hazards/LaserHazard3" index="1" unique_id=1755055180]
+points = PackedVector2Array(0, 0, 0, 24)
+
+[node name="WarningBeam" parent="Hazards/LaserHazard3" index="2" unique_id=1833803067]
+points = PackedVector2Array(0, 0, 0, 24)
+
+[node name="RCapParticles" parent="Hazards/LaserHazard3" index="4" unique_id=1655741551]
+position = Vector2(0, 24)
+
+[node name="BeamCollision" parent="Hazards/LaserHazard3" index="5" unique_id=1900670564]
+position = Vector2(0, 12)
+rotation = 1.5707964
+
+[node name="LaserHazard4" parent="Hazards" unique_id=1014063693 instance=ExtResource("9_hy5ke")]
+position = Vector2(-350, 247)
+active_time = 0.5
+off_time = 0.5
+
+[node name="RightCap" parent="Hazards/LaserHazard4/Caps" parent_id_path=PackedInt32Array(1014063693, 1936609040) index="0" unique_id=713689459]
+position = Vector2(-26, 24)
+
+[node name="Beam" parent="Hazards/LaserHazard4" index="1" unique_id=1755055180]
+points = PackedVector2Array(0, 0, 0, 24)
+
+[node name="WarningBeam" parent="Hazards/LaserHazard4" index="2" unique_id=1833803067]
+points = PackedVector2Array(0, 0, 0, 24)
+
+[node name="RCapParticles" parent="Hazards/LaserHazard4" index="4" unique_id=1655741551]
+position = Vector2(0, 24)
+
+[node name="BeamCollision" parent="Hazards/LaserHazard4" index="5" unique_id=1900670564]
+position = Vector2(0, 12)
+rotation = 1.5707964
+
+[node name="LaserHazard5" parent="Hazards" unique_id=1470200199 instance=ExtResource("9_hy5ke")]
+position = Vector2(-342, 247)
+active_time = 0.5
+off_time = 0.5
+
+[node name="RightCap" parent="Hazards/LaserHazard5/Caps" parent_id_path=PackedInt32Array(1470200199, 1936609040) index="0" unique_id=713689459]
+position = Vector2(-26, 24)
+
+[node name="Beam" parent="Hazards/LaserHazard5" index="1" unique_id=1755055180]
+points = PackedVector2Array(0, 0, 0, 24)
+
+[node name="WarningBeam" parent="Hazards/LaserHazard5" index="2" unique_id=1833803067]
+points = PackedVector2Array(0, 0, 0, 24)
+
+[node name="RCapParticles" parent="Hazards/LaserHazard5" index="4" unique_id=1655741551]
+position = Vector2(0, 24)
+
+[node name="BeamCollision" parent="Hazards/LaserHazard5" index="5" unique_id=1900670564]
+position = Vector2(0, 12)
+rotation = 1.5707964
+
+[node name="LaserHazard6" parent="Hazards" unique_id=1546462930 instance=ExtResource("9_hy5ke")]
+position = Vector2(-334, 247)
+active_time = 0.5
+off_time = 0.5
+
+[node name="RightCap" parent="Hazards/LaserHazard6/Caps" parent_id_path=PackedInt32Array(1546462930, 1936609040) index="0" unique_id=713689459]
+position = Vector2(-26, 24)
+
+[node name="Beam" parent="Hazards/LaserHazard6" index="1" unique_id=1755055180]
+points = PackedVector2Array(0, 0, 0, 24)
+
+[node name="WarningBeam" parent="Hazards/LaserHazard6" index="2" unique_id=1833803067]
+points = PackedVector2Array(0, 0, 0, 24)
+
+[node name="RCapParticles" parent="Hazards/LaserHazard6" index="4" unique_id=1655741551]
+position = Vector2(0, 24)
+
+[node name="BeamCollision" parent="Hazards/LaserHazard6" index="5" unique_id=1900670564]
+position = Vector2(0, 12)
+rotation = 1.5707964
+
+[node name="LaserHazard7" parent="Hazards" unique_id=667494275 instance=ExtResource("9_hy5ke")]
+position = Vector2(-326, 247)
+active_time = 0.5
+off_time = 0.5
+
+[node name="RightCap" parent="Hazards/LaserHazard7/Caps" parent_id_path=PackedInt32Array(667494275, 1936609040) index="0" unique_id=713689459]
+position = Vector2(-26, 24)
+
+[node name="Beam" parent="Hazards/LaserHazard7" index="1" unique_id=1755055180]
+points = PackedVector2Array(0, 0, 0, 24)
+
+[node name="WarningBeam" parent="Hazards/LaserHazard7" index="2" unique_id=1833803067]
+points = PackedVector2Array(0, 0, 0, 24)
+
+[node name="RCapParticles" parent="Hazards/LaserHazard7" index="4" unique_id=1655741551]
+position = Vector2(0, 24)
+
+[node name="BeamCollision" parent="Hazards/LaserHazard7" index="5" unique_id=1900670564]
+position = Vector2(0, 12)
+rotation = 1.5707964
+
+[node name="LaserHazard8" parent="Hazards" unique_id=462740029 instance=ExtResource("9_hy5ke")]
+position = Vector2(-318, 247)
+active_time = 0.5
+off_time = 0.5
+
+[node name="RightCap" parent="Hazards/LaserHazard8/Caps" parent_id_path=PackedInt32Array(462740029, 1936609040) index="0" unique_id=713689459]
+position = Vector2(-26, 24)
+
+[node name="Beam" parent="Hazards/LaserHazard8" index="1" unique_id=1755055180]
+points = PackedVector2Array(0, 0, 0, 24)
+
+[node name="WarningBeam" parent="Hazards/LaserHazard8" index="2" unique_id=1833803067]
+points = PackedVector2Array(0, 0, 0, 24)
+
+[node name="RCapParticles" parent="Hazards/LaserHazard8" index="4" unique_id=1655741551]
+position = Vector2(0, 24)
+
+[node name="BeamCollision" parent="Hazards/LaserHazard8" index="5" unique_id=1900670564]
+position = Vector2(0, 12)
+rotation = 1.5707964
+
+[node name="LaserHazard9" parent="Hazards" unique_id=1130035889 instance=ExtResource("9_hy5ke")]
+position = Vector2(-310, 247)
+active_time = 0.5
+off_time = 0.5
+
+[node name="RightCap" parent="Hazards/LaserHazard9/Caps" parent_id_path=PackedInt32Array(1130035889, 1936609040) index="0" unique_id=713689459]
+position = Vector2(-26, 24)
+
+[node name="Beam" parent="Hazards/LaserHazard9" index="1" unique_id=1755055180]
+points = PackedVector2Array(0, 0, 0, 24)
+
+[node name="WarningBeam" parent="Hazards/LaserHazard9" index="2" unique_id=1833803067]
+points = PackedVector2Array(0, 0, 0, 24)
+
+[node name="RCapParticles" parent="Hazards/LaserHazard9" index="4" unique_id=1655741551]
+position = Vector2(0, 24)
+
+[node name="BeamCollision" parent="Hazards/LaserHazard9" index="5" unique_id=1900670564]
+position = Vector2(0, 12)
+rotation = 1.5707964
+
+[node name="LaserHazard10" parent="Hazards" unique_id=1404254124 instance=ExtResource("9_hy5ke")]
+position = Vector2(-302, 247)
+active_time = 0.5
+off_time = 0.5
+
+[node name="RightCap" parent="Hazards/LaserHazard10/Caps" parent_id_path=PackedInt32Array(1404254124, 1936609040) index="0" unique_id=713689459]
+position = Vector2(-26, 24)
+
+[node name="Beam" parent="Hazards/LaserHazard10" index="1" unique_id=1755055180]
+points = PackedVector2Array(0, 0, 0, 24)
+
+[node name="WarningBeam" parent="Hazards/LaserHazard10" index="2" unique_id=1833803067]
+points = PackedVector2Array(0, 0, 0, 24)
+
+[node name="RCapParticles" parent="Hazards/LaserHazard10" index="4" unique_id=1655741551]
+position = Vector2(0, 24)
+
+[node name="BeamCollision" parent="Hazards/LaserHazard10" index="5" unique_id=1900670564]
+position = Vector2(0, 12)
+rotation = 1.5707964
+
+[node name="Stamps" type="Node2D" parent="." unique_id=123113769]
+position = Vector2(168, 79)
+
+[node name="Goal" parent="." unique_id=652280647 instance=ExtResource("9_kbuko")]
+position = Vector2(-225, 418)
+
+[node name="GameCamera" parent="." unique_id=13152400 node_paths=PackedStringArray("target") instance=ExtResource("10_0tn1s")]
+position = Vector2(-225, 338)
+target = NodePath("../Player")
+default_zoom = Vector2(0.8, 0.8)
+fixed_position = Vector2(150, 130)
+
+[node name="MapTopLayer" type="Node2D" parent="." unique_id=1059944217]
+position = Vector2(0, 7)
+
+[node name="Shadows" type="TileMapLayer" parent="MapTopLayer" unique_id=255637794]
+position = Vector2(159, 91)
+tile_map_data = PackedByteArray("AADn/w4AAAAGAAMAAADo/w4AAAAAAAMAAADp/w4AAAAAAAMAAADq/w4AAAAAAAMAAADr/w4AAAAAAAMAAADs/w4AAAAAAAMAAADt/w4AAAAAAAMAAADn/w8AAAABAAMAAADu/w4AAAAEAAQAAADu/w0AAAAFAAMAAADv/wwAAAAFAAMAAADw/wsAAAAFAAMAAADx/woAAAAFAAMAAADy/wkAAAAFAAMAAADz/wgAAAAFAAMAAAD0/wcAAAAFAAMAAAD1/wYAAAAFAAMAAAD2/wUAAAAFAAMAAAD3/wQAAAAFAAMAAADv/w0AAAAEAAQAAADw/wwAAAAEAAQAAADx/wsAAAAEAAQAAADy/woAAAAEAAQAAADz/wkAAAAEAAQAAAD0/wgAAAAEAAQAAAD1/wcAAAAEAAQAAAD2/wYAAAAEAAQAAAD3/wUAAAAEAAQAAAD4/wQAAAAAAAMAAAD5/wQAAAAAAAMAAAD6/wQAAAAAAAMAAAD7/wQAAAAAAAMAAAD8/wQAAAAAAAMAAAAMABcAAAABAAMAAAAMABgAAAABAAQAAAAFABgAAAAAAAMAAAAGABgAAAAAAAMAAAAHABgAAAAAAAMAAAAIABgAAAAAAAMAAAAJABgAAAAAAAMAAAAKABgAAAAAAAMAAAALABgAAAAAAAMAAAACABkAAAABAAMAAAACABgAAAABAAMAAAACABcAAAABAAMAAAACABYAAAABAAMAAAADABMAAAAAAAMAAAACABMAAAAAAAMAAAABABMAAAAAAAMAAAAAABMAAAAAAAMAAAD//xMAAAAAAAMAAAD+/xMAAAAAAAMAAAD9/xMAAAAAAAMAAAD8/xMAAAAAAAMAAAD7/xMAAAAAAAMAAAD6/xMAAAAAAAMAAAD5/xMAAAAAAAMAAAD4/xMAAAAAAAMAAAD3/xMAAAAAAAMAAAD2/xMAAAAAAAMAAAD1/xMAAAAAAAMAAAD0/xMAAAAAAAMAAADz/xMAAAAAAAMAAADy/xMAAAAAAAMAAADx/xMAAAAAAAMAAADw/xMAAAAAAAMAAADv/xMAAAAAAAMAAADu/xMAAAAAAAMAAADt/xMAAAAAAAMAAADs/xMAAAAAAAMAAADr/xMAAAAAAAMAAADq/xMAAAAAAAMAAADp/xMAAAAAAAMAAADo/xMAAAAAAAMAAADn/xMAAAAGAAMAAADn/xQAAAABAAMAAAAEABgAAAAAAAMAAAACABUAAAABAAMAAAA=")
+tile_set = ExtResource("6_usiyw")
+
+[node name="Walls" type="TileMapLayer" parent="MapTopLayer" unique_id=766012576]
+z_index = 1
+position = Vector2(159, 91)
+tile_map_data = PackedByteArray("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AAD5/xIAAAAAAAoAAAD6/xIAAAAAAAoAAAD7/xIAAAAAAAoAAAD8/xIAAAAAAAoAAAD9/xIAAAAAAAoAAAD+/xIAAAAAAAoAAAADAA8AAAAEAAwAAAAEAA8AAAAGAAwAAAAEABAAAAAEAAwAAAAFABAAAAAGAAwAAAAFABEAAAAEAAwAAAAGABEAAAAGAAwAAAAGABIAAAAEAAwAAAAHAA4AAAAGAAwAAAAHAA8AAAAEAAwAAAAHABIAAAAGAAwAAAAHABMAAAAEAAwAAAAIAA8AAAAGAAwAAAAIABAAAAAEAAwAAAAIABMAAAAGAAwAAAAIABQAAAAEAAwAAAAJABAAAAAGAAwAAAAJABEAAAAEAAwAAAAJABQAAAAGAAwAAAAJABUAAAAEAAwAAAAKABEAAAAGAAwAAAAKABIAAAAEAAwAAAAKABUAAAAGAAwAAAAKABYAAAAEAAwAAAALABIAAAAGAAwAAAALABMAAAAEAAwAAAALABYAAAAGAAwAAAAMABMAAAAGAAwAAAAMABQAAAAEAAwAAAANABQAAAAGAAwAAAANABUAAAAEAAwAAAAOABUAAAAGAAwAAAAOABYAAAAAAAoAAAAOABcAAAAAAAoAAAAOABgAAAAAAAoAAAAOABkAAAAAAAoAAAALABcAAAAAAAoAAAAOABoAAAAFAAwAAAADABoAAAAAAAoAAAAEABoAAAAAAAoAAAAFABoAAAAAAAoAAAAGABoAAAAAAAoAAAAHABoAAAAAAAoAAAAIABoAAAAAAAoAAAAJABoAAAAAAAoAAAAKABoAAAAAAAoAAAALABoAAAAAAAoAAAAMABoAAAAAAAoAAAANABoAAAAAAAoAAAAEABcAAAAAAAoAAAAFABcAAAAAAAoAAAAGABcAAAAAAAoAAAAHABcAAAAAAAoAAAAIABcAAAAAAAoAAAAJABcAAAAAAAoAAAAKABcAAAAAAAoAAAABABoAAAAEAAwAAAACABoAAAAAAAoAAAABABUAAAAAAAoAAAABABYAAAAAAAoAAAABABcAAAAAAAoAAAABABgAAAAAAAoAAAABABkAAAAAAAoAAAAEABIAAAAGAAwAAAAEABMAAAAAAAoAAAAEABQAAAAAAAoAAAAEABUAAAAAAAoAAAAEABYAAAAAAAoAAAD//xIAAAAAAAoAAAAAABIAAAAAAAoAAAABABIAAAAAAAoAAAACABIAAAAAAAoAAAADABIAAAAAAAoAAAD//xUAAAAAAAoAAAAAABUAAAAAAAoAAAA=")
+tile_set = ExtResource("6_usiyw")
+
+[editable path="Hazards/LaserHazard"]
+[editable path="Hazards/LaserHazard2"]
+[editable path="Hazards/LaserHazard3"]
+[editable path="Hazards/LaserHazard4"]
+[editable path="Hazards/LaserHazard5"]
+[editable path="Hazards/LaserHazard6"]
+[editable path="Hazards/LaserHazard7"]
+[editable path="Hazards/LaserHazard8"]
+[editable path="Hazards/LaserHazard9"]
+[editable path="Hazards/LaserHazard10"]
