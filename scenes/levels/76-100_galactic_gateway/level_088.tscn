@@ -1,0 +1,524 @@
+[gd_scene format=4 uid="uid://dx4op7xi4ip0o"]
+
+[ext_resource type="Shader" uid="uid://cy8e5yqoo68kc" path="res://shaders/starry_sky.gdshader" id="1_lc6aq"]
+[ext_resource type="PackedScene" uid="uid://cvsktm1iw46q4" path="res://scenes/utility/level_controller.tscn" id="2_bw4yh"]
+[ext_resource type="PackedScene" uid="uid://ecmje7pp4gyy" path="res://scenes/utility/level_ui.tscn" id="3_1jhhq"]
+[ext_resource type="PackedScene" uid="uid://bxry211ole85r" path="res://scenes/utility/cinematic_bars.tscn" id="4_d1a2u"]
+[ext_resource type="PackedScene" uid="uid://drnundi171cmh" path="res://scenes/player/player.tscn" id="5_c0tjw"]
+[ext_resource type="TileSet" uid="uid://7q8eymh2ksuh" path="res://scenes/tilesets/main_floor_and_walls.tres" id="6_lhrhl"]
+[ext_resource type="Shader" uid="uid://cyftftn8qvqe5" path="res://shaders/hazard_shader.gdshader" id="7_51qpv"]
+[ext_resource type="PackedScene" uid="uid://b3b7a1qdd5k5g" path="res://scenes/hazards/square_hazard.tscn" id="9_3v20o"]
+[ext_resource type="Script" uid="uid://cyfx3hv4kfs08" path="res://scripts/props/toggle_items_manager.gd" id="10_m0jsu"]
+[ext_resource type="PackedScene" uid="uid://cwv3wpwmybmey" path="res://scenes/props/goal.tscn" id="13_y54je"]
+[ext_resource type="PackedScene" uid="uid://ca2uxdoweqwc1" path="res://scenes/utility/game_camera.tscn" id="14_heqpl"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_jur53"]
+shader = ExtResource("1_lc6aq")
+shader_parameter/fade_alpha = 1.0
+shader_parameter/background_color = Color(0.012298316, 0.024600385, 0.090413176, 1)
+shader_parameter/star_color = Color(0.85, 0.82, 1, 1)
+shader_parameter/aspect_ratio = 1.0
+shader_parameter/density = 0.79999997976
+shader_parameter/layer_parascale = 3
+shader_parameter/star_speed = Vector2(0.01, 0.01)
+shader_parameter/star_wave = Vector2(0, 0)
+shader_parameter/star_size = 1.999999955296
+shader_parameter/star_rotate_speed = 0.08300014644250009
+shader_parameter/twinkle_effect = 1.0
+shader_parameter/twinkle_speed = 0.249999994412
+shader_parameter/pixelate_enabled = true
+shader_parameter/pixelate_count = 1000.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_wwkcr"]
+shader = ExtResource("7_51qpv")
+shader_parameter/pulse_color = Color(0.40390328, 8.4228816e-07, 9.62615e-08, 1)
+shader_parameter/pulse_strength = 1.0
+shader_parameter/pulse_speed = 5.00000023424012
+shader_parameter/center_glow_strength = 0.0
+
+[sub_resource type="Curve2D" id="Curve2D_hxqx3"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, -128, -65, 0, 0, 0, 0, 128, -65, 0, 0, 0, 0, 128, 34, 0, 0, 0, 0, -128, 34, 0, 0, 0, 0, -128, -65)
+}
+point_count = 5
+
+[sub_resource type="Curve2D" id="Curve2D_3v20o"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, -110, -40, 0, 0, 0, 0, 111, -40)
+}
+point_count = 2
+
+[sub_resource type="Curve2D" id="Curve2D_56agl"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 53, 0, 0, 0, 0, 0, 53, 63)
+}
+point_count = 2
+
+[node name="Level_086" type="Node2D" unique_id=1381461103]
+metadata/_edit_horizontal_guides_ = [90.0]
+
+[node name="Background" type="ColorRect" parent="." unique_id=882240186]
+material = SubResource("ShaderMaterial_jur53")
+offset_left = -542.0
+offset_top = -422.0
+offset_right = 658.0
+offset_bottom = 778.0
+
+[node name="LevelController" parent="." unique_id=1058685242 groups=["level_controller"] instance=ExtResource("2_bw4yh")]
+player_spawn_path = NodePath("../PlayerSpawn")
+camera_path = NodePath("../GameCamera")
+cinematic_bars_path = NodePath("../CinematicBars")
+level_ui_path = NodePath("../LevelUI")
+platforms_path = NodePath("../Platforms")
+hazards_path = NodePath("../Hazards")
+toggle_blocks_path = NodePath("../ToggleItems")
+
+[node name="LevelUI" parent="." unique_id=687480857 instance=ExtResource("3_1jhhq")]
+layer = 2
+visible = false
+level_controller_path = NodePath("../LevelController")
+
+[node name="CinematicBars" parent="." unique_id=3966864 instance=ExtResource("4_d1a2u")]
+visible = false
+
+[node name="Player" parent="." unique_id=1458309070 instance=ExtResource("5_c0tjw")]
+z_index = 1
+position = Vector2(38, 156)
+game_camera_path = NodePath("../GameCamera")
+
+[node name="PlayerSpawn" type="Node2D" parent="." unique_id=535208430]
+z_index = 1
+position = Vector2(38, 156)
+
+[node name="MapBottomLayer" type="Node2D" parent="." unique_id=1665801705]
+position = Vector2(159, 98)
+
+[node name="Floors" type="TileMapLayer" parent="MapBottomLayer" unique_id=1507503636 groups=["floors"]]
+tile_map_data = PackedByteArray("AAD3/wIAAAAAAAkAAAD3/wMAAAAAAAkAAAD3/wQAAAAAAAkAAAD4/wIAAAAAAAkAAAD4/wMAAAAAAAkAAAD4/wQAAAAAAAkAAAD5/wIAAAAAAAkAAAD5/wMAAAAAAAkAAAD5/wQAAAAAAAkAAAD3//r/AAAAAAkAAAD3//v/AAAAAAkAAAD3//z/AAAAAAkAAAD3//3/AAAAAAkAAAD3//7/AAAAAAkAAAD3////AAAAAAkAAAD3/wAAAAAAAAkAAAD3/wEAAAAAAAkAAAD4//r/AAAAAAkAAAD4//v/AAAAAAkAAAD4//z/AAAAAAkAAAD4//3/AAAAAAkAAAD4//7/AAAAAAkAAAD4////AAAAAAkAAAD4/wAAAAAAAAkAAAD4/wEAAAAAAAkAAAD5//r/AAAAAAkAAAD5//v/AAAAAAkAAAD5//z/AAAAAAkAAAD5//3/AAAAAAkAAAD5//7/AAAAAAkAAAD5////AAAAAAkAAAD5/wAAAAAAAAkAAAD5/wEAAAAAAAkAAAD6//r/AAAAAAkAAAD6//v/AAAAAAkAAAD6//z/AAAAAAkAAAD6//3/AAAAAAkAAAD6//7/AAAAAAkAAAD6////AAAAAAkAAAD6/wAAAAAAAAkAAAD6/wEAAAAAAAkAAAD7//r/AAAAAAkAAAD7//v/AAAAAAkAAAD7//z/AAAAAAkAAAD7//3/AAAAAAkAAAD7//7/AAAAAAkAAAD7////AAAAAAkAAAD7/wAAAAAAAAkAAAD7/wEAAAAAAAkAAAD8//r/AAAAAAkAAAD8//v/AAAAAAkAAAD8//z/AAAAAAkAAAD8//3/AAAAAAkAAAD8//7/AAAAAAkAAAD8////AAAAAAkAAAD8/wAAAAAAAAkAAAD8/wEAAAAAAAkAAAD9//r/AAAAAAkAAAD9//v/AAAAAAkAAAD9//z/AAAAAAkAAAD9//3/AAAAAAkAAAD9//7/AAAAAAkAAAD9////AAAAAAkAAAD9/wAAAAAAAAkAAAD9/wEAAAAAAAkAAAD+//r/AAAAAAkAAAD+//v/AAAAAAkAAAD+//z/AAAAAAkAAAD+//3/AAAAAAkAAAD+//7/AAAAAAkAAAD+////AAAAAAkAAAD+/wAAAAAAAAkAAAD+/wEAAAAAAAkAAAD///r/AAAAAAkAAAD///v/AAAAAAkAAAD///z/AAAAAAkAAAD///3/AAAAAAkAAAD///7/AAAAAAkAAAD/////AAAAAAkAAAD//wAAAAAAAAkAAAD//wEAAAAAAAkAAAAAAPr/AAAAAAkAAAAAAPv/AAAAAAkAAAAAAPz/AAAAAAkAAAAAAP3/AAAAAAkAAAAAAP7/AAAAAAkAAAAAAP//AAAAAAkAAAAAAAAAAAAAAAkAAAAAAAEAAAAAAAkAAAABAPr/AAAAAAkAAAABAPv/AAAAAAkAAAABAPz/AAAAAAkAAAABAP3/AAAAAAkAAAABAP7/AAAAAAkAAAABAP//AAAAAAkAAAABAAAAAAAAAAkAAAABAAEAAAAAAAkAAAACAPr/AAAAAAkAAAACAPv/AAAAAAkAAAACAPz/AAAAAAkAAAACAP3/AAAAAAkAAAACAP7/AAAAAAkAAAACAP//AAAAAAkAAAACAAAAAAAAAAkAAAACAAEAAAAAAAkAAAADAPr/AAAAAAkAAAADAPv/AAAAAAkAAAADAPz/AAAAAAkAAAADAP3/AAAAAAkAAAADAP7/AAAAAAkAAAADAP//AAAAAAkAAAADAAAAAAAAAAkAAAADAAEAAAAAAAkAAAAEAPr/AAAAAAkAAAAEAPv/AAAAAAkAAAAEAPz/AAAAAAkAAAAEAP3/AAAAAAkAAAAEAP7/AAAAAAkAAAAEAP//AAAAAAkAAAAEAAAAAAAAAAkAAAAEAAEAAAAAAAkAAAAFAPr/AAAAAAkAAAAFAPv/AAAAAAkAAAAFAPz/AAAAAAkAAAAFAP3/AAAAAAkAAAAFAP7/AAAAAAkAAAAFAP//AAAAAAkAAAAFAAAAAAAAAAkAAAAFAAEAAAAAAAkAAAAGAPr/AAAAAAkAAAAGAPv/AAAAAAkAAAAGAPz/AAAAAAkAAAAGAP3/AAAAAAkAAAAGAP7/AAAAAAkAAAAGAP//AAAAAAkAAAAGAAAAAAAAAAkAAAAGAAEAAAAAAAkAAAAHAPr/AAAAAAkAAAAHAPv/AAAAAAkAAAAHAPz/AAAAAAkAAAAHAP3/AAAAAAkAAAAHAP7/AAAAAAkAAAAHAP//AAAAAAkAAAAHAAAAAAAAAAkAAAAHAAEAAAAAAAkAAAAIAPr/AAAAAAkAAAAIAPv/AAAAAAkAAAAIAPz/AAAAAAkAAAAIAP3/AAAAAAkAAAAIAP7/AAAAAAkAAAAIAP//AAAAAAkAAAAIAAAAAAAAAAkAAAAIAAEAAAAAAAkAAAAJAPr/AAAAAAkAAAAJAPv/AAAAAAkAAAAJAPz/AAAAAAkAAAAJAP3/AAAAAAkAAAAJAP7/AAAAAAkAAAAJAP//AAAAAAkAAAAJAAAAAAAAAAkAAAAJAAEAAAAAAAkAAAAHAPf/AAAAAAkAAAAHAPj/AAAAAAkAAAAHAPn/AAAAAAkAAAAIAPf/AAAAAAkAAAAIAPj/AAAAAAkAAAAIAPn/AAAAAAkAAAAJAPf/AAAAAAkAAAAJAPj/AAAAAAkAAAAJAPn/AAAAAAkAAAA=")
+tile_set = ExtResource("6_lhrhl")
+
+[node name="Hazards" type="TileMapLayer" parent="MapBottomLayer" unique_id=876696869 groups=["floor_hazards"]]
+modulate = Color(0.5092862, 0.5092861, 0.5092864, 1)
+material = SubResource("ShaderMaterial_wwkcr")
+tile_set = ExtResource("6_lhrhl")
+
+[node name="Ice" type="TileMapLayer" parent="MapBottomLayer" unique_id=1119041539 groups=["ice_surfaces"]]
+tile_set = ExtResource("6_lhrhl")
+
+[node name="Platforms" type="Node2D" parent="." unique_id=1928273324]
+
+[node name="ToggleItems" type="Node2D" parent="." unique_id=40036020]
+position = Vector2(-12, 0)
+script = ExtResource("10_m0jsu")
+player_path = NodePath("../Player")
+
+[node name="Portals" type="Node2D" parent="." unique_id=304918047]
+position = Vector2(0, 7)
+
+[node name="Hazards" type="Node2D" parent="." unique_id=798262580]
+position = Vector2(168, 79)
+
+[node name="SquareHazard" parent="Hazards" unique_id=736354374 instance=ExtResource("9_3v20o")]
+position = Vector2(0, -6)
+curve = SubResource("Curve2D_hxqx3")
+moving = true
+speed = 150.0
+should_not_rotate = true
+preview_in_editor = false
+
+[node name="SquareHazard2" parent="Hazards" unique_id=114232282 instance=ExtResource("9_3v20o")]
+position = Vector2(9, -6)
+curve = SubResource("Curve2D_hxqx3")
+moving = true
+speed = 150.0
+should_not_rotate = true
+preview_in_editor = false
+
+[node name="SquareHazard3" parent="Hazards" unique_id=461174720 instance=ExtResource("9_3v20o")]
+position = Vector2(-9, -6)
+curve = SubResource("Curve2D_hxqx3")
+moving = true
+speed = 150.0
+should_not_rotate = true
+preview_in_editor = false
+
+[node name="SquareHazard4" parent="Hazards" unique_id=954385662 instance=ExtResource("9_3v20o")]
+position = Vector2(0, 3)
+curve = SubResource("Curve2D_hxqx3")
+moving = true
+speed = 150.0
+should_not_rotate = true
+preview_in_editor = false
+
+[node name="SquareHazard5" parent="Hazards" unique_id=1935968509 instance=ExtResource("9_3v20o")]
+position = Vector2(9, 3)
+curve = SubResource("Curve2D_hxqx3")
+moving = true
+speed = 150.0
+should_not_rotate = true
+preview_in_editor = false
+
+[node name="SquareHazard6" parent="Hazards" unique_id=2143711888 instance=ExtResource("9_3v20o")]
+position = Vector2(-9, 3)
+curve = SubResource("Curve2D_hxqx3")
+moving = true
+speed = 150.0
+should_not_rotate = true
+preview_in_editor = false
+
+[node name="SquareHazard7" parent="Hazards" unique_id=1195317713 instance=ExtResource("9_3v20o")]
+position = Vector2(0, 12)
+curve = SubResource("Curve2D_hxqx3")
+moving = true
+speed = 150.0
+should_not_rotate = true
+preview_in_editor = false
+
+[node name="SquareHazard8" parent="Hazards" unique_id=608082634 instance=ExtResource("9_3v20o")]
+position = Vector2(9, 12)
+curve = SubResource("Curve2D_hxqx3")
+moving = true
+speed = 150.0
+should_not_rotate = true
+preview_in_editor = false
+
+[node name="SquareHazard9" parent="Hazards" unique_id=98505493 instance=ExtResource("9_3v20o")]
+position = Vector2(-9, 12)
+curve = SubResource("Curve2D_hxqx3")
+moving = true
+speed = 150.0
+should_not_rotate = true
+preview_in_editor = false
+
+[node name="SquareHazard18" parent="Hazards" unique_id=1162576531 instance=ExtResource("9_3v20o")]
+position = Vector2(0, -6)
+curve = SubResource("Curve2D_hxqx3")
+moving = true
+speed = 150.0
+starting_progress = 350.0
+should_not_rotate = true
+preview_in_editor = false
+
+[node name="SquareHazard19" parent="Hazards" unique_id=552930901 instance=ExtResource("9_3v20o")]
+position = Vector2(9, -6)
+curve = SubResource("Curve2D_hxqx3")
+moving = true
+speed = 150.0
+starting_progress = 350.0
+should_not_rotate = true
+preview_in_editor = false
+
+[node name="SquareHazard20" parent="Hazards" unique_id=2007397064 instance=ExtResource("9_3v20o")]
+position = Vector2(-9, -6)
+curve = SubResource("Curve2D_hxqx3")
+moving = true
+speed = 150.0
+starting_progress = 350.0
+should_not_rotate = true
+preview_in_editor = false
+
+[node name="SquareHazard21" parent="Hazards" unique_id=910325227 instance=ExtResource("9_3v20o")]
+position = Vector2(0, 3)
+curve = SubResource("Curve2D_hxqx3")
+moving = true
+speed = 150.0
+starting_progress = 350.0
+should_not_rotate = true
+preview_in_editor = false
+
+[node name="SquareHazard22" parent="Hazards" unique_id=1109550850 instance=ExtResource("9_3v20o")]
+position = Vector2(9, 3)
+curve = SubResource("Curve2D_hxqx3")
+moving = true
+speed = 150.0
+starting_progress = 350.0
+should_not_rotate = true
+preview_in_editor = false
+
+[node name="SquareHazard23" parent="Hazards" unique_id=2116049286 instance=ExtResource("9_3v20o")]
+position = Vector2(-9, 3)
+curve = SubResource("Curve2D_hxqx3")
+moving = true
+speed = 150.0
+starting_progress = 350.0
+should_not_rotate = true
+preview_in_editor = false
+
+[node name="SquareHazard24" parent="Hazards" unique_id=6111494 instance=ExtResource("9_3v20o")]
+position = Vector2(0, 12)
+curve = SubResource("Curve2D_hxqx3")
+moving = true
+speed = 150.0
+starting_progress = 350.0
+should_not_rotate = true
+preview_in_editor = false
+
+[node name="SquareHazard25" parent="Hazards" unique_id=1737932094 instance=ExtResource("9_3v20o")]
+position = Vector2(9, 12)
+curve = SubResource("Curve2D_hxqx3")
+moving = true
+speed = 150.0
+starting_progress = 350.0
+should_not_rotate = true
+preview_in_editor = false
+
+[node name="SquareHazard26" parent="Hazards" unique_id=518420972 instance=ExtResource("9_3v20o")]
+position = Vector2(-9, 12)
+curve = SubResource("Curve2D_hxqx3")
+moving = true
+speed = 150.0
+starting_progress = 350.0
+should_not_rotate = true
+preview_in_editor = false
+
+[node name="SquareHazard10" parent="Hazards" unique_id=438784270 instance=ExtResource("9_3v20o")]
+position = Vector2(0, -4)
+curve = SubResource("Curve2D_3v20o")
+moving = true
+loop = false
+easing = false
+speed = 200.0
+preview_in_editor = false
+
+[node name="SquareHazard11" parent="Hazards" unique_id=1642737972 instance=ExtResource("9_3v20o")]
+position = Vector2(0, 5)
+curve = SubResource("Curve2D_3v20o")
+moving = true
+loop = false
+easing = false
+speed = 200.0
+preview_in_editor = false
+
+[node name="SquareHazard12" parent="Hazards" unique_id=1737188502 instance=ExtResource("9_3v20o")]
+position = Vector2(0, 14)
+curve = SubResource("Curve2D_3v20o")
+moving = true
+loop = false
+easing = false
+speed = 200.0
+preview_in_editor = false
+
+[node name="SquareHazard13" parent="Hazards" unique_id=491593736 instance=ExtResource("9_3v20o")]
+position = Vector2(0, 23)
+curve = SubResource("Curve2D_3v20o")
+moving = true
+loop = false
+easing = false
+speed = 200.0
+preview_in_editor = false
+
+[node name="SquareHazard14" parent="Hazards" unique_id=883314720 instance=ExtResource("9_3v20o")]
+position = Vector2(0, 32)
+curve = SubResource("Curve2D_3v20o")
+moving = true
+loop = false
+easing = false
+speed = 200.0
+offset = 2.0
+preview_in_editor = false
+
+[node name="SquareHazard15" parent="Hazards" unique_id=2095061128 instance=ExtResource("9_3v20o")]
+position = Vector2(0, 41)
+curve = SubResource("Curve2D_3v20o")
+moving = true
+loop = false
+easing = false
+speed = 200.0
+offset = 2.0
+preview_in_editor = false
+
+[node name="SquareHazard16" parent="Hazards" unique_id=1924960053 instance=ExtResource("9_3v20o")]
+position = Vector2(0, 50)
+curve = SubResource("Curve2D_3v20o")
+moving = true
+loop = false
+easing = false
+speed = 200.0
+offset = 2.0
+preview_in_editor = false
+
+[node name="SquareHazard17" parent="Hazards" unique_id=2062764513 instance=ExtResource("9_3v20o")]
+position = Vector2(0, 59)
+curve = SubResource("Curve2D_3v20o")
+moving = true
+loop = false
+easing = false
+speed = 200.0
+offset = 2.0
+preview_in_editor = false
+
+[node name="SquareHazard27" parent="Hazards" unique_id=643920409 instance=ExtResource("9_3v20o")]
+position = Vector2(-163, -44)
+curve = SubResource("Curve2D_56agl")
+moving = true
+loop = false
+speed = 100.0
+preview_in_editor = false
+
+[node name="SquareHazard28" parent="Hazards" unique_id=342588412 instance=ExtResource("9_3v20o")]
+position = Vector2(-154, -44)
+curve = SubResource("Curve2D_56agl")
+moving = true
+loop = false
+speed = 100.0
+preview_in_editor = false
+
+[node name="SquareHazard29" parent="Hazards" unique_id=1244381491 instance=ExtResource("9_3v20o")]
+position = Vector2(-145, -44)
+curve = SubResource("Curve2D_56agl")
+moving = true
+loop = false
+speed = 100.0
+preview_in_editor = false
+
+[node name="SquareHazard30" parent="Hazards" unique_id=1784646126 instance=ExtResource("9_3v20o")]
+position = Vector2(-136, -44)
+curve = SubResource("Curve2D_56agl")
+moving = true
+loop = false
+speed = 100.0
+preview_in_editor = false
+
+[node name="SquareHazard31" parent="Hazards" unique_id=1352329492 instance=ExtResource("9_3v20o")]
+position = Vector2(-127, -44)
+curve = SubResource("Curve2D_56agl")
+moving = true
+loop = false
+speed = 100.0
+preview_in_editor = false
+
+[node name="SquareHazard32" parent="Hazards" unique_id=1333583736 instance=ExtResource("9_3v20o")]
+position = Vector2(-118, -44)
+curve = SubResource("Curve2D_56agl")
+moving = true
+loop = false
+speed = 100.0
+preview_in_editor = false
+
+[node name="SquareHazard33" parent="Hazards" unique_id=895237092 instance=ExtResource("9_3v20o")]
+position = Vector2(-109, -44)
+curve = SubResource("Curve2D_56agl")
+moving = true
+loop = false
+speed = 100.0
+preview_in_editor = false
+
+[node name="SquareHazard34" parent="Hazards" unique_id=123481977 instance=ExtResource("9_3v20o")]
+position = Vector2(-100, -44)
+curve = SubResource("Curve2D_56agl")
+moving = true
+loop = false
+speed = 100.0
+preview_in_editor = false
+
+[node name="SquareHazard35" parent="Hazards" unique_id=575628191 instance=ExtResource("9_3v20o")]
+position = Vector2(-91, -44)
+curve = SubResource("Curve2D_56agl")
+moving = true
+loop = false
+speed = 100.0
+preview_in_editor = false
+
+[node name="SquareHazard45" parent="Hazards" unique_id=562601548 instance=ExtResource("9_3v20o")]
+position = Vector2(-1, -44)
+curve = SubResource("Curve2D_56agl")
+moving = true
+loop = false
+speed = 100.0
+preview_in_editor = false
+
+[node name="SquareHazard46" parent="Hazards" unique_id=410453069 instance=ExtResource("9_3v20o")]
+position = Vector2(8, -44)
+curve = SubResource("Curve2D_56agl")
+moving = true
+loop = false
+speed = 100.0
+preview_in_editor = false
+
+[node name="SquareHazard47" parent="Hazards" unique_id=1393547550 instance=ExtResource("9_3v20o")]
+position = Vector2(17, -44)
+curve = SubResource("Curve2D_56agl")
+moving = true
+loop = false
+speed = 100.0
+preview_in_editor = false
+
+[node name="SquareHazard48" parent="Hazards" unique_id=1335622918 instance=ExtResource("9_3v20o")]
+position = Vector2(26, -44)
+curve = SubResource("Curve2D_56agl")
+moving = true
+loop = false
+speed = 100.0
+preview_in_editor = false
+
+[node name="SquareHazard49" parent="Hazards" unique_id=878503145 instance=ExtResource("9_3v20o")]
+position = Vector2(35, -44)
+curve = SubResource("Curve2D_56agl")
+moving = true
+loop = false
+speed = 100.0
+preview_in_editor = false
+
+[node name="SquareHazard50" parent="Hazards" unique_id=916322678 instance=ExtResource("9_3v20o")]
+position = Vector2(44, -44)
+curve = SubResource("Curve2D_56agl")
+moving = true
+loop = false
+speed = 100.0
+preview_in_editor = false
+
+[node name="SquareHazard51" parent="Hazards" unique_id=1768879794 instance=ExtResource("9_3v20o")]
+position = Vector2(53, -44)
+curve = SubResource("Curve2D_56agl")
+moving = true
+loop = false
+speed = 100.0
+preview_in_editor = false
+
+[node name="Stamps" type="Node2D" parent="." unique_id=123113769]
+position = Vector2(168, 79)
+
+[node name="StampLocation1" type="Node2D" parent="Stamps" unique_id=1113206901]
+position = Vector2(-128, -62)
+
+[node name="StampLocation4" type="Node2D" parent="Stamps" unique_id=571716944]
+position = Vector2(128, -62)
+
+[node name="StampLocation5" type="Node2D" parent="Stamps" unique_id=1508932656]
+position = Vector2(128, 37)
+
+[node name="StampLocation6" type="Node2D" parent="Stamps" unique_id=541264837]
+position = Vector2(-128, 37)
+
+[node name="StampLocation2" type="Node2D" parent="Stamps" unique_id=1014036070]
+position = Vector2(-60, -17)
+
+[node name="StampLocation3" type="Node2D" parent="Stamps" unique_id=2096809071]
+position = Vector2(60, -17)
+
+[node name="StampLocation7" type="Node2D" parent="Stamps" unique_id=199551537]
+position = Vector2(0, -17)
+
+[node name="Goal" parent="." unique_id=652280647 instance=ExtResource("13_y54je")]
+position = Vector2(295, -22)
+
+[node name="GameCamera" parent="." unique_id=13152400 node_paths=PackedStringArray("target") instance=ExtResource("14_heqpl")]
+position = Vector2(150, 66)
+mode = 1
+target = NodePath("../Player")
+default_zoom = Vector2(0.7, 0.7)
+fixed_position = Vector2(150, 66)
+
+[node name="MapTopLayer" type="Node2D" parent="." unique_id=1059944217]
+position = Vector2(0, 7)
+
+[node name="Shadows" type="TileMapLayer" parent="MapTopLayer" unique_id=255637794]
+position = Vector2(159, 91)
+tile_map_data = PackedByteArray("AAD3/wQAAAABAAMAAAD3/wMAAAABAAMAAAD3/wIAAAABAAMAAAD3/wEAAAABAAMAAAD3/wAAAAABAAMAAAD3////AAABAAMAAAD3//7/AAABAAMAAAD3//3/AAABAAMAAAD3//z/AAABAAMAAAD3//v/AAABAAMAAAD3//r/AAAFAAMAAAD4//r/AAAAAAMAAAD5//r/AAAAAAMAAAD6//r/AAAAAAMAAAD7//r/AAAAAAMAAAD8//r/AAAAAAMAAAD9//r/AAAAAAMAAAD+//r/AAAAAAMAAAD///r/AAAAAAMAAAAAAPr/AAAAAAMAAAABAPr/AAAAAAMAAAACAPr/AAAAAAMAAAADAPr/AAAAAAMAAAAGAPr/AAAAAAMAAAAEAPr/AAAAAAMAAAAFAPr/AAAAAAMAAAAHAPr/AAABAAQAAAAHAPj/AAABAAMAAAAHAPn/AAABAAMAAAAHAPf/AAAFAAMAAAAIAPf/AAAAAAMAAAAJAPf/AAAAAAMAAAA=")
+tile_set = ExtResource("6_lhrhl")
+
+[node name="Walls" type="TileMapLayer" parent="MapTopLayer" unique_id=766012576]
+z_index = 1
+position = Vector2(159, 91)
+tile_map_data = PackedByteArray("AAD6/wIAAAAAAAoAAAD6/wMAAAAAAAoAAAD6/wQAAAAAAAoAAAD6/wUAAAAFAAwAAAD2/wUAAAAEAAwAAAD3/wUAAAAAAAoAAAD4/wUAAAAAAAoAAAD5/wUAAAAAAAoAAAD2//n/AAAHAAwAAAD2//r/AAAAAAoAAAD2//v/AAAAAAoAAAD2//z/AAAAAAoAAAD2//3/AAAAAAoAAAD2//7/AAAAAAoAAAD2////AAAAAAoAAAD2/wAAAAAAAAoAAAD2/wEAAAAAAAoAAAD2/wIAAAAAAAoAAAD2/wMAAAAAAAoAAAD2/wQAAAAAAAoAAAD3//n/AAAAAAoAAAD4//n/AAAAAAoAAAD5//n/AAAAAAoAAAD6//n/AAAAAAoAAAD7//n/AAAAAAoAAAD8//n/AAAAAAoAAAD9//n/AAAAAAoAAAD+//n/AAAAAAoAAAD///n/AAAAAAoAAAAAAPn/AAAAAAoAAAABAPn/AAAAAAoAAAACAPn/AAAAAAoAAAADAPn/AAAAAAoAAAAEAPn/AAAAAAoAAAAFAPn/AAAAAAoAAAAGAPn/AAAAAAoAAAAGAPb/AAAHAAwAAAAGAPf/AAAAAAoAAAAGAPj/AAAAAAoAAAAHAPb/AAAAAAoAAAAIAPb/AAAAAAoAAAAJAPb/AAAAAAoAAAAKAPb/AAAGAAwAAAAKAPf/AAAAAAoAAAAKAPj/AAAAAAoAAAAKAPn/AAAAAAoAAAAKAPr/AAAAAAoAAAAKAPv/AAAAAAoAAAAKAPz/AAAAAAoAAAAKAP3/AAAAAAoAAAAKAP7/AAAAAAoAAAAKAP//AAAAAAoAAAAKAAAAAAAAAAoAAAAKAAEAAAAAAAoAAAAKAAIAAAAFAAwAAAD7/wIAAAAAAAoAAAD8/wIAAAAAAAoAAAD9/wIAAAAAAAoAAAD+/wIAAAAAAAoAAAD//wIAAAAAAAoAAAAAAAIAAAAAAAoAAAABAAIAAAAAAAoAAAACAAIAAAAAAAoAAAADAAIAAAAAAAoAAAAEAAIAAAAAAAoAAAAFAAIAAAAAAAoAAAAGAAIAAAAAAAoAAAAHAAIAAAAAAAoAAAAIAAIAAAAAAAoAAAAJAAIAAAAAAAoAAAAJAAEAAAAHAAwAAAD3/wQAAAAGAAwAAAD5/wQAAAAHAAwAAAD3//r/AAAFAAwAAAAHAPf/AAAFAAwAAAAJAPf/AAAEAAwAAAA=")
+tile_set = ExtResource("6_lhrhl")

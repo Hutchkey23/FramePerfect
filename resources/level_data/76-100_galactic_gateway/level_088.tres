@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="LevelData" format=3 uid="uid://dxv8p2ka0kxyi"]
+
+[ext_resource type="PackedScene" uid="uid://dx4op7xi4ip0o" path="res://scenes/levels/76-100_galactic_gateway/level_088.tscn" id="1_jygb6"]
+[ext_resource type="Script" uid="uid://do5fdotl7d638" path="res://resources/level_data/level_data.gd" id="2_d0yml"]
+
+[resource]
+script = ExtResource("2_d0yml")
+level_id = "level_088"
+level_title = "memories"
+medal_time = 8.0
+level_scene = ExtResource("1_jygb6")
+metadata/_custom_type_script = "uid://do5fdotl7d638"

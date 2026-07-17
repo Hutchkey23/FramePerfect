@@ -141,7 +141,7 @@ position = Vector2(0, 7)
 position = Vector2(168, 79)
 
 [node name="LaserHazard" parent="Hazards" unique_id=2109695187 instance=ExtResource("9_hy5ke")]
-position = Vector2(-374, 247)
+position = Vector2(-380, 247)
 active_time = 0.5
 off_time = 0.5
 
@@ -162,7 +162,7 @@ position = Vector2(0, 12)
 rotation = 1.5707964
 
 [node name="LaserHazard2" parent="Hazards" unique_id=1011233359 instance=ExtResource("9_hy5ke")]
-position = Vector2(-366, 247)
+position = Vector2(-372, 247)
 active_time = 0.5
 off_time = 0.5
 
@@ -183,7 +183,7 @@ position = Vector2(0, 12)
 rotation = 1.5707964
 
 [node name="LaserHazard3" parent="Hazards" unique_id=10563785 instance=ExtResource("9_hy5ke")]
-position = Vector2(-358, 247)
+position = Vector2(-364, 247)
 active_time = 0.5
 off_time = 0.5
 
@@ -204,7 +204,7 @@ position = Vector2(0, 12)
 rotation = 1.5707964
 
 [node name="LaserHazard4" parent="Hazards" unique_id=1014063693 instance=ExtResource("9_hy5ke")]
-position = Vector2(-350, 247)
+position = Vector2(-356, 247)
 active_time = 0.5
 off_time = 0.5
 
@@ -225,7 +225,7 @@ position = Vector2(0, 12)
 rotation = 1.5707964
 
 [node name="LaserHazard5" parent="Hazards" unique_id=1470200199 instance=ExtResource("9_hy5ke")]
-position = Vector2(-342, 247)
+position = Vector2(-348, 247)
 active_time = 0.5
 off_time = 0.5
 
@@ -246,7 +246,7 @@ position = Vector2(0, 12)
 rotation = 1.5707964
 
 [node name="LaserHazard6" parent="Hazards" unique_id=1546462930 instance=ExtResource("9_hy5ke")]
-position = Vector2(-334, 247)
+position = Vector2(-340, 247)
 active_time = 0.5
 off_time = 0.5
 
@@ -267,7 +267,7 @@ position = Vector2(0, 12)
 rotation = 1.5707964
 
 [node name="LaserHazard7" parent="Hazards" unique_id=667494275 instance=ExtResource("9_hy5ke")]
-position = Vector2(-326, 247)
+position = Vector2(-332, 247)
 active_time = 0.5
 off_time = 0.5
 
@@ -288,7 +288,7 @@ position = Vector2(0, 12)
 rotation = 1.5707964
 
 [node name="LaserHazard8" parent="Hazards" unique_id=462740029 instance=ExtResource("9_hy5ke")]
-position = Vector2(-318, 247)
+position = Vector2(-324, 247)
 active_time = 0.5
 off_time = 0.5
 
@@ -309,7 +309,7 @@ position = Vector2(0, 12)
 rotation = 1.5707964
 
 [node name="LaserHazard9" parent="Hazards" unique_id=1130035889 instance=ExtResource("9_hy5ke")]
-position = Vector2(-310, 247)
+position = Vector2(-316, 247)
 active_time = 0.5
 off_time = 0.5
 
@@ -330,7 +330,7 @@ position = Vector2(0, 12)
 rotation = 1.5707964
 
 [node name="LaserHazard10" parent="Hazards" unique_id=1404254124 instance=ExtResource("9_hy5ke")]
-position = Vector2(-302, 247)
+position = Vector2(-308, 247)
 active_time = 0.5
 off_time = 0.5
 
@@ -347,6 +347,27 @@ points = PackedVector2Array(0, 0, 0, 24)
 position = Vector2(0, 24)
 
 [node name="BeamCollision" parent="Hazards/LaserHazard10" index="5" unique_id=1900670564]
+position = Vector2(0, 12)
+rotation = 1.5707964
+
+[node name="LaserHazard11" parent="Hazards" unique_id=164204238 instance=ExtResource("9_hy5ke")]
+position = Vector2(-300, 247)
+active_time = 0.5
+off_time = 0.5
+
+[node name="RightCap" parent="Hazards/LaserHazard11/Caps" parent_id_path=PackedInt32Array(164204238, 1936609040) index="0" unique_id=713689459]
+position = Vector2(-26, 24)
+
+[node name="Beam" parent="Hazards/LaserHazard11" index="1" unique_id=1755055180]
+points = PackedVector2Array(0, 0, 0, 24)
+
+[node name="WarningBeam" parent="Hazards/LaserHazard11" index="2" unique_id=1833803067]
+points = PackedVector2Array(0, 0, 0, 24)
+
+[node name="RCapParticles" parent="Hazards/LaserHazard11" index="4" unique_id=1655741551]
+position = Vector2(0, 24)
+
+[node name="BeamCollision" parent="Hazards/LaserHazard11" index="5" unique_id=1900670564]
 position = Vector2(0, 12)
 rotation = 1.5707964
 
@@ -386,3 +407,4 @@ tile_set = ExtResource("6_usiyw")
 [editable path="Hazards/LaserHazard8"]
 [editable path="Hazards/LaserHazard9"]
 [editable path="Hazards/LaserHazard10"]
+[editable path="Hazards/LaserHazard11"]
