@@ -1,0 +1,144 @@
+[gd_scene format=4 uid="uid://btvgd5mxq601j"]
+
+[ext_resource type="Shader" uid="uid://cy8e5yqoo68kc" path="res://shaders/starry_sky.gdshader" id="1_d36iy"]
+[ext_resource type="PackedScene" uid="uid://cvsktm1iw46q4" path="res://scenes/utility/level_controller.tscn" id="2_7qxd4"]
+[ext_resource type="PackedScene" uid="uid://ecmje7pp4gyy" path="res://scenes/utility/level_ui.tscn" id="3_f0vrw"]
+[ext_resource type="PackedScene" uid="uid://bxry211ole85r" path="res://scenes/utility/cinematic_bars.tscn" id="4_tcgu2"]
+[ext_resource type="PackedScene" uid="uid://drnundi171cmh" path="res://scenes/player/player.tscn" id="5_wic04"]
+[ext_resource type="TileSet" uid="uid://7q8eymh2ksuh" path="res://scenes/tilesets/main_floor_and_walls.tres" id="6_ime8n"]
+[ext_resource type="Shader" uid="uid://cyftftn8qvqe5" path="res://shaders/hazard_shader.gdshader" id="7_ifoah"]
+[ext_resource type="Script" uid="uid://cyfx3hv4kfs08" path="res://scripts/props/toggle_items_manager.gd" id="8_h8k26"]
+[ext_resource type="PackedScene" uid="uid://s1u03rhom1d4" path="res://scenes/hazards/windmill_hazard.tscn" id="9_d36iy"]
+[ext_resource type="PackedScene" uid="uid://cwv3wpwmybmey" path="res://scenes/props/goal.tscn" id="10_v54tx"]
+[ext_resource type="PackedScene" uid="uid://ca2uxdoweqwc1" path="res://scenes/utility/game_camera.tscn" id="11_mc6ix"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_jur53"]
+shader = ExtResource("1_d36iy")
+shader_parameter/fade_alpha = 1.0
+shader_parameter/background_color = Color(0.012298316, 0.024600385, 0.090413176, 1)
+shader_parameter/star_color = Color(0.85, 0.82, 1, 1)
+shader_parameter/aspect_ratio = 1.0
+shader_parameter/density = 0.79999997976
+shader_parameter/layer_parascale = 3
+shader_parameter/star_speed = Vector2(0.01, 0.01)
+shader_parameter/star_wave = Vector2(0, 0)
+shader_parameter/star_size = 1.999999955296
+shader_parameter/star_rotate_speed = 0.08300014644250009
+shader_parameter/twinkle_effect = 1.0
+shader_parameter/twinkle_speed = 0.249999994412
+shader_parameter/pixelate_enabled = true
+shader_parameter/pixelate_count = 1000.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_wwkcr"]
+shader = ExtResource("7_ifoah")
+shader_parameter/pulse_color = Color(0.40390328, 8.4228816e-07, 9.62615e-08, 1)
+shader_parameter/pulse_strength = 1.0
+shader_parameter/pulse_speed = 5.00000023424012
+shader_parameter/center_glow_strength = 0.0
+
+[node name="Level_086" type="Node2D" unique_id=1381461103]
+metadata/_edit_horizontal_guides_ = [90.0]
+
+[node name="Background" type="ColorRect" parent="." unique_id=882240186]
+material = SubResource("ShaderMaterial_jur53")
+offset_left = -542.0
+offset_top = -422.0
+offset_right = 658.0
+offset_bottom = 778.0
+
+[node name="LevelController" parent="." unique_id=1058685242 groups=["level_controller"] instance=ExtResource("2_7qxd4")]
+player_spawn_path = NodePath("../PlayerSpawn")
+camera_path = NodePath("../GameCamera")
+cinematic_bars_path = NodePath("../CinematicBars")
+level_ui_path = NodePath("../LevelUI")
+platforms_path = NodePath("../Platforms")
+hazards_path = NodePath("../Hazards")
+toggle_blocks_path = NodePath("../ToggleItems")
+
+[node name="LevelUI" parent="." unique_id=687480857 instance=ExtResource("3_f0vrw")]
+layer = 2
+visible = false
+level_controller_path = NodePath("../LevelController")
+
+[node name="CinematicBars" parent="." unique_id=3966864 instance=ExtResource("4_tcgu2")]
+visible = false
+
+[node name="Player" parent="." unique_id=1458309070 instance=ExtResource("5_wic04")]
+z_index = 1
+position = Vector2(63, 145)
+game_camera_path = NodePath("../GameCamera")
+
+[node name="PlayerSpawn" type="Node2D" parent="." unique_id=535208430]
+z_index = 1
+position = Vector2(63, 145)
+
+[node name="MapBottomLayer" type="Node2D" parent="." unique_id=1665801705]
+position = Vector2(159, 98)
+
+[node name="Floors" type="TileMapLayer" parent="MapBottomLayer" unique_id=1507503636 groups=["floors"]]
+tile_map_data = PackedByteArray("AAD5////AAAAAAkAAAD5/wAAAAAAAAkAAAD5/wEAAAAAAAkAAAD5/wIAAAAAAAkAAAD5/wMAAAAAAAkAAAD6////AAAAAAkAAAD6/wAAAAAAAAkAAAD6/wEAAAAAAAkAAAD6/wIAAAAAAAkAAAD6/wMAAAAAAAkAAAD6//7/AAAAAAkAAAD7//3/AAAAAAkAAAD8//z/AAAAAAkAAAD9//v/AAAAAAkAAAD+//r/AAAAAAkAAAD///n/AAAAAAkAAAD///r/AAAAAAkAAAD///v/AAAAAAkAAAD///z/AAAAAAkAAAD///3/AAAAAAkAAAD///7/AAAAAAkAAAAAAP7/AAAAAAkAAAABAP3/AAAAAAkAAAACAPz/AAAAAAkAAAADAPv/AAAAAAkAAAAEAPr/AAAAAAkAAAAFAPn/AAAAAAkAAAAFAPr/AAAAAAkAAAAFAPv/AAAAAAkAAAAFAPz/AAAAAAkAAAAFAP3/AAAAAAkAAAAFAP7/AAAAAAkAAAAGAP3/AAAAAAkAAAAHAPz/AAAAAAkAAAAIAPv/AAAAAAkAAAAJAPr/AAAAAAkAAAAKAPn/AAAAAAkAAAAKAPr/AAAAAAkAAAAKAPv/AAAAAAkAAAAKAPz/AAAAAAkAAAAKAP3/AAAAAAkAAAAKAP7/AAAAAAkAAAAKAP//AAAAAAkAAAAKAAAAAAAAAAkAAAAKAAEAAAAAAAkAAAAKAAIAAAAAAAkAAAAKAAMAAAAAAAkAAAALAP//AAAAAAkAAAALAAAAAAAAAAkAAAALAAEAAAAAAAkAAAALAAIAAAAAAAkAAAALAAMAAAAAAAkAAAALAP7/AAAAAAkAAAALAP3/AAAAAAkAAAALAPz/AAAAAAkAAAALAPv/AAAAAAkAAAALAPr/AAAAAAkAAAALAPn/AAAAAAkAAAAJAPv/AAAAAAkAAAAIAPz/AAAAAAkAAAAHAP3/AAAAAAkAAAAGAP7/AAAAAAkAAAAEAPv/AAAAAAkAAAADAPz/AAAAAAkAAAACAP3/AAAAAAkAAAABAP7/AAAAAAkAAAD+//v/AAAAAAkAAAD9//z/AAAAAAkAAAD8//3/AAAAAAkAAAD7//7/AAAAAAkAAAD5//7/AAAAAAkAAAD6//3/AAAAAAkAAAD7//z/AAAAAAkAAAD8//v/AAAAAAkAAAD9//r/AAAAAAkAAAD+//n/AAAAAAkAAAAAAP3/AAAAAAkAAAABAPz/AAAAAAkAAAACAPv/AAAAAAkAAAADAPr/AAAAAAkAAAAEAPn/AAAAAAkAAAD5//3/AAAAAAkAAAD6//z/AAAAAAkAAAD7//v/AAAAAAkAAAD8//r/AAAAAAkAAAD9//n/AAAAAAkAAAAAAPz/AAAAAAkAAAABAPv/AAAAAAkAAAACAPr/AAAAAAkAAAADAPn/AAAAAAkAAAAGAPz/AAAAAAkAAAAHAPv/AAAAAAkAAAAIAPr/AAAAAAkAAAAJAPn/AAAAAAkAAAAHAP7/AAAAAAkAAAAIAP3/AAAAAAkAAAAJAPz/AAAAAAkAAAAMAPn/AAAAAAkAAAAMAPr/AAAAAAkAAAAMAPv/AAAAAAkAAAAMAPz/AAAAAAkAAAAMAP3/AAAAAAkAAAAMAP7/AAAAAAkAAAAMAP//AAAAAAkAAAAMAAAAAAAAAAkAAAAMAAEAAAAAAAkAAAAMAAIAAAAAAAkAAAAMAAMAAAAAAAkAAAD+//z/AAAAAAkAAAAEAPz/AAAAAAkAAAAAAPv/AAAAAAkAAAAGAPv/AAAAAAkAAAA=")
+tile_set = ExtResource("6_ime8n")
+
+[node name="Hazards" type="TileMapLayer" parent="MapBottomLayer" unique_id=876696869 groups=["floor_hazards"]]
+modulate = Color(0.5092862, 0.5092861, 0.5092864, 1)
+material = SubResource("ShaderMaterial_wwkcr")
+tile_map_data = PackedByteArray("AAD7//v/AAAAAAEAAAD7//z/AAABAAEAAAD8//v/AAADAAEAAAD8//z/AAAAAAEAAAD8//3/AAABAAEAAAD9//z/AAADAAEAAAABAPv/AAAAAAEAAAABAPz/AAABAAEAAAACAPv/AAADAAEAAAACAPz/AAAAAAEAAAACAP3/AAABAAEAAAADAPz/AAADAAEAAAAHAPv/AAAAAAEAAAAHAPz/AAABAAEAAAAIAPv/AAADAAEAAAAIAPz/AAAAAAEAAAAIAP3/AAABAAEAAAAJAPz/AAADAAEAAAALAP//AAAAAAEAAAALAAAAAAAAAAEAAAAMAP//AAAAAAEAAAAMAAAAAAAAAAEAAAA=")
+tile_set = ExtResource("6_ime8n")
+
+[node name="Ice" type="TileMapLayer" parent="MapBottomLayer" unique_id=1119041539 groups=["ice_surfaces"]]
+tile_set = ExtResource("6_ime8n")
+
+[node name="Platforms" type="Node2D" parent="." unique_id=1928273324]
+
+[node name="ToggleItems" type="Node2D" parent="." unique_id=40036020]
+position = Vector2(-12, 0)
+script = ExtResource("8_h8k26")
+player_path = NodePath("../Player")
+
+[node name="Portals" type="Node2D" parent="." unique_id=304918047]
+position = Vector2(0, 7)
+
+[node name="Hazards" type="Node2D" parent="." unique_id=798262580]
+position = Vector2(168, 79)
+
+[node name="WindmillHazard" parent="Hazards" unique_id=42799490 instance=ExtResource("9_d36iy")]
+z_index = 2
+position = Vector2(54, -24)
+rotation = -461.5762
+length = 15
+rotation_speed = -40.0
+rotate_squares = false
+preview_rotation = true
+
+[node name="Stamps" type="Node2D" parent="." unique_id=123113769]
+position = Vector2(168, 79)
+
+[node name="StampLocation1" type="Node2D" parent="Stamps" unique_id=2006553917]
+position = Vector2(-1, -18)
+
+[node name="StampLocation2" type="Node2D" parent="Stamps" unique_id=841817164]
+position = Vector2(183, -60)
+
+[node name="Goal" parent="." unique_id=652280647 instance=ExtResource("10_v54tx")]
+position = Vector2(351, 145)
+
+[node name="GameCamera" parent="." unique_id=13152400 node_paths=PackedStringArray("target") instance=ExtResource("11_mc6ix")]
+position = Vector2(207, 74)
+mode = 1
+target = NodePath("../Player")
+default_zoom = Vector2(0.7, 0.7)
+fixed_position = Vector2(207, 74)
+
+[node name="MapTopLayer" type="Node2D" parent="." unique_id=1059944217]
+position = Vector2(0, 7)
+
+[node name="Shadows" type="TileMapLayer" parent="MapTopLayer" unique_id=255637794]
+position = Vector2(159, 91)
+tile_map_data = PackedByteArray("AAD5//7/AAABAAMAAAD5////AAABAAMAAAD5/wAAAAABAAMAAAD5/wEAAAABAAMAAAD5/wIAAAABAAMAAAD5/wMAAAABAAMAAAD5//3/AAAFAAMAAAD6//z/AAAFAAMAAAD7//v/AAAFAAMAAAD8//r/AAAFAAMAAAD9//n/AAAFAAMAAAD+//n/AAAAAAMAAAD///n/AAAAAAMAAAABAPv/AAAFAAMAAAACAPr/AAAFAAMAAAADAPn/AAAFAAMAAAAEAPn/AAAAAAMAAAAFAPn/AAAAAAMAAAAHAPv/AAAFAAMAAAAIAPr/AAAFAAMAAAAJAPn/AAAFAAMAAAAKAPn/AAAAAAMAAAALAPn/AAAAAAMAAAAMAPn/AAAAAAMAAAD///3/AAABAAMAAAD///7/AAABAAMAAAAFAP3/AAABAAMAAAAFAP7/AAABAAMAAAALAP3/AAABAAMAAAALAP7/AAABAAMAAAALAP//AAABAAMAAAALAAAAAAABAAMAAAALAAEAAAABAAMAAAALAAIAAAABAAMAAAALAAMAAAABAAMAAAD6//3/AAAEAAQAAAD7//z/AAAEAAQAAAD8//v/AAAEAAQAAAD9//r/AAAEAAQAAAACAPv/AAAEAAQAAAADAPr/AAAEAAQAAAAIAPv/AAAEAAQAAAAJAPr/AAAEAAQAAAA=")
+tile_set = ExtResource("6_ime8n")
+
+[node name="Walls" type="TileMapLayer" parent="MapTopLayer" unique_id=766012576]
+z_index = 1
+position = Vector2(159, 91)
+tile_map_data = PackedByteArray("AAD4/wMAAAAAAAoAAAD4/wIAAAAAAAoAAAD4/wEAAAAAAAoAAAD4/wAAAAAAAAoAAAD4////AAAAAAoAAAD4//7/AAAAAAoAAAD4//3/AAAAAAoAAAD5//z/AAAAAAoAAAD6//v/AAAAAAoAAAD7//r/AAAAAAoAAAD8//n/AAAAAAoAAAD9//j/AAAAAAoAAAD+//j/AAAAAAoAAAD///j/AAAAAAoAAAAAAPj/AAAGAAwAAAAAAPv/AAAEAAwAAAAAAPr/AAAAAAoAAAAAAPn/AAAAAAoAAAABAPr/AAAHAAwAAAACAPn/AAAHAAwAAAADAPj/AAAHAAwAAAAEAPj/AAAAAAoAAAAFAPj/AAAAAAoAAAAGAPj/AAAGAAwAAAAGAPn/AAAAAAoAAAAGAPr/AAAAAAoAAAAGAPv/AAAEAAwAAAAHAPr/AAAHAAwAAAAIAPn/AAAHAAwAAAAJAPj/AAAHAAwAAAAKAPj/AAAAAAoAAAALAPj/AAAAAAoAAAALAAQAAAAAAAoAAAAKAAQAAAAEAAwAAAAJAP3/AAAAAAoAAAAFAP//AAAAAAoAAAAEAP//AAAEAAwAAAAEAP7/AAAAAAoAAAAEAP3/AAAAAAoAAAAEAPz/AAAGAAwAAAADAP3/AAAAAAoAAAACAP7/AAAAAAoAAAABAP//AAAAAAoAAAAAAP//AAAAAAoAAAD/////AAAAAAoAAAD+////AAAEAAwAAAD+//7/AAAAAAoAAAD+//3/AAAAAAoAAAD+//z/AAAGAAwAAAD9//3/AAAAAAoAAAD8//7/AAAAAAoAAAD7////AAAAAAoAAAD7/wAAAAAAAAoAAAD7/wEAAAAAAAoAAAD7/wIAAAAAAAoAAAD7/wMAAAAAAAoAAAD7/wQAAAAFAAwAAAD6/wQAAAAAAAoAAAD5/wQAAAAAAAoAAAD4/wQAAAAEAAwAAAAGAP//AAAAAAoAAAAHAP//AAAAAAoAAAAIAP7/AAAAAAoAAAAKAPz/AAAGAAwAAAAKAP3/AAAAAAoAAAAKAP7/AAAAAAoAAAAKAP//AAAAAAoAAAAKAAAAAAAAAAoAAAAKAAEAAAAAAAoAAAAKAAIAAAAAAAoAAAAKAAMAAAAAAAoAAAAMAPj/AAAAAAoAAAANAPj/AAAGAAwAAAANAPn/AAAAAAoAAAANAPr/AAAAAAoAAAANAPv/AAAAAAoAAAANAPz/AAAAAAoAAAANAP3/AAAAAAoAAAANAP7/AAAAAAoAAAANAP//AAAAAAoAAAANAAAAAAAAAAoAAAANAAEAAAAAAAoAAAANAAIAAAAAAAoAAAANAAMAAAAAAAoAAAANAAQAAAAFAAwAAAAMAAQAAAAAAAoAAAD5//3/AAAFAAwAAAD6//z/AAAFAAwAAAD7//v/AAAFAAwAAAD8//r/AAAFAAwAAAD9//n/AAAFAAwAAAD4//z/AAAHAAwAAAD5//v/AAAHAAwAAAD6//r/AAAHAAwAAAD7//n/AAAHAAwAAAD8//j/AAAHAAwAAAD7//7/AAAHAAwAAAD8//3/AAAHAAwAAAD9//z/AAAHAAwAAAD8////AAAFAAwAAAD9//7/AAAFAAwAAAACAP//AAAFAAwAAAADAP7/AAAFAAwAAAAIAP//AAAFAAwAAAAJAP7/AAAFAAwAAAABAPv/AAAFAAwAAAACAPr/AAAFAAwAAAADAPn/AAAFAAwAAAAHAPv/AAAFAAwAAAAIAPr/AAAFAAwAAAAJAPn/AAAFAAwAAAAHAP7/AAAHAAwAAAAIAP3/AAAHAAwAAAAJAPz/AAAHAAwAAAABAP7/AAAHAAwAAAACAP3/AAAHAAwAAAADAPz/AAAHAAwAAAD6/wMAAAAHAAwAAAD5/wMAAAAGAAwAAAALAAMAAAAGAAwAAAAMAAMAAAAHAAwAAAD///n/AAAEAAwAAAAFAPn/AAAEAAwAAAAMAPn/AAAEAAwAAAD///7/AAAGAAwAAAAFAP7/AAAGAAwAAAA=")
+tile_set = ExtResource("6_ime8n")
