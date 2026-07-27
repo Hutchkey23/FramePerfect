@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="LevelData" format=3 uid="uid://crx15ur8ujobt"]
+
+[ext_resource type="PackedScene" uid="uid://bpul80wsvlc70" path="res://scenes/levels/76-100_galactic_gateway/level_090.tscn" id="1_re51d"]
+[ext_resource type="Script" uid="uid://do5fdotl7d638" path="res://resources/level_data/level_data.gd" id="2_230pl"]
+
+[resource]
+script = ExtResource("2_230pl")
+level_id = "level_090"
+level_title = "a tune of icy fire"
+medal_time = 12.0
+level_scene = ExtResource("1_re51d")
+metadata/_custom_type_script = "uid://do5fdotl7d638"
