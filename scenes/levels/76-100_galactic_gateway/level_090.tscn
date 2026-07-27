@@ -110,7 +110,7 @@ position = Vector2(168, 79)
 
 [node name="WindmillHazard" parent="Hazards" unique_id=42799490 instance=ExtResource("9_o8hei")]
 position = Vector2(-49, -21)
-rotation = 291.56757
+rotation = 318.63297
 rotation_speed = 35.0
 rotate_squares = false
 preview_rotation = true
