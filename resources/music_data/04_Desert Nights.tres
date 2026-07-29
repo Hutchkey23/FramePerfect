@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="MusicData" format=3 uid="uid://c5aeiabrapg8t"]
+
+[ext_resource type="AudioStream" uid="uid://d33t3unuphjw6" path="res://assets/audio/bgm/04_Desert Nights.wav" id="1_b0wc0"]
+[ext_resource type="Script" uid="uid://bhxby642rllaj" path="res://resources/music_data/music_data.gd" id="2_o8kkm"]
+
+[resource]
+script = ExtResource("2_o8kkm")
+bgm_file = ExtResource("1_b0wc0")
+volume_db = -2.0
+metadata/_custom_type_script = "uid://bhxby642rllaj"

@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="MusicData" format=3 uid="uid://coavw6kmk0ic"]
 
-[ext_resource type="AudioStream" uid="uid://wnsmokoo6wvo" path="res://assets/audio/bgm/08_Starlight Express.wav" id="1_iai6m"]
+[ext_resource type="AudioStream" uid="uid://wnsmokoo6wvo" path="res://assets/audio/bgm/09_Starlight Express.wav" id="1_iai6m"]
 [ext_resource type="Script" uid="uid://bhxby642rllaj" path="res://resources/music_data/music_data.gd" id="2_ixvfu"]
 
 [resource]

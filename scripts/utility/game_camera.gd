@@ -41,6 +41,9 @@ func _ready() -> void:
 	
 	if mode == CameraMode.FIXED:
 		fixed_camera_level = true
+	else:
+		if camera.zoom == Vector2.ONE:
+			camera.zoom = Vector2(0.8, 0.8)
 
 func _draw() -> void:
 	if not Engine.is_editor_hint():

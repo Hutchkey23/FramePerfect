@@ -3,7 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://c3aj3ftm4kt52" path="res://assets/sprites/postcards/peaceful_plains_back.png" id="1_clhkv"]
 [ext_resource type="Script" uid="uid://bhxby642rllaj" path="res://resources/music_data/music_data.gd" id="1_epfqm"]
 [ext_resource type="Resource" uid="uid://c725xt1moqblj" path="res://resources/music_data/02_So Green.tres" id="2_0e1py"]
-[ext_resource type="Resource" uid="uid://coavw6kmk0ic" path="res://resources/music_data/08_Starlight Express.tres" id="3_oeqlp"]
+[ext_resource type="Resource" uid="uid://coavw6kmk0ic" path="res://resources/music_data/09_Starlight Express.tres" id="3_oeqlp"]
 [ext_resource type="Script" uid="uid://do5fdotl7d638" path="res://resources/level_data/level_data.gd" id="4_bmsuo"]
 [ext_resource type="Resource" uid="uid://2tr6xgduo5id" path="res://resources/level_data/01-25_peaceful_plains/level_001.tres" id="5_0ktvd"]
 [ext_resource type="Texture2D" uid="uid://ddksbycmsdtui" path="res://assets/title/bg1.png" id="5_sbvo0"]

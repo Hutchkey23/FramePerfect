@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="MusicData" format=3 uid="uid://d4hwuq1kocdem"]
 
 [ext_resource type="Script" uid="uid://bhxby642rllaj" path="res://resources/music_data/music_data.gd" id="1_k4f8a"]
-[ext_resource type="AudioStream" uid="uid://d1sd866t3t8am" path="res://assets/audio/bgm/05_Grab a Coat!.wav" id="1_t5oub"]
+[ext_resource type="AudioStream" uid="uid://d1sd866t3t8am" path="res://assets/audio/bgm/06_Grab a Coat!.wav" id="1_t5oub"]
 
 [resource]
 script = ExtResource("1_k4f8a")

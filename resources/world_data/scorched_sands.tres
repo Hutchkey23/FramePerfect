@@ -6,8 +6,8 @@
 [ext_resource type="Texture2D" uid="uid://ddw3dh2erb3yj" path="res://assets/title/bg2.png" id="2_7ykru"]
 [ext_resource type="Script" uid="uid://bhxby642rllaj" path="res://resources/music_data/music_data.gd" id="2_glbb3"]
 [ext_resource type="Texture2D" uid="uid://mgecgx064wa3" path="res://assets/sprites/postcards/scorched_sands.png" id="2_qlhq7"]
+[ext_resource type="Resource" uid="uid://c5aeiabrapg8t" path="res://resources/music_data/04_Desert Nights.tres" id="3_pjv50"]
 [ext_resource type="Resource" uid="uid://wsj02jqhdi0x" path="res://resources/level_data/26-50_scorched_sands/level_026.tres" id="4_88p53"]
-[ext_resource type="Resource" uid="uid://coavw6kmk0ic" path="res://resources/music_data/08_Starlight Express.tres" id="4_nmval"]
 [ext_resource type="Resource" uid="uid://bc3kk8rb6ukbw" path="res://resources/level_data/26-50_scorched_sands/level_027.tres" id="5_gqwom"]
 [ext_resource type="Resource" uid="uid://ce6apdrvak5ty" path="res://resources/level_data/26-50_scorched_sands/level_030.tres" id="5_qlhq7"]
 [ext_resource type="Resource" uid="uid://cftbcj7ghrijq" path="res://resources/level_data/26-50_scorched_sands/level_029.tres" id="7_iiluf"]
@@ -39,7 +39,7 @@ world_id = "scorched_sands"
 world_title = "Scorched Sands"
 world_number = 2
 world_intro_text = "Scorched Sands"
-background_music = Array[ExtResource("2_glbb3")]([ExtResource("4_nmval")])
+background_music = Array[ExtResource("2_glbb3")]([ExtResource("3_pjv50")])
 levels = Array[ExtResource("1_7ykru")]([ExtResource("4_88p53"), ExtResource("5_gqwom"), ExtResource("2_6nu2j"), ExtResource("7_iiluf"), ExtResource("5_qlhq7"), ExtResource("9_rt4h4"), ExtResource("10_i08sg"), ExtResource("14_84lak"), ExtResource("15_nmval"), ExtResource("16_wx1lh"), ExtResource("17_0b768"), ExtResource("18_gca7m"), ExtResource("19_fgmfy"), ExtResource("20_sguqf"), ExtResource("21_ovugn"), ExtResource("22_in7mh"), ExtResource("9_c6hvv"), ExtResource("24_wmgky"), ExtResource("25_u417j"), ExtResource("10_b0flh"), ExtResource("27_sc4ju"), ExtResource("28_47hwj"), ExtResource("29_pjv50"), ExtResource("11_b0flh"), ExtResource("22_813bw")])
 front_image = ExtResource("2_qlhq7")
 back_image = ExtResource("1_jc37b")

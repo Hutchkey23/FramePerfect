@@ -3,12 +3,12 @@
 importer="wav"
 type="AudioStreamWAV"
 uid="uid://d1sd866t3t8am"
-path="res://.godot/imported/05_Grab a Coat!.wav-ef0d34ab581b6d8a6514db8ef1bf3102.sample"
+path="res://.godot/imported/06_Grab a Coat!.wav-3f966ac76c356cb4693f54323441183a.sample"
 
 [deps]
 
-source_file="res://assets/audio/bgm/05_Grab a Coat!.wav"
-dest_files=["res://.godot/imported/05_Grab a Coat!.wav-ef0d34ab581b6d8a6514db8ef1bf3102.sample"]
+source_file="res://assets/audio/bgm/06_Grab a Coat!.wav"
+dest_files=["res://.godot/imported/06_Grab a Coat!.wav-3f966ac76c356cb4693f54323441183a.sample"]
 
 [params]
 
