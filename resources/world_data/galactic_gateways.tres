@@ -28,6 +28,7 @@
 [ext_resource type="Resource" uid="uid://bf3bpmhwdq2wf" path="res://resources/level_data/76-100_galactic_gateway/level_091.tres" id="23_bgm8l"]
 [ext_resource type="Resource" uid="uid://cmm7dh63nnbqf" path="res://resources/level_data/76-100_galactic_gateway/level_092.tres" id="24_s538m"]
 [ext_resource type="Resource" uid="uid://dpk4s5jw06owe" path="res://resources/level_data/76-100_galactic_gateway/level_093.tres" id="25_w0exh"]
+[ext_resource type="Resource" uid="uid://unk3qb004xgk" path="res://resources/level_data/76-100_galactic_gateway/level_094.tres" id="26_167us"]
 
 [resource]
 script = ExtResource("2_u51m2")
@@ -36,7 +37,7 @@ world_title = "Galactic Gateways"
 world_number = 4
 world_intro_text = "Galactic Gateways"
 background_music = Array[ExtResource("2_y3gyt")]([ExtResource("3_as8r7"), ExtResource("4_1ugub")])
-levels = Array[ExtResource("1_pcbvh")]([ExtResource("4_pg1hn"), ExtResource("4_v77qx"), ExtResource("6_m8206"), ExtResource("11_1ugub"), ExtResource("12_8s5i4"), ExtResource("13_urajk"), ExtResource("14_vw2bl"), ExtResource("15_igtml"), ExtResource("16_y4w6e"), ExtResource("6_1l6e2"), ExtResource("18_r2hjq"), ExtResource("12_as8r7"), ExtResource("20_3v81d"), ExtResource("21_yskpn"), ExtResource("22_nx1cd"), ExtResource("23_bgm8l"), ExtResource("24_s538m"), ExtResource("25_w0exh"), ExtResource("17_ojjhc"), ExtResource("17_vuq8v")])
+levels = Array[ExtResource("1_pcbvh")]([ExtResource("4_pg1hn"), ExtResource("4_v77qx"), ExtResource("6_m8206"), ExtResource("11_1ugub"), ExtResource("12_8s5i4"), ExtResource("13_urajk"), ExtResource("14_vw2bl"), ExtResource("15_igtml"), ExtResource("16_y4w6e"), ExtResource("6_1l6e2"), ExtResource("18_r2hjq"), ExtResource("12_as8r7"), ExtResource("20_3v81d"), ExtResource("21_yskpn"), ExtResource("22_nx1cd"), ExtResource("23_bgm8l"), ExtResource("24_s538m"), ExtResource("25_w0exh"), ExtResource("26_167us"), ExtResource("17_ojjhc"), ExtResource("17_vuq8v")])
 front_image = ExtResource("2_v77qx")
 back_image = ExtResource("1_l5xfb")
 font_color = Color(0.3529412, 0.3019608, 0.6392157, 1)

@@ -60,8 +60,9 @@ func _ready() -> void:
 	normal_follow_zoom = camera.zoom
 	
 	if target is Player:
-		target.died.connect(_disable_movement_zoom)
-		target.goal_reached.connect(_disable_movement_zoom)
+		var player_reference = target as Player
+		player_reference.died.connect(_disable_movement_zoom)
+		player_reference.goal_reached.connect(_disable_movement_zoom)
 
 func _draw() -> void:
 	if not Engine.is_editor_hint():
