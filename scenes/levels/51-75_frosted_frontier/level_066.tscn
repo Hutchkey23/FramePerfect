@@ -389,7 +389,7 @@ curve = ExtResource("9_w1nsk")
 [node name="WindmillHazard" parent="Hazards" unique_id=42799490 instance=ExtResource("12_aybih")]
 z_index = 2
 position = Vector2(176.00006, -607.99994)
-rotation = -13164.593
+rotation = -32002.188
 length = 8
 rotation_speed = -100.0
 preview_rotation = true
@@ -501,6 +501,12 @@ position = Vector2(304, 555)
 target = NodePath("../Player")
 default_zoom = Vector2(0.6, 0.6)
 fixed_position = Vector2(160, 90)
+use_movement_zoom = null
+movement_zoom_amount = null
+movement_zoom_out_smoothing = null
+movement_zoom_in_smoothing = null
+movement_zoom_min_speed = null
+movement_zoom_return_delay = null
 bounds = Rect2(-181, -80, 682, 420)
 
 [node name="MapTopLayer" type="Node2D" parent="." unique_id=860982189]
