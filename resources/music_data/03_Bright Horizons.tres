@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="MusicData" format=3 uid="uid://bjddb5bd5e6aa"]
+
+[ext_resource type="AudioStream" uid="uid://bm6aogwku0xn2" path="res://assets/audio/bgm/03_Bright Horizons.wav" id="1_o0l8d"]
+[ext_resource type="Script" uid="uid://bhxby642rllaj" path="res://resources/music_data/music_data.gd" id="2_7ujoi"]
+
+[resource]
+script = ExtResource("2_7ujoi")
+bgm_file = ExtResource("1_o0l8d")
+volume_db = -3.0
+metadata/_custom_type_script = "uid://bhxby642rllaj"
