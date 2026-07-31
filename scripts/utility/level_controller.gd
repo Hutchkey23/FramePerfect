@@ -54,9 +54,9 @@ const ANALOG_START_THRESHOLD: float = 0.55
 var analog_start_was_pressed: bool = false
 
 func _ready() -> void:
-	 #DEBUG
-	enter_intro_state()
-	 #END DEBUG
+	 ##DEBUG
+	#enter_intro_state()
+	 ##END DEBUG
 	
 	connect_signals()
 	player.position = player_spawn.position
@@ -224,22 +224,22 @@ func _on_goal_reached() -> void:
 func retry_level() -> void:
 	retry_level_requested.emit()
 	return
-	despawn_stamps()
-	await get_tree().process_frame
-	spawn_stamps()
-	
-	reset_toggle_blocks()
-	
-	cinematic_bars.show_bars()
-	
-	player.retry_level()
-	camera.retry_level()
-	if not fixed_camera_level:
-		camera.set_follow_target(player)
-	goal.retry_level()
-	level_ui.retry_level()
-	player.position = player_spawn.position
-	enter_intro_state()
+	#despawn_stamps()
+	#await get_tree().process_frame
+	#spawn_stamps()
+	#
+	#reset_toggle_blocks()
+	#
+	#cinematic_bars.show_bars()
+	#
+	#player.retry_level()
+	#camera.retry_level()
+	#if not fixed_camera_level:
+		#camera.set_follow_target(player)
+	#goal.retry_level()
+	#level_ui.retry_level()
+	#player.position = player_spawn.position
+	#enter_intro_state()
 
 func reset_toggle_blocks() -> void:
 	if not toggle_blocks_container:
