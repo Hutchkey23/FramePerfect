@@ -59,6 +59,9 @@ func _ready() -> void:
 
 	normal_follow_zoom = camera.zoom
 	
+	if Engine.is_editor_hint():
+		return
+	
 	if target is Player:
 		var player_reference = target as Player
 		player_reference.died.connect(_disable_movement_zoom)
