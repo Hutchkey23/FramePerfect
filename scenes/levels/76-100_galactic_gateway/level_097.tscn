@@ -1,0 +1,180 @@
+[gd_scene format=4 uid="uid://co72a4377hxh3"]
+
+[ext_resource type="Shader" uid="uid://cy8e5yqoo68kc" path="res://shaders/starry_sky.gdshader" id="1_4lylf"]
+[ext_resource type="PackedScene" uid="uid://cvsktm1iw46q4" path="res://scenes/utility/level_controller.tscn" id="2_hcmbo"]
+[ext_resource type="PackedScene" uid="uid://ecmje7pp4gyy" path="res://scenes/utility/level_ui.tscn" id="3_yevvs"]
+[ext_resource type="PackedScene" uid="uid://bxry211ole85r" path="res://scenes/utility/cinematic_bars.tscn" id="4_o00sn"]
+[ext_resource type="PackedScene" uid="uid://drnundi171cmh" path="res://scenes/player/player.tscn" id="5_kw1bn"]
+[ext_resource type="TileSet" uid="uid://7q8eymh2ksuh" path="res://scenes/tilesets/main_floor_and_walls.tres" id="6_cnfuu"]
+[ext_resource type="Shader" uid="uid://cyftftn8qvqe5" path="res://shaders/hazard_shader.gdshader" id="7_7gjva"]
+[ext_resource type="PackedScene" uid="uid://s1u03rhom1d4" path="res://scenes/hazards/windmill_hazard.tscn" id="9_lyd1a"]
+[ext_resource type="PackedScene" uid="uid://bopp28ci4s4xu" path="res://scenes/props/toggle_block.tscn" id="9_wbsfr"]
+[ext_resource type="Script" uid="uid://cyfx3hv4kfs08" path="res://scripts/props/toggle_items_manager.gd" id="10_ec6x0"]
+[ext_resource type="PackedScene" uid="uid://cwv3wpwmybmey" path="res://scenes/props/goal.tscn" id="14_j374v"]
+[ext_resource type="PackedScene" uid="uid://ca2uxdoweqwc1" path="res://scenes/utility/game_camera.tscn" id="15_wp80c"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_jur53"]
+shader = ExtResource("1_4lylf")
+shader_parameter/fade_alpha = 1.0
+shader_parameter/background_color = Color(0.012298316, 0.024600385, 0.090413176, 1)
+shader_parameter/star_color = Color(0.85, 0.82, 1, 1)
+shader_parameter/aspect_ratio = 1.0
+shader_parameter/density = 0.79999997976
+shader_parameter/layer_parascale = 3
+shader_parameter/star_speed = Vector2(0.01, 0.01)
+shader_parameter/star_wave = Vector2(0, 0)
+shader_parameter/star_size = 1.999999955296
+shader_parameter/star_rotate_speed = 0.08300014644250009
+shader_parameter/twinkle_effect = 1.0
+shader_parameter/twinkle_speed = 0.249999994412
+shader_parameter/pixelate_enabled = true
+shader_parameter/pixelate_count = 1000.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_wwkcr"]
+shader = ExtResource("7_7gjva")
+shader_parameter/pulse_color = Color(0.40390328, 8.4228816e-07, 9.62615e-08, 1)
+shader_parameter/pulse_strength = 1.0
+shader_parameter/pulse_speed = 5.00000023424012
+shader_parameter/center_glow_strength = 0.0
+
+[node name="Level_097" type="Node2D" unique_id=1381461103]
+
+[node name="Background" type="ColorRect" parent="." unique_id=882240186]
+material = SubResource("ShaderMaterial_jur53")
+offset_left = -823.0
+offset_top = -652.0
+offset_right = 943.0
+offset_bottom = 990.0
+
+[node name="LevelController" parent="." unique_id=1058685242 groups=["level_controller"] instance=ExtResource("2_hcmbo")]
+player_spawn_path = NodePath("../PlayerSpawn")
+camera_path = NodePath("../GameCamera")
+cinematic_bars_path = NodePath("../CinematicBars")
+level_ui_path = NodePath("../LevelUI")
+platforms_path = NodePath("../Platforms")
+hazards_path = NodePath("../Hazards")
+toggle_blocks_path = NodePath("../ToggleItems")
+z_index_for_stamps = 4
+
+[node name="LevelUI" parent="." unique_id=687480857 instance=ExtResource("3_yevvs")]
+layer = 2
+visible = false
+level_controller_path = NodePath("../LevelController")
+
+[node name="CinematicBars" parent="." unique_id=3966864 instance=ExtResource("4_o00sn")]
+visible = false
+
+[node name="Player" parent="." unique_id=1458309070 instance=ExtResource("5_kw1bn")]
+z_index = 1
+position = Vector2(24, 26)
+game_camera_path = NodePath("../GameCamera")
+
+[node name="PlayerSpawn" type="Node2D" parent="." unique_id=535208430]
+z_index = 1
+position = Vector2(24, 26)
+
+[node name="MapBottomLayer" type="Node2D" parent="." unique_id=1665801705]
+position = Vector2(159, 98)
+
+[node name="Floors" type="TileMapLayer" parent="MapBottomLayer" unique_id=1507503636 groups=["floors"]]
+tile_map_data = PackedByteArray("AAAHAPv/AAAAAAkAAAAHAPz/AAAAAAkAAAAHAP3/AAAAAAkAAAAHAP7/AAAAAAkAAAAHAP//AAAAAAkAAAAHAAAAAAAAAAkAAAAHAAEAAAAAAAkAAAAHAAIAAAAAAAkAAAAHAAMAAAAAAAkAAAD5/wMAAAAAAAkAAAD6/wMAAAAAAAkAAAD7/wMAAAAAAAkAAAD8/wMAAAAAAAkAAAD9/wMAAAAAAAkAAAD+/wMAAAAAAAkAAAD//wMAAAAAAAkAAAAAAAMAAAAAAAkAAAABAAMAAAAAAAkAAAACAAMAAAAAAAkAAAADAAMAAAAAAAkAAAAEAAMAAAAAAAkAAAAFAAMAAAAAAAkAAAAGAAMAAAAAAAkAAAD5//z/AAAAAAkAAAD5//3/AAAAAAkAAAD5//7/AAAAAAkAAAD5////AAAAAAkAAAD5/wAAAAAAAAkAAAD5/wEAAAAAAAkAAAD5/wIAAAAAAAkAAAD5//v/AAAAAAkAAAD3//v/AAAAAAkAAAD4//v/AAAAAAkAAAD6//v/AAAAAAkAAAD7//v/AAAAAAkAAAD8//v/AAAAAAkAAAD9//v/AAAAAAkAAAD+//v/AAAAAAkAAAD///v/AAAAAAkAAAAAAPv/AAAAAAkAAAABAPv/AAAAAAkAAAACAPv/AAAAAAkAAAADAPv/AAAAAAkAAAAEAPv/AAAAAAkAAAAFAPv/AAAAAAkAAAAGAPv/AAAAAAkAAAAAAPz/AAAAAAkAAAAAAP3/AAAAAAkAAAAAAP7/AAAAAAkAAAAAAP//AAAAAAkAAAAAAAAAAAAAAAkAAAAAAAEAAAAAAAkAAAAAAAIAAAAAAAkAAAD6////AAAAAAkAAAD7////AAAAAAkAAAD8////AAAAAAkAAAD9////AAAAAAkAAAD+////AAAAAAkAAAD/////AAAAAAkAAAABAP//AAAAAAkAAAACAP//AAAAAAkAAAADAP//AAAAAAkAAAAEAP//AAAAAAkAAAAFAP//AAAAAAkAAAAGAP//AAAAAAkAAAD6//z/AAAAAAkAAAD6//3/AAAAAAkAAAD6//7/AAAAAAkAAAD6/wAAAAAAAAkAAAD6/wEAAAAAAAkAAAD6/wIAAAAAAAkAAAD7//z/AAAAAAkAAAD7//3/AAAAAAkAAAD7//7/AAAAAAkAAAD7/wAAAAAAAAkAAAD7/wEAAAAAAAkAAAD7/wIAAAAAAAkAAAD8//z/AAAAAAkAAAD8//3/AAAAAAkAAAD8//7/AAAAAAkAAAD8/wAAAAAAAAkAAAD8/wEAAAAAAAkAAAD8/wIAAAAAAAkAAAD9//z/AAAAAAkAAAD9//3/AAAAAAkAAAD9//7/AAAAAAkAAAD9/wAAAAAAAAkAAAD9/wEAAAAAAAkAAAD9/wIAAAAAAAkAAAD+//z/AAAAAAkAAAD+//3/AAAAAAkAAAD+//7/AAAAAAkAAAD+/wAAAAAAAAkAAAD+/wEAAAAAAAkAAAD+/wIAAAAAAAkAAAD///z/AAAAAAkAAAD///3/AAAAAAkAAAD///7/AAAAAAkAAAD//wAAAAAAAAkAAAD//wEAAAAAAAkAAAD//wIAAAAAAAkAAAABAPz/AAAAAAkAAAABAP3/AAAAAAkAAAABAP7/AAAAAAkAAAABAAAAAAAAAAkAAAABAAEAAAAAAAkAAAABAAIAAAAAAAkAAAACAPz/AAAAAAkAAAACAP3/AAAAAAkAAAACAP7/AAAAAAkAAAACAAAAAAAAAAkAAAACAAEAAAAAAAkAAAACAAIAAAAAAAkAAAADAPz/AAAAAAkAAAADAP3/AAAAAAkAAAADAP7/AAAAAAkAAAADAAAAAAAAAAkAAAADAAEAAAAAAAkAAAADAAIAAAAAAAkAAAAEAPz/AAAAAAkAAAAEAP3/AAAAAAkAAAAEAP7/AAAAAAkAAAAEAAAAAAAAAAkAAAAEAAEAAAAAAAkAAAAEAAIAAAAAAAkAAAAFAPz/AAAAAAkAAAAFAP3/AAAAAAkAAAAFAP7/AAAAAAkAAAAFAAAAAAAAAAkAAAAFAAEAAAAAAAkAAAAFAAIAAAAAAAkAAAAGAPz/AAAAAAkAAAAGAP3/AAAAAAkAAAAGAP7/AAAAAAkAAAAGAAAAAAAAAAkAAAAGAAEAAAAAAAkAAAAGAAIAAAAAAAkAAAA=")
+tile_set = ExtResource("6_cnfuu")
+
+[node name="Hazards" type="TileMapLayer" parent="MapBottomLayer" unique_id=876696869 groups=["floor_hazards"]]
+modulate = Color(0.5092862, 0.5092861, 0.5092864, 1)
+material = SubResource("ShaderMaterial_wwkcr")
+tile_map_data = PackedByteArray("AAD///7/AAAAAAEAAAD/////AAAAAAEAAAD//wAAAAAAAAEAAAAAAP7/AAAAAAEAAAAAAP//AAAAAAEAAAAAAAAAAAAAAAEAAAABAP7/AAAAAAEAAAABAP//AAAAAAEAAAABAAAAAAAAAAEAAAA=")
+tile_set = ExtResource("6_cnfuu")
+
+[node name="Ice" type="TileMapLayer" parent="MapBottomLayer" unique_id=1119041539 groups=["ice_surfaces"]]
+tile_set = ExtResource("6_cnfuu")
+
+[node name="Platforms" type="Node2D" parent="." unique_id=1928273324]
+
+[node name="ToggleItems" type="Node2D" parent="." unique_id=40036020]
+position = Vector2(398, 42)
+script = ExtResource("10_ec6x0")
+player_path = NodePath("../Player")
+
+[node name="ToggleBlock" parent="ToggleItems" unique_id=384204412 instance=ExtResource("9_wbsfr")]
+position = Vector2(-119, 80)
+start_toggled = false
+
+[node name="ToggleBlock2" parent="ToggleItems" unique_id=190996801 instance=ExtResource("9_wbsfr")]
+position = Vector2(-119, 16)
+
+[node name="ToggleBlock3" parent="ToggleItems" unique_id=1296347602 instance=ExtResource("9_wbsfr")]
+position = Vector2(-343, 80)
+start_toggled = false
+
+[node name="ToggleBlock4" parent="ToggleItems" unique_id=493268871 instance=ExtResource("9_wbsfr")]
+position = Vector2(-343, 16)
+
+[node name="Portals" type="Node2D" parent="." unique_id=304918047]
+position = Vector2(410, 49)
+
+[node name="Hazards" type="Node2D" parent="." unique_id=798262580]
+position = Vector2(168, 79)
+
+[node name="WindmillHazard" parent="Hazards" unique_id=42799490 instance=ExtResource("9_lyd1a")]
+z_index = 2
+position = Vector2(-1, 11)
+length = 15
+rotation_speed = 100.0
+rotate_squares = false
+
+[node name="Stamps" type="Node2D" parent="." unique_id=123113769]
+z_index = 3
+position = Vector2(168, 79)
+
+[node name="StampLocation1" type="Node2D" parent="Stamps" unique_id=646459395]
+position = Vector2(-1, 11)
+
+[node name="StampLocation2" type="Node2D" parent="Stamps" unique_id=854649871]
+position = Vector2(112, 11)
+
+[node name="StampLocation7" type="Node2D" parent="Stamps" unique_id=2039538241]
+position = Vector2(-113, 11)
+
+[node name="StampLocation8" type="Node2D" parent="Stamps" unique_id=239097884]
+position = Vector2(-1, -52)
+
+[node name="StampLocation9" type="Node2D" parent="Stamps" unique_id=447880360]
+position = Vector2(-1, 74)
+
+[node name="StampLocation3" type="Node2D" parent="Stamps" unique_id=219829487]
+position = Vector2(105, 67)
+
+[node name="StampLocation4" type="Node2D" parent="Stamps" unique_id=228559273]
+position = Vector2(-110, 67)
+
+[node name="StampLocation5" type="Node2D" parent="Stamps" unique_id=668961542]
+position = Vector2(-110, -46)
+
+[node name="StampLocation6" type="Node2D" parent="Stamps" unique_id=792040244]
+position = Vector2(105, -46)
+
+[node name="Goal" parent="." unique_id=652280647 instance=ExtResource("14_j374v")]
+position = Vector2(24, 26)
+
+[node name="GameCamera" parent="." unique_id=13152400 node_paths=PackedStringArray("target") instance=ExtResource("15_wp80c")]
+z_index = 3
+position = Vector2(167, 90)
+mode = 1
+target = NodePath("../Player")
+default_zoom = Vector2(0.85, 0.85)
+fixed_position = Vector2(167, 90)
+
+[node name="MapTopLayer" type="Node2D" parent="." unique_id=1059944217]
+position = Vector2(0, 7)
+
+[node name="Shadows" type="TileMapLayer" parent="MapTopLayer" unique_id=255637794]
+position = Vector2(159, 91)
+tile_map_data = PackedByteArray("AAD3//v/AAAAAAMAAAD4//v/AAAAAAMAAAD5//v/AAAAAAMAAAD6//v/AAAAAAMAAAD7//v/AAAAAAMAAAD8//v/AAAAAAMAAAD9//v/AAAAAAMAAAD+//v/AAAAAAMAAAD///v/AAAAAAMAAAAAAPv/AAAAAAMAAAABAPv/AAAAAAMAAAACAPv/AAAAAAMAAAADAPv/AAAAAAMAAAAEAPv/AAAAAAMAAAAFAPv/AAAAAAMAAAAGAPv/AAAAAAMAAAAHAPv/AAAAAAMAAAD5//z/AAABAAMAAAD5//3/AAABAAMAAAD5//7/AAABAAMAAAD5////AAABAAMAAAD5/wAAAAABAAMAAAD5/wEAAAABAAMAAAD5/wIAAAABAAMAAAD5/wMAAAABAAMAAAAAAP3/AAABAAMAAAAHAP3/AAABAAMAAAAHAAEAAAABAAMAAAAAAAEAAAABAAMAAAAAAAIAAAAEAAQAAAAHAAIAAAAEAAQAAAAHAP7/AAAEAAQAAAAAAP7/AAAEAAQAAAD///7/AAAFAAMAAAD//wIAAAAFAAMAAAAGAAIAAAAFAAMAAAAGAP7/AAAFAAMAAAD7/wMAAAAAAAMAAAD8/wMAAAAAAAMAAAD9/wMAAAAAAAMAAAD+/wMAAAAAAAMAAAACAAMAAAAAAAMAAAADAAMAAAAAAAMAAAAEAAMAAAAAAAMAAAAFAAMAAAAAAAMAAAACAP//AAAAAAMAAAADAP//AAAAAAMAAAAEAP//AAAAAAMAAAAFAP//AAAAAAMAAAD7////AAAAAAMAAAD8////AAAAAAMAAAD9////AAAAAAMAAAD+////AAAAAAMAAAD/////AAAEAAQAAAAGAP//AAAEAAQAAAAGAAMAAAAEAAQAAAD//wMAAAAEAAQAAAA=")
+tile_set = ExtResource("6_cnfuu")
+
+[node name="Walls" type="TileMapLayer" parent="MapTopLayer" unique_id=766012576]
+z_index = 1
+position = Vector2(159, 91)
+tile_map_data = PackedByteArray("AAD3//z/AAAAAAoAAAD4//z/AAAAAAoAAAD4//3/AAAAAAoAAAD4//7/AAAAAAoAAAD4////AAAAAAoAAAD4/wAAAAAAAAoAAAD4/wEAAAAAAAoAAAD4/wIAAAAAAAoAAAD4/wMAAAAAAAoAAAD4/wQAAAAEAAwAAAD5/wQAAAAAAAoAAAD6/wQAAAAAAAoAAAD7/wQAAAAAAAoAAAD8/wQAAAAAAAoAAAD9/wQAAAAAAAoAAAD+/wQAAAAAAAoAAAD//wQAAAAAAAoAAAAAAAQAAAAAAAoAAAABAAQAAAAAAAoAAAACAAQAAAAAAAoAAAADAAQAAAAAAAoAAAAEAAQAAAAAAAoAAAAFAAQAAAAAAAoAAAAGAAQAAAAAAAoAAAAHAAQAAAAAAAoAAAAIAAQAAAAFAAwAAAAIAPr/AAAGAAwAAAAIAPv/AAAAAAoAAAAIAPz/AAAAAAoAAAAIAP3/AAAAAAoAAAAIAP7/AAAAAAoAAAAIAP//AAAAAAoAAAAIAAAAAAAAAAoAAAAIAAEAAAAAAAoAAAAIAAIAAAAAAAoAAAAIAAMAAAAAAAoAAAD3//r/AAAAAAoAAAD4//r/AAAAAAoAAAD5//r/AAAAAAoAAAD6//r/AAAAAAoAAAD7//r/AAAAAAoAAAD8//r/AAAAAAoAAAD9//r/AAAAAAoAAAD+//r/AAAAAAoAAAD///r/AAAAAAoAAAAAAPr/AAAAAAoAAAABAPr/AAAAAAoAAAACAPr/AAAAAAoAAAADAPr/AAAAAAoAAAAEAPr/AAAAAAoAAAAFAPr/AAAAAAoAAAAGAPr/AAAAAAoAAAAHAPr/AAAAAAoAAAD2//r/AAAHAAwAAAD2//v/AAAAAAoAAAD2//z/AAAEAAwAAAD6//z/AAAHAAwAAAD6//3/AAAAAAoAAAD6//7/AAAEAAwAAAD7//z/AAAAAAoAAAD7//3/AAAAAAoAAAD7//7/AAAAAAoAAAD8//z/AAAAAAoAAAD8//3/AAAAAAoAAAD8//7/AAAAAAoAAAD9//z/AAAAAAoAAAD9//3/AAAAAAoAAAD9//7/AAAAAAoAAAD+//z/AAAAAAoAAAD+//3/AAAAAAoAAAD+//7/AAAAAAoAAAD///z/AAAGAAwAAAD///3/AAAAAAoAAAD///7/AAAFAAwAAAD6/wAAAAAHAAwAAAD6/wEAAAAAAAoAAAD6/wIAAAAEAAwAAAD7/wAAAAAAAAoAAAD7/wEAAAAAAAoAAAD7/wIAAAAAAAoAAAD8/wAAAAAAAAoAAAD8/wEAAAAAAAoAAAD8/wIAAAAAAAoAAAD9/wAAAAAAAAoAAAD9/wEAAAAAAAoAAAD9/wIAAAAAAAoAAAD+/wAAAAAAAAoAAAD+/wEAAAAAAAoAAAD+/wIAAAAAAAoAAAD//wAAAAAGAAwAAAD//wEAAAAAAAoAAAD//wIAAAAFAAwAAAABAAAAAAAHAAwAAAABAAEAAAAAAAoAAAABAAIAAAAEAAwAAAACAAAAAAAAAAoAAAACAAEAAAAAAAoAAAACAAIAAAAAAAoAAAADAAAAAAAAAAoAAAADAAEAAAAAAAoAAAADAAIAAAAAAAoAAAAEAAAAAAAAAAoAAAAEAAEAAAAAAAoAAAAEAAIAAAAAAAoAAAAFAAAAAAAAAAoAAAAFAAEAAAAAAAoAAAAFAAIAAAAAAAoAAAAGAAAAAAAGAAwAAAAGAAEAAAAAAAoAAAAGAAIAAAAFAAwAAAABAPz/AAAHAAwAAAABAP3/AAAAAAoAAAABAP7/AAAEAAwAAAACAPz/AAAAAAoAAAACAP3/AAAAAAoAAAACAP7/AAAAAAoAAAADAPz/AAAAAAoAAAADAP3/AAAAAAoAAAADAP7/AAAAAAoAAAAEAPz/AAAAAAoAAAAEAP3/AAAAAAoAAAAEAP7/AAAAAAoAAAAFAPz/AAAAAAoAAAAFAP3/AAAAAAoAAAAFAP7/AAAAAAoAAAAGAPz/AAAGAAwAAAAGAP3/AAAAAAoAAAAGAP7/AAAFAAwAAAAHAPv/AAAGAAoAAAAHAAMAAAAGAAsAAAD5/wMAAAAFAAsAAAA=")
+tile_set = ExtResource("6_cnfuu")

@@ -26,6 +26,7 @@ const STAMP = preload("uid://dpvbyd8v5auob")
 @export var platforms_path: NodePath
 @export var hazards_path: NodePath
 @export var toggle_blocks_path: NodePath
+@export var z_index_for_stamps: int = 0
 
 var game_manager: GameManager = null
 
@@ -54,9 +55,9 @@ const ANALOG_START_THRESHOLD: float = 0.55
 var analog_start_was_pressed: bool = false
 
 func _ready() -> void:
-	 ##DEBUG
-	#enter_intro_state()
-	 ##END DEBUG
+	 #DEBUG
+	enter_intro_state()
+	 #END DEBUG
 	
 	connect_signals()
 	player.position = player_spawn.position
@@ -72,7 +73,7 @@ func _ready() -> void:
 	if cinematic_bars:
 		cinematic_bars.visible = true
 	
-	spawn_stamps()
+	spawn_stamps(z_index_for_stamps)
 
 func _process(delta: float) -> void:
 	match current_state:
@@ -248,10 +249,11 @@ func reset_toggle_blocks() -> void:
 	for toggle_block in toggle_blocks_container.get_children():
 		toggle_block._ready()
 
-func spawn_stamps() -> void:
+func spawn_stamps(z_layer: int = 0) -> void:
 	var stamps_in_level: bool = false
 	for stamp_location in stamps.get_children():
 		var new_stamp = STAMP.instantiate()
+		new_stamp.z_index = z_layer
 		add_child(new_stamp)
 		new_stamp.global_position = stamp_location.global_position
 		stamps_in_level = true

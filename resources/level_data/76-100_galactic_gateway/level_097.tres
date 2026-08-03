@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="LevelData" format=3 uid="uid://cv75lvbd7pdyp"]
+
+[ext_resource type="PackedScene" uid="uid://co72a4377hxh3" path="res://scenes/levels/76-100_galactic_gateway/level_097.tscn" id="1_w1ruj"]
+[ext_resource type="Script" uid="uid://do5fdotl7d638" path="res://resources/level_data/level_data.gd" id="2_mi4n5"]
+
+[resource]
+script = ExtResource("2_mi4n5")
+level_id = "level_097"
+level_title = "simple one"
+medal_time = 6.5
+level_scene = ExtResource("1_w1ruj")
+metadata/_custom_type_script = "uid://do5fdotl7d638"
