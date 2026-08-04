@@ -19,6 +19,20 @@ signal exit_customize_menu
 
 @onready var confirm_button: CustomMenuButton = $VBoxContainer/MarginContainer2/ConfirmButton
 
+const SKIN_POP_SCALE := Vector2(1.22, 1.22)
+const SKIN_POP_SQUASH := Vector2(0.94, 0.94)
+const SKIN_NORMAL_SCALE := Vector2.ONE
+
+const SKIN_POP_OUT_DURATION := 0.08
+const SKIN_POP_SQUASH_DURATION := 0.06
+const SKIN_POP_RETURN_DURATION := 0.12
+
+const IDLE_ROTATION_DEGREES := 2.0
+const IDLE_ROTATION_DURATION := 1.4
+
+var preview_pop_tweens: Dictionary = {}
+var preview_idle_tweens: Dictionary = {}
+
 const GENERIC_MESSAGES: Array[String] = [
 	"Looking cool, Jester!",
 	"I like your style!",
@@ -79,6 +93,7 @@ var goal_skins: Array = []
 
 func _ready() -> void:
 	call_deferred("setup_panel_pivots")
+	call_deferred("setup_preview_animations")
 	
 	player_skins = SkinDatabase.get_skins("player")
 	goal_skins = SkinDatabase.get_skins("goal")
@@ -86,6 +101,86 @@ func _ready() -> void:
 	load_saved_skin_indexes()
 	update_player_skin_display()
 	update_goal_skin_display()
+
+func setup_preview_animations() -> void:
+	setup_preview_pivot(player_preview)
+	setup_preview_pivot(goal_preview)
+	
+	start_preview_idle_animation(player_preview, -1.0)
+	start_preview_idle_animation(goal_preview, 1.0)
+
+
+func setup_preview_pivot(preview: Control) -> void:
+	preview.pivot_offset = preview.size / 2.0
+	preview.scale = SKIN_NORMAL_SCALE
+	preview.rotation = 0.0
+
+
+func animate_skin_change(preview: Control) -> void:
+	if preview_pop_tweens.has(preview):
+		var existing_tween: Tween = preview_pop_tweens[preview]
+		
+		if existing_tween and existing_tween.is_valid():
+			existing_tween.kill()
+	
+	preview.pivot_offset = preview.size / 2.0
+	preview.scale = SKIN_NORMAL_SCALE
+	
+	var tween := create_tween()
+	preview_pop_tweens[preview] = tween
+	
+	tween.tween_property(
+		preview,
+		"scale",
+		SKIN_POP_SCALE,
+		SKIN_POP_OUT_DURATION
+	).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
+	
+	tween.tween_property(
+		preview,
+		"scale",
+		SKIN_POP_SQUASH,
+		SKIN_POP_SQUASH_DURATION
+	).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_IN_OUT)
+	
+	tween.tween_property(
+		preview,
+		"scale",
+		SKIN_NORMAL_SCALE,
+		SKIN_POP_RETURN_DURATION
+	).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
+
+
+func start_preview_idle_animation(
+	preview: Control,
+	direction: float = 1.0
+) -> void:
+	if preview_idle_tweens.has(preview):
+		var existing_tween: Tween = preview_idle_tweens[preview]
+		
+		if existing_tween and existing_tween.is_valid():
+			existing_tween.kill()
+	
+	preview.pivot_offset = preview.size / 2.0
+	preview.rotation = deg_to_rad(-IDLE_ROTATION_DEGREES * direction)
+	
+	var tween := create_tween()
+	preview_idle_tweens[preview] = tween
+	tween.set_loops()
+	
+	tween.tween_property(
+		preview,
+		"rotation",
+		deg_to_rad(IDLE_ROTATION_DEGREES * direction),
+		IDLE_ROTATION_DURATION
+	).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+	
+	tween.tween_property(
+		preview,
+		"rotation",
+		deg_to_rad(-IDLE_ROTATION_DEGREES * direction),
+		IDLE_ROTATION_DURATION
+	).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
 
 func _unhandled_input(event: InputEvent) -> void:
 	if not visible:
@@ -117,14 +212,42 @@ func setup_panel_pivots() -> void:
 
 func _on_player_left_navigation_arrow_pressed() -> void:
 	UIAudioManager.play_ui_pip_sfx()
-	player_skin_index = wrapi(player_skin_index - 1, 0, player_skins.size())
-	update_player_skin_display()
+	player_skin_index = wrapi(
+		player_skin_index - 1,
+		0,
+		player_skins.size()
+	)
+	update_player_skin_display(true)
 
 
 func _on_player_right_navigation_arrow_pressed() -> void:
 	UIAudioManager.play_ui_pip_sfx()
-	player_skin_index = wrapi(player_skin_index + 1, 0, player_skins.size())
-	update_player_skin_display()
+	player_skin_index = wrapi(
+		player_skin_index + 1,
+		0,
+		player_skins.size()
+	)
+	update_player_skin_display(true)
+
+
+func _on_goal_left_navigation_arrow_pressed() -> void:
+	UIAudioManager.play_ui_pip_sfx()
+	goal_skin_index = wrapi(
+		goal_skin_index - 1,
+		0,
+		goal_skins.size()
+	)
+	update_goal_skin_display(true)
+
+
+func _on_goal_right_navigation_arrow_pressed() -> void:
+	UIAudioManager.play_ui_pip_sfx()
+	goal_skin_index = wrapi(
+		goal_skin_index + 1,
+		0,
+		goal_skins.size()
+	)
+	update_goal_skin_display(true)
 
 
 func _on_player_left_navigation_arrow_focus_entered() -> void:
@@ -134,17 +257,6 @@ func _on_player_left_navigation_arrow_focus_entered() -> void:
 func _on_player_right_navigation_arrow_focus_entered() -> void:
 	focus_panel(player_panel)
 
-
-func _on_goal_left_navigation_arrow_pressed() -> void:
-	UIAudioManager.play_ui_pip_sfx()
-	goal_skin_index = wrapi(goal_skin_index - 1, 0, goal_skins.size())
-	update_goal_skin_display()
-
-
-func _on_goal_right_navigation_arrow_pressed() -> void:
-	UIAudioManager.play_ui_pip_sfx()
-	goal_skin_index = wrapi(goal_skin_index + 1, 0, goal_skins.size())
-	update_goal_skin_display()
 
 
 func _on_goal_left_navigation_arrow_focus_entered() -> void:
@@ -209,20 +321,32 @@ func animate_panel(panel: PanelContainer, target_scale: Vector2, target_modulate
 	tween.tween_property(panel, "scale", target_scale, 0.12).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
 	tween.tween_property(panel, "modulate", target_modulate, 0.12).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
 
-func update_player_skin_display() -> void:
+func update_player_skin_display(animate: bool = false) -> void:
+	if player_skins.is_empty():
+		return
+	
 	var skin: Dictionary = player_skins[player_skin_index]
 	
 	player_skin_label.text = skin["display_name"]
 	player_preview.texture = skin["texture"]
 	update_message_for_skin(skin)
+	
+	if animate:
+		animate_skin_change(player_preview)
 
 
-func update_goal_skin_display() -> void:
+func update_goal_skin_display(animate: bool = false) -> void:
+	if goal_skins.is_empty():
+		return
+	
 	var skin: Dictionary = goal_skins[goal_skin_index]
 	
 	goal_skin_label.text = skin["display_name"]
 	goal_preview.texture = skin["texture"]
 	update_message_for_skin(skin)
+	
+	if animate:
+		animate_skin_change(goal_preview)
 
 
 func update_message_for_skin(skin: Dictionary) -> void:
