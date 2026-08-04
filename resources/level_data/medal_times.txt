@@ -1,0 +1,4 @@
+01-25_peaceful_plains: 126.5
+26-50_scorched_sands: 159.7
+51-75_frosted_frontier: 168.75
+76-100_galactic_gateway: 191.6
