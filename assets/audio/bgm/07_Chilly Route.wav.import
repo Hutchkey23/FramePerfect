@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://dynck2jb3ladk"
+path="res://.godot/imported/07_Chilly Route.wav-69679e4086954d2b13ab3cfc311f1d97.sample"
+
+[deps]
+
+source_file="res://assets/audio/bgm/07_Chilly Route.wav"
+dest_files=["res://.godot/imported/07_Chilly Route.wav-69679e4086954d2b13ab3cfc311f1d97.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

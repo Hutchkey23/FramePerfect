@@ -7,6 +7,6 @@
 script = ExtResource("2_mkbt7")
 level_id = "level_064"
 level_title = "nook and cranny"
-medal_time = 9.0
+medal_time = 8.5
 level_scene = ExtResource("1_kd6xr")
 metadata/_custom_type_script = "uid://do5fdotl7d638"

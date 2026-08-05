@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="MusicData" format=3 uid="uid://c720x62dwryvg"]
+
+[ext_resource type="AudioStream" uid="uid://dynck2jb3ladk" path="res://assets/audio/bgm/07_Chilly Route.wav" id="1_gs3q7"]
+[ext_resource type="Script" uid="uid://bhxby642rllaj" path="res://resources/music_data/music_data.gd" id="2_bt3gx"]
+
+[resource]
+script = ExtResource("2_bt3gx")
+bgm_file = ExtResource("1_gs3q7")
+volume_db = 0.0
+metadata/_custom_type_script = "uid://bhxby642rllaj"

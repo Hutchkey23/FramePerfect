@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="MusicData" format=3 uid="uid://dbcd06agktqys"]
+
+[ext_resource type="AudioStream" uid="uid://yop1xukmq7uu" path="res://assets/audio/bgm/05_It Is Wild Out Here!.wav" id="1_fvwm7"]
+[ext_resource type="Script" uid="uid://bhxby642rllaj" path="res://resources/music_data/music_data.gd" id="2_2lvid"]
+
+[resource]
+script = ExtResource("2_2lvid")
+bgm_file = ExtResource("1_fvwm7")
+volume_db = 2.0
+metadata/_custom_type_script = "uid://bhxby642rllaj"

@@ -258,7 +258,6 @@ func _on_player_right_navigation_arrow_focus_entered() -> void:
 	focus_panel(player_panel)
 
 
-
 func _on_goal_left_navigation_arrow_focus_entered() -> void:
 	focus_panel(goal_panel)
 

@@ -6,5 +6,5 @@
 [resource]
 script = ExtResource("2_o8kkm")
 bgm_file = ExtResource("1_b0wc0")
-volume_db = -2.0
+volume_db = 2.0
 metadata/_custom_type_script = "uid://bhxby642rllaj"

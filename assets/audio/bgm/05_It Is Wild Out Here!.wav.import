@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://yop1xukmq7uu"
+path="res://.godot/imported/05_It Is Wild Out Here!.wav-022703d99b619397e455ef5ff50f546e.sample"
+
+[deps]
+
+source_file="res://assets/audio/bgm/05_It Is Wild Out Here!.wav"
+dest_files=["res://.godot/imported/05_It Is Wild Out Here!.wav-022703d99b619397e455ef5ff50f546e.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=2
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2
