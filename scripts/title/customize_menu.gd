@@ -351,8 +351,22 @@ func update_goal_skin_display(animate: bool = false) -> void:
 func update_message_for_skin(skin: Dictionary) -> void:
 	if SkinDatabase.is_skin_unlocked(skin):
 		message_label.text = skin.get("description", "")
-	else:
-		message_label.text = skin.get("locked_message", "Locked.")
+		return
+
+	match skin.get("unlock_type", ""):
+		"world_medals":
+			var world_id: String = skin.get("world_id", "")
+			var required: int = skin.get("unlock_value", 0)
+			var current: int = SaveManager.get_world_medal_count(world_id)
+
+			message_label.text = "%s (%d/%d)" % [
+				skin.get("locked_message", "Locked."),
+				current,
+				required
+			]
+
+		_:
+			message_label.text = skin.get("locked_message", "Locked.")
 
 
 func _on_visibility_changed() -> void:

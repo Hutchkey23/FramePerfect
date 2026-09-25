@@ -6,15 +6,35 @@ const FROSTED_FRONTIER_MARATHON = preload("uid://chdk8s824pi8n")
 const GALACTIC_GATEWAYS_MARATHON = preload("uid://bcno8v7tfu1gc")
 const ALL_WORLDS_MARATHON = preload("uid://dkaotj3i5an5r")
 
+
 var worlds: Array[MarathonData] = [
 	PEACEFUL_PLAINS_MARATHON,
 	SCORCHED_SANDS_MARATHON,
 	FROSTED_FRONTIER_MARATHON,
-	GALACTIC_GATEWAYS_MARATHON
+	GALACTIC_GATEWAYS_MARATHON,
+	ALL_WORLDS_MARATHON,
 ]
+
 
 func setup(new_worlds: Array[MarathonData]) -> void:
 	worlds = new_worlds
+
+
+func get_marathon_data(marathon_id: String) -> MarathonData:
+	for marathon in worlds:
+		if marathon.marathon_id == marathon_id:
+			return marathon
+
+	return null
+
+
+func get_marathon_medal_time(marathon_id: String) -> float:
+	var marathon := get_marathon_data(marathon_id)
+
+	if marathon == null:
+		return 999999.0
+
+	return marathon.medal_time
 
 
 func get_level_data(level_id: String) -> LevelData:
@@ -22,21 +42,23 @@ func get_level_data(level_id: String) -> LevelData:
 		for level in world.levels:
 			if level.level_id == level_id:
 				return level
-	
+
 	return null
 
 
 func get_medal_time(level_id: String) -> float:
 	var level := get_level_data(level_id)
+
 	if level == null:
 		return 999999.0
-	
+
 	return level.medal_time
 
 
 func get_display_name(level_id: String) -> String:
 	var level := get_level_data(level_id)
+
 	if level == null:
 		return level_id
-	
+
 	return level.level_title

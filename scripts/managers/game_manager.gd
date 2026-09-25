@@ -10,11 +10,12 @@ const DEMO_RESULTS_SCENE: PackedScene = preload("uid://cqt1tw0cqi6jv")
 
 const NORMAL_RESULTS_SCENE: PackedScene = preload("uid://3wi43o16qj4m")
 
-const MARATHON_RESULTS : Dictionary = {
-	"world_01": preload("uid://cqt1tw0cqi6jv"),
-	"world_02": preload("uid://cd6nplujadiq"),
-	"world_03": preload("uid://41v0qhg5e2v6"),
-	"world_04": preload("uid://3wi43o16qj4m"),
+const MARATHON_RESULTS: Dictionary = {
+	"peaceful_plains": preload("uid://cqt1tw0cqi6jv"),
+	"scorched_sands": preload("uid://cd6nplujadiq"),
+	"frosted_frontier": preload("uid://41v0qhg5e2v6"),
+	"galactic_gateways": preload("uid://3wi43o16qj4m"),
+	"all_worlds": preload("uid://3wi43o16qj4m"),
 }
 
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
@@ -114,7 +115,7 @@ func sync_world_and_level_indices_to_level_data(world_data: WorldData, level_dat
 	current_world_level_names = get_world_level_names(current_world_index)
 
 func setup_marathon_from_run_state() -> void:
-	var data := RunState.pending_marathon_data
+	var data = RunState.pending_marathon_data
 	RunState.clear_pending_marathon()
 
 	if data == null:
@@ -245,13 +246,17 @@ func instantiate_current_level() -> Node:
 	set_level_title_label_text(current_level_index)
 
 	var level_data := get_current_level_data()
-	if level_data == null or level_data.level_scene == null:
-		push_error("Missing LevelData or level_scene.")
+	if level_data == null:
+		push_error("Missing LevelData.")
 		return null
 
 	current_level_id = level_data.level_id
 
-	var new_level := level_data.level_scene.instantiate()
+	var level_scene: PackedScene = level_data.load_level_scene()
+	if level_scene == null:
+		return null
+
+	var new_level = level_scene.instantiate()
 	level_container.add_child(new_level)
 
 	return new_level
@@ -397,16 +402,18 @@ func finish_marathon() -> void:
 	show_marathon_results(result)
 
 func show_marathon_results(result: Dictionary) -> void:
-	var results_scene: PackedScene = null
-	match result.marathon_id:
-		"world_01", "world_02", "world_03":
-			results_scene = MARATHON_RESULTS[result.marathon_id]
-		_:
-			results_scene = MARATHON_RESULTS["world_04"]
+	var new_marathon_id: String = result.get("marathon_id", "")
 	
+	if not MARATHON_RESULTS.has(new_marathon_id):
+		push_error("No marathon results scene found for marathon_id: " + new_marathon_id)
+		return
+	
+	var results_scene: PackedScene = MARATHON_RESULTS[new_marathon_id]
 	var results_scene_instance = results_scene.instantiate()
+	
 	level_container.add_child(results_scene_instance)
 	results_scene_instance.setup_marathon_results(result)
+	
 	await transition_in()
 	results_scene_instance.show_results()
 
@@ -459,7 +466,7 @@ func load_next_level() -> void:
 
 	if current_level_index >= world_data.levels.size():
 		var completed_world := world_data
-		var marathon_unlocked_now := SaveManager.unlock_marathon(completed_world.world_id)
+		var marathon_unlocked_now = SaveManager.unlock_marathon(completed_world.world_id)
 		
 		current_world_index += 1
 		current_level_index = 0

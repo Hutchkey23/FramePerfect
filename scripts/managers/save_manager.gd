@@ -3,6 +3,14 @@ extends Node
 const FULL_SAVE_PATH := "user://save_data.json"
 const DEMO_SAVE_PATH := "user://demo_save_data.json"
 
+const MARATHON_MEDAL_TIMES: Dictionary = {
+	"peaceful_plains": 135.0,
+	"scorched_sands": 170.0,
+	"frosted_frontier": 180.0,
+	"galactic_gateways": 200.0,
+	"all_worlds": 685.0,
+}
+
 var SAVE_PATH := DEMO_SAVE_PATH if BuildConfig.IS_DEMO else FULL_SAVE_PATH
 
 const NO_TIME := 999999.0
@@ -45,7 +53,7 @@ func record_level_completion(level_id: String, clear_time: float) -> Dictionary:
 	var level_data := get_or_create_level_data(level_id)
 	var previous_best_time: float = level_data["best_time"]
 	var medal_time: float = LevelDatabase.get_medal_time(level_id)
-	var medal_already_achieved: bool = previous_best_time < medal_time
+	var medal_already_achieved: bool = previous_best_time <= medal_time
 
 	level_data.completed = true
 
@@ -55,7 +63,7 @@ func record_level_completion(level_id: String, clear_time: float) -> Dictionary:
 
 	var best_time: float = level_data["best_time"]
 	var earned_medal := best_time <= medal_time
-	var earned_medal_this_run :=  clear_time < medal_time
+	var earned_medal_this_run :=  clear_time <= medal_time
 	var first_completion := previous_best_time == NO_TIME
 
 	save_game()
@@ -96,20 +104,62 @@ func player_has_medal(level_id: String) -> bool:
 		return false
 		
 	
-	var medal_time := LevelDatabase.get_medal_time(level_id)
+	var medal_time = LevelDatabase.get_medal_time(level_id)
 	return best_time <= medal_time
+
+func get_medal_count() -> int:
+	var medal_count := 0
+
+	for world in LevelDatabase.worlds:
+		if world == null:
+			continue
+
+		for level in world.levels:
+			if level == null:
+				continue
+
+			if player_has_medal(level.level_id):
+				medal_count += 1
+
+	return medal_count
+
+
+func get_world_medal_count(world_id: String) -> int:
+	for world in LevelDatabase.worlds:
+		if world == null:
+			continue
+
+		if world.world_id != world_id:
+			continue
+
+		var medal_count := 0
+
+		for level in world.levels:
+			if level == null:
+				continue
+
+			if player_has_medal(level.level_id):
+				medal_count += 1
+
+		return medal_count
+
+	return 0
 
 func get_best_marathon_time(marathon_id: String) -> float:
 	var marathon_data := get_or_create_marathon_data(marathon_id)
 	return marathon_data["best_time"]
 
 
-func player_has_marathon_medal(marathon_id: String, medal_time: float) -> bool:
+func player_has_marathon_medal(marathon_id: String) -> bool:
+	if not MARATHON_MEDAL_TIMES.has(marathon_id):
+		return false
+
 	var best_time := get_best_marathon_time(marathon_id)
 
 	if best_time >= NO_TIME:
 		return false
 
+	var medal_time: float = MARATHON_MEDAL_TIMES[marathon_id]
 	return best_time <= medal_time
 
 func reset_save_data() -> void:
@@ -234,7 +284,7 @@ func ensure_options_data() -> void:
 func save_input_map() -> void:
 	ensure_options_data()
 
-	var serialized_inputs := InputHelper.serialize_inputs_for_actions(REMAPPABLE_ACTIONS)
+	var serialized_inputs = InputHelper.serialize_inputs_for_actions(REMAPPABLE_ACTIONS)
 	save_data["options"]["input_map"] = serialized_inputs
 
 	save_game()

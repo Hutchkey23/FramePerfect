@@ -93,8 +93,7 @@ func setup(data: MarathonData) -> void:
 	world_back_title_label.text = data.display_name
 	
 	var medal_earned: bool = SaveManager.player_has_marathon_medal(
-	data.marathon_id,
-	data.medal_time
+		marathon_data.marathon_id
 	)
 	set_medal_slot(medal_earned)
 	
