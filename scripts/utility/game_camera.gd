@@ -92,7 +92,7 @@ func draw_camera_zoom_preview() -> void:
 
 	draw_rect(rect, Color.YELLOW, false, 2.0)
 
-func _process(delta: float) -> void:
+func _physics_process(delta: float) -> void:
 	if Engine.is_editor_hint():
 		camera.zoom = default_zoom
 
